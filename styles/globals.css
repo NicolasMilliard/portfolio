@@ -1,26 +1,183 @@
-html,
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts */
+@font-face {
+  font-family: 'Oswald-Light';
+  src: url(../public/fonts/Oswald-Light.ttf);
+}
+
+@font-face {
+  font-family: 'Oswald-Regular';
+  src: url(../public/fonts/Oswald-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Oswald-SemiBold';
+  src: url(../public/fonts/Oswald-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: 'Oswald-Bold';
+  src: url(../public/fonts/Oswald-Bold.ttf);
+}
+
+@font-face {
+  font-family: 'Georgia';
+  src: url(../public/fonts/Georgia.ttf);
+}
+
+/* Variables */
+:root {
+  --first-color: #1cb980;
+  --first-color-darker: #106949;
+
+  --bg-color: #fafafa;
+  --bg-color-alt: #ececec;
+
+  --lighter-gray-color: #808080;
+  --gray-color: #636363;
+  --darker-gray-color: #2b2b2b;
+
+  --black-color: #0d0d0d;
+}
+
+/* Global */
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Georgia', serif;
+  background-color: var(--bg-color);
+  color: var(--black-color);
+}
+
+h1 {
+  font-family: 'Oswald-Bold', sans-serif;
+  font-size: 4em;
+}
+
+h2 {
+  font-size: 3em;
+}
+
+h2,
+#logo-lastname {
+  font-family: 'Oswald-SemiBold', sans-serif;
+}
+
+h3 {
+  font-family: 'Oswald-Regular', sans-serif;
+}
+
+p {
+  max-width: 640px;
+}
+
+button {
+  background-color: var(--first-color);
+  color: var(--bg-color);
+}
+
+button:hover {
+  background-color: var(--first-color-darker);
+  transition: background-color 0.1s ease-in-out;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--first-color);
 }
 
-* {
-  box-sizing: border-box;
+a:hover {
+  color: var(--first-color-darker);
+  transition: color 0.1s ease-in-out;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.nm-separator {
+  margin-top: 0.5em; /* Correct alignment with Oswald typography */
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--gray-color);
+}
+
+.nm-shadow {
+  box-shadow: 0px 0px 8px rgba(13, 13, 13, 0.15);
+}
+
+.nm-gray-color {
+  color: var(--gray-color);
+}
+
+/* Navbar */
+#navbar {
+  background-color: rgba(250, 250, 250, 0.85);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+/* Logo */
+#logo-firstname {
+  font-family: 'Oswald-Light', sans-serif;
+  color: var(--black-color);
+}
+
+#logo-lastname {
+  color: var(--first-color);
+}
+
+/* Menu */
+.nm-link {
+  color: var(--black-color);
+}
+
+.nm-link:hover {
+  color: var(--first-color);
+  transition: color 0.1s ease-in-out;
+}
+
+/* Social links */
+#social-links-container {
+  z-index: 3;
+  bottom: 0;
+  left: 4em;
+}
+
+#social-links-container img:hover {
+  transform: scale(1.2);
+  transition: transform 0.1s ease-in-out;
+}
+
+#social-links-bar {
+  width: 2px;
+  height: 64px;
+  background-color: var(--black-color);
+  border-radius: 1px 1px 0 0;
+}
+
+/* Homepage: image */
+#image-container {
+  position: relative;
+  width: 15rem;
+  height: 22.5rem;
+}
+
+#image-wrapper,
+#image-border {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#image-wrapper {
+  z-index: 2;
+  left: 0;
+  top: 0;
+  background: var(--first-color);
+  border-radius: 16px;
+}
+
+#image-border {
+  z-index: 1;
+  left: 2em;
+  top: 2em;
+  border: 2px solid var(--first-color);
+  border-radius: 16px;
 }
