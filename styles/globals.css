@@ -50,6 +50,11 @@ body {
   color: var(--black-color);
 }
 
+section {
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+
 h1 {
   font-family: 'Oswald-Bold', sans-serif;
   font-size: 4em;
@@ -95,7 +100,18 @@ a:hover {
   margin-top: 0.5em; /* Correct alignment with Oswald typography */
   height: 2px;
   border-radius: 1px;
+}
+
+.nm-separator-width {
+  width: 361px;
+}
+
+.nm-separator-gray {
   background-color: var(--gray-color);
+}
+
+.nm-separator-black {
+  background-color: var(--black-color);
 }
 
 .nm-shadow {
@@ -180,4 +196,21 @@ a:hover {
   top: 2em;
   border: 2px solid var(--first-color);
   border-radius: 16px;
+}
+
+/* Projects */
+@media screen and (min-width: 1024px) {
+  .project-description-box {
+    background-color: var(--first-color);
+  }
+
+  .project-description-box p {
+    width: 440px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .project-description-box p {
+    width: 640px;
+  }
 }

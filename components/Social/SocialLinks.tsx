@@ -7,7 +7,7 @@ import linkedin from '../../public/images/icons/linkedin.svg';
 
 const SocialLinks = () => {
   return (
-    <div id="social-links-container" className="fixed hidden sm:block">
+    <div id="social-links-container" className="fixed hidden lg:block">
       <div className="flex flex-col items-center">
         <Link href="#" className="mb-4">
           <Image src={github} alt="Github" />
