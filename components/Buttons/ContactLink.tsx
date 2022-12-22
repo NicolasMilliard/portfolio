@@ -6,10 +6,10 @@ export interface Props {
   additionalClasses: string | null;
 }
 
-const ButtonLink = ({ text, additionalClasses }: Props) => {
+const ContactLink = ({ text, additionalClasses }: Props) => {
   return (
     <Link
-      href="/#contact"
+      href="mailto:contact@nicolasmilliard.fr"
       className={`nm-button-link py-3.5 px-6 font-bold tracking-wide rounded-2xl nm-shadow ${additionalClasses}`}
     >
       {text}
@@ -17,4 +17,4 @@ const ButtonLink = ({ text, additionalClasses }: Props) => {
   );
 };
 
-export default ButtonLink;
+export default ContactLink;
