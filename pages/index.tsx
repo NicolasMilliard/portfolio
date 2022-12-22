@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import Navbar from '../components/Navbar/Navbar';
-import Button from '../components/Buttons/Button';
+import ButtonLink from '../components/Buttons/ButtonLink';
 import Separator from '../components/Titles/Separator';
 import AttractImage from '../components/Images/AttractImage';
 import SocialLinks from '../components/Social/SocialLinks';
@@ -17,13 +16,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
-
       <SocialLinks />
 
-      <main className="px-8 sm:px-0 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto">
+      <>
         {/* About me */}
-        <section className="lg:flex lg:items-center">
+        <section
+          id="about-me"
+          className="my-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:my-48 md:max-w-3xl lg:max-w-5xl lg:flex lg:items-center xl:max-w-6xl"
+        >
           {/* Text */}
           <div className="mb-20 lg:mb-0 lg:mr-20 xl:mr-40">
             <h1>Hello 👋</h1>
@@ -46,7 +46,7 @@ export default function Home() {
               Contracts, Truffle, Hardhat, Web3.js, Ethers.js and others.
             </p>
             <div>
-              <Button text="Contact me" additionalClasses="mr-8" />
+              <ButtonLink text="Contact me" additionalClasses="mr-8" />
               <Link href="#" title="Check my resume">
                 Resume
               </Link>
@@ -56,7 +56,10 @@ export default function Home() {
           <AttractImage />
         </section>
         {/* Case studies */}
-        <section>
+        <section
+          id="projects"
+          className="mb-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl"
+        >
           {/* Title */}
           <div className="flex items-center mb-8">
             <h2 className="mr-4">Case studies</h2>
@@ -65,7 +68,21 @@ export default function Home() {
           {/* Projects */}
           <ProjectsList />
         </section>
-      </main>
+        {/* Get in touch */}
+        <section id="contact" className="p-8 md:rounded-xl md:max-w-screen-md md:mx-auto md:mb-48">
+          <h2 className="mb-8">Get in touch!</h2>
+          <p className="mb-4">
+            I'm currently looking for a job as a Blockchain Developer. I'm a 5+ years experience
+            Full&nbsp;Stack Developer and I have a great experience using Solidity and Web 3
+            technologies.
+          </p>
+          <p className="mb-8">
+            If you're looking after a motivated and versatile Blockchain Developer, feel free to
+            contact me!
+          </p>
+          <ButtonLink text="Contact me" additionalClasses={'nm-btn-alt'} />
+        </section>
+      </>
     </div>
   );
 }
