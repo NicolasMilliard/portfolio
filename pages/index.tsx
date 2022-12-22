@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import ButtonLink from '../components/Buttons/ButtonLink';
+import ContactLink from '../components/Buttons/ContactLink';
 import Separator from '../components/Titles/Separator';
 import AttractImage from '../components/Images/AttractImage';
 import SocialLinks from '../components/Social/SocialLinks';
@@ -46,7 +46,7 @@ export default function Home() {
               Contracts, Truffle, Hardhat, Web3.js, Ethers.js and others.
             </p>
             <div>
-              <ButtonLink text="Contact me" additionalClasses="mr-8" />
+              <ContactLink text="Contact me" additionalClasses="mr-8" />
               <Link href="#" title="Check my resume">
                 Resume
               </Link>
@@ -69,7 +69,7 @@ export default function Home() {
           <ProjectsList />
         </section>
         {/* Get in touch */}
-        <section id="contact" className="p-8 md:rounded-xl md:max-w-screen-md md:mx-auto md:mb-48">
+        <section className="p-8 nm-green-bg-color md:rounded-xl md:max-w-screen-md md:mx-auto md:mb-48">
           <h2 className="mb-8">Get in touch!</h2>
           <p className="mb-4">
             I'm currently looking for a job as a Blockchain Developer. I'm a 5+ years experience
@@ -80,7 +80,7 @@ export default function Home() {
             If you're looking after a motivated and versatile Blockchain Developer, feel free to
             contact me!
           </p>
-          <ButtonLink text="Contact me" additionalClasses={'nm-btn-alt'} />
+          <ContactLink text="Contact me" additionalClasses={'nm-btn-alt'} />
         </section>
       </>
     </div>
