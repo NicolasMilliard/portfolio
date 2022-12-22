@@ -42,12 +42,16 @@ const ProjectsList = () => {
                       />
                     </Link>
                   </div>
-                  <div className="flex flex-col items-center ml-4 lg:flex-row">
+                  <div className="flex flex-col items-center ml-4 lg:flex-row lg:ml-0">
                     <Link href={project.githubURI} className="mb-4 lg:mb-0 lg:mr-4" target="_blank">
-                      <Image src={github} alt={`${project.title} - Github`} />
+                      <Image
+                        src={github}
+                        alt={`${project.title} - Github`}
+                        className="social-icon"
+                      />
                     </Link>
                     <Link href={project.projectURI} target="_blank">
-                      <Image src={external} alt="Visit the website" />
+                      <Image src={external} alt="Visit the website" className="social-icon" />
                     </Link>
                   </div>
                 </div>
