@@ -22,7 +22,7 @@ export default function Home() {
         {/* About me */}
         <section
           id="about-me"
-          className="my-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:my-48 md:max-w-3xl lg:max-w-5xl lg:flex lg:items-center xl:max-w-6xl"
+          className="my-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:my-48 md:max-w-3xl lg:max-w-5xl lg:flex lg:items-center lg:justify-between xl:max-w-6xl"
         >
           {/* Text */}
           <div className="mb-20 lg:mb-0 lg:mr-20 xl:mr-40">
@@ -47,7 +47,11 @@ export default function Home() {
             </p>
             <div>
               <ContactLink text="Contact me" additionalClasses="mr-8" />
-              <Link href="#" title="Check my resume">
+              <Link
+                href="images/resume/resume-nicolas-milliard.pdf"
+                target="_blank"
+                title="Check my resume"
+              >
                 Resume
               </Link>
             </div>

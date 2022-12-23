@@ -27,7 +27,11 @@ const Menu = () => {
       >
         <li>projects</li>
       </Link>
-      <a href="#" className="mr-4 sm:mr-8 nm-link">
+      <a
+        href="images/resume/resume-nicolas-milliard.pdf"
+        target="_blank"
+        className="mr-4 sm:mr-8 nm-link"
+      >
         <li>resume</li>
       </a>
       <ButtonLink text="contact me" additionalClasses="" />
