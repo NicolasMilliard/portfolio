@@ -122,6 +122,10 @@ a:hover {
   color: var(--bg-color);
 }
 
+.nm-black-bg-color {
+  background-color: var(--black-color);
+}
+
 .nm-green-bg-color {
   background-color: var(--first-color);
 }
@@ -175,7 +179,7 @@ a:hover {
 
 #social-links-bar {
   width: 2px;
-  height: 64px;
+  height: 104px;
   background-color: var(--black-color);
   border-radius: 1px 1px 0 0;
 }
