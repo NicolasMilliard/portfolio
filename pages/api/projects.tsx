@@ -16,7 +16,7 @@ export const projects = [
     tools: 'React JS - Hardhat - Ethers.js - TailwindCSS - Toastify',
     imageURI: '/images/projects/chainboard-project.png',
     githubURI: 'https://github.com/NicolasMilliard/chainboard',
-    projectURI: 'https://nicolasmilliard.fr/chainboard/',
+    projectURI: 'https://chainboard.vercel.app/',
   },
   {
     id: '2',
