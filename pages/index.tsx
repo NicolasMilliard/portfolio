@@ -60,7 +60,7 @@ const Home = () => {
                     : 'images/resume/cv-nicolas-milliard.pdf'
                 }
                 target="_blank"
-                title={tHomepage('Check my resume')}
+                title="Check my resume"
               >
                 {tHomepage('Resume')}
               </Link>
