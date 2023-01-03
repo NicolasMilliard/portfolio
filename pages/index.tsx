@@ -40,7 +40,7 @@ const Home = () => {
               <Separator additionalClasses="w-80 nm-separator-gray" />
             </div>
             <p className="mb-8">
-              {tHomepage('aboutme-desc-1')}
+              {tHomepage('about-me-desc-1')}
               <br />
               <Link
                 href="https://certificate.bcdiploma.com/check/B0B491E86C4DD3E9F0065313B4851457AD99C52B28E17896176D6A4E882101BDRlFnSWNWUmJQYVZMZWMvRVZpbTRDdWU1eE9hazdTa0VpMll0ZlVDZVhrSWZjM2pL"
@@ -94,7 +94,7 @@ const Home = () => {
   );
 };
 
-export async function getServerSideProps({ locale }: any) {
+export async function getStaticProps({ locale }: any) {
   return {
     props: {
       ...(await serverSideTranslations(locale, [
