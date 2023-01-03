@@ -94,7 +94,6 @@ const Home = () => {
   );
 };
 
-// getServerSideProps
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
