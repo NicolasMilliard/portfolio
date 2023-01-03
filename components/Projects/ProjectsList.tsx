@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 
 import github from '../../public/images/icons/github.svg';
 import external from '../../public/images/icons/external.svg';
@@ -8,6 +9,18 @@ import external from '../../public/images/icons/external.svg';
 import { projects } from '../../pages/api/projects';
 
 const ProjectsList = () => {
+  const [hydrated, setHydrated] = useState(false);
+  const { t } = useTranslation('projects');
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  // Returns null on first render so server and client match
+  if (!hydrated) {
+    return null;
+  }
+
   return (
     <>
       {projects.map((project) => (
@@ -25,10 +38,10 @@ const ProjectsList = () => {
               </Link>
             </div>
             <div className="project-description lg:relative">
-              <h3 className="text-4xl mb-8 lg:ml-4 lg:mt-10 xl:mt-20">{project.title}</h3>
-              <div className="project-description-box lg:nm-green-bg-color px-8 py-4 rounded-2xl lg:absolute lg:-left-8">
+              <h3 className="text-4xl mb-8 lg:ml-4 lg:mt-10 xl:mt-20">{t(`${project.title}`)}</h3>
+              <div className="project-description-box lg:nm-green-bg-color lg:px-8 lg:py-4 rounded-2xl lg:absolute lg:-left-8">
                 <div className="project-description-text mb-8">
-                  <p>{project.description}</p>
+                  <p>{t(`${project.description}`)}</p>
                 </div>
                 <div className="project-description-links flex items-center mb-8 lg:mb-0">
                   <div className="project-image lg:hidden">

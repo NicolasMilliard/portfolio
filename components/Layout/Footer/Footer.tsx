@@ -1,9 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation('footer');
   return (
     <footer className="py-8 nm-black-bg-color flex items-center justify-center">
-      <p className="nm-white-color">Designed and built by Nicolas&nbsp;Milliard</p>
+      <p className="nm-white-color">{t('Designed and built by Nicolas Milliard')}</p>
     </footer>
   );
 };
