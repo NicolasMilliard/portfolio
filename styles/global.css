@@ -161,6 +161,11 @@ a:hover {
   color: var(--first-color);
 }
 
+.flag-icon {
+  width: 32px;
+  height: auto;
+}
+
 /* Social links */
 #social-links-container {
   z-index: 3;
