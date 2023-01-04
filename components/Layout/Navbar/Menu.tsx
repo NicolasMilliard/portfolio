@@ -19,11 +19,11 @@ const Menu = () => {
   return (
     <ul className="flex items-center">
       {locale == 'en' ? (
-        <button className="mr-4 cursor-pointer nm-link sm:mr-8" onClick={handleClick('fr')}>
+        <button className="mr-4 nm-link sm:mr-8" onClick={handleClick('fr')}>
           <Image src={france} alt="France" className="social-icon flag-icon" priority={false} />
         </button>
       ) : (
-        <button className="mr-4 cursor-pointer nm-link sm:mr-8" onClick={handleClick('en')}>
+        <button className="mr-4 nm-link sm:mr-8" onClick={handleClick('en')}>
           <Image src={usa} alt="USA" className="social-icon flag-icon" priority={false} />
         </button>
       )}
@@ -34,7 +34,7 @@ const Menu = () => {
         spy={true}
         offset={-84}
         duration={300}
-        className="mr-4 cursor-pointer nm-link sm:mr-8"
+        className="mr-4 nm-link sm:mr-8"
       >
         <li>{t('about me')}</li>
       </Link>
@@ -45,7 +45,7 @@ const Menu = () => {
         spy={true}
         offset={-84}
         duration={300}
-        className="mr-4 cursor-pointer nm-link sm:mr-8"
+        className="mr-4 nm-link sm:mr-8"
       >
         <li>{t('projects')}</li>
       </Link>

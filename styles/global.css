@@ -48,6 +48,7 @@ body {
   font-family: 'Georgia', serif;
   background-color: var(--bg-color);
   color: var(--black-color);
+  cursor: none;
 }
 
 h1 {
@@ -81,6 +82,11 @@ p {
   color: var(--bg-color);
   background-color: var(--first-color-darker);
   transition: background-color 0.1s ease-in-out;
+}
+
+a,
+button {
+  cursor: none;
 }
 
 a {
@@ -128,6 +134,29 @@ a:hover {
 
 .nm-green-bg-color {
   background-color: var(--first-color);
+}
+
+/* Cursor */
+.custom-cursor {
+  z-index: 99999;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--black-color);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.custom-cursor::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  background-color: var(--black-color);
+  border-radius: 50%;
 }
 
 /* Navbar */
