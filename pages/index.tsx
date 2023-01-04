@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div>
       <Head>
-        <title>{tHead('Blockchain Developer - Nicolas Milliard')}</title>
+        <title>{tHead('index-title')}</title>
         <meta name="description" content="Portfolio of Nicolas Milliard, Blockchain Developer." />
         <link rel="icon" href="/favicon.ico" />
       </Head>

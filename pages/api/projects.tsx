@@ -1,9 +1,8 @@
 export const projects = [
   {
     id: '0',
-    title: 'Kopo: your energy renovation made easy',
-    description:
-      'Kopo simplifies the process of applying for Energy Savings Certificates (ECC) and ensures their traceability in full transparency thanks to the Polygon Blockchain.',
+    title: 'project-1-title',
+    description: 'project-1-description',
     tools: 'Next.js - Hardhat - Ethers.js - Wagmi - Rainbow Kit - TailwindCSS - Toastify',
     imageURI: '/images/projects/kopo-project.png',
     githubURI: 'https://github.com/NicolasMilliard/kopo',
@@ -11,8 +10,8 @@ export const projects = [
   },
   {
     id: '1',
-    title: 'Chainboard: rent your snowboard',
-    description: 'Chainboard allows users to rent their snowboard on the Binance Smart Chain.',
+    title: 'project-2-title',
+    description: 'project-2-description',
     tools: 'React JS - Hardhat - Ethers.js - TailwindCSS - Toastify',
     imageURI: '/images/projects/chainboard-project.png',
     githubURI: 'https://github.com/NicolasMilliard/chainboard',
@@ -20,9 +19,8 @@ export const projects = [
   },
   {
     id: '2',
-    title: "Let's Vote!",
-    description:
-      "Let's Vote! allows users to organize their owns voting instance, whitelist users, add proposals and tally votes. Working on Ethereum.",
+    title: 'project-3-title',
+    description: 'project-3-description',
     tools: 'React JS - Truffle - Web3.js',
     imageURI: '/images/projects/lets-vote-project.png',
     githubURI: 'https://github.com/NicolasMilliard/Alyra/tree/main/rendus/03_projet',
