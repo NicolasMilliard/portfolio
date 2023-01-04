@@ -19,9 +19,10 @@ export default appWithTranslation(function App({ Component, pageProps }: AppProp
         dangerouslySetInnerHTML={{
           __html: `
           window.dataLayer = window.dataLayer || [];
-          function gtag(){ dataLayer.push(arguments); }
+          function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'UA-110074739-1');`,
+
+          gtag('config', 'G-KD65XFQRL2');`,
         }}
       />
       <Layout>
