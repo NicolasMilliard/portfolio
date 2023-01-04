@@ -9,7 +9,7 @@ const Cursor: FC<CursorProps> = ({ top, left }) => {
   let cursorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    cursorRef.current?.setAttribute('style', `top: ${top - 16}px; left: ${left - 16}px`);
+    cursorRef.current?.setAttribute('style', `top: ${top}px; left: ${left}px`);
   }, [top, left]);
 
   return <div ref={cursorRef} className="custom-cursor"></div>;
