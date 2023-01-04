@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 
 export interface Props {
@@ -6,7 +6,7 @@ export interface Props {
   additionalClasses: string | null;
 }
 
-const ContactLink = ({ text, additionalClasses }: Props) => {
+const ContactLink: FC<Props> = ({ text, additionalClasses }) => {
   return (
     <Link
       href="mailto:contact@nicolasmilliard.fr"

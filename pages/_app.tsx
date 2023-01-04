@@ -1,3 +1,4 @@
+import React, { FC } from 'react';
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
@@ -6,7 +7,7 @@ import Layout from '../components/Layout/Layout';
 
 import '../styles/global.css';
 
-export default appWithTranslation(function App({ Component, pageProps }: AppProps) {
+const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Script
@@ -25,9 +26,12 @@ export default appWithTranslation(function App({ Component, pageProps }: AppProp
           gtag('config', 'G-KD65XFQRL2');`,
         }}
       />
+
       <Layout>
         <Component {...pageProps} />
       </Layout>
     </>
   );
-});
+};
+
+export default appWithTranslation(App);
