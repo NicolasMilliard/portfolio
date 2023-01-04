@@ -14,6 +14,8 @@ export default appWithTranslation(function App({ Component, pageProps }: AppProp
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_TAG_MANAGER}`}
       />
       <Script
+        id="google-analytics"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
           window.dataLayer = window.dataLayer || [];
