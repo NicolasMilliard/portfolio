@@ -14,14 +14,13 @@ export default appWithTranslation(function App({ Component, pageProps }: AppProp
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_TAG_MANAGER}`}
       />
       <Script
-        id="google-analytics"
-        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
           window.dataLayer = window.dataLayer || [];
-          function gtag(){ dataLayer.push(arguments); }
+          function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'UA-110074739-1');`,
+
+          gtag('config', 'G-KD65XFQRL2');`,
         }}
       />
       <Layout>
