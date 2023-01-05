@@ -48,7 +48,6 @@ body {
   font-family: 'Georgia', serif;
   background-color: var(--bg-color);
   color: var(--black-color);
-  cursor: none;
 }
 
 h1 {
@@ -82,11 +81,6 @@ p {
   color: var(--bg-color);
   background-color: var(--first-color-darker);
   transition: background-color 0.1s ease-in-out;
-}
-
-a,
-button {
-  cursor: none;
 }
 
 a {
@@ -137,14 +131,20 @@ a:hover {
 }
 
 /* Cursor */
+@media screen and (min-width: 768px) {
+  body,
+  a,
+  button {
+    cursor: none;
+  }
+}
+
 .custom-cursor,
 .custom-cursor::before {
-  position: absolute;
   transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-  pointer-events: none;
   border-radius: 50%;
 }
+
 .custom-cursor {
   z-index: 99999;
   width: 48px;
