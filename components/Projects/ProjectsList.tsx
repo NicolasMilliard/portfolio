@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 
+import ToolsList from './ToolsList';
+
 import github from '../../public/images/icons/github.svg';
 import external from '../../public/images/icons/external.svg';
 
@@ -38,7 +40,7 @@ const ProjectsList = () => {
               </Link>
             </div>
             <div className="project-description lg:relative">
-              <h3 className="text-4xl mb-8 lg:ml-4 lg:mt-10 xl:mt-20">{t(`${project.title}`)}</h3>
+              <h3 className="text-4xl mb-8 lg:ml-4 lg:mt-8 xl:mt-16">{t(`${project.title}`)}</h3>
               <div className="project-description-box lg:nm-green-bg-color lg:px-8 lg:py-4 rounded-2xl lg:absolute lg:-left-8">
                 <div className="project-description-text mb-8">
                   <p>{t(`${project.description}`)}</p>
@@ -71,9 +73,7 @@ const ProjectsList = () => {
               </div>
             </div>
           </div>
-          <div className="project-tools">
-            <p className="nm-gray-color">{project.tools}</p>
-          </div>
+          <ToolsList tools={project.tools} />
         </div>
       ))}
     </>

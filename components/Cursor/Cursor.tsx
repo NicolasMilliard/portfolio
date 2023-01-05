@@ -12,7 +12,12 @@ const Cursor: FC<CursorProps> = ({ top, left }) => {
     cursorRef.current?.setAttribute('style', `top: ${top}px; left: ${left}px`);
   }, [top, left]);
 
-  return <div ref={cursorRef} className="custom-cursor"></div>;
+  return (
+    <div
+      ref={cursorRef}
+      className="custom-cursor hidden md:block absolute before:absolute pointer-events-none mix-blend-difference"
+    ></div>
+  );
 };
 
 export default Cursor;
