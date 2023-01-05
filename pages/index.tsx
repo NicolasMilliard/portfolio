@@ -8,6 +8,7 @@ import ContactLink from '../components/Buttons/ContactLink';
 import Separator from '../components/Titles/Separator';
 import AttractImage from '../components/Images/AttractImage';
 import SocialLinks from '../components/Social/SocialLinks';
+import ToolsList from '../components/Projects/ToolsList';
 import ProjectsList from '../components/Projects/ProjectsList';
 
 const Home = () => {
@@ -36,7 +37,7 @@ const Home = () => {
             <h1>{tHomepage('Hello 👋')}</h1>
             <h2>{tHomepage("I'm Nicolas Milliard")}</h2>
             <div className="flex items-center mb-8">
-              <h3 className="text-4xl mr-4 nm-gray-color">{tHomepage('Blockchain Developer')}</h3>
+              <h3 className="text-4xl mr-4 nm-gray-color">{tHomepage('job')}</h3>
               <Separator additionalClasses="w-80 nm-separator-gray" />
             </div>
             <p className="mb-8">
@@ -50,7 +51,10 @@ const Home = () => {
               </Link>
               {tHomepage('about-me-desc-2')}
             </p>
-            <div>
+            <ToolsList tools={['React JS', 'React Native', 'Next JS', 'Vue']} />
+            <ToolsList tools={['JavaScript', 'TypeScript', 'HTML5', 'CSS3', 'Solidity']} />
+            <ToolsList tools={['Hardhat', 'Truffle', 'Web3.js', 'Ethers.js']} />
+            <div className="mt-12">
               <ContactLink text={tHomepage('Contact me')} additionalClasses="mr-8" />
               <Link
                 locale="en"

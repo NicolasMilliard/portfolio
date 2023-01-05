@@ -126,6 +126,10 @@ a:hover {
   background-color: var(--black-color);
 }
 
+.nm-gray-bg-color {
+  background-color: var(--gray-color);
+}
+
 .nm-green-bg-color {
   background-color: var(--first-color);
 }
