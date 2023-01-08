@@ -1,8 +1,8 @@
 {
   "Hello 👋": "Bonjour 👋",
   "I'm Nicolas Milliard": "Je suis Nicolas Milliard",
-  "job": "Développeur Full Stack",
-  "about-me-desc-1": "J'ai plus de 5 ans d'expérience comme Développeur Full Stack. Je travaille avec React JS, Vue ou Next Js et en JavaScript (ES6) ou en TypeScript.",
+  "job": "Développeur Full-Stack",
+  "about-me-desc-1": "J'ai plus de 5 ans d'expérience comme Développeur Full-Stack. Je travaille avec React JS, Vue ou Next Js et en JavaScript (ES6) ou en TypeScript.",
   "I'm graduated from Alyra": "Je suis récemment diplômé d'Alyra",
   "about-me-desc-2": ", l'école blockchain française (2022). J'ai développé différents projets Web 3 utilisant des Smart Contracts Solidity, Truffle, Hardhat, Web3.js, Ethers.js...",
   "Contact me": "Contactez-moi",
@@ -10,6 +10,6 @@
   "Resume": "Mon CV",
   "Case studies": "Etudes de cas",
   "Get in touch!": "Gardons le contact !",
-  "contact-me-desc-1": "Je suis à la recherche d'un poste en tant que Développeur Blockchain. J'ai plus de 5 ans d'expérience en tant que Développeur Full Stack et j'ai une bonne expérience de Solidity et des technologies du Web 3.",
-  "contact-me-desc-2": "Si vous êtes à la recherche d'un développeur Blockchain motivé et polyvalent, contactez-moi !"
+  "contact-me-desc-1": "Je suis à la recherche d'un poste en tant que Développeur Full-Stack. J'ai plus de 5 ans d'expérience en tant que Développeur Full-Stack et j'ai une bonne expérience de Solidity et des technologies du Web 3.",
+  "contact-me-desc-2": "Si vous êtes à la recherche d'un développeur Full-Stack motivé et polyvalent, contactez-moi !"
 }

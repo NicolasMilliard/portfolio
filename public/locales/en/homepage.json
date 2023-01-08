@@ -1,8 +1,8 @@
 {
   "Hello 👋": "Hello 👋",
   "I'm Nicolas Milliard": "I'm Nicolas Milliard",
-  "job": "Full Stack Developer",
-  "about-me-desc-1": "I'm a 5+ years experienced Full Stack Developer. I usually work with React JS, Vue or Next JS in JavaScript (ES6) or in TypeScript.",
+  "job": "Full-Stack Developer",
+  "about-me-desc-1": "I'm a 5+ years experienced Full-Stack Developer. I usually work with React JS, Vue or Next JS in JavaScript (ES6) or in TypeScript.",
   "I'm graduated from Alyra": "I recently graduated from Alyra",
   "about-me-desc-2": ", the french blockchain school (2022). I've made several Web 3 projects using Solidity Smart Contracts, Truffle, Hardhat, Web3.js, Ethers.js and others.",
   "Contact me": "Contact me",
@@ -10,6 +10,6 @@
   "Resume": "Resume",
   "Case studies": "Case studies",
   "Get in touch!": "Get in touch!",
-  "contact-me-desc-1": "I'm currently looking for a job as a Blockchain Developer. I'm a 5+ years experience Full Stack Developer and I have a great experience using Solidity and Web 3 technologies.",
-  "contact-me-desc-2": "If you're looking after a motivated and versatile Blockchain Developer, feel free to contact me!"
+  "contact-me-desc-1": "I'm currently looking for a job as a Full-Stack Developer. I'm a 5+ years experience Full-Stack Developer and I have a great experience using Solidity and Web 3 technologies.",
+  "contact-me-desc-2": "If you're looking after a motivated and versatile Full-Stack Developer, feel free to contact me!"
 }

@@ -50,8 +50,13 @@ const Menu = () => {
         <li>{t('projects')}</li>
       </Link>
       <a
-        href="images/resume/resume-nicolas-milliard.pdf"
+        href={
+          locale == 'en'
+            ? 'images/resume/resume-nicolas-milliard.pdf'
+            : 'images/resume/cv-nicolas-milliard.pdf'
+        }
         target="_blank"
+        rel="noreferrer"
         className="mr-4 sm:mr-8 nm-link"
       >
         <li>{t('resume')}</li>
