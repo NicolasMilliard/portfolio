@@ -38,7 +38,7 @@ const Home = () => {
             <h2>{tHomepage("I'm Nicolas Milliard")}</h2>
             <div className="flex items-center mb-8">
               <h3 className="text-4xl mr-4 nm-gray-color">{tHomepage('job')}</h3>
-              <Separator additionalClasses="w-80 nm-separator-gray" />
+              <Separator additionalClasses="w-72 nm-separator-gray" />
             </div>
             <p className="mb-8">
               {tHomepage('about-me-desc-1')}
@@ -46,6 +46,7 @@ const Home = () => {
               <Link
                 href="https://certificate.bcdiploma.com/check/B0B491E86C4DD3E9F0065313B4851457AD99C52B28E17896176D6A4E882101BDRlFnSWNWUmJQYVZMZWMvRVZpbTRDdWU1eE9hazdTa0VpMll0ZlVDZVhrSWZjM2pL"
                 target="_blank"
+                className="underline"
               >
                 {tHomepage("I'm graduated from Alyra")}
               </Link>
@@ -65,6 +66,7 @@ const Home = () => {
                 }
                 target="_blank"
                 title="Check my resume"
+                className="underline"
               >
                 {tHomepage('Resume')}
               </Link>
