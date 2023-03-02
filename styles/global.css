@@ -30,8 +30,8 @@
 
 /* Variables */
 :root {
-  --first-color: #1cb980;
-  --first-color-darker: #106949;
+  --first-color: #e9ab79;
+  --first-color-darker: #645854;
 
   --bg-color: #fafafa;
   --bg-color-alt: #ececec;
@@ -84,7 +84,7 @@ p {
 }
 
 a {
-  color: var(--first-color);
+  color: var(--first-color-darker);
 }
 
 a:hover {
@@ -132,37 +132,6 @@ a:hover {
 
 .nm-green-bg-color {
   background-color: var(--first-color);
-}
-
-/* Cursor */
-@media screen and (min-width: 768px) {
-  body,
-  a,
-  button {
-    cursor: none;
-  }
-}
-
-.custom-cursor,
-.custom-cursor::before {
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-}
-
-.custom-cursor {
-  z-index: 99999;
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--bg-color);
-}
-
-.custom-cursor::before {
-  content: '';
-  top: 50%;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  background-color: var(--bg-color);
 }
 
 /* Navbar */
@@ -227,7 +196,7 @@ a:hover {
 /* Homepage: image */
 #image-container {
   position: relative;
-  width: 15rem;
+  width: 22.5rem;
   height: 22.5rem;
 }
 
