@@ -34,7 +34,7 @@ const Menu = () => {
         spy={true}
         offset={-84}
         duration={300}
-        className="mr-4 cursor-pointer md:cursor-none nm-link sm:mr-8"
+        className="mr-4 cursor-pointer nm-link sm:mr-8"
       >
         <li>{t('about me')}</li>
       </Link>
@@ -45,7 +45,7 @@ const Menu = () => {
         spy={true}
         offset={-84}
         duration={300}
-        className="mr-4 cursor-pointer md:cursor-none nm-link sm:mr-8"
+        className="mr-4 cursor-pointer nm-link sm:mr-8"
       >
         <li>{t('projects')}</li>
       </Link>

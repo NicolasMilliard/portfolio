@@ -16,7 +16,7 @@ const ProjectsList = () => {
 
   useEffect(() => {
     setHydrated(true);
-  }, []);
+  }, [hydrated]);
 
   // Returns null on first render so server and client match
   if (!hydrated) {
