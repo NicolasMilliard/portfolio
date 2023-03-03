@@ -20,7 +20,7 @@ export const projects = [
   {
     id: '2',
     title: 'project-3-title',
-    description: "Let's vote! - Nicolas Milliard",
+    description: 'project-3-description',
     tools: ['React JS', 'Truffle', 'Web3.js'],
     imageURI: '/images/projects/lets-vote-project.png',
     githubURI: 'https://github.com/NicolasMilliard/Alyra/tree/main/rendus/03_projet',
