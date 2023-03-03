@@ -31,7 +31,8 @@
 /* Variables */
 :root {
   --first-color: #e9ab79;
-  --first-color-darker: #645854;
+  --first-color-darker: #d77423;
+  --first-color-darkest: #7f4414;
 
   --bg-color: #fafafa;
   --bg-color-alt: #ececec;
@@ -73,13 +74,13 @@ p {
 }
 
 .nm-button-link {
-  background-color: var(--first-color);
+  background-color: var(--first-color-darker);
   color: var(--bg-color);
 }
 
 .nm-button-link:hover {
   color: var(--bg-color);
-  background-color: var(--first-color-darker);
+  background-color: var(--first-color-darkest);
   transition: background-color 0.1s ease-in-out;
 }
 
@@ -88,7 +89,7 @@ a {
 }
 
 a:hover {
-  color: var(--first-color-darker);
+  color: var(--first-color-darkest);
   transition: color 0.1s ease-in-out;
 }
 
@@ -157,12 +158,16 @@ a:hover {
 }
 
 .nm-link:hover {
-  color: var(--first-color);
+  color: var(--first-color-darker);
   transition: color 0.1s ease-in-out;
 }
 
 .nm-active-link {
-  color: var(--first-color);
+  color: var(--first-color-darker);
+}
+
+.nm-active-link:hover {
+  color: var(--first-color-darkest);
 }
 
 .flag-icon {
@@ -225,7 +230,7 @@ a:hover {
 /* Get in touch */
 .nm-btn-alt {
   background-color: var(--bg-color);
-  color: var(--first-color);
+  color: var(--black-color);
 }
 
 .nm-btn-alt:hover {
