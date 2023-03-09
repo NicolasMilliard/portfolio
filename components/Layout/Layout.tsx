@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode } from 'react';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 
@@ -8,7 +8,7 @@ export interface Props {
 
 const Layout: FC<Props> = ({ children }: Props) => {
   return (
-    <div>
+    <div className="bg-brown-100">
       <Navbar />
       <main>{children}</main>
       <Footer />

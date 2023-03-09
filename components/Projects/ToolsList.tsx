@@ -6,12 +6,9 @@ export interface Props {
 
 const ToolsList: FC<Props> = ({ tools }) => {
   return (
-    <div className="mb-2 flex flex-wrap gap-2">
+    <div className="mb-2 flex flex-wrap gap-10">
       {tools.map((tool) => (
-        <span
-          key={tool}
-          className="nm-black-bg-color nm-white-color opacity-80 hover:opacity-100 py-2 px-4"
-        >
+        <span key={tool} className="text-yellow">
           {tool}
         </span>
       ))}
