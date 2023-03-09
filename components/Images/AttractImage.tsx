@@ -8,11 +8,11 @@ const AttractImage = () => {
   return (
     <>
       <Atropos shadow={false}>
-        <div id="image-container" className="hidden lg:block lg:relative">
-          <div id="image-wrapper">
+        <div className="hidden relative bg-brown-100 lg:w-96 lg:h-96 lg:block lg:relative">
+          <div className="bg-salmon rounded-2xl">
             <Image
               src={boki}
-              alt="Full-Stack Developer - Nicolas Milliard"
+              alt="Blockchain Developer - Nicolas Milliard"
               className="rounded-2xl"
               priority={true}
               data-atropos-offset="3"
