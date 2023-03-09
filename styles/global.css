@@ -2,177 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts */
-@font-face {
-  font-family: 'Oswald-Light';
-  src: url(../public/fonts/Oswald-Light.ttf);
-}
-
-@font-face {
-  font-family: 'Oswald-Regular';
-  src: url(../public/fonts/Oswald-Regular.ttf);
-}
-
-@font-face {
-  font-family: 'Oswald-SemiBold';
-  src: url(../public/fonts/Oswald-SemiBold.ttf);
-}
-
-@font-face {
-  font-family: 'Oswald-Bold';
-  src: url(../public/fonts/Oswald-Bold.ttf);
-}
-
-@font-face {
-  font-family: 'Georgia';
-  src: url(../public/fonts/Georgia.ttf);
-}
-
-/* Variables */
-:root {
-  --first-color: #e9ab79;
-  --first-color-darker: #d77423;
-  --first-color-darkest: #7f4414;
-
-  --bg-color: #fafafa;
-  --bg-color-alt: #ececec;
-
-  --lighter-gray-color: #808080;
-  --gray-color: #636363;
-  --darker-gray-color: #2b2b2b;
-
-  --black-color: #0d0d0d;
-}
-
-/* Global */
-body {
-  font-family: 'Georgia', serif;
-  background-color: var(--bg-color);
-  color: var(--black-color);
-}
-
-h1 {
-  font-family: 'Oswald-Bold', sans-serif;
-  font-size: 4em;
-}
-
-h2 {
-  font-size: 3em;
-}
-
-h2,
-#logo-lastname {
-  font-family: 'Oswald-SemiBold', sans-serif;
-}
-
-h3 {
-  font-family: 'Oswald-Regular', sans-serif;
-}
-
-p {
-  max-width: 640px;
-}
-
-.nm-button-link {
-  background-color: var(--first-color-darker);
-  color: var(--bg-color);
-}
-
-.nm-button-link:hover {
-  color: var(--bg-color);
-  background-color: var(--first-color-darkest);
-  transition: background-color 0.1s ease-in-out;
-}
-
-a {
-  color: var(--first-color-darker);
-}
-
-a:hover {
-  color: var(--first-color-darkest);
-  transition: color 0.1s ease-in-out;
-}
-
-.nm-separator {
-  margin-top: 0.5em; /* Correct alignment with Oswald typography */
-  height: 2px;
-  border-radius: 1px;
-}
-
-.nm-separator-width {
-  width: 361px;
-}
-
-.nm-separator-gray {
-  background-color: var(--gray-color);
-}
-
-.nm-separator-black {
-  background-color: var(--black-color);
-}
-
-.nm-shadow {
-  box-shadow: 0px 0px 8px rgba(13, 13, 13, 0.15);
-}
-
-.nm-gray-color {
-  color: var(--gray-color);
-}
-
-.nm-white-color {
-  color: var(--bg-color);
-}
-
-.nm-black-bg-color {
-  background-color: var(--black-color);
-}
-
-.nm-gray-bg-color {
-  background-color: var(--gray-color);
-}
-
-.nm-green-bg-color {
-  background-color: var(--first-color);
+/* Menu */
+.menu-link-active {
+  color: #ffcf81;
 }
 
 /* Navbar */
 #navbar {
-  background-color: rgba(250, 250, 250, 0.85);
+  background-color: rgba(91, 72, 80, 0.95);
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
-}
-
-/* Logo */
-#logo-firstname {
-  font-family: 'Oswald-Light', sans-serif;
-  color: var(--black-color);
-}
-
-#logo-lastname {
-  color: var(--first-color);
-}
-
-/* Menu */
-.nm-link {
-  color: var(--black-color);
-}
-
-.nm-link:hover {
-  color: var(--first-color-darker);
-  transition: color 0.1s ease-in-out;
-}
-
-.nm-active-link {
-  color: var(--first-color-darker);
-}
-
-.nm-active-link:hover {
-  color: var(--first-color-darkest);
-}
-
-.flag-icon {
-  width: 32px;
-  height: auto;
 }
 
 /* Social links */
@@ -183,12 +22,12 @@ a:hover {
 }
 
 .social-icon {
-  transform: scale(0.8);
+  transform: scale(0.9);
 }
 
 .social-icon:hover {
   transform: scale(1);
-  transition: transform 0.1s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 #social-links-bar {
@@ -198,43 +37,19 @@ a:hover {
   border-radius: 1px 1px 0 0;
 }
 
-/* Homepage: image */
-#image-container {
-  position: relative;
-  width: 22.5rem;
-  height: 22.5rem;
-}
-
-#image-wrapper {
-  background: var(--first-color);
-  border-radius: 16px;
-}
-
 /* Projects */
-@media screen and (min-width: 1024px) {
-  .project-description-box {
-    background-color: var(--first-color);
-  }
+.w-31 {
+  width: 510px;
+}
 
-  .project-description-box p {
+@media screen and (min-width: 1024px) {
+  .project-description-text {
     width: 440px;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .project-description-box p {
+  .project-description-text {
     width: 640px;
   }
-}
-
-/* Get in touch */
-.nm-btn-alt {
-  background-color: var(--bg-color);
-  color: var(--black-color);
-}
-
-.nm-btn-alt:hover {
-  background-color: var(--first-color-darker);
-  color: var(--bg-color);
-  transition: all 0.1s ease-in-out;
 }
