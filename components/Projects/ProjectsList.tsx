@@ -5,8 +5,8 @@ import { useTranslation } from 'next-i18next';
 
 import ToolsList from './ToolsList';
 
-import github from '../../public/images/icons/github.svg';
-import external from '../../public/images/icons/external.svg';
+import github from '../../public/images/icons/github-brown.svg';
+import external from '../../public/images/icons/external-brown.svg';
 
 import { projects } from '../../pages/api/projects';
 
@@ -26,34 +26,36 @@ const ProjectsList = () => {
   return (
     <>
       {projects.map((project) => (
-        <div key={project.id} className="projet-container mb-20">
-          <div className="project-details lg:flex">
-            <div className="project-image hidden lg:block lg:mb-8">
+        <div key={project.id} className="mb-20">
+          <div className="lg:flex">
+            <div className="hidden lg:block lg:mb-8 w-31">
               <Link href={project.projectURI} target="_blank">
                 <Image
                   src={project.imageURI}
-                  alt={project.title}
+                  alt={project.alt}
                   width="510"
                   height="340"
-                  className="rounded-2xl nm-shadow"
+                  className="rounded-2xl shadow"
                 />
               </Link>
             </div>
-            <div className="project-description lg:relative">
-              <h3 className="text-4xl mb-8 lg:ml-4 lg:mt-8 xl:mt-16">{t(`${project.title}`)}</h3>
-              <div className="project-description-box lg:nm-green-bg-color lg:px-8 lg:py-4 rounded-2xl lg:absolute lg:-left-8">
-                <div className="project-description-text mb-8">
-                  <p>{t(`${project.description}`)}</p>
+            <div className="lg:relative">
+              <h3 className="font-oswald text-yellow text-4xl mb-8 lg:ml-4 lg:mt-8 xl:mt-16 project-description-text">
+                {t(`${project.title}`)}
+              </h3>
+              <div className="text-yellow lg:bg-yellow lg:text-brown-100 lg:px-8 lg:py-4 rounded-2xl lg:absolute lg:-left-8">
+                <div className="mb-8">
+                  <p className='project-description-text'>{t(`${project.description}`)}</p>
                 </div>
-                <div className="project-description-links flex items-center mb-8 lg:mb-0">
-                  <div className="project-image lg:hidden">
+                <div className="flex items-center mb-8 lg:mb-0">
+                  <div className="lg:hidden">
                     <Link href={project.projectURI} target="_blank">
                       <Image
                         src={project.imageURI}
                         alt={project.title}
                         width="510"
                         height="340"
-                        className="rounded-2xl nm-shadow"
+                        className="rounded-2xl shadow"
                       />
                     </Link>
                   </div>
