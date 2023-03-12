@@ -11,8 +11,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: 'Lato, sans-serif',
-      oswald: 'Oswald, sans-serif',
+      sans: ["'Lato', sans-serif"],
     },
     boxShadow: {
       DEFAULT: '0px 0px 8px rgba(13, 13, 13, 0.15)',
