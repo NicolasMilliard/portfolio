@@ -43,7 +43,7 @@ const Home = () => {
               <h3 className="font-oswald text-4xl leading-relaxed mr-4 text-salmon">
               {tHomepage('job')}
               </h3>
-              <Separator additionalClasses="w-60 bg-salmon" />
+              <Separator additionalClasses="lg:w-40 bg-salmon" />
             </div>
             <p className="mb-8 text-yellow">
               {tHomepage('about-me-desc-1')}
