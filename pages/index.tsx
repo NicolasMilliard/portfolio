@@ -33,15 +33,15 @@ const Home = () => {
         >
           {/* Text */}
           <div className="mb-20 lg:mb-0 lg:mr-20 xl:mr-40">
-            <h1 className="font-oswald font-bold text-6xl leading-relaxed text-yellow">
+            <h1 className="font-oswald-bold text-6xl leading-relaxed text-yellow">
               {tHomepage('Hello 👋')}
             </h1>
-            <h2 className="font-oswald font-bold text-5xl leading-relaxed text-yellow">
+            <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
               {tHomepage("I'm Nicolas Milliard")}
             </h2>
-            <div className="flex items-center mb-8">
-              <h3 className="font-oswald font-semibold text-4xl leading-relaxed mr-4 text-salmon">
-                {tHomepage('job')}
+            <div className="flex justify-between items-center mb-8">
+              <h3 className="font-oswald text-4xl leading-relaxed mr-4 text-salmon">
+              {tHomepage('job')}
               </h3>
               <Separator additionalClasses="w-60 bg-salmon" />
             </div>
@@ -84,7 +84,7 @@ const Home = () => {
         >
           {/* Title */}
           <div className="flex items-center mb-8">
-            <h2 className="font-oswald font-bold text-5xl leading-relaxed text-yellow mr-4">
+            <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow mr-4">
               {tHomepage('Case studies')}
             </h2>
             <Separator additionalClasses="w-72 ml-4 bg-yellow" />
@@ -94,7 +94,7 @@ const Home = () => {
         </section>
         {/* Get in touch */}
         <section className="p-8 bg-yellow text-brown-100 md:rounded-xl md:max-w-screen-md md:mx-auto md:mb-48">
-          <h2 className="font-oswald font-bold text-5xl leading-relaxed mb-8">
+          <h2 className="font-oswald-semibold text-5xl leading-relaxed mb-8">
             {tHomepage('Get in touch!')}
           </h2>
           <p className="mb-4">{tHomepage('contact-me-desc-1')}</p>
