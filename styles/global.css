@@ -31,11 +31,6 @@
   font-family: "Oswald-Bold", sans-serif;
 }
 
-/* Menu */
-.menu-link-active {
-  color: #ffcf81;
-}
-
 /* Navbar */
 #navbar {
   background-color: rgba(91, 72, 80, 0.95);

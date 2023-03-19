@@ -30,24 +30,24 @@ const Menu = () => {
         )}
       </div>
       <Link
-        activeClass="font-bold menu-link-active"
+        activeClass="font-bold underline"
         to="about-me"
         smooth={true}
         spy={true}
         offset={-84}
         duration={300}
-        className="mr-4 cursor-pointer text-salmon hover:underline sm:mr-8"
+        className="mr-4 cursor-pointer text-yellow hover:underline sm:mr-8"
       >
         <li>{t('about me')}</li>
       </Link>
       <Link
-        activeClass="font-bold menu-link-active"
+        activeClass="font-bold underline"
         to="projects"
         smooth={true}
         spy={true}
         offset={-84}
         duration={300}
-        className="mr-4 cursor-pointer text-salmon hover:underline sm:mr-8"
+        className="mr-4 cursor-pointer text-yellow hover:underline sm:mr-8"
       >
         <li>{t('projects')}</li>
       </Link>
@@ -59,7 +59,7 @@ const Menu = () => {
         }
         target="_blank"
         rel="noreferrer"
-        className="mr-4 sm:mr-8 text-salmon hover:text-yellow hover:underline"
+        className="mr-4 sm:mr-8 text-yellow hover:underline"
       >
         <li>{t('resume')}</li>
       </a>
