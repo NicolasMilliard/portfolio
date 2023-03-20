@@ -4,29 +4,33 @@ import Link from 'next/link';
 export interface Props {
   text: string;
   theme: string | null;
+  link: string;
+  target: string;
 }
 
-const ContactLink: FC<Props> = ({ text, theme }) => {
+const Button: FC<Props> = ({ text, theme, link, target }) => {
   switch (theme) {
-    case "salmon":
+    case 'salmon':
       return (
         <Link
-          href="mailto:contact@nicolasmilliard.fr"
+          href={link}
           className="bg-salmon text-brown-100 py-3.5 px-6 font-bold tracking-wide rounded-2xl shadow hover:bg-yellow ease-in-out duration-300"
+          target={target}
         >
           {text}
         </Link>
-      )
+      );
     default:
       return (
         <Link
-          href="mailto:contact@nicolasmilliard.fr"
+          href={link}
           className="bg-yellow text-brown-100 py-3.5 px-6 font-bold tracking-wide rounded-2xl shadow hover:bg-salmon ease-in-out duration-300"
+          target={target}
         >
           {text}
         </Link>
-      )
-  }  
+      );
+  }
 };
 
-export default ContactLink;
+export default Button;
