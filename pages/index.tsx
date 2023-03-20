@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
-import ContactLink from '../components/Buttons/ContactLink';
+import Button from '../components/Buttons/Button';
 import Separator from '../components/Titles/Separator';
 import AttractImage from '../components/Images/AttractImage';
 import SocialLinks from '../components/Social/SocialLinks';
@@ -19,7 +19,10 @@ const Home = () => {
     <div>
       <Head>
         <title>{tHead('index-title')}</title>
-        <meta name="description" content="Portfolio of Nicolas Milliard, Full-Stack Developer & Web3." />
+        <meta
+          name="description"
+          content="Portfolio of Nicolas Milliard, Full-Stack Developer & Web3."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -41,7 +44,7 @@ const Home = () => {
             </h2>
             <div className="flex justify-between items-center mb-8">
               <h3 className="font-oswald text-4xl leading-relaxed mr-4 text-salmon">
-              {tHomepage('job')}
+                {tHomepage('job')}
               </h3>
               <Separator additionalClasses="lg:w-40 bg-salmon" />
             </div>
@@ -58,7 +61,12 @@ const Home = () => {
               {tHomepage('about-me-desc-2')}
             </p>
             <div className="mt-12">
-              <ContactLink text={tHomepage('Contact me')} theme="" />
+              <Button
+                text={tHomepage('Contact me')}
+                theme=""
+                link="mailto:contact@nicolasmilliard.fr"
+                target="_self"
+              />
               <Link
                 locale="en"
                 href={
@@ -99,7 +107,12 @@ const Home = () => {
           </h2>
           <p className="mb-4">{tHomepage('contact-me-desc-1')}</p>
           <p className="mb-8">{tHomepage('contact-me-desc-2')}</p>
-          <ContactLink text={tHomepage('Contact me')} theme="salmon" />
+          <Button
+            text={tHomepage('Contact me')}
+            theme="salmon"
+            link="mailto:contact@nicolasmilliard.fr"
+            target="_self"
+          />
         </section>
       </>
     </div>

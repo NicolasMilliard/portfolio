@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 
 import france from '../../../public/images/icons/flags/france.svg';
 import usa from '../../../public/images/icons/flags/usa.svg';
-import ButtonLink from '../../Buttons/ContactLink';
+import Button from '../../Buttons/Button';
 
 const Menu = () => {
   const { locale, push } = useRouter();
@@ -18,7 +18,7 @@ const Menu = () => {
   };
   return (
     <ul className="flex items-center">
-      <div className='hidden sm:flex'>
+      <div className="hidden sm:flex">
         {locale == 'en' ? (
           <button className="mr-4 sm:mr-8" onClick={handleClick('fr')}>
             <Image src={france} alt="France" className="w-8 h-auto" priority={false} />
@@ -54,8 +54,8 @@ const Menu = () => {
       <a
         href={
           locale == 'en'
-            ? 'images/resume/resume-nicolas-milliard.pdf'
-            : 'images/resume/cv-nicolas-milliard.pdf'
+            ? 'https://nicolasmilliard.fr/images/resume/resume-nicolas-milliard.pdf'
+            : 'https://nicolasmilliard.fr/fr/images/resume/cv-nicolas-milliard.pdf'
         }
         target="_blank"
         rel="noreferrer"
@@ -63,7 +63,12 @@ const Menu = () => {
       >
         <li>{t('resume')}</li>
       </a>
-      <ButtonLink text={t('contact me')} theme="" />
+      <Button
+        text={t('contact me')}
+        theme=""
+        link="mailto:contact@nicolasmilliard.fr"
+        target="_self"
+      />
     </ul>
   );
 };

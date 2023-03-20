@@ -77,3 +77,26 @@
     width: 640px;
   }
 }
+
+/* SmartVote loader */
+.btn-spin-loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: solid 2px #ffcf81;
+  border-radius: 50%;
+  animation: 1s ease-in-out infinite spinner;
+  -webkit-animation: 1s ease-in-out infinite spinner;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+}
