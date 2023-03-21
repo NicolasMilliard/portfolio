@@ -8,7 +8,7 @@ export interface Props {
 
 const Layout: FC<Props> = ({ children }: Props) => {
   return (
-    <div className="bg-brown-100">
+    <div className="bg-dark">
       <Navbar />
       <main>{children}</main>
       <Footer />
