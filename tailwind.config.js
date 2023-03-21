@@ -3,6 +3,7 @@ module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
+      dark: '#4a3b42',
       yellow: '#ffcf81',
       salmon: '#e48580',
       brown: {
