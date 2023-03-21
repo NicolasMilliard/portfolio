@@ -22,7 +22,7 @@ const ToolsList: FC<Props> = ({ tools, direction }) => {
         return (
           <div className="flex flex-wrap mb-2 gap-4 lg:gap-10">
             {tools.map((tool) => (
-              <span key={tool} className="text-yellow">
+              <span key={tool} className="text-salmon">
                 {tool}
               </span>
             ))}
