@@ -8,7 +8,7 @@ import Button from '../components/Buttons/Button';
 import SocialLinks from '../components/Social/SocialLinks';
 import ProjectsList from '../components/Projects/ProjectsList';
 
-const casestudies = () => {
+const Casestudies = () => {
   const { t: tHead } = useTranslation('head');
   const { t: tHomepage } = useTranslation('homepage');
   const { t: tCaseStudies } = useTranslation('casestudies');
@@ -72,4 +72,4 @@ export async function getStaticProps({ locale }: { locale: string }) {
   };
 }
 
-export default casestudies;
+export default Casestudies;
