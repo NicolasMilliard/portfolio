@@ -28,7 +28,7 @@ const Casestudies = () => {
       <SocialLinks />
 
       {/* Case studies */}
-      <section className="py-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+      <section className="pt-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
         {/* Title */}
         <div className="flex items-center mb-8">
           <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow mr-4">
