@@ -5,7 +5,7 @@ export interface Props {
 }
 
 const Separator: FC<Props> = ({ additionalClasses }) => {
-  return <span className={`block mt-2 h-0.5 rounded-sm ${additionalClasses}`}></span>;
+  return <span className={`hidden md:block mt-2 h-0.5 rounded-sm ${additionalClasses}`}></span>;
 };
 
 export default Separator;
