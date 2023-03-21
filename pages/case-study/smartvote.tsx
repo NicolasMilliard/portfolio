@@ -9,6 +9,7 @@ import SocialLinks from '../../components/Social/SocialLinks';
 import ToolsList from '../../components/Projects/ToolsList';
 import Button from '../../components/Buttons/Button';
 import ButtonLoader from '../../components/Buttons/ButtonLoader';
+import Separator from '../../components/Titles/Separator';
 
 import smartVoteDapp from '../../public/images/case-study/smartvote/smart-vote-dapp.png';
 import smartVoteBlockchains from '../../public/images/case-study/smartvote/smart-vote-blockchains.png';
@@ -41,7 +42,7 @@ const SmartVote = () => {
           Créer, gérer et rejoindre des sessions de vote
         </h2>
         {/* Image and tools */}
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col md:flex-row md:items-center">
           <div className="mb-6 md:mb-0 md:mr-6">
             <Image
               src={smartVoteDapp}
@@ -84,9 +85,13 @@ const SmartVote = () => {
 
       {/* What is SmartVote */}
       <section className="mb-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow mb-8">
-          Qu'est-ce que SmartVote&nbsp;?
-        </h2>
+        {/* Title with separator */}
+        <div className="flex items-center mb-8">
+          <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
+            Qu'est-ce que SmartVote&nbsp;?
+          </h2>
+          <Separator additionalClasses="w-72 ml-4 bg-yellow" />
+        </div>
         <div className="flex flex-col items-center md:flex-row">
           <div className="md:mr-6">
             <p className="text-yellow mt-8 mb-8 max-w-2xl">
@@ -109,9 +114,13 @@ const SmartVote = () => {
 
       {/* Why SmartVote */}
       <section className="mb-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow mb-8">
-          Pourquoi SmartVote&nbsp;?
-        </h2>
+        {/* Title with separator */}
+        <div className="flex items-center mb-8">
+          <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
+            Pourquoi SmartVote&nbsp;?
+          </h2>
+          <Separator additionalClasses="w-72 ml-4 bg-yellow" />
+        </div>
         <p className="text-yellow mt-8 mb-8 max-w-2xl">
           SmartVote utilise la technologie de la Blockchain via des Smart Contracts rédigés en
           Solidity. L'utilisation de la Blockchain permet une parfaite traçabilité de la totalité
@@ -130,9 +139,13 @@ const SmartVote = () => {
 
       {/* UX/UI */}
       <section className="mb-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow mb-8">
-          UX / UI de SmartVote
-        </h2>
+        {/* Title with separator */}
+        <div className="flex items-center mb-8">
+          <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
+            UX / UI de SmartVote
+          </h2>
+          <Separator additionalClasses="w-72 ml-4 bg-yellow" />
+        </div>
         <Image src={smartVoteUXUI} alt="SmartVote UX / UI - Nicolas Milliard" />
         <p className="text-yellow mt-8 mb-8 max-w-2xl">
           Afin de proposer une expérience utilisateur optimale, SmartVote se devait de respecter
@@ -170,9 +183,13 @@ const SmartVote = () => {
 
       {/* Code */}
       <section className="mb-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow mb-8">
-          Réalisation de SmartVote
-        </h2>
+        {/* Title with separator */}
+        <div className="flex items-center mb-8">
+          <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
+            Réalisation de SmartVote
+          </h2>
+          <Separator additionalClasses="w-72 ml-4 bg-yellow" />
+        </div>
         {/* Web 2 */}
         <div className="mb-10">
           <h3 className="font-oswald-semibold text-3xl leading-relaxed text-salmon mb-8">

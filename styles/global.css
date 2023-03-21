@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Lato font */
+@font-face {
+  font-family: "Lato";
+  src: url("../public//fonts/Lato-Regular.ttf");
+}
+
 /* Oswald font */
 @font-face {
   font-family: "Oswald";
@@ -64,18 +70,6 @@
 /* Projects */
 .w-31 {
   width: 510px;
-}
-
-@media screen and (min-width: 1024px) {
-  .project-description-text {
-    width: 440px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .project-description-text {
-    width: 640px;
-  }
 }
 
 /* SmartVote loader */
