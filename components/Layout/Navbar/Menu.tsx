@@ -1,7 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Link } from 'react-scroll';
 import { useTranslation } from 'next-i18next';
 
 import france from '../../../public/images/icons/flags/france.svg';
@@ -29,33 +29,17 @@ const Menu = () => {
           </button>
         )}
       </div>
-      <Link
-        activeClass="font-bold underline"
-        to="about-me"
-        smooth={true}
-        spy={true}
-        offset={-84}
-        duration={300}
-        className="mr-4 cursor-pointer text-yellow hover:underline sm:mr-8"
-      >
-        <li>{t('about me')}</li>
+      <Link href="/" className="mr-4 cursor-pointer text-yellow hover:underline sm:mr-8">
+        <li>{t('home')}</li>
       </Link>
-      <Link
-        activeClass="font-bold underline"
-        to="projects"
-        smooth={true}
-        spy={true}
-        offset={-84}
-        duration={300}
-        className="mr-4 cursor-pointer text-yellow hover:underline sm:mr-8"
-      >
+      <Link href="/casestudies" className="mr-4 cursor-pointer text-yellow hover:underline sm:mr-8">
         <li>{t('projects')}</li>
       </Link>
       <a
         href={
           locale == 'en'
-            ? 'https://nicolasmilliard.fr/images/resume/resume-nicolas-milliard.pdf'
-            : 'https://nicolasmilliard.fr/fr/images/resume/cv-nicolas-milliard.pdf'
+            ? '/images/resume/resume-nicolas-milliard.pdf'
+            : '/images/resume/cv-nicolas-milliard.pdf'
         }
         target="_blank"
         rel="noreferrer"

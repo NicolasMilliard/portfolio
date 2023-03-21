@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 
 import ToolsList from './ToolsList';
+import ProjectImage from './ProjectImage';
 
 import github from '../../public/images/icons/github-brown.svg';
 import external from '../../public/images/icons/external-brown.svg';
@@ -29,27 +30,12 @@ const ProjectsList = () => {
         <div key={project.id} className="mb-20">
           <div className="lg:flex">
             <div className="hidden lg:block lg:mb-8 w-31">
-              {project.casestudyURI != '' ? (
-                <Link href={`/case-study/${project.casestudyURI}`}>
-                  <Image
-                    src={project.imageURI}
-                    alt={project.alt}
-                    width="510"
-                    height="340"
-                    className="rounded-2xl shadow"
-                  />
-                </Link>
-              ) : (
-                <Link href={project.projectURI} target="_blank">
-                  <Image
-                    src={project.imageURI}
-                    alt={project.alt}
-                    width="510"
-                    height="340"
-                    className="rounded-2xl shadow"
-                  />
-                </Link>
-              )}
+              <ProjectImage
+                casestudyURI={project.casestudyURI}
+                projectURI={project.projectURI}
+                imageURI={project.imageURI}
+                imageAlt={project.alt}
+              />
             </div>
             <div className="lg:relative">
               <h3 className="font-oswald text-yellow text-4xl mb-8 lg:ml-4 lg:mt-8 xl:mt-16 project-description-text">
@@ -61,15 +47,12 @@ const ProjectsList = () => {
                 </div>
                 <div className="flex items-center mb-8 lg:mb-0">
                   <div className="lg:hidden">
-                    <Link href={`/case-study/${project.id}`}>
-                      <Image
-                        src={project.imageURI}
-                        alt={project.title}
-                        width="510"
-                        height="340"
-                        className="rounded-2xl shadow"
-                      />
-                    </Link>
+                    <ProjectImage
+                      casestudyURI={project.casestudyURI}
+                      projectURI={project.projectURI}
+                      imageURI={project.imageURI}
+                      imageAlt={project.alt}
+                    />
                   </div>
                   <div className="flex flex-col items-center ml-4 lg:flex-row lg:ml-0">
                     {project.githubURI != '' && (
