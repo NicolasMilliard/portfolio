@@ -5,9 +5,10 @@ import { useTranslation } from 'next-i18next';
 
 import ToolsList from './ToolsList';
 import ProjectImage from './ProjectImage';
+import Button from '../Buttons/Button';
 
-import github from '../../public/images/icons/github-brown.svg';
-import external from '../../public/images/icons/external-brown.svg';
+import github from '../../public/images/icons/github-yellow.svg';
+import external from '../../public/images/icons/external-yellow.svg';
 
 import { projects } from '../../pages/api/projects';
 
@@ -28,7 +29,7 @@ const ProjectsList = () => {
     <>
       {projects.map((project) => (
         <div key={project.id} className="mb-20">
-          <div className="lg:flex">
+          <div className="lg:flex lg:items-center">
             <div className="hidden lg:block lg:mb-8 w-31">
               <ProjectImage
                 casestudyURI={project.casestudyURI}
@@ -38,12 +39,12 @@ const ProjectsList = () => {
               />
             </div>
             <div className="lg:relative">
-              <h3 className="font-oswald text-yellow text-4xl mb-8 lg:ml-4 lg:mt-8 xl:mt-16 project-description-text">
+              <h3 className="font-oswald text-yellow text-4xl mb-8 lg:ml-8 max-w-2xl">
                 {t(`${project.title}`)}
               </h3>
-              <div className="text-yellow lg:bg-yellow lg:text-brown-100 lg:px-8 lg:py-4 rounded-2xl lg:absolute lg:-left-8">
+              <div className="text-yellow lg:px-8 lg:py-4 rounded-2xl">
                 <div className="mb-8">
-                  <p className="project-description-text">{t(`${project.description}`)}</p>
+                  <p className=" max-w-2xl">{t(`${project.description}`)}</p>
                 </div>
                 <div className="flex items-center mb-8 lg:mb-0">
                   <div className="lg:hidden">
@@ -55,23 +56,34 @@ const ProjectsList = () => {
                     />
                   </div>
                   <div className="flex flex-col items-center ml-4 lg:flex-row lg:ml-0">
-                    {project.githubURI != '' && (
-                      <Link
-                        href={project.githubURI}
-                        className="mb-4 lg:mb-0 lg:mr-4"
-                        target="_blank"
-                      >
-                        <Image
-                          src={github}
-                          alt={`${project.title} - Github`}
-                          className="social-icon"
-                        />
-                      </Link>
-                    )}
-                    {project.projectURI != '' && (
-                      <Link href={project.projectURI} target="_blank">
-                        <Image src={external} alt="Visit the website" className="social-icon" />
-                      </Link>
+                    {project.casestudyURI != '' ? (
+                      <Button
+                        text="Voir l'étude de cas"
+                        theme=""
+                        link={`/case-study/${project.casestudyURI}`}
+                        target="_self"
+                      />
+                    ) : (
+                      <>
+                        {project.githubURI != '' && (
+                          <Link
+                            href={project.githubURI}
+                            className="mb-4 lg:mb-0 lg:mr-4"
+                            target="_blank"
+                          >
+                            <Image
+                              src={github}
+                              alt={`${project.title} - Github`}
+                              className="social-icon"
+                            />
+                          </Link>
+                        )}
+                        {project.projectURI != '' && (
+                          <Link href={project.projectURI} target="_blank">
+                            <Image src={external} alt="Visit the website" className="social-icon" />
+                          </Link>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
