@@ -42,16 +42,4 @@ export const projects = [
     projectURI: 'https://chainboard.vercel.app/',
     casestudyURI: '',
   },
-  {
-    id: '3',
-    title: 'Insert Dentaire',
-    description:
-      "Cette application permet aux dentistes de commander des inserts dentaires selon la marque, le modèle et l'utilisation. Elle est syncrhonisée avec le site internet et permet le suivi de sa commande en temps réel.",
-    tools: ['React Native', 'API Chronopost', 'API Stripe'],
-    imageURI: '/images/projects/chainboard-project.png',
-    alt: 'Insert Dentaire - Nicolas Milliard',
-    githubURI: '',
-    projectURI: '',
-    casestudyURI: '',
-  },
 ];
