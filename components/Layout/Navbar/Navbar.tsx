@@ -4,8 +4,8 @@ import Menu from './Menu';
 
 const Navbar = () => {
   return (
-    <nav id="navbar" className="w-full fixed z-50 top-0 py-4 shadow">
-      <div className="sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto flex items-center justify-center sm:justify-between">
+    <nav className="w-full fixed z-50 top-0 pt-7 pb-4 lg:py-8 shadow bg-white-100">
+      <div className="flex items-center justify-between mx-6 md:mx-auto md:px-16 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
         <Logo />
         <Menu />
       </div>
