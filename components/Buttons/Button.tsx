@@ -3,34 +3,20 @@ import Link from 'next/link';
 
 export interface Props {
   text: string;
-  theme: string | null;
   link: string;
   target: string;
 }
 
-const Button: FC<Props> = ({ text, theme, link, target }) => {
-  switch (theme) {
-    case 'salmon':
-      return (
-        <Link
-          href={link}
-          className="bg-salmon text-brown-100 py-3.5 px-6 font-bold tracking-wide rounded-2xl shadow hover:bg-yellow ease-in-out duration-300"
-          target={target}
-        >
-          {text}
-        </Link>
-      );
-    default:
-      return (
-        <Link
-          href={link}
-          className="bg-yellow text-brown-100 py-3.5 px-6 font-bold tracking-wide rounded-2xl shadow hover:bg-salmon ease-in-out duration-300"
-          target={target}
-        >
-          {text}
-        </Link>
-      );
-  }
+const Button: FC<Props> = ({ text, link, target }) => {
+  return (
+    <Link
+      href={link}
+      className="bg-green-500 text-white-500 py-4 px-6 font-semibold rounded-2xl shadow hover:bg-green-900 ease-in-out duration-300"
+      target={target}
+    >
+      {text}
+    </Link>
+  );
 };
 
 export default Button;
