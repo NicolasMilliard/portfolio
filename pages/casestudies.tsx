@@ -5,8 +5,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
 import Button from '../components/Buttons/Button';
-import SocialLinks from '../components/Social/SocialLinks';
-import ProjectsList from '../components/Projects/ProjectsList';
 
 const Casestudies = () => {
   const { t: tHead } = useTranslation('head');
@@ -25,8 +23,6 @@ const Casestudies = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SocialLinks />
-
       {/* Case studies */}
       <section className="pt-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
         {/* Title */}
@@ -35,8 +31,6 @@ const Casestudies = () => {
             {tCaseStudies('case-studies')}
           </h2>
         </div>
-        {/* Projects */}
-        <ProjectsList />
       </section>
       {/* Get in touch */}
       <section className="p-8 bg-yellow text-brown-100 md:rounded-xl md:max-w-screen-md md:mx-auto md:mb-48">
@@ -47,7 +41,6 @@ const Casestudies = () => {
         <p className="mb-8">{tHomepage('contact-me-desc-2')}</p>
         <Button
           text={tHomepage('Contact me')}
-          theme="salmon"
           link="mailto:contact@nicolasmilliard.fr"
           target="_self"
         />
