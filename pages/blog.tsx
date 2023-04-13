@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { PostCard, Categories, PostWidget } from '../components/Blog';
+import { PostCard, Categories, PostWidget, FeaturedPosts } from '../components/Blog';
 import { getPosts } from '../services/getPosts';
 
-export interface Props {
+interface Props {
   posts: Post[];
 }
 
-export interface Post {
+interface Post {
   node: {
     author: Author;
     createdAt: string;
@@ -14,12 +14,12 @@ export interface Post {
     title: string;
     excerpt: string;
     featuredImage: FeaturedImage;
-    categories: Categories;
+    categories: CategoriesList;
   };
   title: string;
 }
 
-export interface Author {
+interface Author {
   bio: string;
   name: string;
   id: string;
@@ -28,11 +28,11 @@ export interface Author {
   };
 }
 
-export interface FeaturedImage {
+interface FeaturedImage {
   url: string;
 }
 
-export interface Categories {
+interface CategoriesList {
   name: string;
   slug: string;
 }
@@ -40,6 +40,7 @@ export interface Categories {
 const blog: FC<Props> = ({ posts }) => {
   return (
     <div className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+      <FeaturedPosts />
       <section className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl lg:flex lg:items-center lg:justify-between">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-8 col-span-1">

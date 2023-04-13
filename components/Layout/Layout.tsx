@@ -1,8 +1,8 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 
-export interface Props {
+interface Props {
   children: ReactNode;
 }
 

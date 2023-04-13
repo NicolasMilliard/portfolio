@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { getSimilarPosts } from '../../services/getSimilarPosts';
 import { getRecentPosts } from '../../services/getRecentPosts';
 
-export interface Props {
+interface Props {
   categories: string[];
   slug: string;
 }
 
-export interface Posts {
+interface Posts {
   title: string;
   createdAt: string;
   slug: string;
@@ -29,8 +29,6 @@ const PostWidget: FC<Props> = ({ categories, slug }) => {
       getRecentPosts().then((result) => setRelatedPosts(result));
     }
   }, [slug]);
-
-  console.log(relatedPosts);
 
   return (
     <div className="bg-white-100 p-8 mb-8">

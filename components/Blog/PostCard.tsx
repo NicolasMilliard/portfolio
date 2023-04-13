@@ -2,7 +2,7 @@ import { FC } from 'react';
 import moment from 'moment';
 import Link from 'next/link';
 
-export interface Props {
+interface Props {
   key: string;
   post: {
     title: string;

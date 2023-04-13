@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 
-export interface Props {
+interface Props {
   text: string;
   link: string;
   target: string;

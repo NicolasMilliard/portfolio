@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { getCategories } from '../../services/getCategories';
 
-export interface Categories {
+interface Categories {
   name: string;
   slug: string;
 }
