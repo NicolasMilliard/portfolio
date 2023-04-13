@@ -3,7 +3,22 @@ import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface Props {}
+interface Props {
+  post: {
+    featuredImage: {
+      url: string;
+    };
+    createdAt: string;
+    title: string;
+    author: {
+      name: string;
+      photo: {
+        url: string;
+      };
+    };
+    slug: string;
+  };
+}
 
 const FeaturedPostCard: FC<Props> = ({ post }) => {
   return (

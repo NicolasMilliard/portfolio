@@ -1,4 +1,16 @@
-export const experiencesList = [
+interface Experience {
+  label: string;
+  title: string;
+  date: string;
+  descriptions: Description[];
+}
+
+interface Description {
+  id: number;
+  text: string;
+}
+
+export const experiencesList: Experience[] = [
   {
     label: 'Freelance',
     title: 'Full-Stack Developer',

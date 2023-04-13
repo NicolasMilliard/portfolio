@@ -1,6 +1,8 @@
 import { FC } from 'react';
+import { useRouter } from 'next/router';
 import { getPosts } from '../../services/getPosts';
 import { getPostDetails } from '../../services/getPostDetails';
+import { ElementNode } from '@graphcms/rich-text-types';
 
 import {
   PostDetail,
@@ -9,23 +11,46 @@ import {
   Author,
   Comments,
   CommentsForm,
+  Loader,
 } from '../../components/Blog';
 
-export interface Props {
+interface Props {
   post: {
-    author: {};
+    title: string;
+    createdAt: string;
+    featuredImage: {
+      url: string;
+    };
+    author: {
+      photo: {
+        url: string;
+      };
+      name: string;
+      bio: string;
+    };
     slug: string;
     categories: Category[];
+    content: {
+      raw: {
+        children: ElementNode[];
+      };
+    };
   };
 }
 
-export interface Category {
+interface Category {
   slug: string;
 }
 
 const PostDetails: FC<Props> = ({ post }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <Loader />;
+  }
+
   return (
-    <div className="container mx-auto px-10 mb-8">
+    <section className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="col-span-1 lg:col-span-8">
           <PostDetail post={post} />
@@ -43,7 +68,7 @@ const PostDetails: FC<Props> = ({ post }) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
@@ -62,6 +87,6 @@ export async function getStaticPaths() {
 
   return {
     paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
-    fallback: false,
+    fallback: true,
   };
 }

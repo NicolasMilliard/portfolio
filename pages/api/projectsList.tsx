@@ -1,8 +1,17 @@
+import { StaticImageData } from 'next/image';
 import screenplanner from '../../public/images/projects/screenplanner.png';
 import smartvote from '../../public/images/projects/smartvote.png';
-import kopo from '../../public/images/projects/kopo.png';
+import koppo from '../../public/images/projects/koppo.png';
 
-export const projectsList = [
+interface Project {
+  title: string;
+  link: string;
+  image: StaticImageData;
+  description: string;
+  tools: string[];
+}
+
+export const projectsList: Project[] = [
   {
     title: 'ScreenPlanner',
     link: '',
@@ -30,11 +39,11 @@ export const projectsList = [
     ],
   },
   {
-    title: 'Kopo',
+    title: 'Koppo',
     link: '',
-    image: kopo,
+    image: koppo,
     description:
-      'Kopo simplifies the process of applying for Energy Savings Certificates (ESC) and ensures their traceability in full transparency thanks to the Polygon Blockchain.',
+      'Koppo simplifies the process of applying for Energy Savings Certificates (ESC) and ensures their traceability in full transparency thanks to the Polygon Blockchain.',
     tools: ['Next.js', 'Hardhat', 'Ethers', 'Wagmi', 'Rainbow Kit', 'TailwindCSS', 'Toastify'],
   },
 ];
