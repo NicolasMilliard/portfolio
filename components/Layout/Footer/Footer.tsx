@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 
-const Footer = () => {
+const Footer: FC = () => {
   const { t } = useTranslation('footer');
   return (
     <footer className="py-8 bg-brown-900 text-yellow flex items-center justify-center">

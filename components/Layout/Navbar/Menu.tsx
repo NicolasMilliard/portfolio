@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -9,7 +10,7 @@ import github from '../../../public/images/icons/github.svg';
 import twitter from '../../../public/images/icons/twitter.svg';
 import linkedin from '../../../public/images/icons/linkedin.svg';
 
-const Menu = () => {
+const Menu: FC = () => {
   const { locale, push } = useRouter();
   const { t } = useTranslation('menu');
   const [isOpen, setIsOpen] = useState(false);

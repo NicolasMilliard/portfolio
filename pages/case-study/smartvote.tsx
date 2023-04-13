@@ -5,11 +5,8 @@ import Image from 'next/image';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
-import SocialLinks from '../../components/Social/SocialLinks';
-import ToolsList from '../../components/Projects/ToolsList';
 import Button from '../../components/Buttons/Button';
 import ButtonLoader from '../../components/Buttons/ButtonLoader';
-import Separator from '../../components/Titles/Separator';
 
 import smartVoteDapp from '../../public/images/case-study/smartvote/smart-vote-dapp.png';
 import smartVoteBlockchains from '../../public/images/case-study/smartvote/smart-vote-blockchains.png';
@@ -33,8 +30,6 @@ const SmartVote = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SocialLinks />
-
       {/* Project presentation */}
       <section className="flex flex-col items-center py-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:py-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
         <h1 className="font-oswald-bold text-6xl leading-relaxed text-yellow">SmartVote</h1>
@@ -50,29 +45,10 @@ const SmartVote = () => {
               className="rounded-2xl"
             />
           </div>
-          <ToolsList
-            tools={[
-              'Next.js',
-              'Hardhat',
-              'Ethers.js',
-              'The Graph',
-              'Wagmi',
-              'Rainbow Kit',
-              'TailwindCSS',
-              'Toastify',
-              'Multi-chains',
-            ]}
-            direction="col"
-          />
         </div>
         {/* Links */}
         <div className="mt-8">
-          <Button
-            text="Voir le projet"
-            theme=""
-            link="https://my-smartvote.vercel.app/"
-            target="_blank"
-          />
+          <Button text="Voir le projet" link="https://my-smartvote.vercel.app/" target="_blank" />
           <Link
             href="https://github.com/NicolasMilliard/SmartVote"
             className="ml-4 text-yellow underline hover:font-semibold"
@@ -90,7 +66,6 @@ const SmartVote = () => {
           <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
             Qu'est-ce que SmartVote&nbsp;?
           </h2>
-          <Separator additionalClasses="w-72 ml-4 bg-yellow" />
         </div>
         <div className="flex flex-col items-center md:flex-row">
           <div className="md:mr-6">
@@ -119,7 +94,6 @@ const SmartVote = () => {
           <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
             Pourquoi SmartVote&nbsp;?
           </h2>
-          <Separator additionalClasses="w-72 ml-4 bg-yellow" />
         </div>
         <p className="text-yellow mt-8 mb-8 max-w-2xl">
           SmartVote utilise la technologie de la Blockchain via des Smart Contracts rédigés en
@@ -144,7 +118,6 @@ const SmartVote = () => {
           <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
             UX / UI de SmartVote
           </h2>
-          <Separator additionalClasses="w-72 ml-4 bg-yellow" />
         </div>
         <Image src={smartVoteUXUI} alt="SmartVote UX / UI - Nicolas Milliard" />
         <p className="text-yellow mt-8 mb-8 max-w-2xl">
@@ -188,7 +161,6 @@ const SmartVote = () => {
           <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
             Réalisation de SmartVote
           </h2>
-          <Separator additionalClasses="w-72 ml-4 bg-yellow" />
         </div>
         {/* Web 2 */}
         <div className="mb-10">
