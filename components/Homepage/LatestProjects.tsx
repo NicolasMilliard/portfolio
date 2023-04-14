@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Button from '../Buttons/Button';
+import ButtonDisabled from '../Buttons/ButtonDisabled';
 
 import { projectsList } from '../../pages/api/projectsList';
 
@@ -26,7 +26,7 @@ const LatestProjects = () => {
                     <li key={tool}>{tool}</li>
                   ))}
                 </ul>
-                <Button text="Case study" link={project.link} target="_self" />
+                <ButtonDisabled text="Case study" />
               </div>
             </div>
           </div>
