@@ -29,7 +29,7 @@ const Menu: FC = () => {
             Home
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="#" className="text-black hover:text-green-500">
             Projects
           </Link>
@@ -43,7 +43,7 @@ const Menu: FC = () => {
           <Link href="#" className="text-black hover:text-green-500">
             Newsletter
           </Link>
-        </li>
+        </li> */}
         <li>
           <Button text="Contact me" link="#" target="_self" />
         </li>
