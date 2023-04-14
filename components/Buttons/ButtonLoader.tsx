@@ -1,4 +1,6 @@
-const ButtonLoader = () => {
+import { FC } from 'react';
+
+const ButtonLoader: FC = () => {
   return (
     <div className="bg-yellow text-brown-100 font-bold py-4 px-6 rounded-2xl cursor-not-allowed">
       <span className="flex items-center">
