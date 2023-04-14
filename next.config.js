@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
-const { i18n } = require('./next-i18next.config');
 
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  i18n,
   env: {
     GOOGLE_TAG_MANAGER: process.env.GOOGLE_TAG_MANAGER,
+    NEXT_PUBLIC_HYGRAPH_API_KEY: process.env.NEXT_PUBLIC_HYGRAPH_API_KEY,
+    HYGRAPH_TOKEN: process.env.HYGRAPH_TOKEN,
   },
 };
 

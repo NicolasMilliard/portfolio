@@ -1,14 +1,14 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 
-export interface Props {
+interface Props {
   children: ReactNode;
 }
 
 const Layout: FC<Props> = ({ children }: Props) => {
   return (
-    <div className="bg-dark">
+    <div className="bg-white-500">
       <Navbar />
       <main>{children}</main>
       <Footer />

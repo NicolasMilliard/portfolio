@@ -1,12 +1,10 @@
 import React, { FC } from 'react';
-import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
 
 import Layout from '../components/Layout/Layout';
 
 import '../styles/global.css';
-import '../node_modules/atropos/atropos.css';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
@@ -35,4 +33,4 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   );
 };
 
-export default appWithTranslation(App);
+export default App;

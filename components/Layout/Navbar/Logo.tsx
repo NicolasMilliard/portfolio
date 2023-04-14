@@ -1,25 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import logo from '../../../public/images/homepage/nicolas-milliard-logo.svg';
 
-const Logo = () => {
+const Logo: FC = () => {
   return (
-    <Link
-      href="/"
-      title="Blockchain Developer: Nicolas Milliard"
-      className="hidden nm-link sm:block"
-    >
-      <span
-        id="logo-firstname"
-        className="font-oswald text-salmon text-lg sm:text-xl md:text-2xl lg:text-4xl"
-      >
-        nicolas
-      </span>
-      <span
-        id="logo-lastname"
-        className="font-oswald text-yellow text-lg sm:text-xl md:text-2xl lg:text-4xl"
-      >
-        milliard
-      </span>
+    <Link href="/" title="Full-Stack & Web 3 Developer - Nicolas Milliard">
+      <Image src={logo} alt="Full-Stack & Web 3 Developer - Nicolas Milliard" />
     </Link>
   );
 };
