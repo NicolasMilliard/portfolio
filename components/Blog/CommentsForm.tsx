@@ -1,33 +1,60 @@
-import { FC, useState, useEffect, useRef } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { submitComment } from '../../services/submitComment';
 
 interface Props {
   slug: string;
 }
 
+interface FormData {
+  name: string;
+  email: string;
+  comment?: string;
+  storeData: boolean | string;
+}
+
 const CommentsForm: FC<Props> = ({ slug }) => {
-  const [error, setError] = useState<boolean>(false);
-  const [localStorage, setLocalStorage] = useState(null);
+  const [error, setError] = useState(false);
+  const [localStorage, setLocalStorage] = useState<{}>();
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const commentEl = useRef<HTMLTextAreaElement>();
-  const nameEl = useRef<HTMLInputElement>();
-  const emailEl = useRef<HTMLInputElement>();
-  const storeDataEl = useRef<HTMLInputElement>();
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    comment: '',
+    storeData: false,
+  });
 
   useEffect(() => {
-    nameEl.current!.value = window.localStorage.getItem('name')!;
-    emailEl.current!.value = window.localStorage.getItem('email')!;
+    setLocalStorage(window.localStorage);
+    const initialFormData: FormData = {
+      name: window.localStorage.getItem('name')!,
+      email: window.localStorage.getItem('email')!,
+      storeData: window.localStorage.getItem('name')! || window.localStorage.getItem('email')!,
+    };
+    setFormData(initialFormData);
   }, []);
+
+  const onInputChange = (
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    const { target } = e;
+    if (e.type === 'checkbox') {
+      setFormData((prevState) => ({
+        ...prevState,
+        [target.name]: (target as HTMLInputElement).checked,
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [target.value]: target.value,
+      }));
+    }
+  };
 
   const handleCommentSubmission = () => {
     setError(false);
 
-    const { value: comment } = commentEl.current;
-    const { value: name } = nameEl.current;
-    const { value: email } = emailEl.current;
-    const { checked: storeData } = storeDataEl.current;
-
-    if (!comment || !name || !email) {
+    const { name, email, comment, storeData } = formData;
+    if (!name || !email || !comment) {
       setError(true);
       return;
     }
@@ -47,12 +74,22 @@ const CommentsForm: FC<Props> = ({ slug }) => {
       window.localStorage.removeItem('email');
     }
 
-    submitComment(commentObj).then(() => {
-      setShowSuccessMessage(true);
-
-      setTimeout(() => {
-        setShowSuccessMessage(false);
-      }, 3000);
+    submitComment(commentObj).then((res) => {
+      if (res.createComment) {
+        if (!storeData) {
+          formData.name = '';
+          formData.email = '';
+        }
+        formData.comment = '';
+        setFormData((prevState) => ({
+          ...prevState,
+          ...formData,
+        }));
+        setShowSuccessMessage(true);
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+        }, 3000);
+      }
     });
   };
 
@@ -61,36 +98,39 @@ const CommentsForm: FC<Props> = ({ slug }) => {
       <h3 className="text-xl">Leave a reply</h3>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <textarea
-          ref={commentEl}
           className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-green-500 bg-white-500 text-black"
           placeholder="Comment"
           name="comment"
+          value={formData.comment}
+          onChange={onInputChange}
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         <input
           type="text"
-          ref={nameEl}
           className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-green-500 bg-white-500 text-black"
           placeholder="Name"
           name="name"
+          value={formData.name}
+          onChange={onInputChange}
         />
         <input
           type="email"
-          ref={emailEl}
           className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-green-500 bg-white-500 text-black"
           placeholder="Email"
           name="email"
+          value={formData.email}
+          onChange={onInputChange}
         />
       </div>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <div>
           <input
-            ref={storeDataEl}
             type="checkbox"
             id="storeData"
             name="storeData"
             defaultChecked={true}
+            onChange={onInputChange}
           />
           <label htmlFor="storeData" className="select-none cursor-pointer ml-2">
             Save my e-mail and name for the next time I comment.
