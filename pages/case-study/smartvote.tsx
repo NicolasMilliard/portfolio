@@ -1,9 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
 
 import Button from '../../components/Buttons/Button';
 import ButtonLoader from '../../components/Buttons/ButtonLoader';
@@ -18,7 +16,7 @@ import smartVoteHardhat from '../../public/images/case-study/smartvote/hardhat-l
 import smartVoteSolidity from '../../public/images/case-study/smartvote/solidity-logo.svg';
 import smartVoteEIP from '../../public/images/case-study/smartvote/smart-vote-eip-1167.png';
 
-const SmartVote = () => {
+const SmartVote: FC = () => {
   return (
     <div>
       <Head>
@@ -259,13 +257,5 @@ const SmartVote = () => {
     </div>
   );
 };
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['logo', 'menu', 'footer'])),
-    },
-  };
-}
 
 export default SmartVote;
