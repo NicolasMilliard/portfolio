@@ -1,15 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from '../Buttons/Button';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 
 import nicolas from '../../public/images/homepage/full-stack-web-3-developer-nicolas-milliard.png';
 
 const Introduction = () => {
-  const { t: tHomepage } = useTranslation('homepage');
-  const { locale } = useRouter();
-
   return (
     <section className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl lg:flex lg:items-center lg:justify-between">
       {/* Text */}
@@ -30,23 +25,15 @@ const Introduction = () => {
           Graph...
         </p>
         <div className="mt-8">
-          <Button
-            text={tHomepage('Contact me')}
-            link="mailto:contact@nicolasmilliard.fr"
-            target="_self"
-          />
+          <Button text="Contact me" link="mailto:contact@nicolasmilliard.fr" target="_self" />
           <Link
             locale="en"
-            href={
-              locale == 'en'
-                ? 'images/resume/resume-nicolas-milliard.pdf'
-                : 'images/resume/cv-nicolas-milliard.pdf'
-            }
+            href="/images/resume/resume-nicolas-milliard.pdf"
             target="_blank"
             title="Check my resume"
             className="underline text-green-500 hover:text-green-900 ml-8"
           >
-            {tHomepage('Resume')}
+            Resume
           </Link>
         </div>
       </div>

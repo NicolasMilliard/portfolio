@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
 
@@ -34,4 +33,4 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   );
 };
 
-export default appWithTranslation(App);
+export default App;
