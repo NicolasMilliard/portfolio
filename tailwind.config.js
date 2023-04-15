@@ -16,7 +16,7 @@ module.exports = {
       red: '#C92626',
     },
     fontFamily: {
-      sans: ["'Montserrat', sans-serif"],
+      sans: 'Montserrat, sans-serif',
     },
     boxShadow: {
       DEFAULT: '0px 0px 5px rgba(0, 27, 45, 0.25)',

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Head from 'next/head';
 import { PostCard, Categories, PostWidget, FeaturedPosts } from '../components/Blog';
 import { getPosts } from '../services/getPosts';
 
@@ -39,26 +40,36 @@ interface CategoriesList {
 
 const blog: FC<Props> = ({ posts }) => {
   return (
-    <div className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-      <h1 className="text-3xl text-black font-bold leading-relaxed">Blog</h1>
-      <FeaturedPosts />
-      <section className="mt-32 md:mb-48 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        <h2 className="my-6 text-xl text-black font-semibold leading-relaxed">Latest articles</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6">
-          <div className="col-span-1 lg:col-span-8">
-            {posts.map((post) => (
-              <PostCard post={post.node} key={post.node.slug} />
-            ))}
-          </div>
-          <div className="col-span-1 lg:col-span-4">
-            <div className="relative lg:sticky lg:top-24">
-              <PostWidget categories={['']} slug="" />
-              <Categories />
+    <>
+      <Head>
+        <title>Blog - Nicolas Milliard</title>
+        <meta
+          name="description"
+          content="Blog of Nicolas Milliard, Full-Stack & Web 3 Developer."
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+        <h1 className="text-3xl text-black font-bold leading-relaxed">Blog</h1>
+        <FeaturedPosts />
+        <section className="mt-32 md:mb-48 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+          <h2 className="my-6 text-xl text-black font-semibold leading-relaxed">Latest articles</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6">
+            <div className="col-span-1 lg:col-span-8">
+              {posts.map((post) => (
+                <PostCard post={post.node} key={post.node.slug} />
+              ))}
+            </div>
+            <div className="col-span-1 lg:col-span-4">
+              <div className="relative lg:sticky lg:top-24">
+                <PostWidget categories={['']} slug="" />
+                <Categories />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 };
 
