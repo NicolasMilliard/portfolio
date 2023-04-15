@@ -36,6 +36,9 @@ const CommentsForm: FC<Props> = ({ slug }) => {
   const onInputChange = (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
+    setError(false);
+    setShowSuccessMessage(false);
+
     const { target } = e;
     if (e.type === 'checkbox') {
       setFormData((prevState) => ({
@@ -45,13 +48,14 @@ const CommentsForm: FC<Props> = ({ slug }) => {
     } else {
       setFormData((prevState) => ({
         ...prevState,
-        [target.value]: target.value,
+        [target.name]: target.value,
       }));
     }
   };
 
   const handleCommentSubmission = () => {
     setError(false);
+    setShowSuccessMessage(false);
 
     const { name, email, comment, storeData } = formData;
     if (!name || !email || !comment) {
@@ -86,19 +90,16 @@ const CommentsForm: FC<Props> = ({ slug }) => {
           ...formData,
         }));
         setShowSuccessMessage(true);
-        setTimeout(() => {
-          setShowSuccessMessage(false);
-        }, 3000);
       }
     });
   };
 
   return (
-    <div className="bg-white-100 p-8 mb-8">
-      <h3 className="text-xl">Leave a reply</h3>
+    <div className="bg-white-100 rounded-2xl p-8 mb-8">
+      <h3 className="text-xl text-black font-semibold mb-6">Leave a reply</h3>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <textarea
-          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-green-500 bg-white-500 text-black"
+          className="p-4 mb-4 outline-none w-full rounded-2xl focus:ring-2 focus:ring-green-500 bg-white-500 text-black"
           placeholder="Comment"
           name="comment"
           value={formData.comment}
@@ -108,7 +109,7 @@ const CommentsForm: FC<Props> = ({ slug }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         <input
           type="text"
-          className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-green-500 bg-white-500 text-black"
+          className="p-4 mb-4 outline-none w-full rounded-2xl focus:ring-2 focus:ring-green-500 bg-white-500 text-black"
           placeholder="Name"
           name="name"
           value={formData.name}
@@ -116,7 +117,7 @@ const CommentsForm: FC<Props> = ({ slug }) => {
         />
         <input
           type="email"
-          className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-green-500 bg-white-500 text-black"
+          className="p-4 mb-4 outline-none w-full rounded-2xl focus:ring-2 focus:ring-green-500 bg-white-500 text-black"
           placeholder="Email"
           name="email"
           value={formData.email}
@@ -132,12 +133,12 @@ const CommentsForm: FC<Props> = ({ slug }) => {
             defaultChecked={true}
             onChange={onInputChange}
           />
-          <label htmlFor="storeData" className="select-none cursor-pointer ml-2">
+          <label htmlFor="storeData" className="select-none cursor-pointer text-black ml-2">
             Save my e-mail and name for the next time I comment.
           </label>
         </div>
       </div>
-      {error && <p className="text-xs">All fields are required.</p>}
+      {error && <p className="text-red font-semibold">All fields are required.</p>}
       <div className="mt-8">
         <button
           type="button"
@@ -147,9 +148,7 @@ const CommentsForm: FC<Props> = ({ slug }) => {
           Post comment
         </button>
         {showSuccessMessage && (
-          <span className="text-xl font-semibold text-green-500">
-            Comment submitted for review!
-          </span>
+          <p className="text-green-500 font-semibold mt-4">Comment submitted for review!</p>
         )}
       </div>
     </div>
