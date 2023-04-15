@@ -51,8 +51,8 @@ const FeaturedPosts: FC = () => {
   }, []);
 
   return (
-    <div className="mb-8">
-      <Carousel infinite responsive={responsive} itemClass="px-4">
+    <div className="mt-6">
+      <Carousel infinite responsive={responsive}>
         {dataLoaded &&
           featuredPosts.map((post, index) => <FeaturedPostCard key={index} post={post} />)}
       </Carousel>
