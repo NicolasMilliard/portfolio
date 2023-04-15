@@ -1,9 +1,13 @@
 import Head from 'next/head';
 
-import Introduction from '../components/Homepage/Introduction';
-import AboutMe from '../components/Homepage/AboutMe';
-import Experiences from '../components/Homepage/Experiences';
-import LatestProjects from '../components/Homepage/LatestProjects';
+import {
+  Introduction,
+  AboutMe,
+  Experiences,
+  LatestProjects,
+  Testimonials,
+  Blog,
+} from '../components/Homepage';
 
 const Home = () => {
   return (
@@ -21,6 +25,8 @@ const Home = () => {
         <AboutMe />
         <Experiences />
         <LatestProjects />
+        <Testimonials />
+        <Blog />
       </>
     </>
   );
