@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
 
