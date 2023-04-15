@@ -13,6 +13,7 @@ module.exports = {
         100: '#ffffff',
         500: '#f2f2f2',
       },
+      red: '#C92626',
     },
     fontFamily: {
       sans: ["'Montserrat', sans-serif"],
@@ -29,6 +30,9 @@ module.exports = {
         '270px': '270px',
         '342px': '342px',
         '480px': '480px',
+      },
+      zIndex: {
+        9999: '9999',
       },
     },
   },
