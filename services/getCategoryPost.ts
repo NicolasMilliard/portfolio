@@ -74,7 +74,7 @@ export const getCategoryPost = async (slug: string): Promise<PostsConnection[]> 
 
   const client: GraphQLClient = new GraphQLClient(graphqlAPI);
 
-  const result: PostsConnectionResponse = await client.request(query);
+  const result: PostsConnectionResponse = await client.request(query, { slug });
 
   return result.postsConnection.edges;
 };
