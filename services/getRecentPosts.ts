@@ -17,11 +17,11 @@ const graphqlAPI: string = process.env.NEXT_PUBLIC_HYGRAPH_API_KEY!;
 
 export const getRecentPosts = async(): Promise<Post[]> => {
     const query = gql`
-        query GetPostDetails {
+        query GetRecentPosts {
             posts(last: 3, orderBy: createdAt_ASC) {
             title
             featuredImage {
-            url
+                url
             }
             createdAt
             slug

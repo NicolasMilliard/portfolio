@@ -22,35 +22,30 @@ interface Props {
 
 const FeaturedPostCard: FC<Props> = ({ post }) => {
   return (
-    <div className="relative h-72">
+    <div className="relative h-80">
+      <div className="absolute w-full h-full -z-10 opacity-60 rounded-2xl bg-gradient-200 from-green-100 to-green-900" />
       <div
-        className="absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-72"
+        className="absolute w-full h-full -z-20 rounded-2xl bg-center bg-cover inline-block"
         style={{ backgroundImage: `url('${post.featuredImage.url}')` }}
       />
-      <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-full h-72" />
-      <div className="flex flex-col rounded-lg p-4 items-center justify-center absolute w-full h-full">
-        <p className="text-white mb-4 text-shadow font-semibold text-xs">
+      <div className="absolute w-full h-full z-0 flex flex-col pt-10 px-8 items-center">
+        <p className="text-white-500 mb-4 text-xs">
           {moment(post.createdAt).format('MMM DD, YYYY')}
         </p>
-        <p className="text-white mb-4 text-shadow font-semibold text-2xl text-center">
-          {post.title}
-        </p>
-        <div className="flex items-center absolute bottom-5 w-full justify-center">
+        <p className="text-white-500 mb-4 font-semibold text-2xl text-center">{post.title}</p>
+        <div className="flex items-center absolute bottom-10 w-full justify-center">
           <Image
-            unoptimized
             alt={post.author.name}
-            height={30}
-            width={30}
-            className="align-middle drop-shadow-lg rounded-full"
+            height={32}
+            width={32}
+            className="drop-shadow-lg rounded-full"
             src={post.author.photo.url}
           />
-          <p className="inline align-middle text-white text-shadow ml-2 font-medium">
-            {post.author.name}
-          </p>
+          <p className="text-white-500 ml-4 font-medium">{post.author.name}</p>
         </div>
       </div>
       <Link href={`/post/${post.slug}`}>
-        <span className="cursor-pointer absolute w-full h-full" />
+        <span className="absolute w-full h-full cursor-pointer" />
       </Link>
     </div>
   );

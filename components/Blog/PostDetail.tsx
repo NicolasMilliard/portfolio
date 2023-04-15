@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import moment from 'moment';
+import Image from 'next/image';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { ElementNode } from '@graphcms/rich-text-types';
 
@@ -26,33 +27,45 @@ interface Props {
 
 const PostDetail: FC<Props> = ({ post }) => {
   return (
-    <div className="bg-white-100 shadow-lg rounded-lg pb-12">
-      <div className="relative overflow-hidden shadow-md mb-6">
-        <img
+    <div className="bg-white-100 shadow-lg rounded-2xl shadow pb-12">
+      <div className="mb-6">
+        <Image
           src={post.featuredImage.url}
           alt={post.title}
-          className="object-top h-full w-full rounded-t-lg"
+          width={666}
+          height={371}
+          className="rounded-t-2xl"
         />
       </div>
-      <div className="px-4 lg:px-0">
-        <div className="flex items-center mb-8 w-full">
-          <div className="flex items-center mb-4 lg:mb-0 w-full lg:w-auto mr-8">
-            <img
+      <div className="px-6">
+        <div className="flex justify-center items-center mb-8 w-full">
+          <div className="flex items-center w-full lg:w-auto mr-8">
+            <Image
               src={post.author.photo.url}
               alt={post.author.name}
-              height="30px"
-              width="30px"
-              className="align-middle rounded-full"
+              width={30}
+              height={30}
+              className="rounded-full"
             />
-            <p className="inline align-middle ml-2 text-lg">{post.author.name}</p>
+            <p className="ml-4 lg:text-lg text-black">{post.author.name}</p>
           </div>
-          <div className="font-medium">
+          <div className="text-black font-medium">
             <span>{moment(post.createdAt).format('MMMM DD, YYYY')}</span>
           </div>
         </div>
       </div>
-      <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
-      <RichText content={post.content.raw} />
+      <h1 className="mb-8 text-3xl text-black font-semibold px-6">{post.title}</h1>
+      <div className="px-6 text-black">
+        <RichText
+          content={post.content.raw}
+          renderers={{
+            h2: ({ children }) => (
+              <h2 className="text-2xl text-black font-semibold mb-6">{children}</h2>
+            ),
+            p: ({ children }) => <p className="text-black leading-relaxed mb-6">{children}</p>,
+          }}
+        />
+      </div>
     </div>
   );
 };

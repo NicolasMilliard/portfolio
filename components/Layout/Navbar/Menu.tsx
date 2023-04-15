@@ -25,7 +25,7 @@ const Menu: FC = () => {
       {/* Menu */}
       <ul className="hidden lg:flex lg:gap-8">
         <li>
-          <Link href="#" className="text-black hover:text-green-500">
+          <Link href="/" className="text-black hover:text-green-500">
             Home
           </Link>
         </li>
@@ -33,13 +33,13 @@ const Menu: FC = () => {
           <Link href="#" className="text-black hover:text-green-500">
             Projects
           </Link>
-        </li>
+        </li> */}
         <li>
-          <Link href="#" className="text-black hover:text-green-500">
+          <Link href="/blog" className="text-black hover:text-green-500">
             Blog
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="#" className="text-black hover:text-green-500">
             Newsletter
           </Link>
@@ -64,35 +64,39 @@ const Menu: FC = () => {
         {/* Portfolio links */}
         <ul>
           <li className="mb-4">
-            <Link href="#">Home</Link>
+            <Link href="/" onClick={() => setIsOpen(!isOpen)}>
+              Home
+            </Link>
           </li>
+          {/* <li className="mb-4">
+            <Link href="#" onClick={() => setIsOpen(!isOpen)}>Projects</Link>
+          </li> */}
           <li className="mb-4">
-            <Link href="#">Projects</Link>
+            <Link href="/blog" onClick={() => setIsOpen(!isOpen)}>
+              Blog
+            </Link>
           </li>
-          <li className="mb-4">
-            <Link href="#">Blog</Link>
-          </li>
-          <li>
-            <Link href="#">Newsletter</Link>
-          </li>
+          {/* <li>
+            <Link href="#" onClick={() => setIsOpen(!isOpen)}>Newsletter</Link>
+          </li> */}
         </ul>
         <div className="block bg-white-500 w-full h-0.5 my-4 rounded"></div>
         {/* Social links */}
         <ul>
           <li className="flex items-center mb-4">
-            <Image src={github} alt="Github - Nicolas Milliard" className="mr-4" />
+            <Image src={github} alt="Github - Nicolas Milliard" className="mr-2" />
             <Link href="https://github.com/NicolasMilliard" target="_blank">
               /NicolasMilliard
             </Link>
           </li>
           <li className="flex items-center mb-4">
-            <Image src={twitter} alt="Twitter - Nicolas Milliard" className="mr-4" />
+            <Image src={twitter} alt="Twitter - Nicolas Milliard" className="mr-2" />
             <Link href="https://twitter.com/NicolasMilliard" target="_blank">
               /NicolasMilliard
             </Link>
           </li>
           <li className="flex items-center">
-            <Image src={linkedin} alt="LinkedIn - Nicolas Milliard" className="mr-4" />
+            <Image src={linkedin} alt="LinkedIn - Nicolas Milliard" className="mr-2" />
             <Link href="https://www.linkedin.com/in/nicolas-milliard/" target="_blank">
               /Nicolas-Milliard
             </Link>

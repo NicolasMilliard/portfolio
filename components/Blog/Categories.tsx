@@ -16,11 +16,15 @@ const Categories: FC = () => {
   }, []);
 
   return (
-    <div>
-      <h3>Categories</h3>
+    <div className="bg-white-100 p-8 mb-8 rounded-2xl">
+      <h3 className="text-xl text-black font-semibold mb-6">Categories</h3>
       {categories.map((category) => (
-        <Link key={category.slug} href={`/category/${category.slug}`}>
-          <span>{category.name}</span>
+        <Link
+          key={category.slug}
+          href={`/category/${category.slug}`}
+          className="text-black underline hover:text-green-500 duration-100"
+        >
+          {category.name}
         </Link>
       ))}
     </div>

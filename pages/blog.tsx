@@ -40,16 +40,18 @@ interface CategoriesList {
 const blog: FC<Props> = ({ posts }) => {
   return (
     <div className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+      <h1 className="text-3xl text-black font-bold leading-relaxed">Blog</h1>
       <FeaturedPosts />
-      <section className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl lg:flex lg:items-center lg:justify-between">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-8 col-span-1">
+      <section className="mt-32 md:mb-48 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+        <h2 className="my-6 text-xl text-black font-semibold leading-relaxed">Latest articles</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6">
+          <div className="col-span-1 lg:col-span-8">
             {posts.map((post) => (
               <PostCard post={post.node} key={post.node.slug} />
             ))}
           </div>
-          <div className="lg:col-span-4 col-span-1">
-            <div className="lg:sticky relative top-8">
+          <div className="col-span-1 lg:col-span-4">
+            <div className="relative lg:sticky lg:top-24">
               <PostWidget categories={['']} slug="" />
               <Categories />
             </div>
