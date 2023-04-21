@@ -14,7 +14,7 @@ export const experiencesList: Experience[] = [
   {
     label: 'Freelance',
     title: 'Full-Stack Developer',
-    date: 'Nov 2017 - Today',
+    date: 'Nov. 2017 - Today',
     descriptions: [
       {
         id: 0,
@@ -37,7 +37,7 @@ export const experiencesList: Experience[] = [
   {
     label: 'DMD France',
     title: 'Full-Stack Developer',
-    date: 'July. 2016 - Nov. 2021',
+    date: 'July 2016 - Nov. 2021',
     descriptions: [
       {
         id: 0,
