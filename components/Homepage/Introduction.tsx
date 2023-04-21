@@ -27,7 +27,6 @@ const Introduction = () => {
         <div className="mt-8">
           <Button text="Contact me" link="mailto:contact@nicolasmilliard.fr" target="_self" />
           <Link
-            locale="en"
             href="/images/resume/resume-nicolas-milliard.pdf"
             target="_blank"
             title="Check my resume"
