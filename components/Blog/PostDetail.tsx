@@ -62,7 +62,15 @@ const PostDetail: FC<Props> = ({ post }) => {
             h2: ({ children }) => (
               <h2 className="text-2xl text-black font-semibold mb-6">{children}</h2>
             ),
+            h3: ({ children }) => (
+              <h3 className="text-xl text-black font-semibold mb-6">{children}</h3>
+            ),
             p: ({ children }) => <p className="text-black leading-relaxed mb-6">{children}</p>,
+            code: ({ children }) => (
+              <code className="bg-green-100 bg-opacity-20 px-2 rounded-lg border-2 border-green-100/40">
+                {children}
+              </code>
+            ),
           }}
         />
       </div>
