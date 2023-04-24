@@ -18,15 +18,18 @@ const Categories: FC = () => {
   return (
     <div className="bg-white-100 p-8 mb-8 rounded-2xl">
       <h3 className="text-xl text-black font-semibold mb-6">Categories</h3>
-      {categories.map((category) => (
-        <Link
-          key={category.slug}
-          href={`/category/${category.slug}`}
-          className="text-black underline hover:text-green-500 duration-100"
-        >
-          {category.name}
-        </Link>
-      ))}
+      <div className="flex flex-col">
+        {categories.map((category) => (
+          <h5 key={category.slug}>
+            <Link
+              href={`/category/${category.slug}`}
+              className="text-lg text-semibold text-black hover:text-green-500 duration-100"
+            >
+              {category.name}
+            </Link>
+          </h5>
+        ))}
+      </div>
     </div>
   );
 };
