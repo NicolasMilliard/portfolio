@@ -37,14 +37,14 @@ const PostWidget: FC<Props> = ({ categories, slug }) => {
         {slug ? 'Related Posts' : 'Recent Posts'}
       </h3>
       {relatedPosts.map((post) => (
-        <div key={post.title}>
+        <div key={post.title} className="mb-6">
           <Link href={`/post/${post.slug}`}>
             <Image
               src={post.featuredImage.url}
               alt={post.title}
               width={240}
               height={134}
-              className="mb-4"
+              className="mb-4 rounded-2xl"
             />
           </Link>
           <p className="text-black text-xs">{moment(post.createdAt).format('MMMM DD, YYYY')}</p>
