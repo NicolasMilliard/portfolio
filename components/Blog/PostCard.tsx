@@ -25,7 +25,7 @@ interface Props {
 
 const PostCard: FC<Props> = ({ post }) => {
   return (
-    <div className="bg-white-100 shadow rounded-2xl">
+    <div className="bg-white-100 shadow rounded-2xl mb-8">
       <div className="mb-6">
         <Link href={`/post/${post.slug}`}>
           <Image
