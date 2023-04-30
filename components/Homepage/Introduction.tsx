@@ -39,9 +39,13 @@ const Introduction = () => {
       {/* Image */}
       <div className="hidden lg:block lg:relative lg:w-80 lg:h-80">
         <div className="absolute z-20 w-80 h-80 top-0 hover:-top-2 left-0 hover:-left-2 ease-in-out duration-300">
-          <Image src={nicolas} alt="Full-Stack & Web 3 Developer - Nicolas Milliard" />
+          <Image
+            src={nicolas}
+            alt="Full-Stack & Web 3 Developer - Nicolas Milliard"
+            className="rounded-2xl"
+          />
         </div>
-        <div className="absolute z-10 w-80 h-80 top-0 left-0 bg-green-900"></div>
+        <div className="absolute z-10 w-80 h-80 top-0 left-0 bg-green-900 rounded-2xl"></div>
       </div>
     </section>
   );
