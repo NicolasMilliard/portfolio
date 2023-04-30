@@ -23,21 +23,21 @@ const AboutMe = () => {
             <p className="mb-6 text-black lg:text-white-500 leading-relaxed">
               Here are a few technologies I've been working with recently:
             </p>
-            <div className="flex gap-10 ml-6 text-black text-sm sm:text-base lg:text-white-500 leading-relaxed">
+            <div className="flex gap-10 ml-6 text-black text-sm sm:text-base lg:text-white-500">
               <ul className="list-disc">
-                <li>JavaScript (ES6+)</li>
-                <li>React JS</li>
-                <li>React Native</li>
+                <li className="leading-relaxed">JavaScript (ES6+)</li>
+                <li className="leading-relaxed">React JS</li>
+                <li className="leading-relaxed">React Native</li>
               </ul>
               <ul className="list-disc">
-                <li>TypeScript</li>
-                <li>Next JS</li>
-                <li>Redux</li>
+                <li className="leading-relaxed">TypeScript</li>
+                <li className="leading-relaxed">Next JS</li>
+                <li className="leading-relaxed">Redux</li>
               </ul>
               <ul className="list-disc">
-                <li>Solidity</li>
-                <li>Hardhat</li>
-                <li>Truffle</li>
+                <li className="leading-relaxed">Solidity</li>
+                <li className="leading-relaxed">Hardhat</li>
+                <li className="leading-relaxed">Truffle</li>
               </ul>
             </div>
           </div>
