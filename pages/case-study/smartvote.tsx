@@ -4,17 +4,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import Button from '../../components/Buttons/Button';
-import ButtonLoader from '../../components/Buttons/ButtonLoader';
 
-import smartVoteDapp from '../../public/images/case-study/smartvote/smart-vote-dapp.png';
-import smartVoteBlockchains from '../../public/images/case-study/smartvote/smart-vote-blockchains.png';
-import smartVoteWhy from '../../public/images/case-study/smartvote/why-smart-vote.png';
-import smartVoteUXUI from '../../public/images/case-study/smartvote/ux-ui-smart-vote.png';
-import smartVoteWallets from '../../public/images/case-study/smartvote/smart-vote-wallets.png';
-import smartVoteNext from '../../public/images/case-study/smartvote/nextjs-logo.svg';
-import smartVoteHardhat from '../../public/images/case-study/smartvote/hardhat-logo.svg';
-import smartVoteSolidity from '../../public/images/case-study/smartvote/solidity-logo.svg';
-import smartVoteEIP from '../../public/images/case-study/smartvote/smart-vote-eip-1167.png';
+import {
+  smartVoteDapp,
+  smartVoteBlockchains,
+  smartVoteWhy,
+  smartVoteUXUI,
+  smartVoteWallets,
+  smartVoteNext,
+  smartVoteHardhat,
+  smartVoteSolidity,
+  smartVoteEIP,
+} from '../../public/images/case-study/smartvote';
 
 const SmartVote: FC = () => {
   return (
@@ -29,52 +30,52 @@ const SmartVote: FC = () => {
       </Head>
 
       {/* Project presentation */}
-      <section className="flex flex-col items-center py-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:py-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        <h1 className="font-oswald-bold text-6xl leading-relaxed text-yellow">SmartVote</h1>
-        <h2 className="font-oswald-semibold text-5xl leading-relaxed text-salmon mb-8">
-          Créer, gérer et rejoindre des sessions de vote
-        </h2>
-        {/* Image and tools */}
-        <div className="flex flex-col md:flex-row md:items-center">
-          <div className="mb-6 md:mb-0 md:mr-6">
-            <Image
-              src={smartVoteDapp}
-              alt="SmartVote dApp - Nicolas Milliard"
-              className="rounded-2xl"
-            />
-          </div>
+      <section className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+        {/* Title */}
+        <div className="mb-8">
+          <h1 className="text-5xl text-center text-black font-bold leading-relaxed">SmartVote</h1>
+          <h2 className="mt-2 text-3xl text-center text-green-500 font-semibold leading-relaxed">
+            Create, manage and join voting sessions
+          </h2>
+        </div>
+        {/* Image */}
+        <div className="flex justify-center mb-8">
+          <Image
+            src={smartVoteDapp}
+            alt="SmartVote dApp - Nicolas Milliard"
+            className="rounded-2xl"
+          />
         </div>
         {/* Links */}
-        <div className="mt-8">
-          <Button text="Voir le projet" link="https://my-smartvote.vercel.app/" target="_blank" />
+        <div className="flex justify-center items-center">
+          <Button text="Visit project" link="https://my-smartvote.vercel.app/" target="_blank" />
           <Link
             href="https://github.com/NicolasMilliard/SmartVote"
-            className="ml-4 text-yellow underline hover:font-semibold"
+            className="underline text-green-500 hover:text-green-900 ml-8"
             target="_blank"
           >
-            Github du projet
+            Github repository
           </Link>
         </div>
       </section>
 
       {/* What is SmartVote */}
-      <section className="mb-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+      <section className="mx-6 md:mx-auto mb-32 md:mb-48 sm:px-0 md:px-16 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
         {/* Title with separator */}
         <div className="flex items-center mb-8">
-          <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
-            Qu'est-ce que SmartVote&nbsp;?
+          <h2 className="text-3xl text-center text-black font-semibold leading-relaxed">
+            What is SmartVote&nbsp;?
           </h2>
         </div>
         <div className="flex flex-col items-center md:flex-row">
-          <div className="md:mr-6">
-            <p className="text-yellow mt-8 mb-8 max-w-2xl">
-              SmartVote permet aux utilisateurs d'organiser leurs propres instances de vote,
-              d'ajouter des utilisateurs sur une liste blanche, de créer des propositions et de
-              comptabiliser les votes. Fonctionne sur les blockchains Polygon et Avalanche.
+          <div className="max-w-xl md:mr-6">
+            <p className="mb-6 text-black leading-relaxed">
+              SmartVote allows users to organize their own voting instances, add users to whitelist,
+              create proposals and tally votes. Works on the Polygon and Avalanche blockchains.
             </p>
-            <p className="text-yellow mt-8 mb-8 max-w-2xl">
-              De manière générale, SmartVote est conçu pour fonctionner avec n'importe qu'elle
-              blockchain, publique ou privée, de type EVM (Ethereum Virtual Machine).
+            <p className="mb-6 text-black leading-relaxed">
+              In general, SmartVote is designed to work with any EVM (Ethereum Virtual Machine)
+              blockchains, public or private.
             </p>
           </div>
           <Image
@@ -86,127 +87,126 @@ const SmartVote: FC = () => {
       </section>
 
       {/* Why SmartVote */}
-      <section className="mb-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+      <section className="mx-6 md:mx-auto mb-32 md:mb-48 sm:px-0 md:px-16 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
         {/* Title with separator */}
         <div className="flex items-center mb-8">
-          <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
-            Pourquoi SmartVote&nbsp;?
+          <h2 className="text-3xl text-center text-black font-semibold leading-relaxed">
+            Why SmartVote&nbsp;?
           </h2>
         </div>
-        <p className="text-yellow mt-8 mb-8 max-w-2xl">
-          SmartVote utilise la technologie de la Blockchain via des Smart Contracts rédigés en
-          Solidity. L'utilisation de la Blockchain permet une parfaite traçabilité de la totalité
-          d'une session de vote, de l'ajout des électeurs jusqu'aux résultats du vote en lui-même.
-        </p>
-        <p className="text-yellow mt-8 mb-8 max-w-2xl">
-          SmartVote permet ainsi la création d'instances de vote totalement infalsifiables et
-          incensurables.
-        </p>
-        <Image
-          src={smartVoteWhy}
-          alt="SmartVote Smart Contracts - Nicolas Milliard"
-          className="rounded-2xl"
-        />
+        {/* Text */}
+        <div className="flex flex-col max-w-xl">
+          <p className="mb-6 text-black leading-relaxed">
+            SmartVote uses Blockchain technology via Smart Contracts written in Solidity. The use of
+            the Blockchain allows a perfect traceability of the entire voting session, from the
+            addition of voters to the results of the vote itself.
+          </p>
+          <p className="mb-6 text-black leading-relaxed">
+            SmartVote thus allows the creation of totally unforgeable and incensurable voting
+            instances.
+          </p>
+        </div>
+        <div>
+          <Image
+            src={smartVoteWhy}
+            alt="SmartVote Smart Contracts - Nicolas Milliard"
+            className="rounded-2xl"
+          />
+        </div>
       </section>
 
       {/* UX/UI */}
-      <section className="mb-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        {/* Title with separator */}
-        <div className="flex items-center mb-8">
-          <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
-            UX / UI de SmartVote
-          </h2>
-        </div>
-        <Image src={smartVoteUXUI} alt="SmartVote UX / UI - Nicolas Milliard" />
-        <p className="text-yellow mt-8 mb-8 max-w-2xl">
-          Afin de proposer une expérience utilisateur optimale, SmartVote se devait de respecter
-          deux contraintes&nbsp;:
+      <section className="mx-6 md:mx-auto mb-32 md:mb-48 sm:px-0 md:px-16 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+        {/* Title */}
+        <h2 className="text-3xl text-black font-semibold mb-6 leading-relaxed">
+          SmartVote UX / UI
+        </h2>
+        <Image src={smartVoteUXUI} alt="SmartVote UX / UI - Nicolas Milliard" className="mb-6" />
+        <p className="mb-6 text-black leading-relaxed">
+          In order to offer an optimal user experience, SmartVote had to respect two constraints:
         </p>
-        <ul className="list-disc ml-8 max-w-2xl">
-          <li className="text-yellow mb-4">
-            un design épuré et facilement modifiable afin de s'adapter aux entreprises qui
-            utiliseront cette dApp&nbsp;;
-          </li>
-          <li className="text-yellow">des parcours utilisateurs simples et intuitifs.</li>
-        </ul>
-        <div className="flex flex-col items-center md:flex-row">
-          <p className="text-yellow mt-8 mb-8 max-w-2xl md:mr-6">
-            De plus, une optimisation de l'interface a été mise en place afin de minimiser la
-            contrainte liée à l'utilisation de la blockchain (connexion au portefeuille numérique,
-            temps d'attente durant les transactions, utilisation sur téléphone portable...).
+        <div className="flex gap-10 ml-6 mb-6 text-black sm:text-base">
+          <ul className="list-disc">
+            <li className="leading-relaxed">
+              a clean and easily modifiable design to fit the companies that will use this dApp;
+            </li>
+            <li className="leading-relaxed">des parcours utilisateurs simples et intuitifs.</li>
+          </ul>
+        </div>
+        <div className="flex flex-col items-center md:flex-row mb-6">
+          <p className="text-black leading-relaxed">
+            Moreover, an interface optimization has been implemented in order to minimize the
+            constraint related to the use of the blockchain: connection to the digital wallet,
+            waiting time during transactions, use on smartphone...
           </p>
           <Image
             src={smartVoteWallets}
             alt="SmartVote Wallets - Nicolas Milliard"
-            className="rounded-2xl"
+            className="rounded-2xl mt-6 md:mt-0 md:ml-6"
           />
         </div>
-        <div className="flex flex-col items-center md:flex-row">
-          <p className="text-yellow mt-8 mb-8 max-w-2xl md:mr-6">
-            Ainsi, la dApp SmartVote simplifie au maximum la connexion à de nombreux portefeuilles
-            en 1 clic seulement, aussi bien sur ordinateur que sur téléphone portable. De plus, un
-            indicateur de chargement est affiché durant toute la durée de la transaction, de son
-            initialisation jusqu'à son inscription sur la blockchain.
+        <div>
+          <p className="text-black leading-relaxed">
+            Thus, the SmartVote dApp makes it as easy as possible to connect to numerous wallets in
+            just one click, both on a computer and a smartphone. In addition, a loading indicator is
+            displayed throughout the duration of the transaction, from its initialization to its
+            registration on the blockchain.
           </p>
-          <ButtonLoader />
         </div>
       </section>
 
       {/* Code */}
-      <section className="mb-28 px-8 mx-auto sm:px-0 sm:max-w-xl md:mb-48 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        {/* Title with separator */}
-        <div className="flex items-center mb-8">
-          <h2 className="font-oswald-semibold text-5xl leading-relaxed text-yellow">
-            Réalisation de SmartVote
-          </h2>
-        </div>
+      <section className="mx-6 md:mx-auto mb-32 md:mb-48 sm:px-0 md:px-16 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+        {/* Title */}
+        <h2 className="text-3xl text-black font-semibold mb-6 leading-relaxed">
+          Realization of SmartVote
+        </h2>
         {/* Web 2 */}
-        <div className="mb-10">
-          <h3 className="font-oswald-semibold text-3xl leading-relaxed text-salmon mb-8">
-            Technologies Web 2
+        <div className="mb-8">
+          <h3 className="text-xl text-black font-semibold leading-relaxed mb-6">
+            Web 2 technologies
           </h3>
           <div className="flex flex-col items-center md:flex-row">
             <div className="md:mr-6">
-              <p className="text-yellow mt-8 mb-8 max-w-2xl">
-                Le framework Next.js a été retenu pour la conception de la dApp SmartVote pour de
-                nombreuses raisons, notamment pour son système de routage puissant et facilement mis
-                en place. SmartVote permet de créer de nombreuses sessions de vote et Next.js permet
-                de simplifier leurs gestions et leurs affichages.
+              <p className="text-black leading-relaxed mb-6">
+                The Next.js framework was chosen for the design of the SmartVote dApp for many
+                reasons, including its powerful and easily implemented routing system. SmartVote
+                allows to create many voting sessions and Next.js allows to simplify their
+                management and display.
               </p>
-              <p className="text-yellow mt-8 mb-8 max-w-2xl">
-                Côté CSS, le framework TailwindCSS a été retenu pour sa compatibilité avec Next.js
-                et pour sa simplicité d'utilisation. L'interface de SmartVote se doit d'être simple
-                et familière avec l'utilisateur et TailwindCSS répond parfaitement à ce besoin.
+              <p className="text-black leading-relaxed mb-6">
+                On the CSS side, the TailwindCSS framework was chosen for its compatibility with
+                Next.js and for its ease of use. SmartVote interface must be simple and familiar to
+                the user and TailwindCSS perfectly meets this need.
               </p>
-              <p className="text-yellow mt-8 mb-8 max-w-2xl">
-                De plus, Toastify a été utilisé afin de fluidifier les interactions avec la
-                Blockchain. La gestion des requêtes asynchrones grâce à Toastify permet des retours
-                instantanés et précis de l'état d'une transaction.
+              <p className="text-black leading-relaxed mb-6">
+                In addition, Toastify was used to make interactions with the Blockchain more fluid.
+                The management of asynchronous requests thanks to Toastify allows instant and
+                precise feedback on the status of a transaction.
               </p>
             </div>
             <Image src={smartVoteNext} alt="Next.js - Nicolas Milliard" />
           </div>
         </div>
         {/* Web 3 */}
-        <div className="mb-10">
-          <h3 className="font-oswald-semibold text-3xl leading-relaxed text-salmon mb-8">
-            Technologies Web 3
+        <div className="mb-8">
+          <h3 className="text-xl text-black font-semibold leading-relaxed mb-6">
+            Web 3 technologies
           </h3>
           <div className="flex flex-col items-center md:flex-row">
             <div className="md:mr-6">
-              <p className="text-yellow mt-8 mb-8 max-w-2xl">
-                Hardhat a été utilisé, de pair avec Ethers.js, afin de déployer et tester les
-                différents smart contracts de la dApp. Hardhat permet notamment une estimation des
-                coûts de déploiement d'un smart contract et permet également d'obtenir un retour
-                d'informations sur la couverture des tests des smart contracts.
+              <p className="text-black leading-relaxed mb-6">
+                Hardhat has been used, together with Ethers.js, to deploy and test the different
+                smart contracts of the dApp. Hardhat allows to estimate the cost of deploying a
+                smart contract and to get a feedback on the coverage of the smart contracts tests.
               </p>
-              <p className="text-yellow mt-8 mb-8 max-w-2xl">
-                Concernant la connexion avec la Blockchain et le portefeuille numérique des
-                utilisateurs, Rainbow Kit a été utilisé, de pair avec Wagmi.sh.
+              <p className="text-black leading-relaxed mb-6">
+                Concerning the connection with the Blockchain and the users' digital wallet, Rainbow
+                Kit was used, together with Wagmi.sh.
               </p>
-              <p className="text-yellow mt-8 mb-8 max-w-2xl">
-                Enfin, afin de fluidifier l'appel aux évènements enregistrés sur la Blockchain, The
-                Graph a été ajouté au projet.
+              <p className="text-black leading-relaxed mb-6">
+                Finally, in order to fluidify the call to events recorded on the Blockchain, The
+                Graph has been added to the project.
               </p>
             </div>
             <Image src={smartVoteHardhat} alt="Hardhat - Nicolas Milliard" />
@@ -214,36 +214,36 @@ const SmartVote: FC = () => {
         </div>
         {/* Smart Contracts */}
         <div>
-          <h3 className="font-oswald-semibold text-3xl leading-relaxed text-salmon mb-8">
-            Structure des Smart Contracts
+          <h3 className="text-xl text-black font-semibold leading-relaxed mb-6">
+            Structure of Smart Contracts
           </h3>
           <div className="flex flex-col items-center md:flex-row">
             <div className="md:mr-6">
-              <p className="text-yellow mt-8 mb-8 max-w-2xl">
-                La dApp SmartVote est divisée en 3 smart contracts&nbsp;:
+              <p className="text-black leading-relaxed mb-6">
+                The SmartVote dApp is divided into 3 smart contracts:
               </p>
-              <ul className="list-disc ml-8 mb-8 md:mb-0 max-w-2xl">
-                <li className="text-yellow mb-4">
-                  VotingFactory.sol&nbsp;: permet de créer des instances de votes en respectant
-                  l'EIP-1167. Bien qu'ajoutant un coût supplémentaire de 700 gas par itération,
-                  l'EIP-1167 permet une simplification du contrat VotingFactory ainsi qu'une très
-                  grande réduction des coûts de déploiements&nbsp;;
-                </li>
-                <li className="text-yellow mb-4">
-                  VotingHandler.sol&nbsp;: sert de référence aux Clones créés par VotingFactory. Ce
-                  smart contract contient toute la logique des sessions de vote&nbsp;: ajout des
-                  électeurs, ajout des propositions, comptage des voies, second tour... Ce smart
-                  contract est Upgradeable pour permettre le clonage et l'enregistrement d'un
-                  nouveau propriétaire de contrat. De plus, VotingHandler est Pausable afin de
-                  proposer aux utilisateurs de la dApp une "suppression" d'une instance de vote
-                  (suppression classique impossible sur la Blockchain)&nbsp;;
-                </li>
-                <li className="text-yellow">
-                  InstancesList.sol&nbsp;: ce smart contract agit comme un marque-page et permet aux
-                  "Non Voters" de suivre ou d'arrêter de suivre une instance de vote depuis leur
-                  tableau de bord.
-                </li>
-              </ul>
+              <div className="flex gap-10 ml-6 mb-6 text-black sm:text-base">
+                <ul className="list-disc">
+                  <li className="leading-relaxed">
+                    VotingFactory.sol: allows to create voting instances respecting the EIP-1167.
+                    Although adding an additional cost of 700 gas per iteration, EIP-1167 allows a
+                    simplification of the VotingFactory contract and a very large reduction of the
+                    deployment costs;
+                  </li>
+                  <li className="leading-relaxed">
+                    VotingHandler.sol: serves as a reference to the Clons created by VotingFactory.
+                    This smart contract contains all the logic of the voting sessions: adding
+                    voters, adding proposals, couting votes, second round... This smart contract is
+                    Upgradeable to allow cloning and registration of a new contract owner. Moreover,
+                    VotingHandler is Pausable in order to propose to the users of the dApp a
+                    "deletion" of a voting instance (classic deletion impossible on the Blockchain);
+                  </li>
+                  <li className="leading-relaxed">
+                    InstancesList.sol: this smart contract acts as a bookmark and allows "Non
+                    Voters" to follow or stop following a voting instance from their dashboard.
+                  </li>
+                </ul>
+              </div>
             </div>
             <Image src={smartVoteSolidity} alt="SmartVote Solidity - Nicolas Milliard" />
           </div>

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Button from '../Buttons/Button';
 import ButtonDisabled from '../Buttons/ButtonDisabled';
 
 import { projectsList } from '../../pages/api/projectsList';
@@ -17,7 +18,7 @@ const LatestProjects = () => {
               <Image
                 src={project.image}
                 alt={project.title}
-                className="my-4 w-342px h-48 lg:w-480px lg:h-270px"
+                className="my-4 w-342px h-48 lg:w-480px lg:h-270px rounded-2xl"
               />
               <div className="max-w-xl lg:ml-8">
                 <p className="mb-4 text-black leading-relaxed">{project.description}</p>
@@ -26,7 +27,11 @@ const LatestProjects = () => {
                     <li key={tool}>{tool}</li>
                   ))}
                 </ul>
-                <ButtonDisabled text="Case study" />
+                {project.active ? (
+                  <Button text="Case study" link={project.link} target="_self" />
+                ) : (
+                  <ButtonDisabled text="Case study" />
+                )}
               </div>
             </div>
           </div>

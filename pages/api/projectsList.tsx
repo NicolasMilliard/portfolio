@@ -1,7 +1,7 @@
 import { StaticImageData } from 'next/image';
 import screenplanner from '../../public/images/projects/screenplanner.png';
 import smartvote from '../../public/images/projects/smartvote.png';
-import koppo from '../../public/images/projects/koppo.png';
+import kopo from '../../public/images/projects/kopo.png';
 
 interface Project {
   title: string;
@@ -9,6 +9,7 @@ interface Project {
   image: StaticImageData;
   description: string;
   tools: string[];
+  active: boolean;
 }
 
 export const projectsList: Project[] = [
@@ -19,10 +20,11 @@ export const projectsList: Project[] = [
     description:
       'ScreenPlanner allows users to add TV series to their watchlist and discover new TV series and actors.',
     tools: ['Next.js', 'Redux', 'TailwindCSS', 'Toastify', 'External API', 'TypeScript'],
+    active: false,
   },
   {
     title: 'SmartVote',
-    link: '',
+    link: '/case-study/smartvote',
     image: smartvote,
     description:
       'SmartVote allows users to organize their owns voting instance, whitelist users, add proposals and tally votes. Working on Polygon and Avalanche.',
@@ -37,13 +39,15 @@ export const projectsList: Project[] = [
       'Toastify',
       'Multi-chains',
     ],
+    active: true,
   },
   {
-    title: 'Koppo',
+    title: 'Kopo',
     link: '',
-    image: koppo,
+    image: kopo,
     description:
-      'Koppo simplifies the process of applying for Energy Savings Certificates (ESC) and ensures their traceability in full transparency thanks to the Polygon Blockchain.',
+      'Kopo simplifies the process of applying for Energy Savings Certificates (ESC) and ensures their traceability in full transparency thanks to the Polygon Blockchain.',
     tools: ['Next.js', 'Hardhat', 'Ethers', 'Wagmi', 'Rainbow Kit', 'TailwindCSS', 'Toastify'],
+    active: false,
   },
 ];
