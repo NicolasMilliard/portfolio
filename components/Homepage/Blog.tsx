@@ -27,7 +27,10 @@ const Blog: FC = () => {
       <h2 className="text-3xl text-black font-bold leading-relaxed">Blog</h2>
       <div className="flex flex-col lg:flex-row gap-10 mt-6">
         {recentPosts.map((post) => (
-          <div key={post.slug} className="bg-white-100 rounded-2xl pt-4 pb-8 px-6 shadow max-w-sm">
+          <div
+            key={post.slug}
+            className="bg-white-100 rounded-2xl pt-4 pb-8 px-6 shadow w-full max-w-sm lg:w-96"
+          >
             <h3 className="text-xl text-black font-semibold">
               <Link href={`/post/${post.slug}`}>{post.title}</Link>
             </h3>
