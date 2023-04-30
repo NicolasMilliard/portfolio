@@ -22,19 +22,19 @@ interface Post {
 
 const responsive = {
   superLargeDesktop: {
-    breakpoint: { max: 4000, min: 1024 },
+    breakpoint: { max: 4000, min: 3000 },
     items: 5,
   },
   desktop: {
-    breakpoint: { max: 1024, min: 768 },
+    breakpoint: { max: 3000, min: 1024 },
     items: 3,
   },
   tablet: {
-    breakpoint: { max: 768, min: 640 },
+    breakpoint: { max: 1024, min: 464 },
     items: 2,
   },
   mobile: {
-    breakpoint: { max: 640, min: 0 },
+    breakpoint: { max: 464, min: 0 },
     items: 1,
   },
 };
@@ -52,7 +52,7 @@ const FeaturedPosts: FC = () => {
 
   return (
     <div className="mt-6">
-      <Carousel infinite responsive={responsive}>
+      <Carousel infinite responsive={responsive} ssr={true}>
         {dataLoaded &&
           featuredPosts.map((post, index) => <FeaturedPostCard key={index} post={post} />)}
       </Carousel>
