@@ -13,15 +13,12 @@ import {
 import Button from '../../components/Buttons/Button';
 
 import {
-  smartVoteDapp,
-  smartVoteWhy,
-  smartVoteUXUI,
-  smartVoteWallets,
-  smartVoteNext,
-  smartVoteHardhat,
-  smartVoteSolidity,
-  smartVoteEIP,
-} from '../../public/images/case-study/smartvote';
+  kopoDapp,
+  kopoEscWorkflow,
+  kopoUx,
+  kopoDappCode,
+} from '../../public/images/case-study/kopo';
+import { nextJS, hardhat } from '../../public/images/case-study/general';
 
 const Kopo: FC = () => {
   return (
@@ -46,11 +43,7 @@ const Kopo: FC = () => {
         </div>
         {/* Image */}
         <div className="flex justify-center mb-8">
-          <Image
-            src={smartVoteDapp}
-            alt="SmartVote dApp - Nicolas Milliard"
-            className="rounded-2xl"
-          />
+          <Image src={kopoDapp} alt="Kopo dApp - Nicolas Milliard" className="rounded-2xl" />
         </div>
         {/* Links */}
         <div className="flex justify-center items-center">
@@ -95,6 +88,11 @@ const Kopo: FC = () => {
             long and opaque, with many backs and forth between the different stakeholders, which can
             take more than 6 months.
           </TextContent>
+          <Image
+            src={kopoEscWorkflow}
+            alt="Kopo ESC Workflow - Nicolas Milliard"
+            className="mb-6"
+          />
           <TextContent>
             In addition, there has been an increase in the number of cases of fraud, which has led
             to a strengthening of control and security measures, with an anti-fraud budget that has
@@ -170,22 +168,36 @@ const Kopo: FC = () => {
             Kopo is a dApp that leverages several technologies to provide an innovative solution for
             managing ESC records.
           </TextContent>
-          <TextContent>
-            On the front-end side, the team chose to use Next.js for web development, Rainbow Kit
-            for connecting to the user's digital wallet, Ethers.js for communication with the
-            blockchain, and NFT.storage for managing NFTs. For user notifications, the team
-            integrated React Toastify. The solution also integrates Wagmi.sh which simplifies the
-            connection to the blockchain and acts as a global state manager. Finally, the dApp uses
-            the TailwindCSS library.
-          </TextContent>
-          <TextContent>
-            On the backend side, the team chose Hardhat, a development platform that facilitates the
-            development process of smart contracts. Some smart contracts are Upgradeable to allow
-            future modifications of these smart contracts. OpenZeppelin is used to provide security
-            features such as authentication and authorization. Chai is used to write unit tests and
-            Eth-gas-reporter to track the gas costs on the blockchain. Finally, Solidity Coverage is
-            used to measure code coverage during unit tests.
-          </TextContent>
+          <div className="flex flex-col items-center lg:flex-row">
+            <div className="md:mr-6 max-w-xl">
+              <TextContent>
+                On the front-end side, the team chose to use Next.js for web development, Rainbow
+                Kit for connecting to the user's digital wallet, Ethers.js for communication with
+                the blockchain, and NFT.storage for managing NFTs. For user notifications, the team
+                integrated React Toastify. The solution also integrates Wagmi.sh which simplifies
+                the connection to the blockchain and acts as a global state manager. Finally, the
+                dApp uses the TailwindCSS library.
+              </TextContent>
+            </div>
+            <Image
+              src={nextJS}
+              alt="NextJS Kopo dApp - Nicolas Milliard"
+              className="mb-6 lg:mb-0"
+            />
+          </div>
+          <div className="flex flex-col items-center lg:flex-row">
+            <div className="md:mr-6 max-w-xl">
+              <TextContent>
+                On the backend side, the team chose Hardhat, a development platform that facilitates
+                the development process of smart contracts. Some smart contracts are Upgradeable to
+                allow future modifications of these smart contracts. OpenZeppelin is used to provide
+                security features such as authentication and authorization. Chai is used to write
+                unit tests and Eth-gas-reporter to track the gas costs on the blockchain. Finally,
+                Solidity Coverage is used to measure code coverage during unit tests.
+              </TextContent>
+            </div>
+            <Image src={hardhat} alt="Hardhat Kopo dApp - Nicolas Milliard" />
+          </div>
         </div>
         {/* Team */}
         <SectionSubTitle>Team</SectionSubTitle>
@@ -223,6 +235,7 @@ const Kopo: FC = () => {
             The Kopo dApp offers two distinct user paths: the beneficiary path and the obligated
             path.
           </TextContent>
+          <Image src={kopoUx} alt="Kopo User Experience - Nicolas Milliard" className="mb-6" />
           <TextContent>
             The beneficiary path begins by connecting the user's digital wallet to the dApp. Once
             this connection is established, Kopo displays the user's existing ESC folders and allow
@@ -276,6 +289,9 @@ const Kopo: FC = () => {
               transmitted without the agreement of the recipient.
             </li>
           </ListContent>
+        </div>
+        <div className="flex justify-center">
+          <Image src={kopoDappCode} alt="Kopo dApp - Nicolas Milliard" className="mb-6" />
         </div>
       </section>
 
