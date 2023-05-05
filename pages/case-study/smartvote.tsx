@@ -18,11 +18,10 @@ import {
   smartVoteWhy,
   smartVoteUXUI,
   smartVoteWallets,
-  smartVoteNext,
-  smartVoteHardhat,
   smartVoteSolidity,
   smartVoteEIP,
 } from '../../public/images/case-study/smartvote';
+import { nextJS, hardhat } from '../../public/images/case-study/general';
 
 const SmartVote: FC = () => {
   return (
@@ -183,7 +182,7 @@ const SmartVote: FC = () => {
                 precise feedback on the status of a transaction.
               </TextContent>
             </div>
-            <Image src={smartVoteNext} alt="Next.js - Nicolas Milliard" />
+            <Image src={nextJS} alt="Next.js - Nicolas Milliard" />
           </div>
         </div>
         {/* Web 3 */}
@@ -205,7 +204,7 @@ const SmartVote: FC = () => {
                 Graph has been added to the project.
               </TextContent>
             </div>
-            <Image src={smartVoteHardhat} alt="Hardhat - Nicolas Milliard" />
+            <Image src={hardhat} alt="Hardhat - Nicolas Milliard" />
           </div>
         </div>
         {/* Smart Contracts */}
