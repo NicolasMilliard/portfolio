@@ -43,11 +43,11 @@ export const projectsList: Project[] = [
   },
   {
     title: 'Kopo',
-    link: '',
+    link: '/case-study/kopo',
     image: kopo,
     description:
       'Kopo simplifies the process of applying for Energy Savings Certificates (ESC) and ensures their traceability in full transparency thanks to the Polygon Blockchain.',
     tools: ['Next.js', 'Hardhat', 'Ethers', 'Wagmi', 'Rainbow Kit', 'TailwindCSS', 'Toastify'],
-    active: false,
+    active: true,
   },
 ];
