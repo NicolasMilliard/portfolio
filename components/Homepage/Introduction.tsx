@@ -13,10 +13,10 @@ const Introduction = () => {
           Hello, I'm Nicolas Milliard!
         </h1>
         <h2 className="my-6 text-xl text-green-500 font-semibold leading-relaxed">
-          Full-Stack & Web 3 Developer
+          Front-End & Web 3 Developer
         </h2>
         <p className="mb-6 text-black leading-relaxed">
-          I'm a <span className="font-semibold">7+ years experienced Full-Stack Developer</span>. I
+          I'm a <span className="font-semibold">7+ years experienced Front-End Developer</span>. I
           usually work with React JS, Next JS or Vue in JavaScript (ES6) or in TypeScript.
         </p>
         <p className="mb-6 text-black leading-relaxed">
@@ -41,7 +41,7 @@ const Introduction = () => {
         <div className="absolute z-20 w-80 h-80 top-0 hover:-top-2 left-0 hover:-left-2 ease-in-out duration-300">
           <Image
             src={nicolas}
-            alt="Full-Stack & Web 3 Developer - Nicolas Milliard"
+            alt="Front-End & Web 3 Developer - Nicolas Milliard"
             className="rounded-2xl"
           />
         </div>

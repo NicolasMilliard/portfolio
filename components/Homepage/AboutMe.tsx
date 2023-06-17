@@ -43,7 +43,7 @@ const AboutMe = () => {
           </div>
           {/* Image on small screen */}
           <div className="flex justify-center mt-8 lg:hidden lg:mt-0">
-            <Image src={nicolas} alt="Full-Stack & Web 3 Developer - Nicolas Milliard" />
+            <Image src={nicolas} alt="Front-End & Web 3 Developer - Nicolas Milliard" />
           </div>
           {/* Image on large screen */}
           <div className="hidden lg:flex">

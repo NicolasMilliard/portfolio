@@ -13,7 +13,7 @@ interface Description {
 export const experiencesList: Experience[] = [
   {
     label: 'Freelance',
-    title: 'Full-Stack Developer',
+    title: 'Front-End Developer',
     date: 'Nov. 2017 - Today',
     descriptions: [
       {
@@ -36,7 +36,7 @@ export const experiencesList: Experience[] = [
   },
   {
     label: 'DMD France',
-    title: 'Full-Stack Developer',
+    title: 'Front-End Developer',
     date: 'July 2016 - Nov. 2021',
     descriptions: [
       {
