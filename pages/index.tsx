@@ -13,10 +13,10 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Full-Stack & Web 3 Developer - Nicolas Milliard</title>
+        <title>Front-End & Web 3 Developer - Nicolas Milliard</title>
         <meta
           name="description"
-          content="Portfolio of Nicolas Milliard, Full-Stack & Web 3 Developer."
+          content="Portfolio of Nicolas Milliard, Front-End & Web 3 Developer."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
