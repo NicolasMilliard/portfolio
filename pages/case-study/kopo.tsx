@@ -22,13 +22,10 @@ import { nextJS, hardhat } from '../../public/images/case-study/general';
 
 const Kopo: FC = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Kopo - Nicolas Milliard</title>
-        <meta
-          name="description"
-          content="Portfolio of Nicolas Milliard, Full-Stack Developer & Web3."
-        />
+        <meta name="description" content="Case Study of Kopo, a Next.js Web 3 dApp." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -327,7 +324,7 @@ const Kopo: FC = () => {
           </TextContent>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

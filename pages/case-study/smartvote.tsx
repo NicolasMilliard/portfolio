@@ -25,13 +25,10 @@ import { nextJS, hardhat } from '../../public/images/case-study/general';
 
 const SmartVote: FC = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>SmartVote - Nicolas Milliard</title>
-        <meta
-          name="description"
-          content="Portfolio of Nicolas Milliard, Full-Stack Developer & Web3."
-        />
+        <meta name="description" content="Case Study of SmartVote, a Next.js Web 3 dApp." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -243,7 +240,7 @@ const SmartVote: FC = () => {
           />
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

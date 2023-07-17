@@ -17,7 +17,7 @@ const Introduction = () => {
         </h2>
         <p className="mb-6 text-black leading-relaxed">
           I'm a <span className="font-semibold">7+ years experienced Front-End Developer</span>. I
-          usually work with React JS, Next JS or Vue in JavaScript (ES6) or in TypeScript.
+          usually work with React JS and React Native in JavaScript (ES6) or in TypeScript.
         </p>
         <p className="mb-6 text-black leading-relaxed">
           I'm also <span className="font-semibold">1+ year experienced Blockchain Developer</span>.
