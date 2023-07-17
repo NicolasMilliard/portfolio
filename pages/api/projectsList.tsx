@@ -1,5 +1,5 @@
 import { StaticImageData } from 'next/image';
-import screenplanner from '../../public/images/projects/screenplanner.png';
+import insertdentaire from '../../public/images/projects/insertdentaire.png';
 import smartvote from '../../public/images/projects/smartvote.png';
 import kopo from '../../public/images/projects/kopo.png';
 
@@ -13,15 +13,6 @@ interface Project {
 }
 
 export const projectsList: Project[] = [
-  {
-    title: 'ScreenPlanner',
-    link: '',
-    image: screenplanner,
-    description:
-      'ScreenPlanner allows users to add TV series to their watchlist and discover new TV series and actors.',
-    tools: ['Next.js', 'Redux', 'TailwindCSS', 'Toastify', 'External API', 'TypeScript'],
-    active: false,
-  },
   {
     title: 'SmartVote',
     link: '/case-study/smartvote',
@@ -49,5 +40,21 @@ export const projectsList: Project[] = [
       'Kopo simplifies the process of applying for Energy Savings Certificates (ESC) and ensures their traceability in full transparency thanks to the Polygon Blockchain.',
     tools: ['Next.js', 'Hardhat', 'Ethers', 'Wagmi', 'Rainbow Kit', 'TailwindCSS', 'Toastify'],
     active: true,
+  },
+  {
+    title: 'Insert Dentaire',
+    link: '/case-study/insert-dentaire',
+    image: insertdentaire,
+    description:
+      'Insert Dentaire is a mobile merchant application that enables dentists to order handpieces and dental tips easily.',
+    tools: [
+      'React Native',
+      'React Navigation',
+      'Redux',
+      'Expo Secure Store',
+      'External APIs',
+      'Jest',
+    ],
+    active: false,
   },
 ];
