@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import Button from '../Buttons/Button';
-import ButtonDisabled from '../Buttons/ButtonDisabled';
+import { Button, ButtonDisabled } from '../Buttons';
 
 import { projectsList } from '../../pages/api/projectsList';
 
