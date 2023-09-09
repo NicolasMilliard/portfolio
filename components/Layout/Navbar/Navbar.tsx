@@ -2,18 +2,18 @@ import { FC, useState, useEffect } from 'react';
 import Logo from './Logo';
 import Menu from './Menu';
 
-interface INavbarState {
+interface NavbarState {
   height: number;
 }
 
 const Navbar: FC = () => {
-  const [scrollState, setScrollState] = useState<INavbarState>({ height: 0 });
+  const [scrollState, setScrollState] = useState<NavbarState>({ height: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollState((prevState) => ({
         ...prevState,
-        height: window.pageYOffset,
+        height: window.scrollY,
       }));
     };
 

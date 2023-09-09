@@ -1,13 +1,13 @@
-import { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import Navbar from './Navbar/Navbar';
 import Socials from './Socials/Socials';
 import Footer from './Footer/Footer';
 
-interface Props {
+interface LayoutProps {
   children: ReactNode;
 }
 
-const Layout: FC<Props> = ({ children }: Props) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className="bg-white-500">
       <Navbar />

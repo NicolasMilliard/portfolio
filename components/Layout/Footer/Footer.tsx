@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '../../Buttons/Button';
@@ -21,9 +21,9 @@ const Footer: FC = () => {
           <Link href="/">
             <li className="mb-4">Home</li>
           </Link>
-          {/* <Link href="#">
-            <li className="mb-4">Projects</li>
-          </Link> */}
+          <Link href="/case-studies">
+            <li className="mb-4">Case studies</li>
+          </Link>
         </ul>
         <ul className="text-green-500">
           <li className="flex items-center mb-4">

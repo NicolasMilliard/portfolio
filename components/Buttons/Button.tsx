@@ -1,13 +1,13 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import Link from 'next/link';
 
-interface Props {
+interface ButtonProps {
   text: string;
   link: string;
   target: string;
 }
 
-const Button: FC<Props> = ({ text, link, target }) => {
+const Button: FC<ButtonProps> = ({ text, link, target }) => {
   return (
     <Link
       href={link}

@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 
-interface Props {
+interface PageTitleProps {
   children: string;
 }
 
-const PageTitle: FC<Props> = ({ children }) => {
+const PageTitle: FC<PageTitleProps> = ({ children }) => {
   return <h1 className="text-5xl text-center text-black font-bold leading-relaxed">{children}</h1>;
 };
 

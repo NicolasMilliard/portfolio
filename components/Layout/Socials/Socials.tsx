@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import SocialLinks from './SocialLinks';
 
 import github from '../../../public/images/icons/github-green.svg';

@@ -1,9 +1,10 @@
+import type { FC } from 'react';
 import Image from 'next/image';
 import { Button, ButtonDisabled } from '../Buttons';
 
 import { projectsList } from '../../pages/api/projectsList';
 
-const LatestProjects = () => {
+const LatestProjects: FC = () => {
   return (
     <section className="mx-6 md:mx-auto mb-32 md:mb-48 sm:px-0 md:px-16 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
       <h2 className="text-3xl text-black font-bold leading-relaxed">Latest projects</h2>

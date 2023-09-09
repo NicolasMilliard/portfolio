@@ -1,19 +1,19 @@
-import React, { useState, MouseEvent } from 'react';
+import { FC, useState, MouseEvent } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-interface Props {
+interface SocialLinksProps {
   link: string;
   imageSource: string;
   imageText: string;
 }
 
-const SocialLinks: React.FC<Props> = ({ link, imageSource, imageText }) => {
-  const [tx, setTx] = useState(0);
-  const [ty, setTy] = useState(0);
-  const [opacity, setOpacity] = useState(0.75);
+const SocialLinks: FC<SocialLinksProps> = ({ link, imageSource, imageText }) => {
+  const [tx, setTx] = useState<number>(0);
+  const [ty, setTy] = useState<number>(0);
+  const [opacity, setOpacity] = useState<number>(0.75);
 
-  const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleMouseMove = (e: MouseEvent<HTMLButtonElement>): void => {
     const btn = e.currentTarget;
     const rect = btn.getBoundingClientRect();
     const h = rect.width / 2;
@@ -35,7 +35,7 @@ const SocialLinks: React.FC<Props> = ({ link, imageSource, imageText }) => {
     setOpacity(newOpacity);
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (): void => {
     setTx(0);
     setTy(0);
     setOpacity(0.75);

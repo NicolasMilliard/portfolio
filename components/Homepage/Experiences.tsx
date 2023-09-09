@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
 import { experiencesList } from '../../pages/api/experiencesList';
 
-const Experiences = () => {
+const Experiences: FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (

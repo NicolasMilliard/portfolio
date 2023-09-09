@@ -1,10 +1,11 @@
+import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Button from '../Buttons/Button';
+import { Button } from '../Buttons';
 
 import nicolas from '../../public/images/homepage/full-stack-web-3-developer-nicolas-milliard.png';
 
-const Introduction = () => {
+const Introduction: FC = () => {
   return (
     <section className="py-32 md:py-48 sm:px-0 md:px-16 mx-6 md:mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl lg:flex lg:items-center lg:justify-between">
       {/* Text */}

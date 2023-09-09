@@ -1,9 +1,10 @@
+import type { FC } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { Button, ButtonDisabled } from '../components/Buttons';
 import { projectsList } from './api/projectsList';
 
-const CaseStudies = () => {
+const CaseStudies: FC = () => {
   return (
     <>
       <Head>

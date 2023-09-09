@@ -1,9 +1,10 @@
+import type { FC } from 'react';
 import Image from 'next/image';
 
 import nicolas from '../../public/images/homepage/full-stack-web-3-developer-nicolas-milliard.png';
 import technologiesImg from '../../public/images/homepage/technologies-web-2-nicolas-milliard.png';
 
-const AboutMe = () => {
+const AboutMe: FC = () => {
   return (
     <section className="lg:bg-gradient-200 lg:from-green-100 lg:to-green-900">
       <div className="mx-6 md:mx-auto mb-32 md:mb-48 sm:px-0 md:px-16 lg:py-10 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">

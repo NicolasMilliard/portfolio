@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 
-interface Props {
+interface TextContentProps {
   children: string;
 }
 
-const TextContent: FC<Props> = ({ children }) => {
+const TextContent: FC<TextContentProps> = ({ children }) => {
   return <p className="mb-6 text-black leading-relaxed">{children}</p>;
 };
 

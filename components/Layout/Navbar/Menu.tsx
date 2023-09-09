@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import Button from '../../Buttons/Button';
+import { Button } from '../../Buttons';
 
 import github from '../../../public/images/icons/github.svg';
 import linkedin from '../../../public/images/icons/linkedin.svg';

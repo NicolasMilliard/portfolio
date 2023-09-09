@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 
-interface Props {
+interface ButtonDisabledProps {
   text: string;
 }
 
-const ButtonDisabled: FC<Props> = ({ text }) => {
+const ButtonDisabled: FC<ButtonDisabledProps> = ({ text }) => {
   return (
     <button
       disabled

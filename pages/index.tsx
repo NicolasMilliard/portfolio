@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import Head from 'next/head';
 import {
   Introduction,
@@ -7,7 +8,7 @@ import {
   Testimonials,
 } from '../components/Homepage';
 
-const Home = () => {
+const Home: FC = () => {
   return (
     <>
       <Head>
