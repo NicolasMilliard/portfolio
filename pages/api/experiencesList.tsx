@@ -12,9 +12,24 @@ interface Description {
 
 export const experiencesList: Experience[] = [
   {
+    label: 'Yper',
+    title: 'Front-End Developer',
+    date: 'Aug. 2023 - Today',
+    descriptions: [
+      {
+        id: 1,
+        text: 'Implement rich user experiences by creating new features utilizing HTML, CSS, JavaScript and TypeScript',
+      },
+      {
+        id: 3,
+        text: 'Development and maintenance of new products',
+      },
+    ],
+  },
+  {
     label: 'Freelance',
     title: 'Front-End Developer',
-    date: 'Nov. 2017 - Today',
+    date: 'Nov. 2017 - Aug. 2023',
     descriptions: [
       {
         id: 0,
