@@ -1,12 +1,10 @@
 import Head from 'next/head';
-
 import {
   Introduction,
   AboutMe,
   Experiences,
   LatestProjects,
   Testimonials,
-  Blog,
 } from '../components/Homepage';
 
 const Home = () => {
@@ -26,7 +24,6 @@ const Home = () => {
         <Experiences />
         <LatestProjects />
         <Testimonials />
-        <Blog />
       </>
     </>
   );
