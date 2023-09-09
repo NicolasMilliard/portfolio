@@ -5,7 +5,6 @@ import { useState } from 'react';
 import Button from '../../Buttons/Button';
 
 import github from '../../../public/images/icons/github.svg';
-import twitter from '../../../public/images/icons/twitter.svg';
 import linkedin from '../../../public/images/icons/linkedin.svg';
 
 const Menu: FC = () => {
@@ -29,21 +28,11 @@ const Menu: FC = () => {
             Home
           </Link>
         </li>
-        {/* <li>
-          <Link href="#" className="text-black hover:text-green-500">
-            Projects
-          </Link>
-        </li> */}
         <li>
-          <Link href="/blog" className="text-black hover:text-green-500">
-            Blog
+          <Link href="/case-studies" className="text-black hover:text-green-500">
+            Case studies
           </Link>
         </li>
-        {/* <li>
-          <Link href="#" className="text-black hover:text-green-500">
-            Newsletter
-          </Link>
-        </li> */}
         <li>
           <Button text="Contact me" link="#" target="_self" />
         </li>
@@ -61,24 +50,17 @@ const Menu: FC = () => {
             <div className="absolute top-4 left-0 block w-7 h-3px bg-white-500 -rotate-45 rounded"></div>
           </button>
         </div>
-        {/* Portfolio links */}
         <ul>
           <li className="mb-4">
             <Link href="/" onClick={() => setIsOpen(!isOpen)}>
               Home
             </Link>
           </li>
-          {/* <li className="mb-4">
-            <Link href="#" onClick={() => setIsOpen(!isOpen)}>Projects</Link>
-          </li> */}
           <li className="mb-4">
-            <Link href="/blog" onClick={() => setIsOpen(!isOpen)}>
-              Blog
+            <Link href="case-studies" onClick={() => setIsOpen(!isOpen)}>
+              Case studies
             </Link>
           </li>
-          {/* <li>
-            <Link href="#" onClick={() => setIsOpen(!isOpen)}>Newsletter</Link>
-          </li> */}
         </ul>
         <div className="block bg-white-500 w-full h-0.5 my-4 rounded"></div>
         {/* Social links */}
@@ -86,12 +68,6 @@ const Menu: FC = () => {
           <li className="flex items-center mb-4">
             <Image src={github} alt="Github - Nicolas Milliard" className="mr-2" />
             <Link href="https://github.com/NicolasMilliard" target="_blank">
-              /NicolasMilliard
-            </Link>
-          </li>
-          <li className="flex items-center mb-4">
-            <Image src={twitter} alt="Twitter - Nicolas Milliard" className="mr-2" />
-            <Link href="https://twitter.com/NicolasMilliard" target="_blank">
               /NicolasMilliard
             </Link>
           </li>

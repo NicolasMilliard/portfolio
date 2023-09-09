@@ -5,7 +5,6 @@ import Button from '../../Buttons/Button';
 
 import logo from '../../../public/images/homepage/nicolas-milliard-logo-white.svg';
 import github from '../../../public/images/icons/github-green.svg';
-import twitter from '../../../public/images/icons/twitter-green.svg';
 import linkedin from '../../../public/images/icons/linkedin-green.svg';
 
 const Footer: FC = () => {
@@ -25,23 +24,11 @@ const Footer: FC = () => {
           {/* <Link href="#">
             <li className="mb-4">Projects</li>
           </Link> */}
-          <Link href="/blog">
-            <li className="mb-4">Blog</li>
-          </Link>
-          {/* <Link href="#">
-            <li>Newsletter</li>
-          </Link> */}
         </ul>
         <ul className="text-green-500">
           <li className="flex items-center mb-4">
             <Image src={github} alt="Github - Nicolas Milliard" className="mr-2 lr:mr-4" />
             <Link href="https://github.com/NicolasMilliard" target="_blank">
-              /NicolasMilliard
-            </Link>
-          </li>
-          <li className="flex items-center mb-4">
-            <Image src={twitter} alt="Twitter - Nicolas Milliard" className="mr-2 lr:mr-4" />
-            <Link href="https://twitter.com/NicolasMilliard" target="_blank">
               /NicolasMilliard
             </Link>
           </li>

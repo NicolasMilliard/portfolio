@@ -2,7 +2,6 @@ import { FC } from 'react';
 import SocialLinks from './SocialLinks';
 
 import github from '../../../public/images/icons/github-green.svg';
-import twitter from '../../../public/images/icons/twitter-green.svg';
 import linkedin from '../../../public/images/icons/linkedin-green.svg';
 
 const Socials: FC = () => {
@@ -14,11 +13,6 @@ const Socials: FC = () => {
             link="https://github.com/NicolasMilliard"
             imageSource={github}
             imageText="GitHub"
-          />
-          <SocialLinks
-            link="https://twitter.com/NicolasMilliard"
-            imageSource={twitter}
-            imageText="Twitter"
           />
           <SocialLinks
             link="https://www.linkedin.com/in/nicolas-milliard/"
