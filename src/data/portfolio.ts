@@ -34,7 +34,7 @@ export const projects = [
 ] satisfies Project[];
 
 export const links = [
-  { label: 'GitHub', href: '' },
-  { label: 'X/Twitter', href: '' },
-  { label: 'LinkedIn', href: '' },
+  { label: 'GitHub', href: 'https://github.com/nicolasmilliard' },
+  { label: 'X/Twitter', href: 'https://x.com/NicolasMilliard' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/nicolas-milliard/' },
 ] satisfies SocialLink[];
