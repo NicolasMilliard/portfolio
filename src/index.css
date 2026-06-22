@@ -99,6 +99,7 @@ p {
 
 a {
   color: var(--muted);
+  transition: color 300ms ease;
 }
 
 a:hover {
