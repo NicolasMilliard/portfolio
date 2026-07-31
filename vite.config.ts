@@ -1,7 +1,16 @@
+import mdx from '@mdx-js/rollup';
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    tanstackRouter({
+      target: 'react',
+      autoCodeSplitting: true,
+    }),
+    { enforce: 'pre', ...mdx() },
+    react({ include: /\.(js|jsx|md|mdx|ts|tsx)$/ }),
+  ],
 });

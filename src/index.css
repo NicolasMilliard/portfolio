@@ -136,6 +136,111 @@ a:focus-visible {
   color: var(--muted);
 }
 
+.writing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.writing-link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.25rem 1rem;
+  padding: 0.75rem 1rem;
+  margin-inline: -1rem;
+  border-radius: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.writing-link:hover,
+.writing-link:focus-visible {
+  background-color: color-mix(in oklab, var(--foreground), transparent 96%);
+}
+
+.writing-title {
+  color: var(--foreground);
+}
+
+.writing-date,
+.article-date {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.writing-description {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.article-main,
+.message-page {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+}
+
+.article-main {
+  display: block;
+}
+
+.article-back-link {
+  display: inline-block;
+  font-size: 0.875rem;
+}
+
+.article-header {
+  margin-top: 2.5rem;
+}
+
+.article-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 7vw, 3rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.article-description {
+  margin-top: 1rem;
+}
+
+.article-date {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+.article-content {
+  margin-top: 3rem;
+}
+
+.article-content > * + * {
+  margin-top: 1.25rem;
+}
+
+.article-content h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 0;
+  color: var(--foreground);
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  line-height: 1.3;
+}
+
+.message-page h1 {
+  margin-bottom: 1rem;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+}
+
+.message-page a {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
 @keyframes content-enter {
   from {
     opacity: 0;
@@ -148,26 +253,40 @@ a:focus-visible {
   }
 }
 
-header,
-main section {
+.home-page > header,
+.home-page > main > section {
   animation: content-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-header {
+.home-page > header {
   animation-delay: 80ms;
 }
 
-main section:nth-of-type(1) {
+.home-page > main > section:nth-of-type(1) {
   animation-delay: 180ms;
 }
 
-main section:nth-of-type(2) {
+.home-page > main > section:nth-of-type(2) {
   animation-delay: 280ms;
 }
 
+.home-page > main > section:nth-of-type(3) {
+  animation-delay: 380ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  header,
-  main section {
+  .home-page > header,
+  .home-page > main > section {
     animation: none;
+  }
+}
+
+@media (max-width: 30rem) {
+  .writing-link {
+    grid-template-columns: 1fr;
+  }
+
+  .writing-description {
+    grid-column: auto;
   }
 }
