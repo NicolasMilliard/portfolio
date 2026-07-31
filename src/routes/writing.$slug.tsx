@@ -1,5 +1,4 @@
 import { createFileRoute, Link, notFound } from '@tanstack/react-router';
-import { Suspense } from 'react';
 
 import {
   formatPublishedDate,
@@ -50,9 +49,7 @@ function WritingPage() {
             </time>
           </header>
           <div className="article-content">
-            <Suspense fallback={<p>Loading article...</p>}>
-              <Content />
-            </Suspense>
+            <Content />
           </div>
         </article>
       </main>

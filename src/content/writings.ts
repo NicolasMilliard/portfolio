@@ -1,4 +1,4 @@
-import { lazy, type ComponentType, type LazyExoticComponent } from 'react';
+import type { ComponentType } from 'react';
 
 export type Writing = {
   slug: string;
@@ -15,33 +15,39 @@ type WritingModule = {
 };
 
 type WritingWithContent = Writing & {
-  Content: LazyExoticComponent<ComponentType>;
+  Content: ComponentType;
 };
 
-const writingModules = import.meta.glob<WritingModule>('./writings/*.mdx');
-const writingMetadata = import.meta.glob<WritingMetadata>('./writings/*.mdx', {
-  eager: true,
-  import: 'metadata',
-});
+const writingModules = import.meta.glob<WritingModule>(
+  ['./writings/*.md', './writings/*.mdx'],
+  { eager: true },
+);
+const writingMetadata = import.meta.glob<WritingMetadata>(
+  ['./writings/*.md', './writings/*.mdx'],
+  {
+    eager: true,
+    import: 'metadata',
+  },
+);
 
 const getSlugFromPath = (path: string) =>
   path
     .split('/')
     .at(-1)
-    ?.replace(/\.mdx$/, '') ?? '';
+    ?.replace(/\.mdx?$/, '') ?? '';
 
 const writingsWithContent = Object.entries(writingMetadata)
   .map(([path, metadata]) => {
-    const loadWriting = writingModules[path];
+    const writingModule = writingModules[path];
 
-    if (!loadWriting) {
-      throw new Error(`No MDX module found for ${path}`);
+    if (!writingModule) {
+      throw new Error(`No Markdown module found for ${path}`);
     }
 
     return {
       ...metadata,
       slug: getSlugFromPath(path),
-      Content: lazy(loadWriting),
+      Content: writingModule.default,
     } satisfies WritingWithContent;
   })
   .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
