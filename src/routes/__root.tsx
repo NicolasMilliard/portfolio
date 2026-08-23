@@ -1,6 +1,29 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
+import {
+  createRootRoute,
+  HeadContent,
+  Link,
+  Outlet,
+} from '@tanstack/react-router';
+import { useEffect } from 'react';
 
-const RootLayout = () => <Outlet />;
+import { notFoundSeo, seoToRouteHead } from '../seo';
+
+const ManagedHead = () => {
+  useEffect(() => {
+    document.head
+      .querySelectorAll('[data-seo-static]')
+      .forEach((element) => element.remove());
+  }, []);
+
+  return typeof document === 'undefined' ? null : <HeadContent />;
+};
+
+const RootLayout = () => (
+  <>
+    <ManagedHead />
+    <Outlet />
+  </>
+);
 
 const NotFoundPage = () => (
   <div className="page">
@@ -15,6 +38,7 @@ const NotFoundPage = () => (
 );
 
 export const Route = createRootRoute({
+  head: () => seoToRouteHead(notFoundSeo),
   component: RootLayout,
   notFoundComponent: NotFoundPage,
 });
