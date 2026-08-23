@@ -4,6 +4,14 @@ description:
   'The hard part wasn’t receiving updates. It was making every view tell the
   same truth.'
 publishedAt: '2026-07-31'
+updatedAt: '2026-08-03'
+image:
+  src: '/og/articles/og-image-how-i-kept-a-real-time-frontend-from-drifting.png'
+  alt:
+    'The hard part wasn’t receiving updates. It was making every view tell the
+    same truth.'
+  width: 1200
+  height: 630
 ---
 
 At [Yper](https://www.yper.fr/), I worked on a support dashboard that aggregates

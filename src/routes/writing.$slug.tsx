@@ -2,36 +2,28 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 
 import {
   formatPublishedDate,
-  getWriting,
-  type Writing,
+  loadWriting,
+  type WritingWithContent,
 } from '../content/writings';
+import { getWritingSeo, notFoundSeo, seoToRouteHead } from '../seo';
 
 export const Route = createFileRoute('/writing/$slug')({
-  loader: ({ params }) => {
-    const writing = getWriting(params.slug);
+  loader: async ({ params }): Promise<WritingWithContent> => {
+    const writing = await loadWriting(params.slug);
 
     if (!writing) {
       throw notFound();
     }
 
-    return {
-      slug: writing.slug,
-      title: writing.title,
-      description: writing.description,
-      publishedAt: writing.publishedAt,
-    } satisfies Writing;
+    return writing;
   },
+  head: ({ loaderData }) =>
+    seoToRouteHead(loaderData ? getWritingSeo(loaderData) : notFoundSeo),
   component: WritingPage,
 });
 
 function WritingPage() {
-  const writingMetadata = Route.useLoaderData();
-  const writing = getWriting(writingMetadata.slug);
-
-  if (!writing) {
-    throw notFound();
-  }
-
+  const writing = Route.useLoaderData();
   const Content = writing.Content;
 
   return (
@@ -44,9 +36,20 @@ function WritingPage() {
           <header className="article-header">
             <h1 className="article-title">{writing.title}</h1>
             <p className="article-description">{writing.description}</p>
-            <time className="article-date" dateTime={writing.publishedAt}>
-              {formatPublishedDate(writing.publishedAt)}
-            </time>
+            <div className="article-time">
+              <time className="article-date" dateTime={writing.publishedAt}>
+                {formatPublishedDate(writing.publishedAt)}
+              </time>
+              {writing.updatedAt &&
+              writing.updatedAt !== writing.publishedAt ? (
+                <p className="article-date">
+                  Updated{' '}
+                  <time dateTime={writing.updatedAt}>
+                    {formatPublishedDate(writing.updatedAt)}
+                  </time>
+                </p>
+              ) : null}
+            </div>
           </header>
           <div className="article-content">
             <Content />
