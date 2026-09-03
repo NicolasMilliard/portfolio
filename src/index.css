@@ -117,27 +117,38 @@ a:focus-visible {
   outline-offset: 0.1875rem;
 }
 
-.project-link {
-  display: block;
-  padding: 0.5rem 1rem;
-  margin-left: -1rem;
-  margin-right: -1rem;
+.project-link,
+.writing-link {
+  padding-inline: 1rem;
+  margin-inline: -1rem;
   border-radius: 0.5rem;
   color: inherit;
   text-decoration: none;
 }
 
 .project-link:hover,
-.project-link:focus-visible {
+.project-link:focus-visible,
+.writing-link:hover,
+.writing-link:focus-visible {
   background-color: var(--surface-subtle);
+}
+
+.project-link {
+  display: block;
+  padding-block: 0.5rem;
+}
+
+.project-title,
+.writing-title {
+  color: var(--foreground);
 }
 
 .project-title {
   display: block;
-  color: var(--foreground);
 }
 
-.project-description {
+.project-description,
+.writing-description {
   color: var(--muted);
 }
 
@@ -154,20 +165,7 @@ a:focus-visible {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.25rem 1rem;
-  padding: 0.75rem 1rem;
-  margin-inline: -1rem;
-  border-radius: 0.5rem;
-  color: inherit;
-  text-decoration: none;
-}
-
-.writing-link:hover,
-.writing-link:focus-visible {
-  background-color: var(--surface-subtle);
-}
-
-.writing-title {
-  color: var(--foreground);
+  padding-block: 0.75rem;
 }
 
 .writing-date,
@@ -178,7 +176,6 @@ a:focus-visible {
 
 .writing-description {
   grid-column: 1 / -1;
-  color: var(--muted);
   line-height: 1.5;
 }
 
@@ -341,6 +338,10 @@ a:focus-visible {
   animation-delay: 380ms;
 }
 
+.home-page > main > section:nth-of-type(4) {
+  animation-delay: 480ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-page > header,
   .home-page > main > section {
@@ -349,6 +350,12 @@ a:focus-visible {
 }
 
 @media (max-width: 30rem) {
+  .project-link,
+  .writing-link {
+    padding-inline: 0.5rem;
+    margin-inline: -0.5rem;
+  }
+
   .writing-link {
     grid-template-columns: 1fr;
   }

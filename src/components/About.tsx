@@ -1,6 +1,8 @@
-import type { Profile } from '../data/portfolio';
+import { profile } from '../data/portfolio';
 
-export const About = ({ about }: { about: Profile['about'] }) => {
+export const About = () => {
+  const about = profile.about;
+
   return (
     <section>
       <h2>about</h2>

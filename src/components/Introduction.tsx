@@ -1,6 +1,6 @@
-import type { Profile } from '../data/portfolio';
+import { profile } from '../data/portfolio';
 
-export const Introduction = ({ profile }: { profile: Profile }) => {
+export const Introduction = () => {
   return (
     <header>
       <h1>{profile.name}</h1>
