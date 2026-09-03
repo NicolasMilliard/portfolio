@@ -27,9 +27,19 @@ export const profile = {
 
 export const projects = [
   {
-    title: 'inBio',
-    description: 'Decentralized link-in-bio platform.',
-    link: '',
+    title: '3bio',
+    description: 'One shareable page for your links and Lens profile.',
+    link: 'https://3bio.social/',
+  },
+  {
+    title: 'YouTube Essentials',
+    description: 'A Chrome extension for a calmer, more focused YouTube experience.',
+    link: 'https://chromewebstore.google.com/detail/youtube-essentials/ehifhlciopjmjlfgdgkkamfhkjgjamig',
+  },
+  {
+    title: 'Frontend Engineering Skills',
+    description: 'AI skills for exploring, reviewing, and debugging frontend code.',
+    link: 'https://github.com/NicolasMilliard/frontend-engineer-skills',
   },
 ] satisfies Project[];
 

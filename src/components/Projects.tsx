@@ -1,6 +1,6 @@
-import type { Project } from '../data/portfolio';
+import { projects } from '../data/portfolio';
 
-export const Projects = ({ projects }: { projects: Project[] }) => {
+export const Projects = () => {
   return (
     <section>
       <h2>projects</h2>

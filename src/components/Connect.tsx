@@ -1,4 +1,4 @@
-import type { SocialLink } from '../data/portfolio';
+import { links } from '../data/portfolio';
 
 const getSeparator = (index: number, total: number) => {
   if (index === 0) {
@@ -12,7 +12,7 @@ const getSeparator = (index: number, total: number) => {
   return ', ';
 };
 
-export const Connect = ({ links }: { links: SocialLink[] }) => {
+export const Connect = () => {
   return (
     <section>
       <h2>connect</h2>
