@@ -1,15 +1,15 @@
 ---
 title: 'How I kept a real-time frontend from drifting'
 description:
-  'The hard part wasn’t receiving updates. It was making every view tell the
-  same truth.'
+  "The hard part wasn't receiving updates. It was making every view tell the
+  same truth."
 publishedAt: '2026-07-31'
 updatedAt: '2026-08-03'
 image:
   src: '/og/articles/og-image-how-i-kept-a-real-time-frontend-from-drifting.png'
   alt:
-    'The hard part wasn’t receiving updates. It was making every view tell the
-    same truth.'
+    "The hard part wasn't receiving updates. It was making every view tell the
+    same truth."
   width: 1200
   height: 630
 ---
@@ -17,11 +17,11 @@ image:
 At [Yper](https://www.yper.fr/), I worked on a support dashboard that aggregates
 conversations from WhatsApp, Messenger, live chat, and email.
 
-The UI wasn’t just real-time. It was constantly being reshaped by incoming
+The UI wasn't just real-time. It was constantly being reshaped by incoming
 messages, reassigned agents, and priority changes, while users applied more than
 ten filters on top of it.
 
-The dangerous failure wasn’t a disconnected socket. It was a dashboard that
+The dangerous failure wasn't a disconnected socket. It was a dashboard that
 looked healthy while showing stale state. A conversation could change priority
 while an agent was looking at a filtered queue. If an older update won the race,
 the row could remain in a view where it no longer belonged.
@@ -53,7 +53,7 @@ useWebSocket(url, {
 ```
 
 The retry recovered the transport, not the data. After a disconnect, the client
-couldn’t assume it had seen every event. A fresh REST snapshot re-established
+couldn't assume it had seen every event. A fresh REST snapshot re-established
 the baseline before the WebSocket returned to providing incremental updates.
 
 ## The normalization layer
@@ -121,7 +121,7 @@ became incremental cache mutations instead of a parallel state system.
 That mattered most when the table became more complex. With more than ten
 filters active at once, full refetches on every event would have been both
 expensive and visually unstable. Incremental updates kept the interface
-responsive while preserving the user’s current view.
+responsive while preserving the user's current view.
 
 Updating the entity was only half the job. A status or priority change could
 also move a conversation out of the current filtered queue. The filtered view
@@ -169,7 +169,7 @@ updated one message rather than creating another.
 
 ## Trade-offs
 
-The cost wasn’t the WebSocket itself. It was enforcing the same contract at
+The cost wasn't the WebSocket itself. It was enforcing the same contract at
 every entry point. Each handler had to validate its payload, compare ordering,
 update the entity, and account for a filtered view or optimistic counterpart.
 
@@ -178,28 +178,28 @@ subtly inconsistent. The normalization layer concentrated most of it, but it
 also duplicated rules the backend already understood.
 
 That was the trade-off: more frontend code and tests in exchange for a UI that
-didn’t depend on a refetch to repair itself.
+didn't depend on a refetch to repair itself.
 
-## What I’d revisit today
+## What I'd revisit today
 
 The architecture still holds up: one authoritative snapshot, one normalized
 event path, and one client-side state layer.
 
-What I’d change is the contract. Ideally, the REST API and real-time events
+What I'd change is the contract. Ideally, the REST API and real-time events
 would deliver the same normalized shape with a monotonic revision. That would
 move the ordering guarantee closer to the source and remove mapping logic from
 the frontend.
 
-I’d also evaluate transport choices more selectively. WebSockets made sense for
+I'd also evaluate transport choices more selectively. WebSockets made sense for
 highly interactive parts of the system, but Server-Sent Events could replace
-them for purely one-way updates. I wouldn’t add another live data source beside
+them for purely one-way updates. I wouldn't add another live data source beside
 the existing one—that would recreate the same consistency problem.
 
 ## Conclusion
 
 Real-time UI is easy to demonstrate and hard to get right.
 
-The challenge isn’t speed. It’s consistency under continuous change.
+The challenge isn't speed. It's consistency under continuous change.
 
 Once you model the system as a snapshot plus an event stream, everything becomes
 easier to reason about. The hard part is not pushing updates. It is enforcing
