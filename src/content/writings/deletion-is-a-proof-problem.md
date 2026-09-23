@@ -4,7 +4,14 @@ description:
   'How 3bio combines tombstones, upload provenance, and fresh reference checks
   to give users meaningful control over deletion.'
 publishedAt: '2026-09-10'
-draft: false
+updatedAt: '2026-09-23'
+image:
+  src: '/og/articles/og-image-deletion-is-a-proof-problem.png'
+  alt:
+    'How 3bio combines tombstones, upload provenance, and fresh reference checks
+    to give users meaningful control over deletion.'
+  width: 1200
+  height: 630
 ---
 
 When I added data controls to [3bio](https://3bio.social/), I wanted users to
@@ -97,10 +104,10 @@ uploads known to that browser installation, including their storage keys,
 resource kinds, and lifecycle states.
 
 That manifest gives cleanup a bounded starting point: resources this
-installation recorded as app-managed. In the usual workflow, that is exactly
-the provenance 3bio needs to clean up images as they are replaced or removed.
-It also keeps the deletion set narrow: discovering a URL is never enough to
-claim ownership of it.
+installation recorded as app-managed. In the usual workflow, that is exactly the
+provenance 3bio needs to clean up images as they are replaced or removed. It
+also keeps the deletion set narrow: discovering a URL is never enough to claim
+ownership of it.
 
 The scope ends at the browser installation. Another browser has a different
 manifest, clearing site data loses the record, and uploads made before tracking
@@ -216,9 +223,9 @@ A remaining race requires a specific sequence:
 3. Another client publishes metadata referencing the image.
 4. The deletion completes.
 
-Lens publication and Grove deletion are separate operations, so 3bio cannot
-make this sequence atomic. Rechecking immediately before the wallet prompt
-narrows the window considerably. The ordinary path remains protected by a fresh
+Lens publication and Grove deletion are separate operations, so 3bio cannot make
+this sequence atomic. Rechecking immediately before the wallet prompt narrows
+the window considerably. The ordinary path remains protected by a fresh
 reference scan, candidate revalidation, and same-origin serialization; the
 cross-client race stays documented because destructive workflows should expose
 the concurrency they cannot control.
