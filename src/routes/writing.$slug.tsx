@@ -34,8 +34,20 @@ function WritingPage() {
             Back home
           </Link>
           <header className="article-header">
-            <h1 className="article-title">{writing.title}</h1>
-            <p className="article-description">{writing.description}</p>
+            <h1
+              className="article-title"
+              style={{ viewTransitionName: `writing-title-${writing.slug}` }}
+            >
+              {writing.title}
+            </h1>
+            <p
+              className="article-description"
+              style={{
+                viewTransitionName: `writing-description-${writing.slug}`,
+              }}
+            >
+              {writing.description}
+            </p>
             <div className="article-time">
               <time className="article-date" dateTime={writing.publishedAt}>
                 {formatPublishedDate(writing.publishedAt)}

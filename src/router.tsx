@@ -10,7 +10,23 @@ export const createAppRouter = (
     routeTree,
     history,
     defaultPreload: 'intent',
+    defaultViewTransition: {
+      types: ({ fromLocation, toLocation }) => {
+        if (!fromLocation || fromLocation.pathname === toLocation.pathname) {
+          return false;
+        }
+
+        return fromLocation.pathname === '/' &&
+          toLocation.pathname.startsWith('/writing/')
+          ? ['article-enter']
+          : [];
+      },
+    },
     scrollRestoration,
+    getScrollRestorationKey: (location) =>
+      location.pathname === '/'
+        ? '/'
+        : location.state.__TSR_key || location.href,
     trailingSlash: 'never',
   });
 
