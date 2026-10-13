@@ -14,11 +14,23 @@ export const Writing = () => {
               to="/writing/$slug"
               params={{ slug: writing.slug }}
             >
-              <span className="writing-title">{writing.title}</span>
+              <span
+                className="writing-title"
+                style={{ viewTransitionName: `writing-title-${writing.slug}` }}
+              >
+                {writing.title}
+              </span>
               <time className="writing-date" dateTime={writing.publishedAt}>
                 {formatPublishedDate(writing.publishedAt)}
               </time>
-              <span className="writing-description">{writing.description}</span>
+              <span
+                className="writing-description"
+                style={{
+                  viewTransitionName: `writing-description-${writing.slug}`,
+                }}
+              >
+                {writing.description}
+              </span>
             </Link>
           </li>
         ))}
