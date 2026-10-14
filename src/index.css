@@ -19,10 +19,12 @@
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     monospace;
 
-  --background: oklch(0.9889 0.0067 115.7);
-  --foreground: oklch(0.2749 0.0751 252.86);
+  --background: oklch(0.986 0.002 67.8);
+  --foreground: oklch(0.275 0.075 252.9);
   --muted: oklch(0.5365 0.0706 253.27);
+  --accent: oklch(0.498 0.173 261.6);
   --surface-subtle: color-mix(in oklab, var(--foreground), transparent 96%);
+  --surface-accent: color-mix(in oklab, var(--accent), transparent 96%);
   --border-subtle: color-mix(in oklab, var(--foreground), transparent 90%);
 
   --space-page-y: clamp(4rem, 10vw, 8rem);
@@ -60,6 +62,19 @@ body {
 
 header {
   margin-top: var(--space-page-y);
+}
+
+.introduction {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.introduction-logo {
+  display: block;
+  width: 3.25rem;
+  height: auto;
 }
 
 main {
@@ -131,7 +146,12 @@ a:focus-visible {
 .project-link:focus-visible,
 .writing-link:hover,
 .writing-link:focus-visible {
-  background-color: var(--surface-subtle);
+  background-color: var(--surface-accent);
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  color: var(--accent);
 }
 
 .project-link {
@@ -353,10 +373,8 @@ a:focus-visible {
   opacity: 1;
 }
 
-html:active-view-transition-type(article-enter) :is(
-  .article-time,
-  .article-content
-) {
+html:active-view-transition-type(article-enter)
+  :is(.article-time, .article-content) {
   visibility: hidden;
   opacity: 0;
   transform: translateY(0.5rem);
@@ -394,6 +412,14 @@ html:active-view-transition-type(article-enter) :is(
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
+  }
+}
+
+@media (min-width: 48rem) {
+  .introduction {
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+    align-items: center;
   }
 }
 
