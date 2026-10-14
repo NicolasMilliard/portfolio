@@ -75,6 +75,61 @@ header {
   display: block;
   width: 3.25rem;
   height: auto;
+  overflow: visible;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo-capsule-left {
+    animation: logo-enter-left 680ms both;
+  }
+
+  .logo-capsule-right {
+    animation: logo-enter-right 720ms 60ms both;
+  }
+
+  @keyframes logo-enter-left {
+    0% {
+      transform: translate(-8px, 8px);
+      opacity: 0.2;
+      animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    74% {
+      transform: translate(1.5px, -1.5px);
+      animation-timing-function: ease-out;
+    }
+
+    100% {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes logo-enter-right {
+    0% {
+      transform: translate(8px, -8px);
+      opacity: 0.2;
+      animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    74% {
+      transform: translate(-1.5px, 1.5px);
+      animation-timing-function: ease-out;
+    }
+
+    100% {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
 }
 
 main {
