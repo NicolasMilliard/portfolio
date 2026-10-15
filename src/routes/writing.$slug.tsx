@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 
+import { ArticleHeading } from '../components/ArticleHeading';
 import {
   formatPublishedDate,
   loadWriting,
@@ -64,7 +65,7 @@ function WritingPage() {
             </div>
           </header>
           <div className="article-content">
-            <Content />
+            <Content components={{ h2: ArticleHeading }} />
           </div>
         </article>
       </main>
