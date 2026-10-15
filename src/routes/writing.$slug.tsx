@@ -1,6 +1,8 @@
 import { createFileRoute, Link, notFound } from '@tanstack/react-router';
+import { useRef } from 'react';
 
 import { ArticleHeading } from '../components/ArticleHeading';
+import { ArticleSectionNav } from '../components/ArticleSectionNav';
 import {
   formatPublishedDate,
   loadWriting,
@@ -26,9 +28,11 @@ export const Route = createFileRoute('/writing/$slug')({
 function WritingPage() {
   const writing = Route.useLoaderData();
   const Content = writing.Content;
+  const contentRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="page article-page">
+      <ArticleSectionNav contentRef={contentRef} articleKey={writing.slug} />
       <main className="article-main">
         <article className="article">
           <Link className="article-back-link" to="/">
@@ -64,7 +68,7 @@ function WritingPage() {
               ) : null}
             </div>
           </header>
-          <div className="article-content">
+          <div className="article-content" ref={contentRef}>
             <Content components={{ h2: ArticleHeading }} />
           </div>
         </article>
