@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-router';
 import { useEffect } from 'react';
 
+import { LostLogo } from '../components/LostLogo';
 import { notFoundSeo, seoToRouteHead } from '../seo';
 
 const ManagedHead = () => {
@@ -27,12 +28,13 @@ const RootLayout = () => (
 
 const NotFoundPage = () => (
   <div className="page">
-    <main className="message-page">
+    <main className="message-page not-found-page">
       <section>
         <h1>Page not found</h1>
         <p>The page you are looking for does not exist.</p>
         <Link to="/">Return home</Link>
       </section>
+      <LostLogo />
     </main>
   </div>
 );

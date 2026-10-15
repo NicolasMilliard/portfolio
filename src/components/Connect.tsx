@@ -21,7 +21,9 @@ export const Connect = () => {
         {links.map((link, index) => (
           <span key={link.label}>
             {getSeparator(index, links.length)}
-            <a href={link.href}>{link.label}</a>
+            <a className="social-link" href={link.href}>
+              {link.label}
+            </a>
           </span>
         ))}
         .

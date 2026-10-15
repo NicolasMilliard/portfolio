@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import type { ComponentProps, ComponentType } from 'react';
 import rawWritingMetadata, {
   writingModuleLoaders as rawWritingModuleLoaders,
 } from 'virtual:writings-metadata';
@@ -25,11 +25,13 @@ export type Writing = Omit<WritingMetadata, 'draft'> & {
 };
 
 export type WritingWithContent = Writing & {
-  Content: ComponentType;
+  Content: ComponentType<{
+    components?: { h2?: ComponentType<ComponentProps<'h2'>> };
+  }>;
 };
 
 type WritingModule = {
-  default: ComponentType;
+  default: WritingWithContent['Content'];
   metadata: WritingMetadata;
 };
 
