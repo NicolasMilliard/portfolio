@@ -4,8 +4,12 @@
     <loc>https://milliard.dev/</loc>
   </url>
   <url>
+    <loc>https://milliard.dev/writing/a-little-automation-for-my-garden</loc>
+    <lastmod>2026-10-16</lastmod>
+  </url>
+  <url>
     <loc>https://milliard.dev/writing/deletion-is-a-proof-problem</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-23</lastmod>
   </url>
   <url>
     <loc>https://milliard.dev/writing/designing-a-real-time-frontend-that-doesnt-break</loc>
