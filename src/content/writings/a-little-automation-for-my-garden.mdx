@@ -1,0 +1,163 @@
+---
+title: 'A little automation for my garden'
+description:
+  'How I built an n8n workflow that uses weather data and watering events to
+  help me decide when my garden needs water.'
+publishedAt: '2026-10-16'
+---
+
+import { ArticleImageLightbox } from '../../components/ArticleImageLightbox';
+
+**I live in the countryside.** The sound of the birds. The smell of the grass
+after the rain. Drinking my coffee surrounded by my chickens.
+
+The countryside provides me with a lovely life. But it also gives me some
+interesting challenges when I want to add a bit of technology to it.
+
+One of them appeared when I asked myself: how can I automate watering my garden?
+In most cases, it doesn't require much effort. You can buy a watering timer, set
+it to run at a certain time and… that's it. But I wanted something a bit
+smarter. A garden that gets the water it needs, without wasting any.
+
+So how can I know if I need to water my vegetables and fruit trees? And how much
+water do they actually need?
+
+It was the starting point of an interesting journey!
+
+## First step: brainstorming
+
+The first step was very similar to my other projects: brainstorming with my pal
+ChatGPT.
+
+My original idea was to have an n8n workflow that takes, at least, the current
+weather into account to determine if I need to water my garden. I discovered the
+free API from [Open-Meteo](https://open-meteo.com/). It answered pretty much all
+my needs. And even more.
+
+I also (re)discovered the concept of evapotranspiration. It's a cool name for
+something quite simple: water evaporates from the soil, and plants release water
+through their leaves. Open-Meteo provides an estimate of this process, called
+reference evapotranspiration (ET₀).
+
+Basically, it helps estimate how much water is being lost.
+
+Another important requirement was to isolate my different garden areas. I have
+two vegetable gardens and an area dedicated to my fruit trees. Their needs are
+totally different.
+
+I did some research (in fact, I asked ChatGPT), and determined an initial
+estimate of the water needs for each area. Each zone now has its own
+configuration: number of plants or surface area, water requirements, minimum
+interval between watering events, and a few other parameters.
+
+Nothing too complicated. But enough to make better decisions.
+
+## Second step: the workflow
+
+The workflow is quite simple.
+
+<ArticleImageLightbox
+  src="/images/garden-watering-workflow.png"
+  alt="n8n workflow that fetches weather and garden data, calculates each zone’s water balance, then updates state and sends watering notifications"
+  width={2484}
+  height={814}
+/>
+
+It starts every morning with a scheduled trigger. It fetches weather data from
+Open-Meteo, normalizes it, retrieves the latest watering events, does some
+maths, and determines if watering is needed or not.
+
+The interesting part is the water deficit.
+
+Think of it as a balance. Every day, plants consume water, and rain brings some
+back. The workflow estimates this balance for each zone, using rainfall,
+evapotranspiration, and the specific needs of the plants. If the deficit reaches
+a certain threshold, it's probably time to water.
+
+But there's another question: what if it's going to rain tomorrow?
+
+That's why the workflow also looks at the forecast. There's no point in watering
+my garden today if nature is planning to do it for me tomorrow. At least, in
+theory. Weather forecasts aren't always right.
+
+Finally, the workflow updates the state of each zone and decides whether to send
+me a notification.
+
+Everything runs on n8n, hosted on my Raspberry Pi. And the best part? I don't
+have to think about it every morning.
+
+## Third step: the event system
+
+The event system is divided into two parts: the push notifications and the
+watering events I manually record.
+
+**First, the notifications.**
+
+Every morning, the workflow checks which zones need water.
+
+If watering is recommended, I receive a push notification on my phone through
+[Pushover](https://pushover.net/).
+
+**Second, the watering events.**
+
+Knowing when to water is useful. But the system also needs to know when I
+actually do it. So I created a simple form using n8n.
+
+Every time I water a zone, I open the form on my phone, select the garden area,
+and enter how much water I used. This event is then stored in a database and
+taken into account during the next calculation.
+
+The important thing is that a notification doesn't mean the garden has been
+watered. The workflow needs confirmation. It's a small detail, but without it,
+the whole system would quickly become unreliable.
+
+## Fourth step: why not 100% automated?
+
+That's a good question.
+
+I could probably connect some valves, add a few sensors, and let the system
+water everything automatically.
+
+And to be fair, that sounds pretty cool.
+
+But I don't think I need it. At least, not yet.
+
+First, my calculations are still estimates. I'm using weather data and
+theoretical water requirements, not real-time soil moisture measurements. Some
+plants might need more water. Others might need less. And there's something
+else.
+
+**I actually enjoy taking care of my garden.**
+
+Walking outside, checking the vegetables, looking at the fruit trees. It's part
+of why I love living in the countryside.
+
+I don't want technology to replace that. I want it to help me make better
+decisions.
+
+For now, a simple notification telling me when and how much to water is already
+a big improvement. Maybe I'll add soil moisture sensors in the future. Maybe
+I'll automate watering for some areas.
+
+But I'll do it when there's a real need for it.
+
+## Final thoughts
+
+This little project reminded me of something I really enjoy about software
+development.
+
+You don't always need to build a big application to solve a problem.
+
+Sometimes, a free API, a few calculations, a small database, and a couple of n8n
+workflows are more than enough.
+
+Is my system perfect? Absolutely not.
+
+It still needs some calibration. The weather isn't always predictable, and every
+garden is different. But it's a good starting point. And more importantly, it's
+already useful.
+
+I also learned a few things about plants, water, and the weather along the way.
+Not bad for a project that started with a simple question.
+
+And now, if you'll excuse me, I have some chickens to feed.
