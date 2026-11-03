@@ -198,7 +198,7 @@ const assertLocalImageExists = async (page) => {
   }
 };
 
-const buildDocument = ({ template, appHtml, seoHead }) => {
+const buildDocument = ({ template, appHtml, seoHead, styles }) => {
   if (!seoBlockPattern.test(template)) {
     throw new Error('SEO marker block was not found in dist/index.html');
   }
@@ -212,7 +212,8 @@ const buildDocument = ({ template, appHtml, seoHead }) => {
       seoBlockPattern,
       `<!-- seo:start -->\n    ${seoHead}\n    <!-- seo:end -->`,
     )
-    .replace(emptyRoot, `<div id="root">${appHtml}</div>`);
+    .replace(emptyRoot, `<div id="root">${appHtml}</div>`)
+    .replace('</head>', `${styles}</head>`);
 };
 
 const assertRenderedDocument = (document, page) => {
@@ -240,6 +241,36 @@ const assertRenderedDocument = (document, page) => {
 };
 
 const template = await readFile(templatePath, 'utf8');
+const manifest = JSON.parse(
+  await readFile(path.join(distDirectory, '.vite/manifest.json'), 'utf8'),
+);
+
+// Lazy routes still need their styles on the first, prerendered paint.
+const renderPageStyles = (page) => {
+  if (!page.styleEntry) return '';
+  const styles = new Set();
+  const visited = new Set();
+  const collectStyles = (entry) => {
+    if (visited.has(entry)) return;
+    visited.add(entry);
+    const chunk = manifest[entry];
+    if (!chunk) throw new Error(`Missing built entry: ${entry}`);
+    // Follow static imports, including shared clue styles, but keep dialog
+    // and terminal chunks lazy by ignoring dynamic imports.
+    for (const dependency of chunk.imports ?? []) collectStyles(dependency);
+    for (const asset of chunk.css ?? []) styles.add(asset);
+  };
+  for (const [entry, chunk] of Object.entries(manifest)) {
+    if (chunk.src?.split('?')[0] === page.styleEntry) collectStyles(entry);
+  }
+  if (styles.size === 0) {
+    throw new Error(`No built styles found for ${page.styleEntry}`);
+  }
+  return [...styles]
+    .filter((asset) => !template.includes(`href="/${asset}"`))
+    .map((asset) => `    <link rel="stylesheet" href="/${asset}" />\n`)
+    .join('');
+};
 const vite = await createServer({
   root: projectRoot,
   appType: 'custom',
@@ -282,6 +313,7 @@ try {
       template,
       appHtml,
       seoHead: renderSeoHead(page.seo),
+      styles: renderPageStyles(page),
     });
 
     assertRenderedDocument(document, page);
