@@ -1,0 +1,537 @@
+.island-clues {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.lost-page .island-clue {
+  position: absolute;
+  display: block;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  pointer-events: auto;
+  cursor: zoom-in;
+  -webkit-tap-highlight-color: transparent;
+}
+.island-clue-ticket {
+  left: 18%;
+  bottom: 10%;
+  width: clamp(78.75px, 8.25vw, 118.5px);
+  transform: rotate(-24deg);
+  filter: drop-shadow(0 8px 8px #0007);
+}
+.island-clue-suitcase {
+  right: 7%;
+  bottom: 13%;
+  width: clamp(110px, 12vw, 180px);
+  transform: rotate(6deg);
+  filter: drop-shadow(0 8px 7px #0008);
+}
+.island-clue-suitcase > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.83;
+}
+.island-clue:is(:hover, :focus-visible) > img {
+  opacity: 1;
+}
+
+/* The same paper component is used at scene scale and in the inspection. */
+.oceanic-ticket {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 21%;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid #8e795460;
+  border-radius: 3px;
+  color: #304138;
+  background:
+    radial-gradient(ellipse at 2% 95%, #78633f45, transparent 38%),
+    radial-gradient(ellipse at 98% 2%, #8b744c33, transparent 45%),
+    repeating-linear-gradient(2deg, #86755205 0 1px, transparent 1px 4px),
+    #d5c39c;
+  box-shadow:
+    0 20px 55px #0005,
+    inset 0 0 35px #79613824;
+  font: 10px/1.4 var(--font-mono);
+  text-align: left;
+  transform: rotate(-2deg);
+}
+.oceanic-ticket::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    94deg,
+    transparent 32%,
+    #fff1 33%,
+    #574a2820 33.3%,
+    transparent 34%,
+    transparent 68%,
+    #574a2810 68.3%,
+    #fff2 68.6%,
+    transparent 69%
+  );
+}
+.oceanic-ticket-main {
+  padding: 2em 2.4em 1.8em;
+}
+.oceanic-ticket-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  font-size: 1.2em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  border-bottom: 0.15em solid #30413880;
+  padding-bottom: 1em;
+}
+.oceanic-ticket-brand > span:last-child {
+  margin-left: auto;
+  font-size: 0.6em;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+.oceanic-emblem {
+  font-size: 1.7em;
+  line-height: 1;
+}
+.oceanic-ticket-route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  margin: 1.6em 0 1.8em;
+}
+.oceanic-ticket-route > span {
+  display: flex;
+  flex-direction: column;
+  font-size: 4.5em;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+.oceanic-ticket-route small {
+  margin-top: 1em;
+  font-size: 0.17em;
+  font-weight: 400;
+  letter-spacing: 0.13em;
+}
+.oceanic-ticket-route > span:last-child {
+  text-align: right;
+}
+.oceanic-ticket-route .oceanic-ticket-flight {
+  text-align: center;
+  font-size: 2.4em;
+  font-weight: 400;
+  color: #52604c;
+  letter-spacing: 0.05em;
+}
+.oceanic-ticket-flight small {
+  font-size: 0.3em;
+  margin-top: 0.6em;
+}
+.oceanic-ticket-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2.2fr;
+  gap: 1.6em;
+  border-top: 1px solid #30413850;
+  padding-top: 1.3em;
+}
+.oceanic-ticket-fields > div {
+  display: flex;
+  flex-direction: column;
+}
+.oceanic-ticket-fields > div > span {
+  font-size: 0.8em;
+  letter-spacing: 0.13em;
+}
+.oceanic-ticket-fields strong {
+  font-size: 4.6em;
+  line-height: 1.2;
+  font-weight: 700;
+}
+.oceanic-ticket-passenger b {
+  font-size: 1.1em;
+  font-weight: 400;
+  margin-top: 0.8em;
+}
+.oceanic-ticket-passenger small {
+  font-size: 0.65em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}
+.oceanic-ticket-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1em;
+  margin-top: 1.5em;
+}
+.oceanic-ticket-bottom > span {
+  font-size: 0.57em;
+  letter-spacing: 0.05em;
+}
+.oceanic-barcode {
+  display: block;
+  width: 15em;
+  height: 2.6em;
+  opacity: 0.7;
+  background: repeating-linear-gradient(
+    90deg,
+    #304138 0 1px,
+    transparent 1px 3px,
+    #304138 3px 5px,
+    transparent 5px 6px,
+    #304138 6px 7px,
+    transparent 7px 10px
+  );
+}
+.oceanic-ticket-stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 2.5em 1.4em;
+  border-left: 1px dashed #736c50aa;
+  text-align: center;
+}
+.oceanic-ticket-stub > span {
+  font-size: 0.8em;
+  letter-spacing: 0.12em;
+}
+.oceanic-ticket-stub > b {
+  font-size: 3.3em;
+  font-weight: 400;
+  line-height: 1;
+}
+.oceanic-ticket-stub > .oceanic-barcode {
+  width: 7em;
+  height: 7em;
+}
+.oceanic-ticket-compact {
+  font-size: 2.025px;
+  box-shadow: 0 3px 10px #0005;
+  opacity: 0.85;
+}
+.oceanic-ticket-compact .oceanic-ticket-main {
+  padding: 1.5em;
+}
+.oceanic-ticket-compact .oceanic-ticket-brand {
+  font-size: 1.2em;
+  letter-spacing: 0.06em;
+}
+.oceanic-ticket-compact .oceanic-ticket-brand > span:last-child,
+.oceanic-ticket-compact .oceanic-ticket-passenger,
+.oceanic-ticket-compact .oceanic-ticket-bottom {
+  display: none;
+}
+.oceanic-ticket-compact .oceanic-ticket-fields {
+  grid-template-columns: 1fr 1fr;
+  padding-top: 1em;
+}
+.oceanic-ticket-compact .oceanic-ticket-fields strong {
+  font-size: 4em;
+}
+.oceanic-ticket-compact .oceanic-ticket-route {
+  margin-block: 1.4em;
+}
+.oceanic-ticket-compact .oceanic-ticket-stub {
+  padding: 2em 0.7em;
+}
+.oceanic-ticket-compact .oceanic-ticket-stub > .oceanic-barcode {
+  width: 4em;
+  height: 4em;
+}
+
+.island-clue-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  padding: 24px;
+  margin: 0;
+  border: 0;
+  overflow: auto;
+  background: transparent;
+  color: #f4ebd6;
+  color-scheme: dark;
+}
+.island-clue-dialog[open] {
+  display: grid;
+  place-items: center;
+}
+.island-clue-dialog::backdrop {
+  background: #03100eeb;
+  backdrop-filter: blur(12px);
+}
+.island-clue-dialog :is(button, a):focus-visible {
+  outline: 2px solid #f2c58d;
+  outline-offset: 5px;
+}
+.clue-inspection {
+  width: min(820px, 100%);
+  text-align: center;
+  padding: 8px 12px 18px;
+}
+.clue-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  color: #c4c8b3;
+  font: 9px/1.5 var(--font-mono);
+  letter-spacing: 0.13em;
+  text-align: left;
+}
+.clue-toolbar button {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 44px;
+  flex: none;
+  padding: 8px 12px;
+  border: 1px solid #c3cab34d;
+  border-radius: 2px;
+  color: #eee8d2;
+  background: #0a201b66;
+  font: 9px var(--font-mono);
+  cursor: pointer;
+}
+.clue-toolbar button:hover {
+  background: #bed2b314;
+}
+.clue-toolbar button > span {
+  font: 20px/1 var(--font-sans);
+}
+.clue-inspection h2 {
+  max-width: none;
+  margin: 34px 0 28px;
+  color: #f4ebd6;
+  font: italic 400 clamp(26px, 4vw, 38px)/1.2 var(--font-serif);
+  letter-spacing: -0.035em;
+}
+.clue-ticket-stage {
+  width: min(680px, 100%);
+  margin: 35px auto 38px;
+}
+.clue-ticket-stage .oceanic-ticket {
+  font-size: clamp(5.6px, 1.3vw, 10px);
+}
+.clue-inspection .clue-caption {
+  max-width: none;
+  margin: 26px 0 0;
+  color: #e7d6b1;
+  font: italic 16px/1.7 var(--font-serif);
+}
+.clue-return-note {
+  display: block;
+  margin-top: 13px;
+  color: #acbba8;
+  font: 8px/1.6 var(--font-mono);
+  letter-spacing: 0.1em;
+}
+.clue-suitcase-stage {
+  position: relative;
+  width: min(620px, 100%);
+  height: clamp(200px, 30vw, 335px);
+  margin: -5px auto 10px;
+}
+.clue-suitcase-stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 25px #0005);
+}
+.clue-suitcase-stage[data-open='true'] {
+  width: min(100%, calc(clamp(200px, 30vw, 335px) * 1.49925));
+  height: auto;
+  aspect-ratio: 1000 / 667;
+}
+.clue-suitcase-stage[data-open='true'] > img {
+  height: auto;
+  pointer-events: none;
+}
+
+.lost-page .clue-suitcase-action {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+.lost-page .clue-case-item-hotspot {
+  position: absolute;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.clue-case-shirt {
+  left: 22%;
+  top: 48%;
+  width: 31%;
+  height: 22%;
+}
+.clue-case-paper {
+  left: 56%;
+  top: 52%;
+  width: 24%;
+  height: 13%;
+}
+.clue-shirt-stage {
+  width: min(620px, 100%);
+  margin: 40px auto;
+  filter: drop-shadow(0 18px 30px #0005);
+}
+.clue-shirt-stage > img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: min(52svh, 380px);
+  margin-inline: auto;
+  user-select: none;
+}
+.clue-case-hover-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  padding: 8px 13px;
+  border: 1px solid #d7dec34d;
+  border-radius: 2px;
+  background: #071b15df;
+  color: #e9e2ca;
+  font: 9px/1.5 var(--font-mono);
+  letter-spacing: 0.08em;
+  opacity: 0;
+  pointer-events: none;
+}
+.clue-suitcase-action:is(:hover, :focus-visible) .clue-case-hover-hint {
+  opacity: 1;
+}
+.clue-case-contents {
+  width: min(270px, 100%);
+  margin: 12px auto 15px;
+}
+.clue-case-contents[data-revealed='true'] {
+  width: min(410px, 100%);
+  margin-top: 4px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .clue-case-contents[data-revealed='true'],
+  .clue-shirt-stage {
+    animation: clue-arrival 0.4s both cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .island-clue {
+    transition:
+      transform 0.4s,
+      filter 0.4s;
+  }
+  .island-clue-ticket:is(:hover, :focus-visible) {
+    transform: translateY(-4px) rotate(-20deg);
+  }
+  .island-clue-suitcase:is(:hover, :focus-visible) {
+    transform: translateY(-4px) rotate(3deg);
+  }
+  .clue-inspection {
+    animation: clue-arrival 0.45s both cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes clue-arrival {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+@media (max-width: 850px) and (min-width: 641px) {
+  .island-clue-ticket {
+    left: 16%;
+    bottom: 10%;
+  }
+  .island-clue-suitcase {
+    right: 5%;
+    bottom: 13%;
+  }
+}
+@media (max-width: 640px) {
+  .island-clues {
+    position: relative;
+    inset: auto;
+    flex: none;
+    height: 125px;
+    margin-top: 0;
+  }
+  .island-clue-ticket {
+    left: 13%;
+    bottom: 50px;
+    width: 88.5px;
+  }
+  .island-clue-suitcase {
+    right: 8%;
+    bottom: 45px;
+    width: 132px;
+  }
+  .island-clue-dialog {
+    padding: 16px;
+  }
+  .clue-inspection {
+    padding: 2px 0 12px;
+  }
+  .clue-toolbar {
+    font-size: 7px;
+    letter-spacing: 0.07em;
+    gap: 10px;
+  }
+  .clue-toolbar button {
+    font-size: 8px;
+    padding: 8px 10px;
+    gap: 10px;
+  }
+  .clue-inspection h2 {
+    margin-top: 30px;
+  }
+  .clue-ticket-stage {
+    margin-block: 29px;
+  }
+  .clue-inspection .clue-caption {
+    font-size: 15px;
+  }
+  .clue-suitcase-stage {
+    height: 215px;
+    margin-top: -10px;
+  }
+  .clue-suitcase-stage[data-open='true'] {
+    width: min(100%, 322px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .island-clue-dialog *,
+  .island-clue-dialog::backdrop,
+  .island-clue {
+    animation: none !important;
+    transition: none !important;
+  }
+}
