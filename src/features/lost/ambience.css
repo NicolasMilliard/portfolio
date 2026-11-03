@@ -1,0 +1,39 @@
+.lost-page .lost-ambience-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 9px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 14px;
+  border: 1px solid #ebe6d54f;
+  border-radius: 24px;
+  color: var(--lost-cream);
+  background: #09262799;
+  backdrop-filter: blur(8px);
+  font: 9px/1.4 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background 0.25s, border-color 0.25s;
+}
+.lost-ambience-toggle svg {
+  flex: none;
+  width: 19px;
+  height: 19px;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.lost-page .lost-ambience-toggle:is(:hover, :focus-visible) {
+  background: #092627d9;
+  border-color: #ebe6d5b3;
+}
+@media (max-width: 640px) {
+  .lost-page .lost-ambience-toggle {
+    padding-inline: 12px;
+    font-size: 8px;
+  }
+}
