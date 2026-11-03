@@ -1,0 +1,93 @@
+.island-foreground {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: clip;
+  pointer-events: none;
+}
+.island-canopy {
+  position: absolute;
+  top: -12px;
+  left: -20px;
+  width: calc(100% + 40px);
+  transform: translate3d(
+    calc(var(--island-x) * -13px),
+    calc(var(--island-y) * -7px),
+    0
+  );
+}
+.island-canopy > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 50% 0;
+}
+.island-foreground-corner {
+  --foreground-mirror: 1;
+  position: absolute;
+  bottom: -18px;
+  width: clamp(260px, 34vw, 520px);
+  transform: translate3d(
+      calc(var(--island-x) * -21px),
+      calc(var(--island-y) * -12px),
+      0
+    )
+    scaleX(var(--foreground-mirror));
+  mask-image: linear-gradient(90deg, transparent, #000 25%);
+}
+.island-foreground-right {
+  right: -4%;
+}
+.island-foreground-left {
+  --foreground-mirror: -1;
+  left: -4%;
+  width: clamp(280px, 42vw, 590px);
+}
+.island-foreground-corner > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 100% 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .island-foreground-corner,
+  .island-canopy {
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .island-foreground-corner > img {
+    animation: foreground-breathe 17s -6s ease-in-out infinite alternate;
+  }
+  .island-foreground-left > img {
+    animation-delay: -13s;
+    animation-duration: 21s;
+  }
+  .island-canopy > img {
+    animation: canopy-breathe 23s -9s ease-in-out infinite alternate;
+  }
+  @keyframes canopy-breathe {
+    to {
+      transform: rotate(0.2deg) translateY(2px);
+    }
+  }
+  @keyframes foreground-breathe {
+    to {
+      transform: rotate(0.6deg) translateX(2px);
+    }
+  }
+}
+.lost-page[data-motion='paused'] .island-foreground-corner > img,
+.lost-page[data-overlay-open='true'] .island-foreground-corner > img,
+.lost-page[data-motion='paused'] .island-canopy > img,
+.lost-page[data-overlay-open='true'] .island-canopy > img {
+  animation-play-state: paused;
+}
+@media (max-width: 640px) {
+  .island-foreground-right {
+    right: -35px;
+    width: 260px;
+  }
+  .island-foreground-left {
+    left: -35px;
+    width: 330px;
+  }
+}
