@@ -1,27 +1,34 @@
 import { useEffect, useRef, useState, type SubmitEvent } from 'react';
 
 import {
-  CYCLE_SECONDS,
+  countdownRemaining,
   formatCountdown,
   isValidSequence,
   TRANSMISSION_URL,
 } from './protocol';
+import { HatchSequenceInput } from './HatchSequenceInput';
 import type { PlaySound } from './soundEffects';
 import './terminal.css';
 
 type Phase = 'awaiting' | 'error' | 'accepted';
 
-function Countdown({ restored }: { restored: boolean }) {
-  const [remaining, setRemaining] = useState(CYCLE_SECONDS);
+function Countdown({ deadline }: { deadline: number | null }) {
+  const [remaining, setRemaining] = useState(() =>
+    countdownRemaining(deadline, Date.now()),
+  );
   useEffect(() => {
-    if (restored) return;
-    const deadline = Date.now() + CYCLE_SECONDS * 1000;
-    const timer = window.setInterval(() => {
+    if (deadline === null) return;
+    const tick = () => {
       // Wall time keeps the clock accurate when a background tab is throttled.
-      setRemaining(Math.max(0, Math.ceil((deadline - Date.now()) / 1000)));
-    }, 1000);
-    return () => window.clearInterval(timer);
-  }, [restored]);
+      setRemaining(countdownRemaining(deadline, Date.now()));
+    };
+    const timer = window.setInterval(tick, 1000);
+    document.addEventListener('visibilitychange', tick);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener('visibilitychange', tick);
+    };
+  }, [deadline]);
 
   return (
     <span
@@ -30,17 +37,19 @@ function Countdown({ restored }: { restored: boolean }) {
       aria-label="Time until containment reset"
       aria-live="off"
     >
-      {formatCountdown(restored ? CYCLE_SECONDS : remaining)}
+      {formatCountdown(remaining)}
     </span>
   );
 }
 
 export default function HatchTerminal({
   prefill,
+  deadline,
   onClose,
   onSound,
 }: {
   prefill: string;
+  deadline: number | null;
   onClose: () => void;
   onSound: PlaySound;
 }) {
@@ -119,18 +128,13 @@ export default function HatchTerminal({
               <br />
               ELECTROMAGNETIC RESEARCH DIVISION
             </span>
-            <Countdown restored={accepted} />
+            <Countdown deadline={deadline} />
           </div>
           <div className="hatch-boot" aria-hidden="true">
             <span>LINK ESTABLISHED........................OK</span>
             <span>CONTAINMENT PROTOCOL...................ACTIVE</span>
           </div>
-          <h2 id="hatch-terminal-heading">
-            SYSTEM INITIALIZED
-            <span className="hatch-cursor" aria-hidden="true">
-              _
-            </span>
-          </h2>
+          <h2 id="hatch-terminal-heading">SYSTEM INITIALIZED</h2>
           <p id="hatch-terminal-description">
             Every 108 minutes, the sequence must be entered.
             <br />
@@ -141,20 +145,11 @@ export default function HatchTerminal({
             <div className="hatch-terminal-form">
               <div className="hatch-input-wrap">
                 <span aria-hidden="true">&gt;:</span>
-                <input
-                  ref={inputRef}
-                  id="hatch-sequence"
-                  name="sequence"
-                  type="text"
-                  inputMode="numeric"
-                  spellCheck={false}
-                  autoCapitalize="off"
-                  maxLength={64}
-                  defaultValue={prefill}
-                  placeholder="_ _ _ _ _ _"
+                <HatchSequenceInput
+                  inputRef={inputRef}
+                  prefill={prefill}
                   readOnly={accepted}
-                  aria-invalid={phase === 'error'}
-                  aria-describedby="hatch-response"
+                  invalid={phase === 'error'}
                 />
               </div>
               <button type="submit" disabled={accepted}>
@@ -173,7 +168,7 @@ export default function HatchTerminal({
               ? '> CODE ACCEPTED. TRANSMISSION UNLOCKED.'
               : phase === 'error'
                 ? '> INVALID SEQUENCE. TRY AGAIN. THE CLOCK IS STILL RUNNING.'
-                : '> AWAITING INPUT_'}
+                : '> AWAITING INPUT'}
           </p>
           {accepted && (
             <a
@@ -195,7 +190,6 @@ export default function HatchTerminal({
           <span>
             <i aria-hidden="true" /> SWAN / MAINFRAME
           </span>
-          <span>DESIGNED FOR CONTINUOUS OPERATION</span>
         </div>
       </div>
     </dialog>

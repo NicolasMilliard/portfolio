@@ -21,6 +21,15 @@ export const formatCountdown = (seconds: number): string => {
   return `${String(Math.floor(remaining / 60)).padStart(3, '0')}:${String(remaining % 60).padStart(2, '0')}`;
 };
 
+// Keep one wall-clock deadline for this visit, including time spent exploring.
+export const startCountdown = (deadline: number | null, now: number): number =>
+  deadline ?? now + CYCLE_SECONDS * 1000;
+
+export const countdownRemaining = (deadline: number | null, now: number): number =>
+  deadline === null
+    ? CYCLE_SECONDS
+    : Math.max(0, Math.ceil((deadline - now) / 1000));
+
 export const advanceSequence = (buffer: string, key: string): string => {
   if (/^\d$/.test(key)) return (buffer + key).slice(-LOST_SEQUENCE.length);
   return key.length === 1 && !/\s/.test(key) ? '' : buffer;

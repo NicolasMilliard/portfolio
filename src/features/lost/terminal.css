@@ -22,7 +22,7 @@
   background: #020b0cdf;
   backdrop-filter: blur(13px);
 }
-.hatch-dialog :is(button, input, a):focus-visible {
+.hatch-dialog :is(button, a):focus-visible {
   outline: 2px solid #c8ffd0;
   outline-offset: 5px;
 }
@@ -58,7 +58,8 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  min-height: 36px;
+  min-height: 44px;
+  min-width: 44px;
   padding: 5px 8px;
   border: 1px solid #b6c2aa55;
   border-radius: 2px;
@@ -176,25 +177,50 @@
 .hatch-input-wrap > span {
   font-size: 20px;
 }
+.hatch-input-field {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: #b9ffbf;
+  font: 700 clamp(16px, 2.5vw, 22px)/1.4 var(--font-mono);
+  letter-spacing: 0.06em;
+}
 .hatch-input-wrap input {
+  display: block;
   width: 100%;
   min-width: 0;
-  padding: 5px 2px;
+  padding: 5px calc(1ch + 2px) 5px 2px;
   border: 0;
   border-radius: 0;
   background: transparent;
   color: #b9ffbf;
-  font: 700 clamp(16px, 2.5vw, 22px)/1.4 var(--font-mono);
-  letter-spacing: 0.06em;
-  caret-color: #b9ffbf;
+  font: inherit;
+  letter-spacing: inherit;
+  caret-color: transparent;
+  outline: none;
+  box-shadow: none;
   text-shadow: 0 0 8px #81ff8c66;
 }
-.hatch-input-wrap input::placeholder {
-  color: #84b98c;
-  opacity: 0.7;
+.hatch-input-measure,
+.hatch-input-caret {
+  position: absolute;
+  pointer-events: none;
+  white-space: pre;
 }
-.hatch-input-wrap:focus-within {
-  border-color: #c8ffd0;
+.hatch-input-measure {
+  top: 0;
+  left: 0;
+  width: max-content;
+  visibility: hidden;
+}
+.hatch-input-caret {
+  top: 50%;
+  transform: translateY(-50%);
+  text-shadow: 0 0 8px #81ff8c66;
+}
+.hatch-input-caret[hidden] {
+  display: none;
 }
 .hatch-terminal-form button {
   flex: none;
@@ -373,7 +399,7 @@
   .hatch-input-wrap {
     flex-basis: 100%;
   }
-  .hatch-input-wrap input {
+  .hatch-input-field {
     font-size: 17px;
   }
   .hatch-screen .hatch-response {
@@ -387,10 +413,6 @@
   .hatch-terminal-label {
     font-size: 7px;
     padding-top: 13px;
-  }
-  .hatch-terminal-label > span:last-child {
-    max-width: 115px;
-    text-align: right;
   }
 }
 

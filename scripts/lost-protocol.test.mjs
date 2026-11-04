@@ -5,10 +5,12 @@ import {
   advanceSequence,
   CYCLE_SECONDS,
   CLUE_NUMBERS,
+  countdownRemaining,
   formatCountdown,
   isValidSequence,
   LOST_SEQUENCE,
   OCEANIC_FLIGHT,
+  startCountdown,
 } from '../src/features/lost/protocol.ts';
 
 test('four discoveries supply all six numbers without relying on Flight 815', () => {
@@ -68,4 +70,25 @@ test('countdown formats the 108-minute cycle and clamps at zero', () => {
   assert.equal(formatCountdown(60), '001:00');
   assert.equal(formatCountdown(1), '000:01');
   assert.equal(formatCountdown(-5), '000:00');
+});
+
+test('the cycle starts only on first use and cannot restart on reopening', () => {
+  assert.equal(countdownRemaining(null, 900_000), CYCLE_SECONDS);
+  const deadline = startCountdown(null, 900_000);
+  assert.equal(deadline, 900_000 + CYCLE_SECONDS * 1000);
+  assert.equal(startCountdown(deadline, 960_000), deadline);
+  assert.equal(countdownRemaining(deadline, 960_000), CYCLE_SECONDS - 60);
+  // A fresh page owns a fresh, initially unstarted cycle.
+  assert.equal(startCountdown(null, 960_000), deadline + 60_000);
+});
+
+test('the countdown includes time spent closed or throttled and expires at zero', () => {
+  const deadline = startCountdown(null, 1000);
+  assert.equal(countdownRemaining(deadline, 1000), CYCLE_SECONDS);
+  assert.equal(countdownRemaining(deadline, 1999), CYCLE_SECONDS);
+  assert.equal(countdownRemaining(deadline, 2000), CYCLE_SECONDS - 1);
+  assert.equal(countdownRemaining(deadline, 121_000), CYCLE_SECONDS - 120);
+  assert.equal(countdownRemaining(deadline, deadline), 0);
+  assert.equal(countdownRemaining(deadline, deadline + 500_000), 0);
+  assert.equal(startCountdown(deadline, deadline + 500_000), deadline);
 });

@@ -6,7 +6,7 @@ import { IslandClues, type ClueKind } from './IslandClues';
 import { IslandForeground } from './IslandForeground';
 import { IslandPhone } from './IslandPhone';
 import { IslandAmbience } from './IslandAmbience';
-import { OCEANIC_FLIGHT, type Evidence } from './protocol';
+import { OCEANIC_FLIGHT, startCountdown, type Evidence } from './protocol';
 import { useIslandInteractions } from './useIslandInteractions';
 import { useIslandAudio } from './useIslandAudio';
 import './island.css';
@@ -26,6 +26,7 @@ const overlaySound = {
 
 export function NotFoundPage() {
   const [overlay, setOverlay] = useState<Overlay | null>(null);
+  const [terminalDeadline, setTerminalDeadline] = useState<number | null>(null);
   const audio = useIslandAudio(overlay !== null);
   const { playSound } = audio;
   const [found, setFound] = useState<Record<Evidence, boolean>>({
@@ -39,6 +40,10 @@ export function NotFoundPage() {
   const previousFocus = useRef<HTMLElement | null>(null);
   const terminalTriggerRef = useRef<HTMLButtonElement>(null);
   const openOverlay = useCallback((next: Overlay, trigger?: HTMLElement) => {
+    if (next.kind === 'terminal') {
+      const now = Date.now();
+      setTerminalDeadline((deadline) => startCountdown(deadline, now));
+    }
     playSound(overlaySound[next.kind]);
     previousFocus.current =
       trigger ??
@@ -197,6 +202,7 @@ export function NotFoundPage() {
           {overlay.kind === 'terminal' ? (
             <HatchTerminal
               prefill={overlay.prefill}
+              deadline={terminalDeadline}
               onClose={closeOverlay}
               onSound={playSound}
             />
