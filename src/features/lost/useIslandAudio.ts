@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { createSoundEffects, type PlaySound, type SoundEffect } from './soundEffects';
+import { createAmbienceFader } from './ambienceFader';
 
 type Playback = 'paused' | 'loading' | 'playing' | 'error';
 const preferenceKey = 'lost-island-ambience';
@@ -12,6 +13,7 @@ export function useIslandAudio(suspended: boolean) {
   const wantedRef = useRef(true);
   const requestRef = useRef(0);
   const synchronizeRef = useRef<(() => void) | null>(null);
+  const suspendedRef = useRef(suspended);
   const [playback, setPlayback] = useState<Playback>('paused');
 
   useEffect(() => {
@@ -35,16 +37,20 @@ export function useIslandAudio(suspended: boolean) {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.volume = 0.45;
+    const fader = createAmbienceFader({ clip: audio });
     let disposed = false;
     const synchronize = () => {
       const request = ++requestRef.current;
       if (document.hidden) effectsRef.current?.stop();
-      if (!wantedRef.current || suspended || document.hidden) {
-        audio.pause();
+      if (!wantedRef.current || document.hidden) {
+        fader.stop();
         return;
       }
-      void audio.play().catch((error: unknown) => {
+      if (suspendedRef.current) {
+        fader.suspend();
+        return;
+      }
+      void fader.resume().catch((error: unknown) => {
         if (disposed || request !== requestRef.current) return;
         const name = error instanceof DOMException ? error.name : '';
         if (name === 'AbortError') return;
@@ -53,13 +59,17 @@ export function useIslandAudio(suspended: boolean) {
     };
     synchronizeRef.current = synchronize;
     document.addEventListener('visibilitychange', synchronize);
-    synchronize();
     return () => {
       disposed = true;
       synchronizeRef.current = null;
       document.removeEventListener('visibilitychange', synchronize);
-      audio.pause();
+      fader.dispose();
     };
+  }, []);
+
+  useEffect(() => {
+    suspendedRef.current = suspended;
+    synchronizeRef.current?.();
   }, [suspended]);
 
   const registerEffect = useCallback((effect: SoundEffect, clip: HTMLAudioElement | null) => {

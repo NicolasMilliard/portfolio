@@ -59,7 +59,6 @@ export function IslandAmbience({
             <path d="m16 9 5 6m0-6-5 6" />
           )}
         </svg>
-        <span>{playback === 'error' ? 'Retry sound' : active ? 'Pause sound' : 'Play sound'}</span>
       </button>
       <span className="visually-hidden" role="status">
         {playback === 'error' ? 'Island ambience could not be loaded. You can try again.' : ''}

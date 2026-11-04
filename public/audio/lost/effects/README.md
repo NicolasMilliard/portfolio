@@ -52,3 +52,11 @@ Effects preload after sound starts or an enabled interaction requests one.
 One foreground voice and a 75 ms same-cue debounce prevent rapid clicks from
 stacking. Hidden tabs and navigation stop pending/playing effects. Media errors
 and browser autoplay rejection never block the interaction.
+
+The original ambient loop now eases out over 180 ms when an inspection opens,
+then pauses at its current position. Closing the inspection resumes that same
+loop position with a 700 ms fade to its original 0.45 level. Mute, hidden-tab
+silencing and unmount remain immediate. The small `ambienceFader.ts` controller
+uses the existing media element, with cancellable volume ramps and no runtime
+audio dependency. Its tests cover interrupted fades, late playback, mute and
+autoplay recovery. Foley playback and the original sound files are unchanged.
