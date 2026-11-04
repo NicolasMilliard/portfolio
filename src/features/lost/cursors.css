@@ -1,0 +1,41 @@
+@media (hover: hover) and (pointer: fine) {
+  .lost-page {
+    --lost-cursor-browse: url('/cursors/lost/browse.svg?v=3') 20 20, default;
+    --lost-cursor-action: url('/cursors/lost/action.svg?v=3') 20 20, pointer;
+    --lost-cursor-inspect: url('/cursors/lost/inspect.svg?v=3') 20 20, zoom-in;
+    cursor: var(--lost-cursor-browse);
+  }
+
+  .lost-page :is(button, a, [role='button']):not(:disabled, [aria-disabled='true']) {
+    cursor: var(--lost-cursor-action);
+  }
+
+  .lost-page :is(.island-clue, .island-prop-control, .clue-case-item-hotspot):not(:disabled, [aria-disabled='true']) {
+    cursor: var(--lost-cursor-inspect);
+  }
+
+  .lost-page :is(button, [role='button']):is(:disabled, [aria-disabled='true']) {
+    cursor: var(--lost-cursor-browse);
+  }
+
+  .lost-page :is(input, textarea, [contenteditable]:not([contenteditable='false'])) {
+    cursor: text;
+  }
+
+  /* Keep the native modal backdrop in the same cursor set. */
+  .lost-page dialog::backdrop {
+    cursor: url('/cursors/lost/browse.svg?v=3') 20 20, default;
+  }
+}
+
+@media (forced-colors: active) {
+  .lost-page {
+    --lost-cursor-browse: default;
+    --lost-cursor-action: pointer;
+    --lost-cursor-inspect: zoom-in;
+  }
+
+  .lost-page dialog::backdrop {
+    cursor: default;
+  }
+}

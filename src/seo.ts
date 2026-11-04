@@ -38,6 +38,7 @@ export type PrerenderPage = {
   seo: SeoPage;
   includeInSitemap: boolean;
   lastModified?: string;
+  styleEntry?: string;
 };
 
 type SeoMetaTag =

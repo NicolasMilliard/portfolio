@@ -1,0 +1,551 @@
+@font-face {
+  font-family: 'Lost Sans';
+  src: url('../../fonts/lost/DMSans-Latin.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lost Serif';
+  src: url('../../fonts/lost/SourceSerif4-Latin.woff2') format('woff2');
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lost Display';
+  src: url('../../fonts/Jost-404.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  unicode-range: U+0030, U+0034;
+}
+
+/* Root font metrics must also use the subset during a visit to the island. */
+html:has(.lost-page) {
+  font-family: 'Lost Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+.lost-page {
+  --font-sans: 'Lost Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lost Serif', ui-serif, Georgia, Cambria, serif;
+  --lost-cream: #f4ebd6;
+  --lost-gold: #f2c58d;
+  --island-x: 0;
+  --island-y: 0;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: clip;
+  background: #0c282e;
+  color: var(--lost-cream);
+  color-scheme: dark;
+  font-family: var(--font-sans);
+}
+
+.lost-page button {
+  font: inherit;
+  cursor: pointer;
+}
+.lost-page :is(button, a):focus-visible {
+  outline: 2px solid var(--lost-gold);
+  outline-offset: 6px;
+}
+.lost-page a {
+  color: inherit;
+}
+.lost-page ::selection {
+  background: #f2c58d;
+  color: #183a35;
+}
+.island-light {
+  background: radial-gradient(ellipse at 82% 38%, #edc9920d, transparent 57%);
+  mix-blend-mode: screen;
+}
+.island-sunbeams {
+  --island-sun-origin: 94%;
+  opacity: 0.66;
+  background: conic-gradient(
+    from 180deg at var(--island-sun-origin) -10%,
+    transparent 19deg,
+    #ffe4ac18 22deg,
+    #ffe4ac50 24deg,
+    #ffe4ac18 26deg,
+    transparent 29deg 35deg,
+    #f9ddb91c 37deg,
+    #f9ddb94a 39deg,
+    #f9ddb912 41deg,
+    transparent 44deg
+  );
+  mask-image: linear-gradient(transparent, #000 12%, #000 45%, transparent 84%);
+  mix-blend-mode: screen;
+  transform-origin: 94% 0;
+}
+.island-shade {
+  background:
+    radial-gradient(
+      ellipse 48% 60% at 50% 44%,
+      #06171618,
+      #06171608 70%,
+      transparent
+    ),
+    linear-gradient(
+      180deg,
+      #04100f12,
+      transparent 28%,
+      #03110f08 55%,
+      #020c0b30
+    );
+}
+.island-grain {
+  opacity: 0.11;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+.island-scene .island-fog {
+  inset: auto auto 33% 44%;
+  width: 65%;
+  height: 17%;
+  background: radial-gradient(
+    ellipse,
+    #bbd5c410,
+    #a0bbb008 45%,
+    transparent 70%
+  );
+  filter: blur(14px);
+}
+.island-scene .island-pollen {
+  width: 2.5px;
+  height: 2.5px;
+  border-radius: 50%;
+  background: #ead5a4;
+  opacity: 0;
+}
+.island-scene .island-firefly {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffe5a6;
+  box-shadow: 0 0 12px 3px #ffcf7b70;
+  opacity: 0;
+}
+
+.lost-header {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  width: 100%;
+  max-width: none;
+  min-height: 100px;
+  margin: 0;
+  padding: 26px clamp(24px, 4.5vw, 76px);
+}
+.lost-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.lost-page .lost-motion-toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 1px solid #ebe6d54f;
+  border-radius: 50%;
+  color: var(--lost-cream);
+  background: #0926274d;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    color 0.25s;
+}
+.lost-motion-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+.lost-page .lost-motion-toggle:is(:hover, :focus-visible) {
+  background: #092627b3;
+  border-color: #ebe6d5b3;
+  color: var(--lost-cream);
+}
+
+.lost-main {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  gap: 0;
+  width: 100%;
+  margin: 0;
+  padding: 20px 24px 120px;
+  pointer-events: none;
+}
+.lost-hero {
+  max-width: 850px;
+  width: 100%;
+  text-align: center;
+}
+.lost-hero :is(a, button) {
+  pointer-events: auto;
+}
+.lost-hero .lost-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  max-width: none;
+  margin: 0 0 24px;
+  color: #f7e1bd;
+  font: 10px/1.6 var(--font-mono);
+  letter-spacing: 0.2em;
+  text-shadow: 0 2px 17px #04151599;
+}
+.lost-eyebrow::before,
+.lost-eyebrow::after {
+  content: '';
+  width: 27px;
+  height: 1px;
+  background: #efd6ac80;
+}
+.lost-error-code {
+  font:
+    600 clamp(135px, 17vw, 235px)/0.82 'Lost Display',
+    Futura,
+    sans-serif;
+  font-variant-numeric: lining-nums;
+  letter-spacing: 0.035em;
+  padding-left: 0.035em;
+  text-shadow:
+    0 1px 2px #f4ebd633,
+    0 8px 40px #06171655;
+}
+.lost-hero h1 {
+  margin: 18px 0 0;
+  color: var(--lost-cream);
+  font: italic 400 clamp(43px, 5.7vw, 76px)/1.12 var(--font-serif);
+  letter-spacing: -0.055em;
+  text-shadow: 0 4px 32px #06252155;
+}
+.lost-hero h1 > span:last-child {
+  color: var(--lost-gold);
+}
+.lost-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  margin: 25px auto 20px;
+}
+.lost-rule::before,
+.lost-rule::after {
+  content: '';
+  width: 43px;
+  height: 1px;
+  background: #f2ebd378;
+}
+.lost-rule i {
+  width: 4px;
+  height: 4px;
+  background: #f0d0a3;
+  transform: rotate(45deg);
+}
+.lost-hero .lost-description {
+  max-width: none;
+  margin: 0;
+  color: #f0eee0;
+  font-size: 15px;
+  line-height: 1.9;
+  text-shadow: 0 2px 13px #041214;
+}
+.lost-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 27px;
+  flex-wrap: wrap;
+}
+.lost-page .lost-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  min-height: 52px;
+  padding: 0 23px;
+  border: 1px solid;
+  border-radius: 3px;
+  font: 600 10px/1.4 var(--font-sans);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    transform 0.25s,
+    background 0.25s,
+    border-color 0.25s;
+}
+.lost-page .lost-button-primary {
+  background: #f4e9d4;
+  color: #233734;
+  border-color: #f4e9d4;
+  box-shadow: 0 10px 33px #03121430;
+}
+.lost-page .lost-button-primary:hover {
+  background: #fff7e8;
+  border-color: #fff7e8;
+  color: #233734;
+}
+.lost-page .lost-button-ghost {
+  color: #f8edda;
+  background: #05161630;
+  border-color: #f0e8d485;
+  backdrop-filter: blur(5px);
+}
+.lost-page .lost-button-ghost:hover {
+  background: #05161680;
+  border-color: #f0e8d4da;
+}
+.lost-button > span {
+  font:
+    23px/1 Georgia,
+    serif;
+  letter-spacing: 0;
+}
+.lost-hero .lost-hint {
+  min-height: 20px;
+  max-width: none;
+  margin: 16px 0 0;
+  color: #e7d8ba;
+  font: 10px/1.8 var(--font-mono);
+  letter-spacing: 0.03em;
+}
+.lost-loading {
+  position: fixed;
+  z-index: 5;
+  inset: auto 20px 110px auto;
+  padding: 15px;
+  border: 1px solid #a9d5aa;
+  background: #0b211b;
+  color: #b8ffbb;
+  font: 11px/1.8 var(--font-mono);
+}
+.lost-loading button {
+  display: block;
+  margin-top: 10px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid;
+  padding: 8px 16px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .island-light {
+    animation: island-light-shift 24s ease-in-out infinite alternate;
+  }
+  .island-fog {
+    animation: island-fog-drift 48s -12s ease-in-out infinite alternate;
+  }
+  .island-sunbeams {
+    animation: island-beam-shift 32s -8s ease-in-out infinite alternate;
+  }
+  .island-pollen {
+    animation: island-pollen-drift 19s ease-in-out infinite;
+  }
+  .island-firefly {
+    animation: island-firefly 8s ease-in-out infinite;
+  }
+  .lost-hero {
+    animation: island-arrive 1.2s 0.08s both cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .lost-button:hover {
+    transform: translateY(-3px);
+  }
+  @keyframes island-light-shift {
+    to {
+      opacity: 0.45;
+      transform: translateX(-2%);
+    }
+  }
+  @keyframes island-fog-drift {
+    from {
+      transform: translate3d(-3%, 0, 0);
+      opacity: 0.25;
+    }
+    to {
+      transform: translate3d(7%, 0, 0);
+      opacity: 0.5;
+    }
+  }
+  @keyframes island-beam-shift {
+    to {
+      opacity: 0.5;
+      transform: rotate(-0.7deg);
+    }
+  }
+  @keyframes island-pollen-drift {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate3d(0, 0, 0);
+    }
+    30%,
+    65% {
+      opacity: 0.5;
+    }
+    85% {
+      opacity: 0;
+      transform: translate3d(-16px, 28px, 0);
+    }
+  }
+  @keyframes island-firefly {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(0, 0);
+    }
+    35%,
+    55% {
+      opacity: 0.65;
+    }
+    75% {
+      opacity: 0.1;
+      transform: translate(12px, -20px);
+    }
+  }
+  @keyframes island-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.lost-page:is([data-motion='paused'], [data-overlay-open='true'], [data-visibility='hidden']) .island-scene * {
+  animation-play-state: paused;
+}
+
+@media (max-width: 850px) {
+  .lost-header-actions {
+    gap: 14px;
+  }
+  .lost-error-code {
+    font-size: clamp(145px, 23vw, 190px);
+  }
+}
+
+@media (max-width: 640px) {
+  .island-sunbeams {
+    --island-sun-origin: 125%;
+    opacity: 0.5;
+    animation: none;
+  }
+  .lost-page {
+    min-height: max(100svh, calc(100vw * 1846 / 852), 780px);
+  }
+  .island-shade {
+    background:
+      radial-gradient(ellipse 100% 70% at 50% 42%, #06171618, transparent),
+      linear-gradient(180deg, #04141810, transparent 40%, #02131530);
+  }
+  .lost-header {
+    min-height: 74px;
+    padding: 15px 20px;
+    gap: 12px;
+  }
+  .lost-header-actions {
+    gap: 10px;
+  }
+  .lost-main {
+    flex: none;
+    display: block;
+    padding: 28px 18px 0;
+  }
+  .lost-hero .lost-eyebrow {
+    font-size: 8px;
+    gap: 8px;
+    letter-spacing: 0.13em;
+    margin-bottom: 20px;
+  }
+  .lost-eyebrow::before,
+  .lost-eyebrow::after {
+    width: 17px;
+  }
+  .lost-error-code {
+    font-size: clamp(125px, 36vw, 174px);
+  }
+  .lost-hero h1 {
+    font-size: clamp(44px, 12.4vw, 67px);
+    margin-top: 16px;
+  }
+  .lost-rule {
+    margin: 20px auto 14px;
+  }
+  .lost-hero .lost-description {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .lost-actions {
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .lost-page .lost-button {
+    min-height: 49px;
+    padding-inline: 16px;
+    gap: 13px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+  .lost-hero .lost-hint {
+    font-size: 9px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 641px) {
+  .lost-header {
+    min-height: 80px;
+    padding-block: 20px;
+  }
+  .lost-error-code {
+    font-size: clamp(130px, 16vw, 175px);
+  }
+  .lost-hero h1 {
+    font-size: clamp(45px, 5vw, 62px);
+    margin-top: 15px;
+  }
+  .lost-hero .lost-eyebrow {
+    margin-bottom: 16px;
+  }
+  .lost-rule {
+    margin-block: 20px 14px;
+  }
+  .lost-actions {
+    margin-top: 20px;
+  }
+  .lost-main {
+    padding-bottom: 105px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lost-page *,
+  .lost-page *::before,
+  .lost-page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .lost-motion-toggle {
+    visibility: hidden;
+  }
+}
