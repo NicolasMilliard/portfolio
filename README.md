@@ -3,10 +3,13 @@
 ## Development checks
 
 ```bash
-bun run lint
-bun run test
-bun run build
+bun run check
 ```
+
+This runs lint, the Node.js tests, and the complete production build. The same
+command runs in the GitHub Actions `Validate` job for pull requests targeting
+`main` and pushes to `main`, using Node.js 24 and Bun 1.3.13. You can also run
+`bun run lint`, `bun run test`, or `bun run build` individually.
 
 Linting uses Oxlint's native JavaScript, TypeScript, and React rules configured
 in `.oxlintrc.json`. The configuration preserves the existing TypeScript/TSX
