@@ -3,11 +3,13 @@ export const CYCLE_SECONDS = 108 * 60;
 export const TRANSMISSION_URL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 export const CLUE_NUMBERS = {
   ticket: [4, 23],
-  flight: [8, 15],
   lottery: [16, 42],
+  wheelchair: [8],
+  can: [15],
 } as const;
-export const OCEANIC_FLIGHT = CLUE_NUMBERS.flight.join('');
-export type Evidence = 'ticket' | 'lottery';
+// A familiar reference, rather than the only source of two required numbers.
+export const OCEANIC_FLIGHT = '815';
+export type Evidence = keyof typeof CLUE_NUMBERS;
 
 // Accept spaced or continuous digits, but never silently discard other input.
 export const isValidSequence = (value: string): boolean =>

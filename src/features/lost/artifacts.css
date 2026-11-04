@@ -1,0 +1,123 @@
+/* Inspection detail stays separate from the deliberately subdued scene props. */
+.artifact-inspection {
+  width: min(760px, 100%);
+}
+.artifact-inspection .clue-toolbar button {
+  min-width: 44px;
+}
+.artifact-stage {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  margin: 0 auto 22px;
+}
+.artifact-chair,
+.artifact-can {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: min(48svh, 460px);
+  object-fit: contain;
+  filter: drop-shadow(0 14px 22px #0004);
+}
+.artifact-can {
+  height: min(45svh, 420px);
+}
+.artifact-frame-detail,
+.artifact-can-base {
+  position: relative;
+  container-type: inline-size;
+  margin: 0;
+}
+.artifact-frame-detail {
+  width: min(520px, 100%);
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 3px;
+  background: radial-gradient(ellipse at 65% 20%, #213126, #081b17 80%);
+}
+/* A closer look at the existing cross-brace, using the approved chair artwork. */
+.artifact-frame-detail > img {
+  position: absolute;
+  width: 307.436%;
+  max-width: none;
+  height: auto;
+  left: -112.82%;
+  top: -284.615%;
+}
+.artifact-frame-number,
+.artifact-can-number {
+  position: absolute;
+  color: #2c3028;
+  font: 700 5cqw/1 var(--font-mono);
+  mix-blend-mode: multiply;
+  text-shadow: 0 1px 0 #a6a18c70;
+}
+.artifact-frame-number {
+  left: 28.2%;
+  top: 26.9%;
+  transform: translate(-50%, -50%) rotate(33deg) scaleY(0.84);
+  opacity: 0.8;
+}
+.artifact-can-base {
+  width: min(460px, 100%);
+}
+.artifact-can-base > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.artifact-can-number {
+  left: 37.6%;
+  top: 66.7%;
+  font-size: 7.5cqw;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transform: translate(-50%, -50%) rotate(-24deg) skewX(-8deg) scaleY(0.86);
+  opacity: 0.78;
+}
+.artifact-inspection .artifact-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 48px;
+  margin-top: 14px;
+  padding: 12px 18px;
+  border: 1px solid #c3cab35c;
+  border-radius: 2px;
+  color: #eee8d2;
+  background: #0a201b66;
+  font: 10px/1.5 var(--font-mono);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.artifact-action:hover {
+  background: #bed2b314;
+}
+.artifact-action > span {
+  font: 20px/1 var(--font-sans);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .artifact-stage {
+    animation: artifact-reveal 220ms both cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes artifact-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(6px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+@media (max-width: 640px) {
+  .artifact-stage {
+    min-height: 180px;
+  }
+  .artifact-inspection {
+    padding-inline: 0;
+  }
+}

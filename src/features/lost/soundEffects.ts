@@ -4,6 +4,8 @@ export const SOUND_EFFECTS = {
   latch: { file: 'baggage-open-v1.wav', volume: 0.5 },
   paper: { file: 'paper-rustle-v1.wav', volume: 0.55 },
   terminal: { file: 'terminal-boot-v1.wav', volume: 0.4 },
+  frame: { file: 'wheelchair-frame-v1.wav', volume: 0.35 },
+  metal: { file: 'can-handle-v1.wav', volume: 0.4 },
 } as const;
 
 export type SoundEffect = keyof typeof SOUND_EFFECTS;

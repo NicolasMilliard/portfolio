@@ -13,11 +13,14 @@ import './island.css';
 
 const HatchTerminal = lazy(() => import('./HatchTerminal'));
 const ClueDialog = lazy(() => import('./ClueDialog'));
+const ArtifactDialog = lazy(() => import('./ArtifactDialog'));
 
 type Overlay = { kind: 'terminal'; prefill: string } | { kind: ClueKind };
 const overlaySound = {
   ticket: 'paper',
   suitcase: 'baggage',
+  wheelchair: 'frame',
+  can: 'metal',
   terminal: 'terminal',
 } as const;
 
@@ -28,6 +31,8 @@ export function NotFoundPage() {
   const [found, setFound] = useState<Record<Evidence, boolean>>({
     ticket: false,
     lottery: false,
+    wheelchair: false,
+    can: false,
   });
   const [hint, setHint] = useState(false);
   const [motionPaused, setMotionPaused] = useState(false);
@@ -51,7 +56,7 @@ export function NotFoundPage() {
       openOverlay({ kind: 'terminal', prefill: '' }, trigger),
     [openOverlay],
   );
-  const sceneRef = useIslandInteractions(discover, overlay === null);
+  const sceneRef = useIslandInteractions(discover, overlay === null, motionPaused);
   const closeOverlay = useCallback(() => {
     playSound('ui');
     setOverlay(null);
@@ -73,14 +78,16 @@ export function NotFoundPage() {
     },
     [findEvidence, openOverlay],
   );
-  const allFound = found.ticket && found.lottery;
+  const allFound = Object.values(found).every(Boolean);
   const explorationHint = allFound
     ? 'Six numbers. That handset might still work.'
-    : found.ticket
-      ? 'There’s something folded inside that suitcase.'
-      : found.lottery
-        ? 'There’s a boarding pass caught in the leaves.'
-        : 'The tide leaves things behind. Look around.';
+    : found.ticket && found.lottery
+      ? 'The island has a habit of keeping secrets.'
+      : found.ticket
+        ? 'There’s something folded inside that suitcase.'
+        : found.lottery
+          ? 'There’s a boarding pass caught in the leaves.'
+          : 'The tide leaves things behind. Look around.';
 
   return (
     <div
@@ -89,7 +96,6 @@ export function NotFoundPage() {
       data-motion={motionPaused ? 'paused' : 'playing'}
       data-overlay-open={overlay !== null}
     >
-      <IslandScene />
       <header className="lost-header">
         <div className="lost-header-actions">
           <IslandAmbience audio={audio} />
@@ -166,12 +172,14 @@ export function NotFoundPage() {
         </div>
       </main>
 
-      <IslandClues onInspect={inspectClue} />
-      <IslandPhone
-        triggerRef={terminalTriggerRef}
-        onConnect={connectPhone}
-        hasSequence={allFound}
-      />
+      <IslandScene>
+        <IslandClues onInspect={inspectClue} />
+        <IslandPhone
+          triggerRef={terminalTriggerRef}
+          onConnect={connectPhone}
+          hasSequence={allFound}
+        />
+      </IslandScene>
       <IslandForeground />
       {overlay && (
         <Suspense
@@ -190,6 +198,14 @@ export function NotFoundPage() {
             <HatchTerminal
               prefill={overlay.prefill}
               onClose={closeOverlay}
+              onSound={playSound}
+            />
+          ) : overlay.kind === 'wheelchair' || overlay.kind === 'can' ? (
+            <ArtifactDialog
+              key={overlay.kind}
+              kind={overlay.kind}
+              onClose={closeOverlay}
+              onFind={findEvidence}
               onSound={playSound}
             />
           ) : (

@@ -1,108 +1,97 @@
-# Island photographic backgrounds
+# LOST 404 runtime images
 
-Original assets generated with the built-in `image_gen` tool for this portfolio.
-No downloaded stock photography, show footage, or external image requests.
-The JPEG exports preserve the generated images; only encoding and the smaller
-desktop resolution were changed locally.
+This folder contains only the **33 WebP images used by the current LOST 404
+experience**, plus this asset list. Unused JPEG backgrounds, original PNG
+exports, and superseded artwork have been removed from the public directory.
 
-- `island-desktop.jpg`: original landscape composition, 1672 × 941.
-- `island-desktop-1280.jpg`: 1280-pixel-wide landscape export.
-- `island-mobile.jpg`: dedicated portrait composition, 941 × 1672.
-- `suitcase-preview.png`: transparent 480-pixel-wide scene prop.
-- `suitcase-closed.png`: transparent 1000-pixel-wide inspection asset.
-- `suitcase-open.png`: matching transparent 1000-pixel-wide opened state.
-- `suitcase-preview-v2.png`, `suitcase-closed-v2.png`, `suitcase-open-v2.png`:
-  current tag-free suitcase artwork; the original versions are retained above.
-- `foreground-leaves.png`, `foreground-leaves-450.png`: transparent foreground
-  vegetation, exported at 900 and 450 pixels wide for responsive loading.
-- `overhead-canopy-v1.png`, `overhead-canopy-v1-800.png`: transparent overhead
-  branches, lianas and leaves, exported at 1600 and 800 pixels wide.
-- `satellite-phone-v1.png`: transparent 400 × 600 weathered handset; its scene
-  button opens the existing terminal and replaces the former header icon.
-- `folded-shirt-v1.png`, `folded-shirt-v1-600.png`: standalone folded shirt,
-  exported at 1000 and 600 pixels wide. Clicking the left item in the open
-  suitcase opens this separate photograph with no visible caption or clue.
+All responsive variants and images loaded by inspections are included. A file
+is still used even if your current screen size or inspection state does not
+request it.
 
-`lottery-ticket-damaged-v3.png` is a transparent, 800 × 1000 photographic prop
-generated from the user's attached reference with the built-in `image_gen` edit
-tool. It replaces the earlier CSS illustration. Only 16 and 42 remain legible;
-the other number fields are abraded away. It loads with the lazy clue dialog.
-The foreground vegetation is reused at both bottom corners, mirrored on the left.
-References:
-[user-provided lottery reference](https://lostpedia.fandom.com/wiki/The_Numbers?file=Lotto_ticket_.jpg),
-[Propstore production prop](https://propstoreauction.com/lot-details/index/catalog/489/lot/185675/296-Hugo-Hurley-Reyes-Jorge-Garcia-Production-Made-Mega-Lotto-Jackpot-Ticket-LOST-T-V-SERIES-2004-2010).
+## Replacing files with compressed versions
 
-## Canopy and handset generation prompts
+Use the exact filenames listed below. Keep the existing pixel dimensions,
+transparent margins, and alpha channels so the objects, foliage masks, and
+inspection overlays stay aligned. No component or stylesheet changes are
+needed when replacing these files in place.
 
-Both were generated with the built-in `image_gen` tool, transparent background
-enabled, using the island photograph only as a lighting and material reference.
-Responsive exports preserve alpha. The canopy is decorative and ignores pointer
-events; the handset is a native keyboard-accessible button.
+## Usage
 
-Canopy prompt:
+| File family | Use | Width variants |
+| --- | --- | --- |
+| `clearing-sea-v1` | Desktop sky, sea and beach layer | 1056, 1586 |
+| `clearing-forest-v1` | Desktop forest layer | 1056, 1586 |
+| `clearing-ground-v1` | Desktop sand, roots and rocks | 1056, 1586 |
+| `clearing-mobile-v1` | Dedicated portrait environment | 480, 852 |
+| `canopy-warm-v1` | Overhead foliage | 1000, 2000 |
+| `foreground-left-v1` | Left foreground and object concealment | 450, 900 |
+| `foreground-right-v1` | Right foreground and object concealment | 450, 900 |
+| `fuselage-v1` | Aircraft wreckage | 480, 960 |
+| `wheelchair-v1` | Scene, inspection and frame detail | 240, 480, 960 |
+| `dharma-can-v1` | Scene and upright inspection | 160, 640 |
+| `dharma-can-base-v1` | Turned-over can inspection | 720 |
+| `boarding-pass-weathered-v1` | Scene preview and paper inspection | 160, 320, 720, 1440 |
+| `folded-shirt-v1` | Shirt inspection | 600, 1000 |
+| `suitcase-preview-v2.webp` | Scene preview | Single file |
+| `suitcase-closed-v2.webp` | Closed suitcase inspection | Single file |
+| `suitcase-open-v2.webp` | Open suitcase and item hotspots | Single file |
+| `satellite-phone-v1.webp` | Phone opening the terminal | Single file |
+| `lottery-ticket-damaged-v3.webp` | Lottery inspection | Single file |
 
-Use case: compositing. Asset type: original photographic transparent overhead jungle canopy for the top of an immersive island website. Image 1 is a reference ONLY for natural vegetation, realistic cool dawn lighting and photographic finish; do not reproduce its landscape. Generate ONLY an overhead fringe of near-camera Hawaiian tropical vegetation in a very wide 3:1 horizontal composition, on genuinely transparent alpha. A moss-dark irregular branch and slender vine enter from upper left, with a few hanging damp broad leaves and finely divided palm/fern fronds; different thinner hanging foliage and one winding liana enter from upper right. One thin irregular vine with just a few small leaves traverses part of the upper center, leaving generous clear gaps. Dense plants concentrated against the TOP EDGE and outer upper corners, hanging down at the outer edges, but very shallow and SPARSE across the center. Important layout: the lower 65 percent of the central half of the canvas must be completely TRANSPARENT with no leaf, vine or trunk, to leave a wide open window for webpage text. Do not create a solid hedge or a symmetric arch. The left and right foliage should be visibly different, organic and imperfect. Extremely lifelike close-up botanical photography: damp waxy leaf surfaces, visible fine veins, realistic serrated/split edges, weathered liana bark, soft variation in focus and exposure, dark forest green, cool blue-green dawn fill and restrained warm edge light. The top roots/branch attachments can be naturally cropped by the top edge as an overlay. Transparent empty space between every leaf and below the canopy, true clean alpha, no white/black/color backdrop, no sky, no beach, no ground, no complete tree, no background photograph, no text, no numbers, no logos, no watermark. Avoid CGI, vector art, illustration, neon saturation, oversized central leaves, excessive dense vegetation. The output is ONLY isolated vegetation forming a natural overhead foreground frame.
+Families with width variants use the filename `<family>-<width>.webp`.
 
-Handset prompt:
+## Complete file list
 
-Use case: product-mockup. Asset type: small photorealistic interactive environmental prop for a mysterious remote island webpage. Image 1 is a reference ONLY for cool dawn lighting, photographic realism and weathered humid tropical atmosphere. Create one isolated worn early-2000s rugged SATELLITE PHONE, entirely on a genuinely transparent background. Dark charcoal rubberized handset, a long chunky straight antenna extending from the top, small rectangular dim muted green monochrome LCD display, visible physical rubber numeric keypad below it with very worn nearly unreadable markings, a few tarnished buttons and scuffed edges, subtle salt residue and grains of damp sand. A believable found object left after a plane crash. Phone leans diagonally slightly left, seen from a slightly elevated three-quarter FRONT view with the display and keypad facing the viewer; like a handset resting against a small out-of-frame root, no hand. The complete phone and antenna are visible, tightly framed with a small transparent margin. Portrait approximately 2:3 composition. Display must be a clean dark desaturated green LCD with a faint luminous green cursor prompt '>_' only; no numbers, no other letters, no brand. Match shadowy jungle foreground: soft cool blue-green dawn fill, restrained warm edge highlights, convincing tactile aged plastic, scratched screen and rubber wear. Real 70mm prop photography with realistic physical proportions and depth, not a toy or game icon, not glossy CGI. Only the phone, no surrounding leaves, no ground or floor, no table, no rocks, no background, no cast shadow plane, no hands, no people, no cables or extra objects. Genuine transparent alpha around all edges and antenna, no colored/black/white backdrop, no logos, no watermark.
+```text
+boarding-pass-weathered-v1-1440.webp
+boarding-pass-weathered-v1-160.webp
+boarding-pass-weathered-v1-320.webp
+boarding-pass-weathered-v1-720.webp
+canopy-warm-v1-1000.webp
+canopy-warm-v1-2000.webp
+clearing-forest-v1-1056.webp
+clearing-forest-v1-1586.webp
+clearing-ground-v1-1056.webp
+clearing-ground-v1-1586.webp
+clearing-mobile-v1-480.webp
+clearing-mobile-v1-852.webp
+clearing-sea-v1-1056.webp
+clearing-sea-v1-1586.webp
+dharma-can-base-v1-720.webp
+dharma-can-v1-160.webp
+dharma-can-v1-640.webp
+folded-shirt-v1-1000.webp
+folded-shirt-v1-600.webp
+foreground-left-v1-450.webp
+foreground-left-v1-900.webp
+foreground-right-v1-450.webp
+foreground-right-v1-900.webp
+fuselage-v1-480.webp
+fuselage-v1-960.webp
+lottery-ticket-damaged-v3.webp
+satellite-phone-v1.webp
+suitcase-closed-v2.webp
+suitcase-open-v2.webp
+suitcase-preview-v2.webp
+wheelchair-v1-240.webp
+wheelchair-v1-480.webp
+wheelchair-v1-960.webp
+```
 
-## Standalone folded shirt generation prompt
+## Artwork and composition
 
-Built-in `image_gen` edit with `suitcase-open-v2.png` as the garment reference;
-transparent background enabled. Responsive PNG exports preserve alpha. The
-asset is requested only when the lazy inspection shows the shirt. No numbers,
-labels, or hidden clues are added to this object.
+Original artwork was generated with the built-in `image_gen` tool through the
+approved composition and object reviews. The desktop layers share a 1586 × 992
+frame; the portrait artwork uses an 852 × 1846 frame. Media-selected picture
+sources keep the desktop plates from downloading on mobile and vice versa.
+Large paper and artifact inspection images load only when their views open.
 
-Use case: precise-object-edit / background-extraction. Asset type: photorealistic transparent inspection prop for an immersive island webpage. Image 1 is the exact visual reference for the shirt to preserve. Extract and recreate ONLY the folded beige linen shirt lying on the LEFT INSIDE this open suitcase. Show that SAME shirt as a standalone, much larger, finely detailed product photograph. Preserve its faded warm oatmeal/cream linen color, loosely folded rectangular shape, open pointed collar, ivory buttons down the front, folded long sleeves, realistic weave, creases, faint weathering and salt/dirt marks. Preserve the shirt's recognizable collar and folds and gently angled front three-quarter camera view, but show the COMPLETE SHIRT, with a small transparent margin around every edge. This is a new close inspection photograph of the OBJECT ITSELF, not a crop, zoom, or enlarged picture of the suitcase. Completely REMOVE all suitcase, lining, leather, latches, handle, paper, baggage and other objects. The only subject is the same worn folded shirt, isolated on genuinely TRANSPARENT ALPHA. Tactile, ultra-realistic photography with believable linen fibres and imperfect seams, natural soft cool fill and restrained warm edge light matching the reference, quiet low-key exposure suitable for a dark inspection dialog. Landscape 3:2 composition. Only a very faint tight contact shadow directly beneath the shirt; no floor, no table, no backdrop color, no surrounding scene, no person, no hanger, no extra clothing. No text, numbers, badges, labels, embroidery, logos, hidden symbols or watermark anywhere. The shirt is an ordinary found object with no puzzle clue. Do not turn it into a police uniform, do not add any graphic or accessory. Preserve genuine transparency around the complete garment, with fully transparent corners.
+The wheelchair and can clue numbers are text overlays, so their image canvas
+and object placement must remain consistent. Boarding-pass and lottery digits
+are part of their photographic artwork.
 
-## Landscape generation prompt
-
-Use case: photorealistic-natural. Asset type: production background photograph for an immersive LOST-inspired island 404 webpage, not a UI screenshot. Create an ultra-photorealistic cinematic location photograph. Landscape 16:9 composition, target 2560 by 1440. First-person human eye-level viewpoint from just inside the shadowy edge of a remote Hawaiian tropical jungle, looking out over an empty crescent beach and quiet Pacific bay toward steep weathered forest-covered volcanic ridges fading into humid sea mist. The viewer should feel physically present on the island. Near left and right edges: naturally irregular coconut palm trunks, layered real palm fronds, broad tropical leaves, damp ferns; some near leaves gently out of focus, vivid believable leaf veins, edges and transmitted light, no symmetrical framing. Lower foreground: dark damp sand, a few scattered leaves and low coastal plants. Midground: small natural foamy waves meeting wet sand, softly reflected sky, varied shallow turquoise and deeper slate-teal ocean. Background ridges mostly at the sides with a long open view toward the ocean through the center. Early morning just before sunrise after rain: moody cool sea-green and blue-grey ambient light, a restrained warm peach glow near the far-right horizon, thin low marine mist, naturally overcast textured sky. Preserve luminous realistic highlights, dark detailed foreground, true-to-life photographic microtexture and imperfect organic forms, physical atmospheric perspective, filmic dynamic range and subtle analog grain. 35mm full-frame cinema location photography, f/5.6, natural lens behavior, meticulous realism, not an illustration and not a game render. Composition is essential: central 45 percent of image should be comparatively calm and low in detail, occupied by open muted sky and distant water so cream-colored web typography will remain legible. Vegetation frames the outer thirds, does not cross the central text area. Horizon approximately 58 percent down. Center-cropping for a mobile portrait viewport must still show a believable open bay, distant mountain shoulder and some foreground plants. Deliver ONLY the environmental image, no letters, no numbers, no logos, no people, no aircraft, no ruins, no buildings, no UI, no watermark. Avoid painting, vector art, stylized leaves, glossy CGI, fantasy cliffs, neon colors, excessive saturation, artificial symmetry and obvious fake cinematic light rays.
-
-## Portrait generation prompt
-
-Reference: the generated landscape image above.
-
-Use case: photorealistic-natural. Image 1 is the visual reference and scene to preserve. Create a portrait 9:16 mobile background photograph of THIS SAME remote Hawaiian jungle-edge beach and misty bay, matching exactly its ultra-photorealistic photographic style, cool damp dawn light, cloud cover, subtle warm peach light near the right horizon, slate teal ocean, rugged forested volcanic ridge fading away to the left, damp sand and near tropical vegetation. Target 1152 by 2048 pixels. Change only the framing to a natural portrait shot from the same human eye-level viewpoint; preserve the location and mood, do not invent a different setting. Frame the portrait with a narrow textured palm trunk just inside the left edge and a few beautifully detailed natural palm fronds along upper corners, low broad leaves and ferns at bottom left and bottom right, while leaving the center clear. The center should be calm sky in the upper half, distant hazy ocean in middle, natural wet sand lower down. Leave the central 70 percent visually open for cream web typography; avoid any leaf crossing the central half. Place horizon about 56 percent down. Maintain lifelike physical texture, subtle imperfections, natural depth of field, fine ocean ripples and real leaf veins, restrained natural saturation and cinematic photographic exposure. Not a painting, not CGI, not a stylized render. No text, no numbers, no logos, no people, no buildings, no watermark, no interface. The deliverable is only a seamless full-bleed portrait environmental photograph.
-
-## Closed suitcase generation prompt
-
-Generated with the built-in `image_gen` tool, transparent background enabled.
-
-Use case: product-mockup. Asset type: photorealistic transparent-background interactive environmental prop for an immersive mysterious Hawaiian island webpage. Create one CLOSED vintage medium-sized dark brown leather travel suitcase, late 1970s to early 2000s, seen from a natural slightly elevated eye-level three-quarter front view. Horizontal case, lid fully shut, short aged leather handle toward viewer, two small tarnished brass latches, worn leather corners, scuffed seams, subtle saltwater stains, damp sand grains caught near the feet. A small faded blank cream luggage tag is tied to the handle with thin string. The case should look found on a humid tropical shore after a plane crash: used, weathered, tactile and completely photographic, not a stylized game icon. Camera 70mm product detail photography, realistic leather grain and irregular edge wear. Soft cool blue-green dawn fill with restrained warm reflected light from upper right, low-key exposure matching a shadowy tropical jungle foreground. Show the entire suitcase with a generous transparent margin, no cropping. Isolate it on GENUINELY TRANSPARENT background, preserve fine tag-string detail, optional very faint tight contact shadow directly beneath the case only. No surrounding scene, no floor plane, no backdrop color, no people, no extra objects. No text, no numbers, no brand marks, no logos, no watermark. Landscape composition, single suitcase only.
-
-## Open suitcase generation prompt
-
-Edited from the generated closed suitcase using the built-in `image_gen` tool,
-with transparency preserved. The lottery clue appears in a separate accessible
-React inspection, opened by clicking the folded paper in this photograph.
-
-Use case: precise-object-edit. Image 1 is the exact suitcase to preserve. Create the OPENED state of this same worn dark brown leather suitcase for an interactive webpage. Keep its recognizable leather, shape, tarnished brass latches, front handle, tied blank luggage tag, weathered seams, damp salt-stained texture, three-quarter camera viewpoint and cool dawn fill / warm upper-right reflected light. Open the lid upward to roughly a right angle, tilted very slightly away so we can see the old muted beige cloth lining inside the lid and case. The base stays at the same three-quarter angle facing the viewer. Inside are a folded faded linen shirt and an old plain folded cream paper note, with no readable text; leave the interior calm and uncluttered. Preserve complete photographic realism, real worn stitching and tactile materials. Show the entire open suitcase and lid with generous transparent margin; no cropping. GENUINELY TRANSPARENT background, fully transparent corners, no colored or black backdrop, no floor plane, no surrounding scene, only a very faint tight contact shadow directly beneath the case. No text, numbers, logos, watermark, people, extra luggage or new props beyond the shirt and folded paper. Single open suitcase, landscape composition.
-
-## Foreground vegetation prompt
-
-Generated with the built-in `image_gen` tool with a transparent background.
-The original island image was a reference for lighting and plant textures.
-
-Use case: compositing. Image 1 is a lighting and vegetation reference only. Generate an original photorealistic isolated FOREGROUND CLUSTER of Hawaiian coastal jungle vegetation for overlaying the bottom-right of this same island webpage. Only a few broad waxy tropical leaves, irregular thin fern fronds and a low branching leafy shrub, damp natural deep green with fine leaf veins and edges, slightly weathered from salt spray. Camera human eye-level looking slightly down into near-ground vegetation, near leaves subtly out of focus at the very front and mid leaves crisply textured, matching the reference's cool blue-green dawn fill and restrained warm rim light from upper right. Composition: a low horizontal cluster of plants rising from the lower RIGHT edge, taller leaves toward the far right, tapering down toward the left. Leaves should form natural gaps so an object behind can be partly seen, never a solid opaque hedge. Landscape 3:2 image. GENUINELY TRANSPARENT background with fully transparent empty upper-left and center-left, no soil plane, no sky, no mountain, no water, no container, no pot, no trunk, no floating shadow, no surrounding scene. Do not copy the entire reference image. This must be only isolated realistic vegetation on transparent alpha, appropriate as a close camera framing layer. No text, no numbers, no logo, no people, no artificial vignette, no painterly or CGI look. Detailed photographic cutout, gentle natural asymmetry.
-
-## Tag-free closed suitcase edit prompt
-
-Built-in `image_gen` edit of the original closed suitcase; transparency retained.
-
-Use case: precise-object-edit. Image 1 is the exact edit target. Remove ONLY the hanging paper luggage tag and its string from the handle. Reconstruct the small revealed leather areas naturally. Preserve the closed suitcase's exact shape, perspective, handles, two brass latches, worn brown leather, seams, moisture, lighting, framing and scale. Do not add anything else or redesign any part of the suitcase. Preserve genuine transparent background and alpha around the whole object, with fully transparent corners. The finished asset should be the same photorealistic closed suitcase, now with no label, paper tag or string anywhere. No text or numbers, no floor, no background.
-
-## Tag-free open suitcase edit prompt
-
-Built-in `image_gen` edit of the original open suitcase; transparency retained.
-
-Use case: precise-object-edit. Image 1 is the exact edit target. Remove ONLY the hanging paper luggage tag and the thin string from the front handle. Reconstruct the small revealed leather areas naturally. Preserve the exact open suitcase, raised lid, latches, handles, weathered brown leather, muted cloth lining, folded linen shirt, folded cream paper inside, perspective, lighting, framing and scale. Do not alter the contents or redesign anything. Preserve genuine transparent background and alpha around the entire object, with fully transparent corners. The finished asset should be the same photorealistic open suitcase with no luggage tag or string on its exterior. No text or numbers, no floor plane, no background.
-
-## Reference-based damaged lottery ticket prompt
-
-Built-in `image_gen` edit with the user-supplied ticket screenshot as its
-reference; transparent background enabled. Exported at 1000 pixels high with
-alpha preserved. No external asset requests are made at runtime.
-
-Use case: precise-object-edit / photorealistic prop. Image 1 is the exact visual reference for the fictional LOST lottery ticket. Create a realistic damaged version of this SAME portrait lottery ticket, isolated on a genuinely transparent background. Preserve the reference's unmistakable print composition and proportions: the dense patterned dark-green outer border; aged pale cream paper with a faint green sunburst and large faint M watermark; the HUGE stacked MEGA / LOTTO / JACKPOT heading filling the upper portion, heavy black outlines, red-orange fill for MEGA and JACKPOT and warm yellow-orange LOTTO, with the orange sunburst radiating behind the heading; the lower pale-green outlined rectangle with 'Your numbers are:' on the left and the bold stacked 'MEGA NUMBER' label and black outlined number box on the right. Keep the ticket in a portrait approximately 4:5 aspect ratio, photographed nearly straight-on, with no perspective warping. Change the paper condition rather than redesigning the graphics. Make the damage convincingly PHOTOGRAPHIC: irregular soft-fibred torn edges, small missing corners, tide marks, ingrained dirt, lifted paper fibres and rubbed-off printing, varied small abrasions, crumpled paper relief and a few natural fold lines with realistic shallow shadows. NOT a digitally cut zigzag silhouette, NOT uniform diagonal scratch lines, NOT a big triangular bite. Only TWO NUMBERS may be legible anywhere on the ticket: '16' surviving in the regular numbers row at its reference position, and '42' in the separate MEGA NUMBER box. Completely destroy the printing at the original 4, 8, 15 and 23 positions using worn-away ink, paper-fibre abrasion and small irregular missing patches; leave no readable ghost digits. No other legible digits, serial codes or dates anywhere. Preserve the recognizable headline and the words 'Your numbers are:' and 'MEGA NUMBER'. Remove the French browser reading-mode tooltip and all screenshot/UI material from the reference. The asset is ONLY the physically damaged ticket, tightly framed with a small transparent margin around its complete torn edges; no hands, no table, no island background, no colored backdrop, no added watermark. Soft neutral photographic lighting, high detail on paper texture and ink wear, clean true alpha transparency.
+Reference photographs informed the artwork and are not served by the site:
+[wheelchair reference](https://www.wired.com/2010/08/lost-props-2/),
+[Dharma ration props](https://www.juliensauctions.com/en/items/314885/lost-dharma-initiative-food-ration-props),
+[lottery reference](https://lostpedia.fandom.com/wiki/The_Numbers?file=Lotto_ticket_.jpg),
+[production lottery prop](https://propstoreauction.com/lot-details/index/catalog/489/lot/185675/296-Hugo-Hurley-Reyes-Jorge-Garcia-Production-Made-Mega-Lotto-Jackpot-Ticket-LOST-T-V-SERIES-2004-2010).

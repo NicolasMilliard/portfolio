@@ -2,54 +2,31 @@ import { CLUE_NUMBERS, OCEANIC_FLIGHT } from './protocol';
 
 export function BoardingPass({ compact = false }: { compact?: boolean }) {
   return (
-    <div
+    <img
       className={`oceanic-ticket${compact ? ' oceanic-ticket-compact' : ''}`}
-    >
-      <div className="oceanic-ticket-main">
-        <div className="oceanic-ticket-brand">
-          <span className="oceanic-emblem" aria-hidden="true">
-            ◒
-          </span>{' '}
-          OCEANIC AIRLINES<span>BOARDING PASS</span>
-        </div>
-        <div className="oceanic-ticket-route">
-          <span>
-            SYD<small>SYDNEY</small>
-          </span>
-          <span className="oceanic-ticket-flight">
-            {OCEANIC_FLIGHT}
-            <small>FLIGHT</small>
-          </span>
-          <span>
-            LAX<small>LOS ANGELES</small>
-          </span>
-        </div>
-        <div className="oceanic-ticket-fields">
-          <div>
-            <span>GATE</span>
-            <strong>{CLUE_NUMBERS.ticket[0]}</strong>
-          </div>
-          <div>
-            <span>SEAT</span>
-            <strong>{CLUE_NUMBERS.ticket[1]}</strong>
-          </div>
-          <div className="oceanic-ticket-passenger">
-            <span>PASSENGER</span>
-            <b>JACK SHEPHARD</b>
-            <small>ONE WAY / NO RETURN</small>
-          </div>
-        </div>
-        <div className="oceanic-ticket-bottom">
-          <span>KEEP THIS PORTION FOR YOUR RECORDS</span>
-          <i className="oceanic-barcode" aria-hidden="true" />
-        </div>
-      </div>
-      <div className="oceanic-ticket-stub" aria-hidden="true">
-        <span>OCEANIC</span>
-        <b>{OCEANIC_FLIGHT}</b>
-        <span>SYD → LAX</span>
-        <i className="oceanic-barcode" />
-      </div>
-    </div>
+      src={
+        compact
+          ? '/images/lost/boarding-pass-weathered-v1-320.webp'
+          : '/images/lost/boarding-pass-weathered-v1-1440.webp'
+      }
+      srcSet={
+        compact
+          ? '/images/lost/boarding-pass-weathered-v1-160.webp 160w, /images/lost/boarding-pass-weathered-v1-320.webp 320w'
+          : '/images/lost/boarding-pass-weathered-v1-720.webp 720w, /images/lost/boarding-pass-weathered-v1-1440.webp 1440w'
+      }
+      sizes={
+        compact
+          ? '(max-width: 640px) 20vw, 8vw'
+          : '(max-width: 640px) calc(100vw - 32px), 680px'
+      }
+      width={1900}
+      height={828}
+      alt={
+        compact
+          ? ''
+          : `A torn, water-stained Oceanic Airlines boarding pass for Jack Shephard. Sydney (SYD) to Los Angeles (LAX), flight ${OCEANIC_FLIGHT}. Gate ${CLUE_NUMBERS.ticket[0]}, seat ${CLUE_NUMBERS.ticket[1]}. One way, no return.`
+      }
+      decoding="async"
+    />
   );
 }

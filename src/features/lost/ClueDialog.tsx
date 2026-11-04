@@ -14,7 +14,7 @@ import {
 import { useIslandDialog } from './useIslandDialog';
 
 type ClueDialogProps = {
-  kind: ClueKind;
+  kind: Exclude<ClueKind, 'wheelchair' | 'can'>;
   onClose: () => void;
   onFind: (evidence: Evidence) => void;
   onSound: PlaySound;
@@ -133,7 +133,9 @@ export default function ClueDialog({
                   }}
                 >
                   <img
-                    src="/images/lost/suitcase-closed-v2.png"
+                    src="/images/lost/suitcase-closed-v2.webp"
+                    width={1000}
+                    height={665}
                     alt="A weathered leather suitcase with two tarnished brass latches."
                     decoding="async"
                   />

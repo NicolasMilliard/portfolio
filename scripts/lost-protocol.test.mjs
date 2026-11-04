@@ -11,15 +11,18 @@ import {
   OCEANIC_FLIGHT,
 } from '../src/features/lost/protocol.ts';
 
-test('the boarding pass, flight and lottery clues give the complete LOST sequence', () => {
+test('four discoveries supply all six numbers without relying on Flight 815', () => {
   const discovered = Object.values(CLUE_NUMBERS)
     .flat()
     .toSorted((a, b) => a - b)
     .join(' ');
   assert.equal(isValidSequence(discovered), true);
+  assert.equal(new Set(Object.values(CLUE_NUMBERS).flat()).size, 6);
   assert.equal(OCEANIC_FLIGHT, '815');
   assert.deepEqual(CLUE_NUMBERS.ticket, [4, 23]);
   assert.deepEqual(CLUE_NUMBERS.lottery, [16, 42]);
+  assert.deepEqual(CLUE_NUMBERS.wheelchair, [8]);
+  assert.deepEqual(CLUE_NUMBERS.can, [15]);
 });
 
 test('accepts the sequence with ordinary spacing variations or continuous digits', () => {

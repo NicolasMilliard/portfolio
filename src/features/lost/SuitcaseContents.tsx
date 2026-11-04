@@ -1,7 +1,7 @@
 import type { Ref } from 'react';
 
 export type SuitcaseItem = 'shirt' | 'paper';
-const openSuitcaseImage = '/images/lost/suitcase-open-v2.png';
+const openSuitcaseImage = '/images/lost/suitcase-open-v2.webp';
 
 export function OpenSuitcase({
   shirtRef,
@@ -17,7 +17,7 @@ export function OpenSuitcase({
       <img
         src={openSuitcaseImage}
         width={1000}
-        height={667}
+        height={665}
         alt="The open suitcase holds a folded linen shirt and a folded paper."
         decoding="async"
         draggable={false}
@@ -45,8 +45,8 @@ export function ShirtInspection() {
     <div className="clue-shirt-stage">
       <img
         data-inspection-content=""
-        src="/images/lost/folded-shirt-v1.png"
-        srcSet="/images/lost/folded-shirt-v1-600.png 600w, /images/lost/folded-shirt-v1.png 1000w"
+        src="/images/lost/folded-shirt-v1-1000.webp"
+        srcSet="/images/lost/folded-shirt-v1-600.webp 600w, /images/lost/folded-shirt-v1-1000.webp 1000w"
         sizes="(max-width: 640px) calc(100vw - 32px), 620px"
         width={1000}
         height={666}

@@ -15,6 +15,7 @@ export function IslandPhone({
     <button
       ref={triggerRef}
       type="button"
+      tabIndex={-1}
       className="island-phone"
       aria-label="Use the satellite phone to enter the sequence"
       aria-haspopup="dialog"
@@ -22,7 +23,7 @@ export function IslandPhone({
       onClick={(event) => onConnect(event.currentTarget)}
     >
       <img
-        src="/images/lost/satellite-phone-v1.png"
+        src="/images/lost/satellite-phone-v1.webp"
         width={400}
         height={600}
         alt=""

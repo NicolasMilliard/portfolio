@@ -1,10 +1,10 @@
 .lost-page .island-phone {
   position: absolute;
   z-index: 2;
-  left: 6%;
-  bottom: 25%;
+  left: max(6%, calc((100% - 100cqw) / 2 + 12px));
+  bottom: 20%;
   display: block;
-  width: clamp(66px, 6.5vw, 94px);
+  width: 6%;
   min-width: 44px;
   min-height: 44px;
   padding: 0;
@@ -12,6 +12,7 @@
   border-radius: 4px;
   color: #d2ddbf;
   background: none;
+  pointer-events: auto;
   filter: drop-shadow(0 7px 5px #0008);
   -webkit-tap-highlight-color: transparent;
 }
@@ -67,17 +68,11 @@
 }
 @media (max-width: 640px) {
   .lost-page .island-phone {
-    left: 5%;
-    bottom: 17%;
-    width: 68px;
+    left: max(2.5%, calc((100% - 100cqw) / 2 + 8px));
+    bottom: 12%;
+    width: 15.5%;
   }
   .island-phone-hint {
     display: none;
-  }
-}
-@media (max-width: 370px) {
-  .lost-page .island-phone {
-    left: 1%;
-    width: 62px;
   }
 }
