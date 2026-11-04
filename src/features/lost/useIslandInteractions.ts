@@ -76,6 +76,7 @@ export function useIslandInteractions(
         scene.dataset.motion === 'paused'
       )
         return;
+      // oxlint-disable-next-line react/immutability -- These pointer coordinates are local to the effect.
       x = Math.max(-0.5, Math.min(0.5, event.clientX / window.innerWidth - 0.5));
       y = Math.max(-0.5, Math.min(0.5, event.clientY / window.innerHeight - 0.5));
       if (!frame) frame = requestAnimationFrame(paint);

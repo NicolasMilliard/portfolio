@@ -42,6 +42,7 @@ export function HatchSequenceInput({
       for (const animation of caret.getAnimations()) animation.currentTime = 0;
       window.cancelAnimationFrame(frame);
       // Native inputs can adjust horizontal scrolling after the input event.
+      // oxlint-disable-next-line react/immutability -- This animation handle is local to the effect.
       frame = window.requestAnimationFrame(sync);
     };
     const startComposition = () => {

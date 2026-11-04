@@ -60,6 +60,7 @@ export function useIslandAudio(suspended: boolean) {
     synchronizeRef.current = synchronize;
     document.addEventListener('visibilitychange', synchronize);
     return () => {
+      // oxlint-disable-next-line react/immutability -- Cleanup updates this effect's cancellation flag.
       disposed = true;
       synchronizeRef.current = null;
       document.removeEventListener('visibilitychange', synchronize);

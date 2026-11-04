@@ -1,5 +1,31 @@
 # Minimalistic portfolio
 
+## Development checks
+
+```bash
+bun run lint
+bun run test
+bun run build
+```
+
+Linting uses Oxlint's native JavaScript, TypeScript, and React rules configured
+in `.oxlintrc.json`. The configuration preserves the existing TypeScript/TSX
+scope, Hooks checks, Vite Fast Refresh options, and route-file export exception.
+Generated output and `src/routeTree.gen.ts` are excluded.
+
+The applicable React Compiler checks are enabled explicitly; Oxlint currently
+marks these native ports as experimental. ESLint's compiler configuration and
+gating checks do not apply because Oxlint uses fixed compiler options without
+gating. No ESLint plugins or type-aware linting add-on are required.
+TypeScript checking remains part of `bun run build` through `tsc -b`.
+
+Narrow `react/immutability` suppressions cover native Compiler false positives
+for effect-local animation, pointer, and cancellation variables. The rule stays
+enabled everywhere else.
+
+For editor diagnostics, use the
+[Oxc editor integration](https://oxc.rs/docs/guide/usage/linter/editors).
+
 ## Writing an article
 
 Add a Markdown or MDX file to `src/content/writings`. Its filename becomes the
