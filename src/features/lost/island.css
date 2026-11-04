@@ -1,4 +1,18 @@
 @font-face {
+  font-family: 'Lost Sans';
+  src: url('../../fonts/lost/DMSans-Latin.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lost Serif';
+  src: url('../../fonts/lost/SourceSerif4-Latin.woff2') format('woff2');
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Lost Display';
   src: url('../../fonts/Jost-404.ttf') format('truetype');
   font-style: normal;
@@ -7,7 +21,14 @@
   unicode-range: U+0030, U+0034;
 }
 
+/* Root font metrics must also use the subset during a visit to the island. */
+html:has(.lost-page) {
+  font-family: 'Lost Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
 .lost-page {
+  --font-sans: 'Lost Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lost Serif', ui-serif, Georgia, Cambria, serif;
   --lost-cream: #f4ebd6;
   --lost-gold: #f2c58d;
   --island-x: 0;
@@ -22,6 +43,7 @@
   background: #0c282e;
   color: var(--lost-cream);
   color-scheme: dark;
+  font-family: var(--font-sans);
 }
 
 .lost-page button {
