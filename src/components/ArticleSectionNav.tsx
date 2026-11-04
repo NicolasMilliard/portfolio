@@ -62,6 +62,7 @@ export const ArticleSectionNav = ({
       setActiveId(current?.id ?? null);
     };
     const scheduleUpdate = () => {
+      // oxlint-disable-next-line react/immutability -- This animation handle is local to the effect.
       if (!frame) frame = window.requestAnimationFrame(updateActiveSection);
     };
 
