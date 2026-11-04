@@ -29,23 +29,6 @@ The AAC-LC export contains 44.1 kHz stereo audio at approximately 128 kbps,
 occupies 995 KB, and has peak headroom. The PCM master measures -24.2 dBFS RMS
 with a -3.7 dBFS peak; the player starts at 45% volume.
 
-To reproduce on macOS, download the published previews into a working folder as
-`surf.mp3`, `jungle.mp3`, and `leaves.mp3`. Decode each using, for example:
-
-```sh
-afconvert -f WAVE -d LEI16@44100 -c 2 surf.mp3 surf.wav
-```
-
-Run the offline mixer from the repository root (Node built-ins only):
-
-```sh
-node scripts/mix-island-ambience.mjs /path/to/decoded-recordings /tmp/island-ambience.wav
-afconvert -f m4af -d aac -b 128000 -q 127 /tmp/island-ambience.wav public/audio/lost/island-ambience-v1.m4a
-```
-
-Audio preparation is separate from the site build. The source recordings and
-intermediate WAV are not needed at runtime. No new package dependency is used.
-
 ## Playback
 
 The page requests quiet playback by default and presents a play button if the
