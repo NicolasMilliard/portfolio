@@ -157,7 +157,20 @@ export function NotFoundPage() {
           </p>
           <div className="lost-actions">
             <Link to="/" className="lost-button lost-button-primary">
-              We have to go back <span aria-hidden="true">↗</span>
+              We have to go back
+              <svg
+                className="lost-button-icon"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="m4 16 12-12M4 4h12v12" />
+              </svg>
             </Link>
             <button
               type="button"
