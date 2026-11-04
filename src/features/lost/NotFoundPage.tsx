@@ -10,6 +10,7 @@ import { OCEANIC_FLIGHT, startCountdown, type Evidence } from './protocol';
 import { useIslandInteractions } from './useIslandInteractions';
 import { useIslandAudio } from './useIslandAudio';
 import './island.css';
+import './cursors.css';
 
 const HatchTerminal = lazy(() => import('./HatchTerminal'));
 const ClueDialog = lazy(() => import('./ClueDialog'));
