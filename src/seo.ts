@@ -1,4 +1,5 @@
 import type { Writing, WritingImage } from './content/writings';
+import type { InformationPage } from './content/information';
 import { links, profile } from './data/portfolio';
 
 const SITE_ORIGIN = 'https://milliard.dev';
@@ -87,6 +88,7 @@ const author = {
   name: profile.name,
   url: absoluteUrl('/'),
   jobTitle: profile.title,
+  description: profile.about.join(' '),
   sameAs: links.map(({ href }) => href),
 };
 
@@ -121,6 +123,30 @@ export const notFoundSeo: SeoPage = {
   description: 'The requested page could not be found.',
   robots: 'noindex, nofollow',
 };
+
+export const getInformationSeo = (page: InformationPage): SeoPage => ({
+  title: page.title,
+  description: page.description,
+  robots: 'index, follow, max-image-preview:large',
+  canonicalUrl: absoluteUrl(page.path),
+  type: 'website',
+  image: resolveImage(),
+  structuredData: {
+    '@context': 'https://schema.org',
+    '@graph': [
+      author,
+      {
+        '@type': 'WebPage',
+        '@id': `${absoluteUrl(page.path)}#webpage`,
+        name: page.title,
+        description: page.description,
+        url: absoluteUrl(page.path),
+        about: { '@id': author['@id'] },
+        inLanguage: SITE_LANGUAGE,
+      },
+    ],
+  },
+});
 
 export const getWritingSeo = (writing: Writing): SeoPage => {
   const canonicalUrl = absoluteUrl(`/writing/${writing.slug}`);
@@ -209,7 +235,10 @@ export const seoToRouteHead = (seo: SeoPage) => {
   return {
     meta: [{ title: seo.title }, ...getSeoMetaTags(seo)],
     links: seo.canonicalUrl
-      ? [{ rel: 'canonical', href: seo.canonicalUrl }]
+      ? [
+          { rel: 'canonical', href: seo.canonicalUrl },
+          { rel: 'alternate', type: 'text/markdown', href: seo.canonicalUrl },
+        ]
       : [],
     scripts: seo.structuredData
       ? [
@@ -247,6 +276,7 @@ export const renderSeoHead = (seo: SeoPage) => {
   if (seo.canonicalUrl) {
     tags.push(
       `<link data-seo-static rel="canonical" href="${escapeHtml(seo.canonicalUrl)}" />`,
+      `<link data-seo-static rel="alternate" type="text/markdown" href="${escapeHtml(seo.canonicalUrl)}" />`,
     );
   }
 

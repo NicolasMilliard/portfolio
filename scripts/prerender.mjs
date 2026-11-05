@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 import { createServer } from 'vite';
 
+import { renderLlms, renderMarkdown } from './agent-content.mjs';
+
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
@@ -20,7 +22,9 @@ const assertUnique = (values, label) => {
   );
 
   if (duplicates.length > 0) {
-    throw new Error(`Duplicate ${label}: ${[...new Set(duplicates)].join(', ')}`);
+    throw new Error(
+      `Duplicate ${label}: ${[...new Set(duplicates)].join(', ')}`,
+    );
   }
 };
 
@@ -94,11 +98,7 @@ const readWebpMetadata = (buffer) => {
       };
     }
 
-    if (
-      chunkType === 'VP8L' &&
-      chunkSize >= 5 &&
-      buffer[dataOffset] === 0x2f
-    ) {
+    if (chunkType === 'VP8L' && chunkSize >= 5 && buffer[dataOffset] === 0x2f) {
       const byte1 = buffer[dataOffset + 1];
       const byte2 = buffer[dataOffset + 2];
       const byte3 = buffer[dataOffset + 3];
@@ -107,8 +107,7 @@ const readWebpMetadata = (buffer) => {
       return {
         type: 'image/webp',
         width: 1 + byte1 + ((byte2 & 0x3f) << 8),
-        height:
-          1 + (byte2 >> 6) + (byte3 << 2) + ((byte4 & 0x0f) << 10),
+        height: 1 + (byte2 >> 6) + (byte3 << 2) + ((byte4 & 0x0f) << 10),
       };
     }
 
@@ -135,9 +134,9 @@ const readWebpMetadata = (buffer) => {
 const readImageMetadata = (buffer) => {
   if (
     buffer.length >= 24 &&
-    buffer.subarray(0, 8).equals(
-      Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
-    )
+    buffer
+      .subarray(0, 8)
+      .equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
   ) {
     return {
       type: 'image/png',
@@ -279,11 +278,19 @@ const vite = await createServer({
 });
 
 try {
-  const [{ getPrerenderPages, renderPage }, { renderSeoHead, renderSitemap }] =
-    await Promise.all([
-      vite.ssrLoadModule('/src/entry-server.tsx'),
-      vite.ssrLoadModule('/src/seo.ts'),
-    ]);
+  const [
+    { getPrerenderPages, renderPage },
+    { renderSeoHead, renderSitemap },
+    { informationPages },
+    { writings },
+    { profile, projects },
+  ] = await Promise.all([
+    vite.ssrLoadModule('/src/entry-server.tsx'),
+    vite.ssrLoadModule('/src/seo.ts'),
+    vite.ssrLoadModule('/src/content/information.ts'),
+    vite.ssrLoadModule('/src/content/writings.ts'),
+    vite.ssrLoadModule('/src/data/portfolio.ts'),
+  ]);
   const pages = getPrerenderPages();
 
   assertUnique(
@@ -319,6 +326,13 @@ try {
     assertRenderedDocument(document, page);
     await mkdir(path.dirname(outputPath), { recursive: true });
     await writeFile(outputPath, document);
+    if (page.includeInSitemap && page.seo.canonicalUrl) {
+      const markdownPath = outputPath.replace(/\.html$/, '.md');
+      await writeFile(
+        markdownPath,
+        renderMarkdown(appHtml, page.seo.canonicalUrl),
+      );
+    }
   }
 
   const sitemap = renderSitemap(pages);
@@ -326,6 +340,16 @@ try {
   await Promise.all([
     writeFile(path.join(distDirectory, 'sitemap.xml'), sitemap),
     writeFile(path.join(publicDirectory, 'sitemap.xml'), sitemap),
+    writeFile(
+      path.join(distDirectory, 'llms.txt'),
+      renderLlms({
+        profile,
+        pages: informationPages,
+        writings,
+        projects,
+        origin: 'https://milliard.dev',
+      }),
+    ),
   ]);
 } finally {
   await vite.close();

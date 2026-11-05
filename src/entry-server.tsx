@@ -1,13 +1,12 @@
-import {
-  createMemoryHistory,
-  RouterProvider,
-} from '@tanstack/react-router';
+import { createMemoryHistory, RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
 
+import { informationPages } from './content/information';
 import { writings } from './content/writings';
 import { createAppRouter } from './router';
 import {
+  getInformationSeo,
   getWritingSeo,
   homeSeo,
   notFoundSeo,
@@ -21,6 +20,12 @@ export const getPrerenderPages = (): PrerenderPage[] => [
     seo: homeSeo,
     includeInSitemap: true,
   },
+  ...informationPages.map((page) => ({
+    path: page.path,
+    outputFile: `${page.path.slice(1)}.html`,
+    seo: getInformationSeo(page),
+    includeInSitemap: true,
+  })),
   ...writings.map((writing) => ({
     path: `/writing/${writing.slug}`,
     outputFile: `writing/${writing.slug}.html`,
