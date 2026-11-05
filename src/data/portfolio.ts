@@ -19,27 +19,26 @@ export const profile = {
   name: 'Nicolas Milliard',
   title: 'Senior Frontend Engineer',
   about: [
-    'Senior Frontend Engineer with 10 years of experience building scalable product interfaces and modern web applications.',
-    'Focused on frontend architecture, design systems, performance, and reliable user experiences.',
-    'I enjoy building products that are fast, maintainable, accessible, and easy for teams to evolve.',
+    'Senior Frontend Engineer with 10 years of experience designing high-performance interfaces and scalable frontend architectures that evolve with product needs. Specializing in React, TypeScript, and design systems, I combine technical excellence, user experience, and maintainability to build robust, long-lasting products.',
   ],
 } satisfies Profile;
 
 export const projects = [
   {
-    title: '3bio',
-    description: 'One shareable page for your links and Lens profile.',
-    link: 'https://3bio.social/',
+    title: 'Gestik',
+    description: 'Visual component library for representing user interactions.',
+    link: 'https://nicolasmilliard.github.io/gestik/',
   },
   {
     title: 'YouTube Essentials',
-    description: 'A Chrome extension for a calmer, more focused YouTube experience.',
-    link: 'https://chromewebstore.google.com/detail/youtube-essentials/ehifhlciopjmjlfgdgkkamfhkjgjamig',
+    description: 'Browser extension for customizing the YouTube interface.',
+    link: 'https://github.com/NicolasMilliard/youtube-essentials',
   },
   {
-    title: 'Frontend Engineering Skills',
-    description: 'AI skills for exploring, reviewing, and debugging frontend code.',
-    link: 'https://github.com/NicolasMilliard/frontend-engineer-skills',
+    title: '3bio',
+    description:
+      'Decentralized alternative to link-in-bio platforms, built on Web3 technologies.',
+    link: 'https://3bio.social/',
   },
 ] satisfies Project[];
 
