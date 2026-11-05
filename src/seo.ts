@@ -88,6 +88,7 @@ const author = {
   name: profile.name,
   url: absoluteUrl('/'),
   jobTitle: profile.title,
+  description: profile.about.join(' '),
   sameAs: links.map(({ href }) => href),
 };
 
@@ -234,7 +235,10 @@ export const seoToRouteHead = (seo: SeoPage) => {
   return {
     meta: [{ title: seo.title }, ...getSeoMetaTags(seo)],
     links: seo.canonicalUrl
-      ? [{ rel: 'canonical', href: seo.canonicalUrl }]
+      ? [
+          { rel: 'canonical', href: seo.canonicalUrl },
+          { rel: 'alternate', type: 'text/markdown', href: seo.canonicalUrl },
+        ]
       : [],
     scripts: seo.structuredData
       ? [
@@ -272,6 +276,7 @@ export const renderSeoHead = (seo: SeoPage) => {
   if (seo.canonicalUrl) {
     tags.push(
       `<link data-seo-static rel="canonical" href="${escapeHtml(seo.canonicalUrl)}" />`,
+      `<link data-seo-static rel="alternate" type="text/markdown" href="${escapeHtml(seo.canonicalUrl)}" />`,
     );
   }
 
