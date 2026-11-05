@@ -171,6 +171,7 @@ p {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.65;
+  text-wrap: pretty;
 }
 
 a {
@@ -509,6 +510,17 @@ a:focus-visible {
 
 .article-content > * + * {
   margin-top: 1.25rem;
+}
+
+.article-content > .information-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1rem;
+  line-height: 1.65;
 }
 
 .article-content > .article-diagram {

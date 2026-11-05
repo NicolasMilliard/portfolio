@@ -1,4 +1,5 @@
 import type { Writing, WritingImage } from './content/writings';
+import type { InformationPage } from './content/information';
 import { links, profile } from './data/portfolio';
 
 const SITE_ORIGIN = 'https://milliard.dev';
@@ -121,6 +122,30 @@ export const notFoundSeo: SeoPage = {
   description: 'The requested page could not be found.',
   robots: 'noindex, nofollow',
 };
+
+export const getInformationSeo = (page: InformationPage): SeoPage => ({
+  title: page.title,
+  description: page.description,
+  robots: 'index, follow, max-image-preview:large',
+  canonicalUrl: absoluteUrl(page.path),
+  type: 'website',
+  image: resolveImage(),
+  structuredData: {
+    '@context': 'https://schema.org',
+    '@graph': [
+      author,
+      {
+        '@type': 'WebPage',
+        '@id': `${absoluteUrl(page.path)}#webpage`,
+        name: page.title,
+        description: page.description,
+        url: absoluteUrl(page.path),
+        about: { '@id': author['@id'] },
+        inLanguage: SITE_LANGUAGE,
+      },
+    ],
+  },
+});
 
 export const getWritingSeo = (writing: Writing): SeoPage => {
   const canonicalUrl = absoluteUrl(`/writing/${writing.slug}`);
