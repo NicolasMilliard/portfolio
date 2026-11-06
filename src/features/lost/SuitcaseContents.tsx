@@ -1,6 +1,7 @@
 import type { Ref } from 'react';
 
-export type SuitcaseItem = 'shirt' | 'paper';
+import type { SuitcaseItem } from './protocol';
+
 const openSuitcaseImage = '/images/lost/suitcase-open-v2.webp';
 
 export function OpenSuitcase({

@@ -1,6 +1,6 @@
 import type { Ref } from 'react';
 
-import './phone.css';
+import './styles/phone.css';
 
 export function IslandPhone({
   triggerRef,

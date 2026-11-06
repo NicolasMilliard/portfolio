@@ -1,7 +1,6 @@
 import { BoardingPass } from './BoardingPass';
-import './clues.css';
-
-export type ClueKind = 'ticket' | 'suitcase' | 'wheelchair' | 'can';
+import type { ClueKind } from './protocol';
+import './styles/scene-clues.css';
 
 export function IslandClues({
   onInspect,

@@ -1,5 +1,4 @@
 import { CLUE_NUMBERS } from './protocol';
-import './lottery.css';
 
 export function LotteryTicket() {
   return (

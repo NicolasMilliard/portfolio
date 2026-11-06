@@ -1,4 +1,5 @@
 import { CLUE_NUMBERS, OCEANIC_FLIGHT } from './protocol';
+import './styles/boarding-pass.css';
 
 export function BoardingPass({ compact = false }: { compact?: boolean }) {
   return (

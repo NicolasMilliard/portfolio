@@ -1,7 +1,7 @@
 import { SOUND_EFFECTS, SOUND_EFFECT_NAMES } from './soundEffects';
 import type { IslandAudio } from './useIslandAudio';
 
-import './ambience.css';
+import './styles/ambience.css';
 
 export function IslandAmbience({
   audio: {
@@ -14,11 +14,16 @@ export function IslandAmbience({
     onPause,
     onError,
   },
-}: { audio: IslandAudio }) {
+}: {
+  audio: IslandAudio;
+}) {
   const active = playback === 'playing' || playback === 'loading';
-  const label = playback === 'error'
-    ? 'Retry island sound'
-    : active ? 'Pause island sound' : 'Play island sound';
+  const label =
+    playback === 'error'
+      ? 'Retry island sound'
+      : active
+        ? 'Pause island sound'
+        : 'Play island sound';
 
   return (
     <>
@@ -61,7 +66,9 @@ export function IslandAmbience({
         </svg>
       </button>
       <span className="visually-hidden" role="status">
-        {playback === 'error' ? 'Island ambience could not be loaded. You can try again.' : ''}
+        {playback === 'error'
+          ? 'Island ambience could not be loaded. You can try again.'
+          : ''}
       </span>
     </>
   );

@@ -1,4 +1,4 @@
-import './foreground.css';
+import './styles/foreground.css';
 
 export function IslandForeground() {
   return (

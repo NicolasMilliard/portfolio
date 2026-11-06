@@ -1,16 +1,22 @@
 import { Link } from '@tanstack/react-router';
 import { lazy, Suspense, useCallback, useRef, useState } from 'react';
 
-import { IslandScene } from './IslandScene';
-import { IslandClues, type ClueKind } from './IslandClues';
+import { IslandAmbience } from './IslandAmbience';
+import { IslandClues } from './IslandClues';
 import { IslandForeground } from './IslandForeground';
 import { IslandPhone } from './IslandPhone';
-import { IslandAmbience } from './IslandAmbience';
-import { OCEANIC_FLIGHT, startCountdown, type Evidence } from './protocol';
-import { useIslandInteractions } from './useIslandInteractions';
+import { IslandScene } from './IslandScene';
+import {
+  FORMATTED_LOST_SEQUENCE,
+  OCEANIC_FLIGHT,
+  startCountdown,
+  type ClueKind,
+  type Evidence,
+} from './protocol';
+import './styles/cursors.css';
+import './styles/island.css';
 import { useIslandAudio } from './useIslandAudio';
-import './island.css';
-import './cursors.css';
+import { useIslandInteractions } from './useIslandInteractions';
 
 const HatchTerminal = lazy(() => import('./HatchTerminal'));
 const ClueDialog = lazy(() => import('./ClueDialog'));
@@ -40,21 +46,24 @@ export function NotFoundPage() {
   const [motionPaused, setMotionPaused] = useState(false);
   const previousFocus = useRef<HTMLElement | null>(null);
   const terminalTriggerRef = useRef<HTMLButtonElement>(null);
-  const openOverlay = useCallback((next: Overlay, trigger?: HTMLElement) => {
-    if (next.kind === 'terminal') {
-      const now = Date.now();
-      setTerminalDeadline((deadline) => startCountdown(deadline, now));
-    }
-    playSound(overlaySound[next.kind]);
-    previousFocus.current =
-      trigger ??
-      (document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null);
-    setOverlay(next);
-  }, [playSound]);
+  const openOverlay = useCallback(
+    (next: Overlay, trigger?: HTMLElement) => {
+      if (next.kind === 'terminal') {
+        const now = Date.now();
+        setTerminalDeadline((deadline) => startCountdown(deadline, now));
+      }
+      playSound(overlaySound[next.kind]);
+      previousFocus.current =
+        trigger ??
+        (document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null);
+      setOverlay(next);
+    },
+    [playSound],
+  );
   const discover = useCallback(
-    () => openOverlay({ kind: 'terminal', prefill: '4 8 15 16 23 42' }),
+    () => openOverlay({ kind: 'terminal', prefill: FORMATTED_LOST_SEQUENCE }),
     [openOverlay],
   );
   const connectPhone = useCallback(
@@ -62,7 +71,11 @@ export function NotFoundPage() {
       openOverlay({ kind: 'terminal', prefill: '' }, trigger),
     [openOverlay],
   );
-  const sceneRef = useIslandInteractions(discover, overlay === null, motionPaused);
+  const sceneRef = useIslandInteractions(
+    discover,
+    overlay === null,
+    motionPaused,
+  );
   const closeOverlay = useCallback(() => {
     playSound('ui');
     setOverlay(null);

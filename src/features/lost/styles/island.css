@@ -1,20 +1,20 @@
 @font-face {
   font-family: 'Lost Sans';
-  src: url('../../fonts/lost/DMSans-Latin.woff2') format('woff2');
+  src: url('../fonts/DMSans-Latin.woff2') format('woff2');
   font-weight: 100 1000;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Lost Serif';
-  src: url('../../fonts/lost/SourceSerif4-Latin.woff2') format('woff2');
+  src: url('../fonts/SourceSerif4-Latin.woff2') format('woff2');
   font-weight: 200 900;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Lost Display';
-  src: url('../../fonts/Jost-404.ttf') format('truetype');
+  src: url('../fonts/Jost-404.ttf') format('truetype');
   font-style: normal;
   font-weight: 600;
   font-display: swap;
@@ -23,7 +23,12 @@
 
 /* Root font metrics must also use the subset during a visit to the island. */
 html:has(.lost-page) {
-  font-family: 'Lost Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-family:
+    'Lost Sans',
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 .lost-page {
@@ -443,7 +448,13 @@ html:has(.lost-page) {
   }
 }
 
-.lost-page:is([data-motion='paused'], [data-overlay-open='true'], [data-visibility='hidden']) .island-scene * {
+.lost-page:is(
+    [data-motion='paused'],
+    [data-overlay-open='true'],
+    [data-visibility='hidden']
+  )
+  .island-scene
+  * {
   animation-play-state: paused;
 }
 

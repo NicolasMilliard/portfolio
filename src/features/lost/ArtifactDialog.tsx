@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { CLUE_NUMBERS, type Evidence } from './protocol';
+import { InspectionDialog } from './InspectionDialog';
+import { CLUE_NUMBERS, type ArtifactKind, type Evidence } from './protocol';
 import type { PlaySound } from './soundEffects';
+import './styles/artifacts.css';
 import { useIslandDialog } from './useIslandDialog';
-import './clues.css';
-import './artifacts.css';
-
-type ArtifactKind = 'wheelchair' | 'can';
 
 export default function ArtifactDialog({
   kind,
@@ -19,7 +17,6 @@ export default function ArtifactDialog({
   onFind: (evidence: Evidence) => void;
   onSound: PlaySound;
 }) {
-  const dialogRef = useIslandDialog();
   const [detail, setDetail] = useState(false);
   const actionRef = useRef<HTMLButtonElement>(null);
   const backRef = useRef<HTMLButtonElement>(null);
@@ -27,15 +24,24 @@ export default function ArtifactDialog({
   const chair = kind === 'wheelchair';
   const number = CLUE_NUMBERS[kind][0];
   const title = chair
-    ? detail ? 'Beneath the seat.' : 'Someone walked away.'
-    : detail ? 'The other side.' : 'Supplies from another time.';
+    ? detail
+      ? 'Beneath the seat.'
+      : 'Someone walked away.'
+    : detail
+      ? 'The other side.'
+      : 'Supplies from another time.';
   const caption = chair
-    ? detail ? 'A worn stencil on the cross-brace.' : 'Dust in the upholstery. No tracks leading away.'
-    : detail ? 'A mark pressed into the metal.' : 'The label has outlasted whoever left it here.';
+    ? detail
+      ? 'A worn stencil on the cross-brace.'
+      : 'Dust in the upholstery. No tracks leading away.'
+    : detail
+      ? 'A mark pressed into the metal.'
+      : 'The label has outlasted whoever left it here.';
 
   useEffect(() => {
     if (detail) backRef.current?.focus({ preventScroll: true });
-    else if (returningRef.current) actionRef.current?.focus({ preventScroll: true });
+    else if (returningRef.current)
+      actionRef.current?.focus({ preventScroll: true });
   }, [detail]);
 
   const returnToObject = () => {
@@ -43,30 +49,16 @@ export default function ArtifactDialog({
     returningRef.current = true;
     setDetail(false);
   };
-  const dismiss = () => dialogRef.current?.close();
-  const stepBack = () => detail ? returnToObject() : dismiss();
+  const dialog = useIslandDialog({
+    onClose,
+    onDismiss: detail ? returnToObject : undefined,
+  });
 
   return (
-    <dialog
-      ref={dialogRef}
-      className="island-clue-dialog"
-      aria-modal="true"
-      aria-labelledby="artifact-title"
-      aria-describedby="artifact-caption"
-      onClose={(event) => {
-        if (!event.currentTarget.open) onClose();
-      }}
-      onCancel={(event) => {
-        event.preventDefault();
-        stepBack();
-      }}
-      onClick={(event) => {
-        if (
-          event.target instanceof Element &&
-          event.target.closest('[data-inspection-content], button, a')
-        ) return;
-        stepBack();
-      }}
+    <InspectionDialog
+      dialog={dialog}
+      labelledBy="artifact-title"
+      describedBy="artifact-caption"
     >
       <article className="clue-inspection artifact-inspection">
         <div className="clue-toolbar">
@@ -80,7 +72,11 @@ export default function ArtifactDialog({
               <span aria-hidden="true">←</span> BACK
             </button>
           )}
-          <button type="button" onClick={dismiss} aria-label="Close inspection">
+          <button
+            type="button"
+            onClick={dialog.close}
+            aria-label="Close inspection"
+          >
             CLOSE
           </button>
         </div>
@@ -104,7 +100,9 @@ export default function ArtifactDialog({
                   alt=""
                   draggable={false}
                 />
-                <span className="artifact-frame-number" aria-hidden="true">{number}</span>
+                <span className="artifact-frame-number" aria-hidden="true">
+                  {number}
+                </span>
               </figure>
             ) : (
               <img
@@ -131,7 +129,9 @@ export default function ArtifactDialog({
                 decoding="async"
                 draggable={false}
               />
-              <span className="artifact-can-number" aria-hidden="true">{number}</span>
+              <span className="artifact-can-number" aria-hidden="true">
+                {number}
+              </span>
             </figure>
           ) : (
             <img
@@ -145,7 +145,9 @@ export default function ArtifactDialog({
             />
           )}
         </div>
-        <p id="artifact-caption" className="clue-caption">{caption}</p>
+        <p id="artifact-caption" className="clue-caption">
+          {caption}
+        </p>
         {!detail && (
           <button
             ref={actionRef}
@@ -162,9 +164,11 @@ export default function ArtifactDialog({
           </button>
         )}
         <p className="visually-hidden" role="status" aria-atomic="true">
-          {detail ? `${chair ? 'The cross-brace is marked' : 'The can base is stamped'} ${number}.` : ''}
+          {detail
+            ? `${chair ? 'The cross-brace is marked' : 'The can base is stamped'} ${number}.`
+            : ''}
         </p>
       </article>
-    </dialog>
+    </InspectionDialog>
   );
 }
