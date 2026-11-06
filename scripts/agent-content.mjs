@@ -8,7 +8,6 @@ export const renderMarkdown = (html, canonicalUrl) => {
   });
 
   turndown.remove(['script', 'style', 'svg', 'nav', 'dialog', 'footer']);
-  turndown.remove((node) => node.getAttribute('aria-hidden') === 'true');
   turndown.addRule('absoluteLinks', {
     filter: (node) => node.nodeName === 'A' && node.hasAttribute('href'),
     replacement: (content, node) => {
@@ -57,6 +56,14 @@ export const renderMarkdown = (html, canonicalUrl) => {
     },
   });
 
+  // A custom rule also overrides built-in paragraph and heading rules.
+  turndown.addRule('browserOnlyContent', {
+    filter: (node) =>
+      node.getAttribute('aria-hidden') === 'true' ||
+      node.getAttribute('role') === 'status',
+    replacement: () => '',
+  });
+
   return `${turndown.turndown(html)}\n\nCanonical URL: ${canonicalUrl}\n`;
 };
 
@@ -84,7 +91,7 @@ ${writings.map((writing) => `- [${writing.title}](${absolute(`/writing/${writing
 
 ## Projects
 
-${projects.map((project) => `- [${project.title}](${project.link}): ${project.description}`).join('\n')}
+${projects.map((project) => `- [${project.title}](${absolute(project.link)}): ${project.description}`).join('\n')}
 
 ## Reading content
 

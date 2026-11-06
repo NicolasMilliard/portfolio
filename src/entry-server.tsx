@@ -4,8 +4,10 @@ import { renderToString } from 'react-dom/server';
 
 import { informationPages } from './content/information';
 import { writings } from './content/writings';
+import { botanicalProject } from './data/portfolio';
 import { createAppRouter } from './router';
 import {
+  botanicalSeo,
   getInformationSeo,
   getWritingSeo,
   homeSeo,
@@ -18,6 +20,13 @@ export const getPrerenderPages = (): PrerenderPage[] => [
     path: '/',
     outputFile: 'index.html',
     seo: homeSeo,
+    includeInSitemap: true,
+  },
+  {
+    path: botanicalProject.link,
+    outputFile: 'botanical.html',
+    styleEntry: 'src/routes/botanical.tsx',
+    seo: botanicalSeo,
     includeInSitemap: true,
   },
   ...informationPages.map((page) => ({

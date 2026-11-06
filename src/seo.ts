@@ -1,6 +1,6 @@
 import type { Writing, WritingImage } from './content/writings';
 import type { InformationPage } from './content/information';
-import { links, profile } from './data/portfolio';
+import { botanicalProject, links, profile } from './data/portfolio.ts';
 
 const SITE_ORIGIN = 'https://milliard.dev';
 const SITE_LOCALE = 'en_US';
@@ -25,6 +25,7 @@ export type SeoPage = {
   title: string;
   description: string;
   robots: string;
+  themeColor?: string;
   canonicalUrl?: string;
   type?: 'website' | 'article';
   image?: ResolvedImage;
@@ -124,6 +125,37 @@ export const notFoundSeo: SeoPage = {
   robots: 'noindex, nofollow',
 };
 
+export const botanicalSeo: SeoPage = {
+  title: `${botanicalProject.title} — ${profile.name}`,
+  description: botanicalProject.description,
+  robots: 'index, follow, max-image-preview:large',
+  themeColor: '#d4c8b4',
+  canonicalUrl: absoluteUrl(botanicalProject.link),
+  type: 'website',
+  image: resolveImage({
+    src: '/og/botanical.jpg',
+    alt: 'The Living Garden: engraved wildflowers and strawberry vines on warm paper.',
+    width: 1200,
+    height: 630,
+  }),
+  structuredData: {
+    '@context': 'https://schema.org',
+    '@graph': [
+      author,
+      {
+        '@type': 'WebPage',
+        '@id': `${absoluteUrl(botanicalProject.link)}#webpage`,
+        name: botanicalProject.title,
+        description: botanicalProject.description,
+        url: absoluteUrl(botanicalProject.link),
+        creator: { '@id': author['@id'] },
+        isPartOf: { '@id': `${absoluteUrl('/')}#website` },
+        inLanguage: SITE_LANGUAGE,
+      },
+    ],
+  },
+};
+
 export const getInformationSeo = (page: InformationPage): SeoPage => ({
   title: page.title,
   description: page.description,
@@ -193,6 +225,7 @@ const getSeoMetaTags = (seo: SeoPage): SeoMetaTag[] => {
   const tags: SeoMetaTag[] = [
     { name: 'description', content: seo.description },
     { name: 'robots', content: seo.robots },
+    { name: 'theme-color', content: seo.themeColor ?? '#fbfcf7' },
   ];
 
   if (!seo.canonicalUrl || !seo.type || !seo.image) {

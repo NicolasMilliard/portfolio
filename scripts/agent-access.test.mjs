@@ -247,3 +247,31 @@ test('agent guidance describes use cases and includes the supplied published pag
   assert.match(guide, /https:\/\/milliard.dev\/writing\/published-article/);
   assert.match(guide, /Accept: text\/markdown/);
 });
+
+test('standalone project Markdown keeps the essay and omits browser-only controls', () => {
+  const markdown = renderMarkdown(`
+    <nav><a href="/">Back to portfolio</a><button>Regrow</button></nav>
+    <p role="status">Flower 2 planted.</p>
+    <main><h1>The Living Garden</h1><p>A garden drawn with code.</p>
+      <svg role="group"><g role="button">Plant another blossom</g></svg>
+    </main>
+  `, 'https://milliard.dev/botanical');
+  assert.match(markdown, /^# The Living Garden/);
+  assert.match(markdown, /A garden drawn with code\./);
+  assert.match(markdown, /Canonical URL: https:\/\/milliard.dev\/botanical/);
+  assert.doesNotMatch(markdown, /Back to portfolio|Regrow|Flower 2|Plant another/);
+});
+
+test('agent project links resolve internal routes without changing external destinations', () => {
+  const guide = renderLlms({
+    profile: { name: 'Nicolas Milliard', about: ['Frontend engineering.'] },
+    pages: [], writings: [],
+    projects: [
+      { title: 'Garden', link: '/botanical', description: 'An interactive study.' },
+      { title: 'External', link: 'https://example.com/project', description: 'Another project.' },
+    ],
+    origin: 'https://milliard.dev',
+  });
+  assert.match(guide, /\[Garden\]\(https:\/\/milliard.dev\/botanical\)/);
+  assert.match(guide, /\[External\]\(https:\/\/example.com\/project\)/);
+});

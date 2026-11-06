@@ -20,7 +20,7 @@ export function BotanicalPage() {
 
   return (
     <div className="botanical-page">
-      <div className="botanical-toolbar">
+      <nav className="botanical-toolbar" aria-label="Garden navigation and controls">
         <div>
           <strong>The Living Page</strong>
           <span className="botanical-hint"> / A botanical experiment</span>
@@ -38,7 +38,7 @@ export function BotanicalPage() {
             </button>
           </div>
         </div>
-      </div>
+      </nav>
       <p className="botanical-status" role="status" aria-live="polite" aria-atomic="true">
         {status}
       </p>

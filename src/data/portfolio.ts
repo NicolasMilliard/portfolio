@@ -7,8 +7,10 @@ export type Profile = {
 export type Project = {
   title: string;
   description: string;
-  link: string;
-};
+} & (
+  | { internal: true; link: '/botanical' }
+  | { internal?: false; link: string }
+);
 
 export type SocialLink = {
   label: string;
@@ -23,7 +25,15 @@ export const profile = {
   ],
 } satisfies Profile;
 
-export const projects = [
+export const botanicalProject = {
+  title: 'The Living Garden',
+  description: 'An interactive botanical study in paper, ink, and motion.',
+  link: '/botanical',
+  internal: true,
+} satisfies Project;
+
+export const projects: Project[] = [
+  botanicalProject,
   {
     title: 'Gestik',
     description: 'Visual component library for representing user interactions.',
@@ -40,7 +50,7 @@ export const projects = [
       'Decentralized alternative to link-in-bio platforms, built on Web3 technologies.',
     link: 'https://3bio.social/',
   },
-] satisfies Project[];
+];
 
 export const links = [
   { label: 'GitHub', href: 'https://github.com/nicolasmilliard' },
