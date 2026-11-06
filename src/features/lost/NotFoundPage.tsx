@@ -2,11 +2,17 @@ import { Link } from '@tanstack/react-router';
 import { lazy, Suspense, useCallback, useRef, useState } from 'react';
 
 import { IslandAmbience } from './IslandAmbience';
-import { IslandClues, type ClueKind } from './IslandClues';
+import { IslandClues } from './IslandClues';
 import { IslandForeground } from './IslandForeground';
 import { IslandPhone } from './IslandPhone';
 import { IslandScene } from './IslandScene';
-import { OCEANIC_FLIGHT, startCountdown, type Evidence } from './protocol';
+import {
+  FORMATTED_LOST_SEQUENCE,
+  OCEANIC_FLIGHT,
+  startCountdown,
+  type ClueKind,
+  type Evidence,
+} from './protocol';
 import './styles/cursors.css';
 import './styles/island.css';
 import { useIslandAudio } from './useIslandAudio';
@@ -57,7 +63,7 @@ export function NotFoundPage() {
     [playSound],
   );
   const discover = useCallback(
-    () => openOverlay({ kind: 'terminal', prefill: '4 8 15 16 23 42' }),
+    () => openOverlay({ kind: 'terminal', prefill: FORMATTED_LOST_SEQUENCE }),
     [openOverlay],
   );
   const connectPhone = useCallback(

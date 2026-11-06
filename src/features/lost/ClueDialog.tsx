@@ -2,20 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 
 import { BoardingPass } from './BoardingPass';
 import { InspectionDialog } from './InspectionDialog';
-import type { ClueKind } from './IslandClues';
 import { LotteryTicket } from './LotteryTicket';
-import type { Evidence } from './protocol';
+import type { ArtifactKind, ClueKind, Evidence, SuitcaseItem } from './protocol';
 import type { PlaySound } from './soundEffects';
 import './styles/suitcase.css';
-import {
-  OpenSuitcase,
-  ShirtInspection,
-  type SuitcaseItem,
-} from './SuitcaseContents';
+import { OpenSuitcase, ShirtInspection } from './SuitcaseContents';
 import { useIslandDialog } from './useIslandDialog';
 
 type ClueDialogProps = {
-  kind: Exclude<ClueKind, 'wheelchair' | 'can'>;
+  kind: Exclude<ClueKind, ArtifactKind>;
   onClose: () => void;
   onFind: (evidence: Evidence) => void;
   onSound: PlaySound;

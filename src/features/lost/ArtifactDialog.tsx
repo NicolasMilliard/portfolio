@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { InspectionDialog } from './InspectionDialog';
-import { CLUE_NUMBERS, type Evidence } from './protocol';
+import { CLUE_NUMBERS, type ArtifactKind, type Evidence } from './protocol';
 import type { PlaySound } from './soundEffects';
 import './styles/artifacts.css';
 import { useIslandDialog } from './useIslandDialog';
-
-type ArtifactKind = 'wheelchair' | 'can';
 
 export default function ArtifactDialog({
   kind,

@@ -1,4 +1,6 @@
-export const LOST_SEQUENCE = '4815162342';
+const sequenceNumbers = [4, 8, 15, 16, 23, 42] as const;
+export const LOST_SEQUENCE = sequenceNumbers.join('');
+export const FORMATTED_LOST_SEQUENCE = sequenceNumbers.join(' ');
 export const CYCLE_SECONDS = 108 * 60;
 export const TRANSMISSION_URL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 export const CLUE_NUMBERS = {
@@ -7,9 +9,12 @@ export const CLUE_NUMBERS = {
   wheelchair: [8],
   can: [15],
 } as const;
-// A familiar reference, rather than the only source of two required numbers.
 export const OCEANIC_FLIGHT = '815';
+
 export type Evidence = keyof typeof CLUE_NUMBERS;
+export type ArtifactKind = 'wheelchair' | 'can';
+export type ClueKind = 'ticket' | 'suitcase' | ArtifactKind;
+export type SuitcaseItem = 'shirt' | 'paper';
 
 // Accept spaced or continuous digits, but never silently discard other input.
 export const isValidSequence = (value: string): boolean =>
@@ -25,7 +30,10 @@ export const formatCountdown = (seconds: number): string => {
 export const startCountdown = (deadline: number | null, now: number): number =>
   deadline ?? now + CYCLE_SECONDS * 1000;
 
-export const countdownRemaining = (deadline: number | null, now: number): number =>
+export const countdownRemaining = (
+  deadline: number | null,
+  now: number,
+): number =>
   deadline === null
     ? CYCLE_SECONDS
     : Math.max(0, Math.ceil((deadline - now) / 1000));
