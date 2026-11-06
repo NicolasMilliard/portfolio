@@ -1,0 +1,451 @@
+/* Document colors and root font metrics follow the garden only while mounted. */
+html:has(.botanical-page) {
+  background: #d4c8b4;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+body:has(.botanical-page) {
+  background: #d4c8b4;
+}
+
+.botanical-page {
+  --botanical-ink: #26271f;
+  --botanical-ground: #d4c8b4;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  padding-bottom: 1px;
+  background: var(--botanical-ground);
+  color: var(--botanical-ink);
+  color-scheme: light;
+  font-family: var(--font-serif);
+}
+
+.botanical-page::before {
+  content: '';
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.67' numOctaves='3' seed='8' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+}
+
+.botanical-page ::selection {
+  background: #cbbfa8;
+  color: var(--botanical-ink);
+}
+
+.botanical-page .botanical-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: min(968px, calc(100% - 40px));
+  margin-inline: auto;
+  padding: 24px 5px 18px;
+  color: #625b4d;
+  font: 11px var(--font-sans);
+  letter-spacing: 0.085em;
+  text-transform: uppercase;
+}
+
+.botanical-page .botanical-toolbar strong {
+  color: #36372e;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.botanical-page .botanical-hint {
+  opacity: 0.7;
+}
+
+.botanical-page .botanical-back-link {
+  flex-shrink: 0;
+  padding-block: 10px;
+  color: #37362d;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.botanical-page .botanical-back-link:hover {
+  color: var(--botanical-ink);
+}
+
+.botanical-page .botanical-back-link:focus-visible {
+  outline: 2px solid #777451;
+  outline-offset: 4px;
+}
+
+/* Explicit element styles contain the portfolio's global typography and layout. */
+.botanical-page .botanical-sheet {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: min(968px, calc(100% - 28px));
+  min-height: 1290px;
+  margin: 0 auto 45px;
+  padding: 44px 35px 23px;
+  overflow: hidden;
+  border: 1px solid #cbbfa8;
+  background: radial-gradient(ellipse at 25% 13%, #f1e9d8 0, #ede3d0 55%, #e6dcc8 100%);
+  box-shadow: 0 3px 7px #53452b12, 0 25px 75px #56483134, inset 0 0 100px #b3a18615;
+}
+
+.botanical-page .botanical-sheet::before {
+  content: '';
+  position: absolute;
+  z-index: 12;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, #513c2a04 4px 5px);
+  mix-blend-mode: multiply;
+}
+
+.botanical-page .botanical-sheet::after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1px solid #a99d8750;
+  pointer-events: none;
+}
+
+.botanical-page .botanical-masthead {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0 8px 24px;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.botanical-page .botanical-masthead div:nth-child(2) {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  white-space: nowrap;
+}
+
+.botanical-page .botanical-masthead div:last-child {
+  text-align: right;
+}
+
+.botanical-page .botanical-plate {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr) minmax(0, 1fr);
+  gap: 22px;
+  width: 100%;
+  max-width: none;
+  min-height: 1111px;
+  margin: 0;
+}
+
+.botanical-page .botanical-illustration {
+  position: relative;
+  height: 1111px;
+  overflow: hidden;
+  border: 2px solid var(--botanical-ink);
+  background: repeating-linear-gradient(90deg, #342c221c 0 0.65px, transparent 1px 5px);
+}
+
+.botanical-page .botanical-illustration svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.botanical-page .botanical-illustration::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 3px solid #ece1cd;
+  box-shadow: inset 0 0 0 1px #26271f88;
+  pointer-events: none;
+}
+
+.botanical-page .botanical-essay {
+  position: relative;
+  align-self: stretch;
+  padding-inline: 1px;
+  font-size: 14px;
+  line-height: 1.39;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.botanical-page .botanical-essay p {
+  max-width: none;
+  margin: 0 0 11px;
+  color: inherit;
+  font: inherit;
+  text-wrap: wrap;
+}
+
+.botanical-page .botanical-essay .botanical-eyebrow {
+  margin-bottom: 2px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.botanical-page .botanical-essay h1 {
+  margin: 5px -8px 2px;
+  text-align: center;
+  font: 600 25px/1.02 var(--font-serif);
+  letter-spacing: -0.045em;
+}
+
+.botanical-page .botanical-essay .botanical-byline {
+  margin: 4px 0 19px;
+  text-align: center;
+  font-size: 11px;
+  font-style: italic;
+}
+
+.botanical-page .botanical-indent {
+  text-indent: 1.15em;
+}
+
+.botanical-page .botanical-drop::first-letter {
+  float: left;
+  padding: 2px 5px 0 0;
+  font-size: 3em;
+  line-height: 0.85;
+}
+
+.botanical-page .botanical-essay h2 {
+  margin: 21px 0 5px;
+  text-align: center;
+  font: 600 16px/1.1 var(--font-serif);
+}
+
+.botanical-page .botanical-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px auto 13px;
+  font-size: 14px;
+}
+
+.botanical-page .botanical-ornament::before,
+.botanical-page .botanical-ornament::after {
+  content: '';
+  width: 42px;
+  border-top: 1px solid var(--botanical-ink);
+}
+
+.botanical-page .botanical-pull {
+  margin: 15px 0 14px;
+  padding: 11px 7px 8px;
+  border-block: 1px solid var(--botanical-ink);
+  text-align: center;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.24;
+}
+
+.botanical-page .botanical-essay .botanical-colophon {
+  margin: 22px 0;
+  text-align: center;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
+.botanical-page .botanical-bottomline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  margin-top: 9px;
+  color: #40392d;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.botanical-page .botanical-bottomline span:nth-child(2) {
+  text-align: center;
+  font-size: 11px;
+}
+
+.botanical-page .botanical-bottomline span:last-child {
+  text-align: right;
+}
+
+.botanical-page .botanical-stem {
+  fill: none;
+  stroke: #28271f;
+  stroke-linecap: round;
+}
+
+.botanical-page .botanical-leaf-outline {
+  fill: #eee4d0;
+  stroke: #25271e;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.botanical-page .botanical-leaf-vein {
+  fill: none;
+  stroke: #2d2d23;
+  stroke-linecap: round;
+}
+
+.botanical-page .botanical-leaf-hatch {
+  fill: none;
+  stroke: #2d2d23;
+  stroke-width: 0.7;
+  opacity: 0.82;
+}
+
+.botanical-page .botanical-petal {
+  fill: #f0e6d2;
+  stroke: #26251d;
+  stroke-width: 1.9;
+  stroke-linejoin: round;
+}
+
+.botanical-page .botanical-petal-inner {
+  fill: none;
+  stroke: #25271f;
+  stroke-width: 0.8;
+  opacity: 0.9;
+}
+
+.botanical-page .botanical-flower-core {
+  fill: #d8c8ac;
+  stroke: #28271f;
+  stroke-width: 1.55;
+}
+
+.botanical-page .botanical-seed {
+  fill: #29281e;
+}
+
+.botanical-page .botanical-fruit {
+  fill: #d4c2a4;
+  stroke: #292820;
+  stroke-width: 2;
+}
+
+.botanical-page .botanical-fruit-groove {
+  fill: none;
+  stroke: #29281f;
+  stroke-width: 0.7;
+  opacity: 0.5;
+}
+
+.botanical-page .botanical-berry-seed {
+  fill: none;
+  stroke: #29291f;
+  stroke-width: 1.2;
+}
+
+.botanical-page .botanical-calyx {
+  fill: #e8dcc4;
+  stroke: #29281f;
+  stroke-width: 1.6;
+}
+
+.botanical-page .botanical-engraving {
+  fill: none;
+  stroke: #29281f;
+  stroke-width: 0.45;
+  opacity: 0.16;
+}
+
+@media (max-width: 1050px) {
+  .botanical-page .botanical-sheet {
+    min-height: auto;
+    padding: 30px 24px;
+  }
+
+  .botanical-page .botanical-plate {
+    gap: 15px;
+    min-height: 1000px;
+  }
+
+  .botanical-page .botanical-essay {
+    font-size: 12px;
+  }
+
+  .botanical-page .botanical-essay h1 {
+    font-size: 22px;
+  }
+
+  .botanical-page .botanical-illustration {
+    height: 1000px;
+  }
+}
+
+@media (max-width: 680px) {
+  .botanical-page .botanical-toolbar {
+    width: calc(100% - 32px);
+    padding: 14px 0;
+    font-size: 10px;
+  }
+
+  .botanical-page .botanical-hint {
+    display: none;
+  }
+
+  .botanical-page .botanical-sheet {
+    width: calc(100% - 16px);
+    padding: 25px 16px 17px;
+  }
+
+  .botanical-page .botanical-masthead {
+    padding: 0 0 22px;
+    font-size: 10px;
+  }
+
+  .botanical-page .botanical-masthead div:nth-child(2) {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  .botanical-page .botanical-plate {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 12px;
+    min-height: auto;
+  }
+
+  .botanical-page .botanical-essay {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: min(100%, 420px);
+    margin-inline: auto;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .botanical-page .botanical-essay h1 {
+    margin-inline: 0;
+    font-size: 32px;
+  }
+
+  .botanical-page .botanical-essay h2 {
+    font-size: 20px;
+  }
+
+  .botanical-page .botanical-illustration {
+    height: min(640px, 170vw);
+  }
+
+  .botanical-page .botanical-bottomline {
+    margin-top: 16px;
+    font-size: 8px;
+  }
+}
