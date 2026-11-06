@@ -1,5 +1,5 @@
 import { BoardingPass } from './BoardingPass';
-import './clues.css';
+import './styles/clues.css';
 
 export type ClueKind = 'ticket' | 'suitcase' | 'wheelchair' | 'can';
 

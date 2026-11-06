@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { BoardingPass } from './BoardingPass';
-import './clues.css';
 import type { ClueKind } from './IslandClues';
 import { LotteryTicket } from './LotteryTicket';
 import type { Evidence } from './protocol';
 import type { PlaySound } from './soundEffects';
+import './styles/clues.css';
 import {
   OpenSuitcase,
   ShirtInspection,

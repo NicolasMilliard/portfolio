@@ -1,10 +1,9 @@
 import { memo, type ReactNode } from 'react';
 
-import './scene.css';
+import './styles/scene.css';
 
 // A media source prevents hidden desktop plates downloading on phones (and vice versa).
-const emptyImage =
-  'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+const emptyImage = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
 function DesktopPlate({
   name,
@@ -77,7 +76,10 @@ export const IslandScene = memo(function IslandScene({
         <div className="island-depth island-depth-far" aria-hidden="true">
           <DesktopPlate name="sea" />
         </div>
-        <div className="island-depth island-depth-background" aria-hidden="true">
+        <div
+          className="island-depth island-depth-background"
+          aria-hidden="true"
+        >
           <DesktopPlate name="forest" priority />
           <div className="island-prop island-wreckage">
             <img

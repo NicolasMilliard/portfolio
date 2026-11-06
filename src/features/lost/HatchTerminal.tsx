@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState, type SubmitEvent } from 'react';
 
+import { HatchSequenceInput } from './HatchSequenceInput';
 import {
   countdownRemaining,
   formatCountdown,
   isValidSequence,
   TRANSMISSION_URL,
 } from './protocol';
-import { HatchSequenceInput } from './HatchSequenceInput';
 import type { PlaySound } from './soundEffects';
-import './terminal.css';
+import './styles/terminal.css';
 
 type Phase = 'awaiting' | 'error' | 'accepted';
 

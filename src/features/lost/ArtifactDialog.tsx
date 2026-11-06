@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import { CLUE_NUMBERS, type Evidence } from './protocol';
 import type { PlaySound } from './soundEffects';
+import './styles/artifacts.css';
+import './styles/clues.css';
 import { useIslandDialog } from './useIslandDialog';
-import './clues.css';
-import './artifacts.css';
 
 type ArtifactKind = 'wheelchair' | 'can';
 
@@ -27,15 +27,24 @@ export default function ArtifactDialog({
   const chair = kind === 'wheelchair';
   const number = CLUE_NUMBERS[kind][0];
   const title = chair
-    ? detail ? 'Beneath the seat.' : 'Someone walked away.'
-    : detail ? 'The other side.' : 'Supplies from another time.';
+    ? detail
+      ? 'Beneath the seat.'
+      : 'Someone walked away.'
+    : detail
+      ? 'The other side.'
+      : 'Supplies from another time.';
   const caption = chair
-    ? detail ? 'A worn stencil on the cross-brace.' : 'Dust in the upholstery. No tracks leading away.'
-    : detail ? 'A mark pressed into the metal.' : 'The label has outlasted whoever left it here.';
+    ? detail
+      ? 'A worn stencil on the cross-brace.'
+      : 'Dust in the upholstery. No tracks leading away.'
+    : detail
+      ? 'A mark pressed into the metal.'
+      : 'The label has outlasted whoever left it here.';
 
   useEffect(() => {
     if (detail) backRef.current?.focus({ preventScroll: true });
-    else if (returningRef.current) actionRef.current?.focus({ preventScroll: true });
+    else if (returningRef.current)
+      actionRef.current?.focus({ preventScroll: true });
   }, [detail]);
 
   const returnToObject = () => {
@@ -44,7 +53,7 @@ export default function ArtifactDialog({
     setDetail(false);
   };
   const dismiss = () => dialogRef.current?.close();
-  const stepBack = () => detail ? returnToObject() : dismiss();
+  const stepBack = () => (detail ? returnToObject() : dismiss());
 
   return (
     <dialog
@@ -64,7 +73,8 @@ export default function ArtifactDialog({
         if (
           event.target instanceof Element &&
           event.target.closest('[data-inspection-content], button, a')
-        ) return;
+        )
+          return;
         stepBack();
       }}
     >
@@ -104,7 +114,9 @@ export default function ArtifactDialog({
                   alt=""
                   draggable={false}
                 />
-                <span className="artifact-frame-number" aria-hidden="true">{number}</span>
+                <span className="artifact-frame-number" aria-hidden="true">
+                  {number}
+                </span>
               </figure>
             ) : (
               <img
@@ -131,7 +143,9 @@ export default function ArtifactDialog({
                 decoding="async"
                 draggable={false}
               />
-              <span className="artifact-can-number" aria-hidden="true">{number}</span>
+              <span className="artifact-can-number" aria-hidden="true">
+                {number}
+              </span>
             </figure>
           ) : (
             <img
@@ -145,7 +159,9 @@ export default function ArtifactDialog({
             />
           )}
         </div>
-        <p id="artifact-caption" className="clue-caption">{caption}</p>
+        <p id="artifact-caption" className="clue-caption">
+          {caption}
+        </p>
         {!detail && (
           <button
             ref={actionRef}
@@ -162,7 +178,9 @@ export default function ArtifactDialog({
           </button>
         )}
         <p className="visually-hidden" role="status" aria-atomic="true">
-          {detail ? `${chair ? 'The cross-brace is marked' : 'The can base is stamped'} ${number}.` : ''}
+          {detail
+            ? `${chair ? 'The cross-brace is marked' : 'The can base is stamped'} ${number}.`
+            : ''}
         </p>
       </article>
     </dialog>
