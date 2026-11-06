@@ -79,13 +79,6 @@
   color: #e7d6b1;
   font: italic 16px/1.7 var(--font-serif);
 }
-.clue-return-note {
-  display: block;
-  margin-top: 13px;
-  color: #acbba8;
-  font: 8px/1.6 var(--font-mono);
-  letter-spacing: 0.1em;
-}
 @media (prefers-reduced-motion: no-preference) {
   .clue-inspection {
     animation: clue-arrival 0.45s both cubic-bezier(0.22, 1, 0.36, 1);

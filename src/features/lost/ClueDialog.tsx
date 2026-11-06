@@ -131,11 +131,7 @@ export default function ClueDialog({
             )}
             {view === 'shirt' && <ShirtInspection />}
             {view === 'lottery' && (
-              <div
-                className="clue-case-contents"
-                key="contents"
-                data-revealed="true"
-              >
+              <div className="clue-case-contents" key="contents">
                 <LotteryTicket />
               </div>
             )}
