@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { BoardingPass } from './BoardingPass';
+import { InspectionDialog } from './InspectionDialog';
 import type { ClueKind } from './IslandClues';
 import { LotteryTicket } from './LotteryTicket';
 import type { Evidence } from './protocol';
 import type { PlaySound } from './soundEffects';
-import './styles/clues.css';
 import {
   OpenSuitcase,
   ShirtInspection,
@@ -33,7 +33,6 @@ export default function ClueDialog({
   onFind,
   onSound,
 }: ClueDialogProps) {
-  const dialogRef = useIslandDialog();
   const [view, setView] = useState<SuitcaseView>('closed');
   const shirtRef = useRef<HTMLButtonElement>(null);
   const paperRef = useRef<HTMLButtonElement>(null);
@@ -68,41 +67,23 @@ export default function ClueDialog({
     onSound(view === 'lottery' ? 'paper' : 'baggage');
     setView('open');
   };
-  const dismissInspection = () => {
-    if (inspectingItem) returnToSuitcase();
-    else dialogRef.current?.close();
-  };
+  const dialog = useIslandDialog({
+    onClose,
+    onDismiss: inspectingItem ? returnToSuitcase : undefined,
+  });
 
   return (
-    <dialog
-      ref={dialogRef}
-      className="island-clue-dialog"
-      aria-modal="true"
-      aria-labelledby="island-clue-title"
-      aria-describedby={caption ? 'island-clue-caption' : undefined}
-      onClose={(event) => {
-        if (!event.currentTarget.open) onClose();
-      }}
-      onCancel={(event) => {
-        event.preventDefault();
-        dismissInspection();
-      }}
-      onClick={(event) => {
-        if (
-          event.target instanceof Element &&
-          event.target.closest('[data-inspection-content], button, a')
-        ) {
-          return;
-        }
-        dismissInspection();
-      }}
+    <InspectionDialog
+      dialog={dialog}
+      labelledBy="island-clue-title"
+      describedBy={caption ? 'island-clue-caption' : undefined}
     >
       <article className="clue-inspection">
         <div className="clue-toolbar">
           <button
             ref={closeRef}
             type="button"
-            onClick={dismissInspection}
+            onClick={dialog.dismiss}
             aria-label="Close inspection"
           >
             CLOSE
@@ -170,6 +151,6 @@ export default function ClueDialog({
           </p>
         )}
       </article>
-    </dialog>
+    </InspectionDialog>
   );
 }

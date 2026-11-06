@@ -9,6 +9,7 @@ import {
 } from './protocol';
 import type { PlaySound } from './soundEffects';
 import './styles/terminal.css';
+import { useIslandDialog } from './useIslandDialog';
 
 type Phase = 'awaiting' | 'error' | 'accepted';
 
@@ -53,24 +54,11 @@ export default function HatchTerminal({
   onClose: () => void;
   onSound: PlaySound;
 }) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialog = useIslandDialog({ onClose, initialFocusRef: inputRef });
   const acceptedRef = useRef(false);
   const [phase, setPhase] = useState<Phase>('awaiting');
   const accepted = phase === 'accepted';
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-    const previousOverflow = document.body.style.overflow;
-    dialog.showModal();
-    document.body.style.overflow = 'hidden';
-    inputRef.current?.focus({ preventScroll: true });
-    return () => {
-      dialog.close();
-      document.body.style.overflow = previousOverflow;
-    };
-  }, []);
 
   const submit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -91,23 +79,13 @@ export default function HatchTerminal({
 
   return (
     <dialog
-      ref={dialogRef}
+      {...dialog.props}
       className="hatch-dialog"
       data-phase={phase}
       aria-labelledby="hatch-terminal-heading"
-      aria-modal="true"
       aria-describedby="hatch-terminal-description"
-      onClose={(event) => {
-        // StrictMode replays effects; ignore the cleanup's queued close event
-        // if the second setup has already reopened the native dialog.
-        if (!event.currentTarget.open) onClose();
-      }}
-      onCancel={(event) => {
-        event.preventDefault();
-        dialogRef.current?.close();
-      }}
       onClick={(event) => {
-        if (event.target === event.currentTarget) dialogRef.current?.close();
+        if (event.target === event.currentTarget) dialog.close();
       }}
     >
       <div className="hatch-terminal-shell">
@@ -115,7 +93,7 @@ export default function HatchTerminal({
           <span>STATION 03 / THE SWAN</span>
           <button
             type="button"
-            onClick={() => dialogRef.current?.close()}
+            onClick={dialog.close}
             aria-label="Close terminal"
           >
             CLOSE

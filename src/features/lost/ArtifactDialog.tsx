@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { InspectionDialog } from './InspectionDialog';
 import { CLUE_NUMBERS, type Evidence } from './protocol';
 import type { PlaySound } from './soundEffects';
 import './styles/artifacts.css';
-import './styles/clues.css';
 import { useIslandDialog } from './useIslandDialog';
 
 type ArtifactKind = 'wheelchair' | 'can';
@@ -19,7 +19,6 @@ export default function ArtifactDialog({
   onFind: (evidence: Evidence) => void;
   onSound: PlaySound;
 }) {
-  const dialogRef = useIslandDialog();
   const [detail, setDetail] = useState(false);
   const actionRef = useRef<HTMLButtonElement>(null);
   const backRef = useRef<HTMLButtonElement>(null);
@@ -52,31 +51,16 @@ export default function ArtifactDialog({
     returningRef.current = true;
     setDetail(false);
   };
-  const dismiss = () => dialogRef.current?.close();
-  const stepBack = () => (detail ? returnToObject() : dismiss());
+  const dialog = useIslandDialog({
+    onClose,
+    onDismiss: detail ? returnToObject : undefined,
+  });
 
   return (
-    <dialog
-      ref={dialogRef}
-      className="island-clue-dialog"
-      aria-modal="true"
-      aria-labelledby="artifact-title"
-      aria-describedby="artifact-caption"
-      onClose={(event) => {
-        if (!event.currentTarget.open) onClose();
-      }}
-      onCancel={(event) => {
-        event.preventDefault();
-        stepBack();
-      }}
-      onClick={(event) => {
-        if (
-          event.target instanceof Element &&
-          event.target.closest('[data-inspection-content], button, a')
-        )
-          return;
-        stepBack();
-      }}
+    <InspectionDialog
+      dialog={dialog}
+      labelledBy="artifact-title"
+      describedBy="artifact-caption"
     >
       <article className="clue-inspection artifact-inspection">
         <div className="clue-toolbar">
@@ -90,7 +74,11 @@ export default function ArtifactDialog({
               <span aria-hidden="true">←</span> BACK
             </button>
           )}
-          <button type="button" onClick={dismiss} aria-label="Close inspection">
+          <button
+            type="button"
+            onClick={dialog.close}
+            aria-label="Close inspection"
+          >
             CLOSE
           </button>
         </div>
@@ -183,6 +171,6 @@ export default function ArtifactDialog({
             : ''}
         </p>
       </article>
-    </dialog>
+    </InspectionDialog>
   );
 }
