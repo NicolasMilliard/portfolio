@@ -144,15 +144,17 @@ function GardenStrawberry({ fruit }: { fruit: BlossomSpec }) {
 type GardenPlotProps = {
   garden: GardenDefinition;
   label: string;
+  caption: string;
   flowerName: string;
   plants: readonly PlantedFlower[];
   isFull: boolean;
   onPlant: (blossom: BlossomSpec) => void;
 };
 
-export function GardenPlot({ garden, label, flowerName, plants, isFull, onPlant }: GardenPlotProps) {
+export function GardenPlot({ garden, label, caption, flowerName, plants, isFull, onPlant }: GardenPlotProps) {
   return (
     <div className="botanical-illustration">
+      <span className="botanical-plot-label" aria-hidden="true">{caption}</span>
       <svg
         viewBox="0 0 270 1100"
         preserveAspectRatio="xMidYMid slice"

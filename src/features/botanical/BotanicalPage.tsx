@@ -46,7 +46,11 @@ export function BotanicalPage() {
       <main className="botanical-sheet" aria-labelledby="botanical-title">
         <header className="botanical-masthead">
           <div>No. 01</div>
-          <div>✦ &nbsp; H O R T U S &nbsp; ✦</div>
+          <div>
+            <span aria-hidden="true">✦</span>
+            <span>Hortus</span>
+            <span aria-hidden="true">✦</span>
+          </div>
           <div>2026</div>
         </header>
 
@@ -54,16 +58,6 @@ export function BotanicalPage() {
           className="botanical-plate"
           aria-label="Botanical illustration and editorial"
         >
-          <GardenPlot
-            key={`wildflowers-${garden.cycle}`}
-            garden={wildflowerGarden}
-            label="Vintage botanical engraving of wildflowers, with finely veined leaves and five-petalled blossoms"
-            flowerName="wildflower"
-            plants={garden.plants.filter((plant) => plant.side === 'wildflowers')}
-            isFull={isFull}
-            onPlant={(blossom) => dispatch({ type: 'plant', source: { side: 'wildflowers', blossom } })}
-          />
-
           <article className="botanical-essay">
             <p className="botanical-eyebrow">An exercise in patience</p>
             <h1 id="botanical-title">The Living Garden</h1>
@@ -142,15 +136,28 @@ export function BotanicalPage() {
             </p>
           </article>
 
-          <GardenPlot
-            key={`strawberries-${garden.cycle}`}
-            garden={strawberryGarden}
-            label="Vintage botanical engraving of strawberry vines, with serrated leaves, small blossoms and seeded fruit"
-            flowerName="strawberry blossom"
-            plants={garden.plants.filter((plant) => plant.side === 'strawberries')}
-            isFull={isFull}
-            onPlant={(blossom) => dispatch({ type: 'plant', source: { side: 'strawberries', blossom } })}
-          />
+          <div className="botanical-gardens">
+            <GardenPlot
+              key={`wildflowers-${garden.cycle}`}
+              garden={wildflowerGarden}
+              label="Vintage botanical engraving of wildflowers, with finely veined leaves and five-petalled blossoms"
+              caption="I. Wildflowers"
+              flowerName="wildflower"
+              plants={garden.plants.filter((plant) => plant.side === 'wildflowers')}
+              isFull={isFull}
+              onPlant={(blossom) => dispatch({ type: 'plant', source: { side: 'wildflowers', blossom } })}
+            />
+            <GardenPlot
+              key={`strawberries-${garden.cycle}`}
+              garden={strawberryGarden}
+              label="Vintage botanical engraving of strawberry vines, with serrated leaves, small blossoms and seeded fruit"
+              caption="II. Strawberries"
+              flowerName="strawberry blossom"
+              plants={garden.plants.filter((plant) => plant.side === 'strawberries')}
+              isFull={isFull}
+              onPlant={(blossom) => dispatch({ type: 'plant', source: { side: 'strawberries', blossom } })}
+            />
+          </div>
         </section>
 
         <footer className="botanical-bottomline">

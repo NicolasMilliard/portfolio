@@ -1,7 +1,31 @@
+@font-face {
+  font-family: 'Botanical Serif';
+  src: url('./fonts/EBGaramond-Latin.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Botanical Serif';
+  src: url('./fonts/EBGaramond-Italic-Latin.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* Document colors and root font metrics follow the garden only while mounted. */
 html:has(.botanical-page) {
   background: #d4c8b4;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Botanical Serif', Georgia, 'Times New Roman', serif;
 }
 
 body:has(.botanical-page) {
@@ -11,7 +35,7 @@ body:has(.botanical-page) {
 .botanical-page {
   --botanical-ink: #26271f;
   --botanical-ground: #d4c8b4;
-  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-serif: 'Botanical Serif', Georgia, 'Times New Roman', serif;
   --font-sans: ui-sans-serif, system-ui, sans-serif;
   position: relative;
   isolation: isolate;
@@ -47,9 +71,9 @@ body:has(.botanical-page) {
   width: min(968px, calc(100% - 40px));
   margin-inline: auto;
   padding: 24px 5px 10px;
-  color: #625b4d;
-  font: 11px var(--font-sans);
-  letter-spacing: 0.085em;
+  color: #514b40;
+  font: 12px/1.4 var(--font-sans);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -59,12 +83,12 @@ body:has(.botanical-page) {
   letter-spacing: 0.16em;
 }
 
-.botanical-page .botanical-hint {
-  opacity: 0.7;
-}
-
 .botanical-page .botanical-back-link {
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
+  gap: 6px;
+  min-height: 44px;
   padding-block: 10px;
   color: #37362d;
   text-decoration-thickness: 1px;
@@ -96,7 +120,7 @@ body:has(.botanical-page) {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 10px 14px;
   border: 1px solid #aa9d83;
   border-radius: 3px;
@@ -126,11 +150,11 @@ body:has(.botanical-page) {
 .botanical-page .botanical-status {
   width: min(968px, calc(100% - 40px));
   max-width: none;
-  min-height: 16px;
+  min-height: 18px;
   margin: 0 auto 18px;
   padding-inline: 5px;
-  color: #625b4d;
-  font: 11px/1.45 var(--font-sans);
+  color: #514b40;
+  font: 12px/1.5 var(--font-sans);
   text-wrap: wrap;
 }
 
@@ -175,17 +199,27 @@ body:has(.botanical-page) {
   max-width: none;
   margin: 0;
   padding: 0 8px 24px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1;
   letter-spacing: 0.04em;
+  font-variant-numeric: lining-nums;
 }
 
 .botanical-page .botanical-masthead div:nth-child(2) {
-  text-align: center;
-  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 22px;
   font-weight: 500;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   white-space: nowrap;
+}
+
+.botanical-page .botanical-masthead [aria-hidden='true'] {
+  font-size: 12px;
+  letter-spacing: 0;
 }
 
 .botanical-page .botanical-masthead div:last-child {
@@ -204,6 +238,7 @@ body:has(.botanical-page) {
 
 .botanical-page .botanical-illustration {
   position: relative;
+  align-self: start;
   height: 1111px;
   overflow: hidden;
   border: 2px solid var(--botanical-ink);
@@ -211,10 +246,38 @@ body:has(.botanical-page) {
 }
 
 .botanical-page .botanical-illustration svg {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
+}
+
+.botanical-page .botanical-gardens {
+  display: contents;
+}
+
+.botanical-page .botanical-gardens .botanical-illustration:where(:first-child) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.botanical-page .botanical-gardens .botanical-illustration:where(:last-child) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.botanical-page .botanical-plot-label {
+  position: absolute;
+  z-index: 1;
+  inset: 16px 8px auto;
+  color: #514b40;
+  text-align: center;
+  font-size: 15px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  pointer-events: none;
 }
 
 .botanical-page .botanical-illustration::after {
@@ -228,10 +291,12 @@ body:has(.botanical-page) {
 
 .botanical-page .botanical-essay {
   position: relative;
+  grid-column: 2;
+  grid-row: 1;
   align-self: stretch;
   padding-inline: 1px;
-  font-size: 14px;
-  line-height: 1.39;
+  font-size: 16px;
+  line-height: 1.45;
   text-align: justify;
   hyphens: auto;
 }
@@ -247,23 +312,23 @@ body:has(.botanical-page) {
 .botanical-page .botanical-essay .botanical-eyebrow {
   margin-bottom: 2px;
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .botanical-page .botanical-essay h1 {
-  margin: 5px -8px 2px;
+  margin: 5px -8px 4px;
   text-align: center;
-  font: 600 25px/1.02 var(--font-serif);
-  letter-spacing: -0.045em;
+  font: 600 32px/1.05 var(--font-serif);
+  letter-spacing: -0.025em;
 }
 
 .botanical-page .botanical-essay .botanical-byline {
-  margin: 4px 0 19px;
+  margin: 4px 0 22px;
   text-align: center;
-  font-size: 11px;
+  font-size: 13px;
   font-style: italic;
 }
 
@@ -274,14 +339,14 @@ body:has(.botanical-page) {
 .botanical-page .botanical-drop::first-letter {
   float: left;
   padding: 2px 5px 0 0;
-  font-size: 3em;
-  line-height: 0.85;
+  font-size: 3.2em;
+  line-height: 0.8;
 }
 
 .botanical-page .botanical-essay h2 {
   margin: 21px 0 5px;
   text-align: center;
-  font: 600 16px/1.1 var(--font-serif);
+  font: 600 20px/1.15 var(--font-serif);
 }
 
 .botanical-page .botanical-ornament {
@@ -305,7 +370,7 @@ body:has(.botanical-page) {
   padding: 11px 7px 8px;
   border-block: 1px solid var(--botanical-ink);
   text-align: center;
-  font-size: 17px;
+  font-size: 21px;
   font-style: italic;
   line-height: 1.24;
 }
@@ -313,7 +378,7 @@ body:has(.botanical-page) {
 .botanical-page .botanical-essay .botanical-colophon {
   margin: 22px 0;
   text-align: center;
-  font-size: 11px;
+  font-size: 13px;
   font-style: italic;
   line-height: 1.3;
   letter-spacing: 0.01em;
@@ -325,13 +390,13 @@ body:has(.botanical-page) {
   align-items: end;
   margin-top: 9px;
   color: #40392d;
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
 }
 
 .botanical-page .botanical-bottomline span:nth-child(2) {
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .botanical-page .botanical-bottomline span:last-child {
@@ -521,44 +586,20 @@ body:has(.botanical-page) {
   }
 }
 
-@media (max-width: 1050px) {
-  .botanical-page .botanical-sheet {
-    min-height: auto;
-    padding: 30px 24px;
-  }
-
-  .botanical-page .botanical-plate {
-    gap: 15px;
-    min-height: 1000px;
-  }
-
-  .botanical-page .botanical-essay {
-    font-size: 12px;
-  }
-
-  .botanical-page .botanical-essay h1 {
-    font-size: 22px;
-  }
-
-  .botanical-page .botanical-illustration {
-    height: 1000px;
-  }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 1120px) {
   .botanical-page .botanical-hint {
     display: none;
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 960px) {
   .botanical-page .botanical-toolbar {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 8px;
     width: calc(100% - 32px);
     padding: 14px 0 10px;
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .botanical-page .botanical-toolbar-actions {
@@ -572,61 +613,92 @@ body:has(.botanical-page) {
   .botanical-page .botanical-controls button {
     flex: 1;
     min-height: 44px;
+    font-size: 12px;
   }
 
   .botanical-page .botanical-status {
     width: calc(100% - 32px);
-    min-height: 29px;
+    min-height: 36px;
     margin-bottom: 10px;
     padding: 0;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .botanical-page .botanical-sheet {
     width: calc(100% - 16px);
-    padding: 25px 16px 17px;
+    min-height: auto;
+    padding: 28px clamp(16px, 4vw, 32px) 20px;
   }
 
   .botanical-page .botanical-masthead {
-    padding: 0 0 22px;
-    font-size: 10px;
+    padding: 0 0 28px;
+    font-size: 12px;
   }
 
   .botanical-page .botanical-masthead div:nth-child(2) {
-    font-size: 11px;
-    letter-spacing: 0.12em;
+    gap: 10px;
+    font-size: 18px;
+    letter-spacing: 0.22em;
   }
 
   .botanical-page .botanical-plate {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 12px;
+    display: block;
     min-height: auto;
   }
 
   .botanical-page .botanical-essay {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    width: min(100%, 420px);
+    width: min(100%, 48ch);
     margin-inline: auto;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 18px;
+    line-height: 1.55;
+    text-align: start;
+    hyphens: none;
+  }
+
+  .botanical-page .botanical-essay p {
+    margin-bottom: 14px;
+    text-wrap: pretty;
   }
 
   .botanical-page .botanical-essay h1 {
     margin-inline: 0;
-    font-size: 32px;
+    font-size: clamp(34px, 6vw, 42px);
+    text-wrap: balance;
   }
 
   .botanical-page .botanical-essay h2 {
-    font-size: 20px;
+    margin-top: 28px;
+    font-size: 23px;
   }
 
-  .botanical-page .botanical-illustration {
-    height: min(640px, 170vw);
+  .botanical-page .botanical-pull {
+    margin-block: 22px;
+    padding-block: 16px;
+    font-size: 24px;
+  }
+
+  .botanical-page .botanical-gardens {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(12px, 3vw, 20px);
+    width: min(100%, 480px);
+    margin: 32px auto 0;
+  }
+
+  .botanical-page .botanical-gardens .botanical-illustration {
+    grid-column: auto;
+    grid-row: auto;
+    height: auto;
+    aspect-ratio: 270 / 1100;
+  }
+
+  .botanical-page .botanical-plot-label {
+    inset-block-start: 12px;
+    font-size: 13px;
   }
 
   .botanical-page .botanical-bottomline {
     margin-top: 16px;
-    font-size: 8px;
+    font-size: 10px;
   }
 }
