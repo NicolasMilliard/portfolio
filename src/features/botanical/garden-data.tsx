@@ -1,6 +1,6 @@
 import type { GardenDefinition } from './botany';
 
-// Original plate arrangements; timing values are retained for the motion pass.
+// Original plate arrangements and staggered growth timings, in seconds.
 export const wildflowerGarden = {
   stems: [
     ['M 92 1115 C 70 872 109 644 80 463 C 65 347 48 257 99 145', 0.03, 3.5],

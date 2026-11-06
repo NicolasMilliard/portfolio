@@ -1,10 +1,23 @@
 import { Link } from '@tanstack/react-router';
+import { useReducer } from 'react';
 
 import { GardenPlot } from './GardenPlot';
 import { strawberryGarden, wildflowerGarden } from './garden-data';
+import { gardenReducer, initialGardenState, MAX_PLANTED_FLOWERS } from './garden-state';
 import './botanical.css';
 
 export function BotanicalPage() {
+  const [garden, dispatch] = useReducer(gardenReducer, initialGardenState);
+  const isFull = garden.plants.length >= MAX_PLANTED_FLOWERS;
+  const latestPlant = garden.plants.at(-1);
+  const status = isFull
+    ? 'The garden is full. Regrow to make room for more flowers.'
+    : latestPlant
+      ? `Flower ${garden.plants.length} planted in the ${latestPlant.side === 'wildflowers' ? 'wildflower' : 'strawberry'} garden.`
+      : garden.cycle > 0
+        ? 'Both gardens are growing again.'
+        : 'Select a blossom to plant another nearby.';
+
   return (
     <div className="botanical-page">
       <div className="botanical-toolbar">
@@ -12,10 +25,23 @@ export function BotanicalPage() {
           <strong>The Living Page</strong>
           <span className="botanical-hint"> / A botanical experiment</span>
         </div>
-        <Link className="botanical-back-link" to="/">
-          Back to portfolio <span aria-hidden="true">↗</span>
-        </Link>
+        <div className="botanical-toolbar-actions">
+          <Link className="botanical-back-link" to="/">
+            Back to portfolio <span aria-hidden="true">↗</span>
+          </Link>
+          <div className="botanical-controls" role="group" aria-label="Garden controls">
+            <button type="button" disabled={isFull} onClick={() => dispatch({ type: 'plant' })}>
+              <span aria-hidden="true">✳</span> Plant a flower
+            </button>
+            <button type="button" onClick={() => dispatch({ type: 'regrow' })}>
+              <span aria-hidden="true">↻</span> Regrow
+            </button>
+          </div>
+        </div>
       </div>
+      <p className="botanical-status" role="status" aria-live="polite" aria-atomic="true">
+        {status}
+      </p>
 
       <main className="botanical-sheet" aria-labelledby="botanical-title">
         <header className="botanical-masthead">
@@ -29,8 +55,13 @@ export function BotanicalPage() {
           aria-label="Botanical illustration and editorial"
         >
           <GardenPlot
+            key={`wildflowers-${garden.cycle}`}
             garden={wildflowerGarden}
             label="Vintage botanical engraving of wildflowers, with finely veined leaves and five-petalled blossoms"
+            flowerName="wildflower"
+            plants={garden.plants.filter((plant) => plant.side === 'wildflowers')}
+            isFull={isFull}
+            onPlant={(blossom) => dispatch({ type: 'plant', source: { side: 'wildflowers', blossom } })}
           />
 
           <article className="botanical-essay">
@@ -95,25 +126,30 @@ export function BotanicalPage() {
 
             <h2>III. A Gentle Experiment</h2>
             <p className="botanical-indent">
-              A garden rewards a second look. Follow a stem through the leaves,
-              trace the edge of a blossom, and notice how much can grow from a
-              single line.
+              You may tend this garden yourself. Plant another blossom with the
+              little button above, or touch a flower and watch a new one grow
+              nearby.
             </p>
             <p className="botanical-indent">
-              Return to the smallest details. You will find the same lines and
-              curves, yet the drawing remains a small delight.
+              When the page grows still, begin again. You will find the same lines
+              and curves, yet the unfolding remains a small delight.
             </p>
             <div className="botanical-ornament" aria-hidden="true">❦</div>
             <p className="botanical-colophon">
               An original study in paper, ink,
               <br />
-              &amp; the poetry of the web.
+              motion &amp; the poetry of the web.
             </p>
           </article>
 
           <GardenPlot
+            key={`strawberries-${garden.cycle}`}
             garden={strawberryGarden}
             label="Vintage botanical engraving of strawberry vines, with serrated leaves, small blossoms and seeded fruit"
+            flowerName="strawberry blossom"
+            plants={garden.plants.filter((plant) => plant.side === 'strawberries')}
+            isFull={isFull}
+            onPlant={(blossom) => dispatch({ type: 'plant', source: { side: 'strawberries', blossom } })}
           />
         </section>
 
