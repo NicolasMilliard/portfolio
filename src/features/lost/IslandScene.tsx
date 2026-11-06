@@ -1,4 +1,4 @@
-import { memo, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import './styles/scene.css';
 
@@ -30,11 +30,7 @@ function DesktopPlate({
   );
 }
 
-export const IslandScene = memo(function IslandScene({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function IslandScene({ children }: { children: ReactNode }) {
   return (
     <div className="island-scene">
       <svg
@@ -143,4 +139,4 @@ export const IslandScene = memo(function IslandScene({
       </div>
     </div>
   );
-});
+}
