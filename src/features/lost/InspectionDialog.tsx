@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import './styles/clues.css';
+import './styles/inspection-dialog.css';
 import type { IslandDialog } from './useIslandDialog';
 
 export function InspectionDialog({

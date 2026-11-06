@@ -6,6 +6,7 @@ import type { ClueKind } from './IslandClues';
 import { LotteryTicket } from './LotteryTicket';
 import type { Evidence } from './protocol';
 import type { PlaySound } from './soundEffects';
+import './styles/suitcase.css';
 import {
   OpenSuitcase,
   ShirtInspection,

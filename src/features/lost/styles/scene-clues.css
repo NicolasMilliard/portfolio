@@ -1,0 +1,240 @@
+.island-clues {
+  --ticket-left: max(18.5%, calc((100% - 100cqw) / 2 + 20px));
+  /* Keep the paper and its foliage inside the visible crop on wide screens. */
+  --ticket-bottom: max(10%, calc((100% - 100cqh) / 2 + max(6cqh, 3cqw)));
+  --ticket-width: 8.25%;
+  --suitcase-right: max(7%, calc((100% - 100cqw) / 2 + 20px));
+  --suitcase-bottom: 12%;
+  --suitcase-width: 17%;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.lost-page .island-clue {
+  position: absolute;
+  display: block;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  pointer-events: auto;
+  cursor: zoom-in;
+  -webkit-tap-highlight-color: transparent;
+}
+.island-clue-ticket {
+  left: var(--ticket-left);
+  bottom: var(--ticket-bottom);
+  width: var(--ticket-width);
+  transform: rotate(-20deg);
+  filter: drop-shadow(0 2px 2px #0006);
+}
+.island-clue-ticket > span {
+  display: block;
+  transform: scale(0.82);
+  filter: brightness(0.62) saturate(0.65);
+}
+.island-clue-ticket:is(:hover, :focus-visible) > span {
+  filter: brightness(0.86) saturate(0.85);
+}
+/* This stays attached to the roots, independently of the ticket's hover lift. */
+.island-ticket-cover {
+  position: absolute;
+  z-index: 1;
+  left: calc(var(--ticket-left) - 2%);
+  bottom: calc(var(--ticket-bottom) - 2%);
+  width: 17%;
+  aspect-ratio: 3 / 2;
+  background: url('/images/lost/foreground-left-v1-450.webp') left bottom / contain no-repeat;
+  filter: brightness(0.72) saturate(0.75);
+  mask-image:
+    linear-gradient(90deg, transparent, #000 12%, #000 92%, transparent),
+    linear-gradient(#000 78%, transparent);
+  mask-composite: intersect;
+  pointer-events: none;
+}
+.island-clue-suitcase {
+  right: var(--suitcase-right);
+  bottom: var(--suitcase-bottom);
+  width: var(--suitcase-width);
+  transform: rotate(-1deg);
+  filter: drop-shadow(0 8px 7px #0008);
+}
+.island-clue-suitcase > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 1;
+}
+.island-suitcase-cover {
+  position: absolute;
+  z-index: 1;
+  right: calc(var(--suitcase-right) - var(--suitcase-width) * 0.06);
+  bottom: calc(var(--suitcase-bottom) - 1.5%);
+  width: calc(var(--suitcase-width) * 1.8);
+  aspect-ratio: 3 / 2;
+  background: url('/images/lost/foreground-right-v1-450.webp') right bottom / contain no-repeat;
+  filter: brightness(0.68) saturate(0.75);
+  mask-image: linear-gradient(#000 70%, transparent);
+  pointer-events: none;
+}
+.island-clue:is(:hover, :focus-visible) > img {
+  opacity: 1;
+}
+.lost-page .island-prop-control {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  min-width: 44px;
+  min-height: 44px;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  pointer-events: auto;
+  cursor: zoom-in;
+  -webkit-tap-highlight-color: transparent;
+}
+.island-prop-control:focus-visible {
+  outline: 3px solid #f2c58d;
+  outline-offset: 6px;
+}
+.island-wheelchair {
+  --prop-brightness: 0.58;
+  --prop-highlight: 0.8;
+  --prop-saturation: 0.65;
+  left: max(13.5%, calc((100% - 100cqw) / 2 + 16px));
+  bottom: 39%;
+  width: 10.25%;
+}
+.island-wheelchair::after {
+  content: '';
+  position: absolute;
+  left: -25%;
+  bottom: -8%;
+  width: 260%;
+  aspect-ratio: 3 / 2;
+  background: url('/images/lost/foreground-left-v1-450.webp') left bottom / 100% auto no-repeat;
+  filter: url('#island-cutout-alpha') brightness(0.58) saturate(0.65);
+  mask-image: linear-gradient(#000 72%, transparent);
+  pointer-events: none;
+}
+.island-wheelchair::before,
+.island-food-can::before {
+  content: '';
+  position: absolute;
+  left: 9%;
+  bottom: 3%;
+  width: 80%;
+  height: 4%;
+  border-radius: 50%;
+  background: #09110980;
+  filter: blur(4px);
+}
+.island-food-can {
+  --prop-brightness: 0.88;
+  --prop-highlight: 1.08;
+  --prop-saturation: 0.78;
+  /* A separate discovery at the treeline, clear of the foreground luggage. */
+  right: max(23%, calc((100% - 100cqw) / 2 + 24px));
+  bottom: 39.5%;
+  width: 1.95%;
+}
+.island-prop:has(> .island-prop-control) > .island-cutout {
+  filter: url('#island-cutout-alpha') brightness(var(--prop-brightness)) saturate(var(--prop-saturation));
+}
+.island-prop:has(> .island-prop-control:focus-visible) {
+  --prop-brightness: var(--prop-highlight);
+}
+.island-food-can::before {
+  bottom: 5%;
+  height: 8%;
+  filter: blur(2px);
+}
+.island-food-can::after {
+  content: '';
+  position: absolute;
+  left: -40%;
+  bottom: -10%;
+  width: 220%;
+  aspect-ratio: 3 / 2;
+  background: url('/images/lost/foreground-right-v1-450.webp') right bottom / contain no-repeat;
+  filter: brightness(0.68) saturate(0.75);
+  mask-image: linear-gradient(#000 70%, transparent);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .island-clue {
+    transition:
+      transform 0.4s,
+      filter 0.4s;
+  }
+  .island-clue-ticket:is(:hover, :focus-visible) {
+    transform: translateY(-4px) rotate(-17deg);
+  }
+  .island-clue-suitcase:is(:hover, :focus-visible) {
+    transform: translateY(-4px) rotate(0deg);
+  }
+  .island-prop:has(> .island-prop-control) > .island-cutout {
+    transition: filter 400ms ease, transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .island-prop:has(> .island-prop-control:focus-visible) > .island-cutout {
+    transform: translateY(-3px);
+  }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  .island-clues {
+    --suitcase-width: 15.5%;
+    --suitcase-bottom: 9.5%;
+  }
+}
+@media (max-width: 640px) {
+  .island-clues {
+    --ticket-left: 23%;
+    --ticket-bottom: 7.5%;
+    --ticket-width: 23%;
+    --suitcase-right: max(3%, calc((100% - 100cqw) / 2 + 10px));
+    --suitcase-bottom: 10.5%;
+    --suitcase-width: 39%;
+  }
+  .island-ticket-cover {
+    width: 43%;
+  }
+  .island-wheelchair {
+    left: max(5.5%, calc((100% - 100cqw) / 2 + 8px));
+    bottom: 31%;
+    width: 21%;
+  }
+  .island-food-can {
+    left: auto;
+    right: max(14%, calc((100% - 100cqw) / 2 + 22px));
+    bottom: 33%;
+    width: 6%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .island-clue {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .island-prop:has(> .island-prop-control:hover) {
+    --prop-brightness: var(--prop-highlight);
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .island-prop:has(> .island-prop-control:hover) > .island-cutout {
+    transform: translateY(-3px);
+  }
+}
+@media (max-width: 360px) {
+  .island-wheelchair {
+    width: 16%;
+  }
+}
