@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 
-import { profile } from '../data/portfolio';
+import { profile } from '../../data/portfolio';
 
 import { DrawnUnderline, SketchRuler } from './SketchMarks';
 

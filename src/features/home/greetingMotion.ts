@@ -1,9 +1,7 @@
-import { helloLettering } from './helloLettering';
+import { helloLettering } from './helloLettering.ts';
 
 const helloEnd = Math.max(
-  ...helloLettering.flatMap((letter) =>
-    letter.strokes.map((stroke) => stroke.delay + stroke.duration),
-  ),
+  ...helloLettering.map((stroke) => stroke.delay + stroke.duration),
 );
 
 export const greetingComma = { delay: helloEnd + 40, duration: 120 };

@@ -6,6 +6,7 @@ export function Companions() {
   const [hasEntered, setHasEntered] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const sceneRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const artRef = useRef<HTMLImageElement>(null);
   const isVisible = hasEntered && isReady;
 
@@ -33,7 +34,9 @@ export function Companions() {
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     )
       return;
-    for (const animation of artRef.current?.getAnimations() ?? []) {
+    for (const animation of stageRef.current?.getAnimations({
+      subtree: true,
+    }) ?? []) {
       animation.currentTime = 0;
       animation.play();
     }
@@ -55,6 +58,7 @@ export function Companions() {
       </div>
       <div
         className="companions-stage"
+        ref={stageRef}
         id="studio-assistants"
         aria-hidden={!isVisible}
       >

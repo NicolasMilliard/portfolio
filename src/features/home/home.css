@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Caveat';
-  src: url('./fonts/Caveat-Medium-Latin.woff2') format('woff2');
+  src: url('../../fonts/Caveat-Medium-Latin.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -56,10 +56,12 @@
 }
 
 .home-page .introduction-logo {
+  display: block;
   width: 2.75rem;
   height: 2.75rem;
   flex-shrink: 0;
   object-fit: contain;
+  overflow: visible;
   transform-origin: 50% 80%;
 }
 
@@ -88,25 +90,25 @@
 }
 
 .drawn-box path {
-  --box-delay: 0ms;
-  --box-duration: 100ms;
+  --stroke-delay: 0ms;
+  --stroke-duration: 100ms;
   stroke-dasharray: 1 2;
   stroke-dashoffset: 1.01;
   opacity: 0;
 }
 
 .drawn-box path:nth-child(2) {
-  --box-delay: 130ms;
-  --box-duration: 200ms;
+  --stroke-delay: 130ms;
+  --stroke-duration: 200ms;
 }
 
 .drawn-box path:nth-child(3) {
-  --box-delay: 360ms;
+  --stroke-delay: 360ms;
 }
 
 .drawn-box path:nth-child(4) {
-  --box-delay: 490ms;
-  --box-duration: 200ms;
+  --stroke-delay: 490ms;
+  --stroke-duration: 200ms;
 }
 
 .site-nav nav a:is(:hover, :focus-visible) > .drawn-box path {
@@ -270,7 +272,12 @@
 }
 
 .home-page .writing-list {
+  display: flex;
+  flex-direction: column;
   gap: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .home-page .writing-link,
@@ -283,13 +290,8 @@
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--border-subtle);
   border-radius: 0;
-}
-
-.home-page .writing-link:hover,
-.home-page .writing-link:focus-visible,
-.home-page .project-link:hover,
-.home-page .project-link:focus-visible {
-  background: transparent;
+  color: inherit;
+  text-decoration: none;
 }
 
 .home-page .writing-list li:first-child .writing-link,
@@ -300,6 +302,7 @@
 .home-page .writing-title,
 .home-page .project-title {
   grid-column: 1;
+  color: var(--foreground);
   font-family: var(--font-serif);
   font-size: 1.375rem;
   font-weight: 450;
@@ -308,6 +311,7 @@
 }
 
 .home-page .writing-date {
+  color: var(--muted);
   grid-column: 1;
   grid-row: 1;
   margin-bottom: 0.125rem;
@@ -317,8 +321,14 @@
 .home-page .writing-description,
 .home-page .project-description {
   grid-column: 1;
+  color: var(--muted);
   font-size: 0.9375rem;
   line-height: 1.65;
+}
+
+.writing-title,
+.writing-description {
+  justify-self: start;
 }
 
 .row-arrow {
@@ -525,8 +535,10 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .site-nav nav a:hover:not(:focus-visible) > .drawn-box path {
-    animation: box-write var(--box-duration) var(--box-delay)
+  .site-nav nav a:hover:not(:focus-visible) > .drawn-box path,
+  .hello-stroke,
+  .name-underline-stroke {
+    animation: ink-write var(--stroke-duration) var(--stroke-delay)
       cubic-bezier(0.35, 0.1, 0.55, 1) both;
   }
 
@@ -536,13 +548,10 @@
     stroke-dasharray: 1 2;
     stroke-dashoffset: 1.01;
     opacity: 0;
-    animation: greeting-write var(--stroke-duration) var(--stroke-delay)
-      cubic-bezier(0.35, 0.1, 0.55, 1) both;
   }
 
   .hello-comma {
-    animation: hello-comma var(--hello-comma-duration) var(--hello-comma-delay)
-      both;
+    animation: hello-comma var(--stroke-duration) var(--stroke-delay) both;
   }
 
   .drawn-underline path {
@@ -588,7 +597,7 @@
     animation-delay: 320ms;
   }
 
-  @keyframes box-write {
+  @keyframes ink-write {
     from {
       stroke-dashoffset: 1.01;
       opacity: 0;
@@ -608,20 +617,6 @@
     }
     to {
       stroke-dashoffset: 0;
-    }
-  }
-
-  @keyframes greeting-write {
-    from {
-      stroke-dashoffset: 1.01;
-      opacity: 0;
-    }
-    1% {
-      opacity: 1;
-    }
-    to {
-      stroke-dashoffset: 0;
-      opacity: 1;
     }
   }
 

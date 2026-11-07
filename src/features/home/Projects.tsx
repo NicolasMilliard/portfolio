@@ -1,4 +1,4 @@
-import { projects } from '../data/portfolio';
+import { projects } from '../../data/portfolio';
 
 export const Projects = () => {
   return (

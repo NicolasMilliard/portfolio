@@ -1,10 +1,8 @@
 import { Link } from '@tanstack/react-router';
-import type { CSSProperties } from 'react';
 
-import { profile } from '../data/portfolio';
+import { profile } from '../../data/portfolio';
 
-import { greetingComma, nameUnderlineStrokes } from './greetingMotion';
-import { HelloWriting } from './HelloWriting';
+import { Greeting } from './Greeting';
 import { DrawnBox } from './SketchMarks';
 
 export const Introduction = () => {
@@ -44,45 +42,9 @@ export const Introduction = () => {
           </a>
         </nav>
       </div>
-      <div
-        className="introduction-body"
-        style={
-          {
-            '--hello-comma-delay': `${greetingComma.delay}ms`,
-            '--hello-comma-duration': `${greetingComma.duration}ms`,
-          } as CSSProperties
-        }
-      >
+      <div className="introduction-body">
         <div className="introduction-copy">
-          <h1>
-            <span className="greeting">
-              <HelloWriting />
-              <span className="handwritten hello-comma">,</span> I’m
-            </span>{' '}
-            <span className="name-underline">
-              Nicolas
-              <svg viewBox="0 0 260 16" fill="none" aria-hidden="true">
-                {nameUnderlineStrokes.map((stroke, index) => (
-                  <path
-                    key={index}
-                    className="name-underline-stroke"
-                    d={stroke.path}
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    pathLength="1"
-                    style={
-                      {
-                        '--stroke-delay': `${stroke.delay}ms`,
-                        '--stroke-duration': `${stroke.duration}ms`,
-                      } as CSSProperties
-                    }
-                  />
-                ))}
-              </svg>
-            </span>
-            .
-          </h1>
+          <Greeting />
           <p className="introduction-lead">
             I build interfaces that feel simple.
             <br /> And care about the details that make them work.

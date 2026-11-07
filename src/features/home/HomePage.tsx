@@ -1,15 +1,15 @@
 import { useRef } from 'react';
 
-import { About } from './components/About';
-import { Connect } from './components/Connect';
-import { Introduction } from './components/Introduction';
-import { Projects } from './components/Projects';
-import { Writing } from './components/Writing';
+import { About } from './About';
+import { Connect } from './Connect';
+import { Introduction } from './Introduction';
+import { Projects } from './Projects';
+import { Writing } from './Writing';
 import { useSketchbook } from './useSketchbook';
 
 import './home.css';
 
-function App() {
+export function HomePage() {
   const rootRef = useRef<HTMLDivElement>(null);
   useSketchbook(rootRef);
 
@@ -28,5 +28,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
