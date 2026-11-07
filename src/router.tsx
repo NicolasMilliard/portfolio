@@ -23,6 +23,8 @@ export const createAppRouter = (
       },
     },
     scrollRestoration,
+    // Settle route positions before view-transition snapshots; anchors stay smooth.
+    scrollRestorationBehavior: 'instant',
     getScrollRestorationKey: (location) =>
       location.pathname === '/'
         ? '/'

@@ -17,18 +17,21 @@ export const getPrerenderPages = (): PrerenderPage[] => [
   {
     path: '/',
     outputFile: 'index.html',
+    styleEntry: 'src/routes/index.tsx',
     seo: homeSeo,
     includeInSitemap: true,
   },
   ...informationPages.map((page) => ({
     path: page.path,
     outputFile: `${page.path.slice(1)}.html`,
+    styleEntry: `src/routes${page.path}.tsx`,
     seo: getInformationSeo(page),
     includeInSitemap: true,
   })),
   ...writings.map((writing) => ({
     path: `/writing/${writing.slug}`,
     outputFile: `writing/${writing.slug}.html`,
+    styleEntry: 'src/routes/writing.$slug.tsx',
     seo: getWritingSeo(writing),
     includeInSitemap: true,
     lastModified: writing.updatedAt ?? writing.publishedAt,

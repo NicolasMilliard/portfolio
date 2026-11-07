@@ -31,8 +31,10 @@
 
 .home-page .introduction {
   display: block;
+  width: 100%;
   max-width: none;
   margin-top: 2.5rem;
+  margin-inline: auto;
 }
 
 .site-nav,
@@ -223,13 +225,18 @@
 }
 
 .home-page .home-main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   gap: 5rem;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .home-page section {
+  width: 100%;
   max-width: none;
+  margin-inline: auto;
   scroll-margin-top: 2rem;
 }
 
