@@ -1,7 +1,10 @@
 import { useId, type CSSProperties } from 'react';
 
-import { greetingComma, nameUnderlineStrokes } from './greetingMotion';
-import { helloLettering } from './helloLettering';
+import {
+  greetingComma,
+  helloStrokes,
+  nameUnderlineStrokes,
+} from './greetingMotion';
 
 const strokeStyle = ({
   delay,
@@ -28,7 +31,7 @@ function HelloWriting() {
         focusable="false"
       >
         <defs>
-          {helloLettering.map((stroke, index) => (
+          {helloStrokes.map((stroke, index) => (
             <mask
               id={`${id}-hello-${index}`}
               key={index}
@@ -52,7 +55,7 @@ function HelloWriting() {
             </mask>
           ))}
         </defs>
-        {helloLettering.map((stroke, index) => (
+        {helloStrokes.map((stroke, index) => (
           <path
             key={index}
             d={stroke.outline}
