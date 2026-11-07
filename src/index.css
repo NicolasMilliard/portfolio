@@ -19,10 +19,11 @@
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     monospace;
 
-  --background: oklch(0.986 0.002 67.8);
-  --foreground: oklch(0.275 0.075 252.9);
-  --muted: oklch(0.5365 0.0706 253.27);
-  --accent: oklch(0.498 0.173 261.6);
+  --background: #faf6ef;
+  --foreground: #303c48;
+  --muted: #62676a;
+  --ink-blue: #415a77;
+  --accent: #a95539;
   --surface-subtle: color-mix(in oklab, var(--foreground), transparent 96%);
   --surface-accent: color-mix(in oklab, var(--accent), transparent 96%);
   --border-subtle: color-mix(in oklab, var(--foreground), transparent 90%);
@@ -53,7 +54,7 @@ body {
 }
 
 ::selection {
-  background: oklch(87.327% 0.06192 262.872);
+  background: #edcfb8;
 }
 
 .page {
@@ -79,56 +80,8 @@ header {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .logo-capsule-left {
-    animation: logo-enter-left 680ms both;
-  }
-
-  .logo-capsule-right {
-    animation: logo-enter-right 720ms 60ms both;
-  }
-
-  @keyframes logo-enter-left {
-    0% {
-      transform: translate(-8px, 8px);
-      opacity: 0.2;
-      animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    74% {
-      transform: translate(1.5px, -1.5px);
-      animation-timing-function: ease-out;
-    }
-
-    100% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes logo-enter-right {
-    0% {
-      transform: translate(8px, -8px);
-      opacity: 0.2;
-      animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    74% {
-      transform: translate(-1.5px, 1.5px);
-      animation-timing-function: ease-out;
-    }
-
-    100% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
+  html {
+    scroll-behavior: smooth;
   }
 }
 

@@ -1,47 +1,108 @@
+import { Link } from '@tanstack/react-router';
+import type { CSSProperties } from 'react';
+
 import { profile } from '../data/portfolio';
+
+import { greetingComma, nameUnderlineStrokes } from './greetingMotion';
+import { HelloWriting } from './HelloWriting';
+import { DrawnBox } from './SketchMarks';
 
 export const Introduction = () => {
   return (
     <header className="introduction">
-      <svg
-        className="introduction-logo"
-        width="44"
-        height="39"
-        viewBox="0 0 44 39"
-        fill="none"
-        aria-hidden="true"
-        focusable="false"
+      <div className="site-nav">
+        <Link
+          className="site-identity"
+          to="/"
+          resetScroll
+          aria-label={`${profile.name}, home`}
+        >
+          <img
+            className="introduction-logo"
+            src="/images/brand/nicolas-face-small.png"
+            srcSet="/images/brand/nicolas-face-small.png 96w, /images/brand/nicolas-face.png 256w"
+            sizes="44px"
+            width="44"
+            height="44"
+            alt=""
+            aria-hidden="true"
+          />
+          <span>{profile.name}</span>
+        </Link>
+        <nav aria-label="Main navigation">
+          <a href="#writing">
+            Writing
+            <DrawnBox />
+          </a>
+          <a href="#projects">
+            Projects
+            <DrawnBox />
+          </a>
+          <a href="#connect">
+            Say hello
+            <DrawnBox />
+          </a>
+        </nav>
+      </div>
+      <div
+        className="introduction-body"
+        style={
+          {
+            '--hello-comma-delay': `${greetingComma.delay}ms`,
+            '--hello-comma-duration': `${greetingComma.duration}ms`,
+          } as CSSProperties
+        }
       >
-        <g className="logo-capsule-left">
-          <rect
-            x="15.817"
-            y="2.31699"
-            width="17"
-            height="33"
-            rx="8.5"
-            transform="rotate(30 15.817 2.31699)"
-            fill="#245BC3"
-            fillOpacity="0.4"
-            stroke="#245BC3"
+        <div className="introduction-copy">
+          <h1>
+            <span className="greeting">
+              <HelloWriting />
+              <span className="handwritten hello-comma">,</span> I’m
+            </span>{' '}
+            <span className="name-underline">
+              Nicolas
+              <svg viewBox="0 0 260 16" fill="none" aria-hidden="true">
+                {nameUnderlineStrokes.map((stroke, index) => (
+                  <path
+                    key={index}
+                    className="name-underline-stroke"
+                    d={stroke.path}
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    pathLength="1"
+                    style={
+                      {
+                        '--stroke-delay': `${stroke.delay}ms`,
+                        '--stroke-duration': `${stroke.duration}ms`,
+                      } as CSSProperties
+                    }
+                  />
+                ))}
+              </svg>
+            </span>
+            .
+          </h1>
+          <p className="introduction-lead">
+            I build interfaces that feel simple.
+            <br /> And care about the details that make them work.
+          </p>
+          <p className="introduction-description">
+            I’m a {profile.title} working with React and TypeScript, with ten
+            years of building for the web.
+          </p>
+        </div>
+        <figure className="introduction-portrait">
+          <img
+            src="/images/brand/nicolas-portrait-cutout.png"
+            srcSet="/images/brand/nicolas-portrait-small-cutout.png 320w, /images/brand/nicolas-portrait-cutout.png 640w"
+            sizes="(max-width: 40rem) 36vw, (max-width: 50rem) 208px, 280px"
+            width="640"
+            height="1129"
+            alt="Watercolor character of Nicolas, smiling with his hands in his pockets and a backpack over his shoulder."
+            fetchPriority="high"
           />
-        </g>
-        <g className="logo-capsule-right">
-          <rect
-            x="29.817"
-            y="-0.683013"
-            width="17"
-            height="33"
-            rx="8.5"
-            transform="rotate(30 29.817 -0.683013)"
-            fill="#245BC3"
-            fillOpacity="0.4"
-            stroke="#245BC3"
-          />
-        </g>
-      </svg>
-      <div className="introduction-copy">
-        <h1>{profile.name}</h1>
-        <p>{profile.title}</p>
+        </figure>
       </div>
     </header>
   );

@@ -19,7 +19,8 @@ export const profile = {
   name: 'Nicolas Milliard',
   title: 'Senior Frontend Engineer',
   about: [
-    'Senior Frontend Engineer with 10 years of experience designing high-performance interfaces and scalable frontend architectures that evolve with product needs. Specializing in React, TypeScript, and design systems, I combine technical excellence, user experience, and maintainability to build robust, long-lasting products.',
+    'I’ve spent the last ten years building interfaces and the frontend foundations behind them. I work with React, TypeScript, and design systems to make complex products easier to use and maintain.',
+    'I care about how an interface feels to use, how well it performs, and how easy it is for the next person to work on.',
   ],
 } satisfies Profile;
 
