@@ -2,7 +2,17 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import { onRequest } from '../functions/_middleware.js';
-import { renderLlms, renderMarkdown } from './agent-content.mjs';
+import { renderLlms, renderMarkdown } from '../scripts/agent-content.ts';
+
+type ServeOptions = {
+  path?: string;
+  accept?: string;
+  method?: string;
+  status?: number;
+  contentType?: string;
+  headers?: Record<string, string>;
+  markdownStatus?: number;
+};
 
 const serve = ({
   path = '/',
@@ -12,8 +22,8 @@ const serve = ({
   contentType = 'text/html; charset=utf-8',
   headers = {},
   markdownStatus = 200,
-} = {}) => {
-  const fetched = [];
+}: ServeOptions = {}): { response: Promise<Response>; fetched: string[] } => {
+  const fetched: string[] = [];
   const context = {
     request: new Request(`https://milliard.dev${path}`, {
       method,
@@ -26,7 +36,7 @@ const serve = ({
       }),
     env: {
       ASSETS: {
-        fetch: async (request) => {
+        fetch: async (request: Request) => {
           fetched.push(request.url);
           return new Response('# Nicolas Milliard\n\nPortfolio content.\n', {
             status: markdownStatus,
@@ -52,7 +62,7 @@ test('serves Markdown on canonical URLs, retaining security headers and dropping
   });
   const result = await response;
   assert.equal(result.status, 200);
-  assert.match(result.headers.get('Content-Type'), /^text\/markdown/);
+  assert.match(result.headers.get('Content-Type')!, /^text\/markdown/);
   assert.equal(result.headers.get('Vary'), 'Accept-Encoding, Accept');
   assert.equal(result.headers.get('ETag'), null);
   assert.equal(result.headers.get('Last-Modified'), null);
@@ -63,7 +73,7 @@ test('serves Markdown on canonical URLs, retaining security headers and dropping
 });
 
 test('honors explicit preferences and defaults to HTML for browsers and wildcard requests', async () => {
-  const cases = [
+  const cases: [string, boolean][] = [
     ['text/markdown', true],
     ['TEXT/MARKDOWN; charset=utf-8', true],
     ['text/markdown, text/html;q=0.8', true],
@@ -79,7 +89,7 @@ test('honors explicit preferences and defaults to HTML for browsers and wildcard
     const { response } = serve({ accept });
     const result = await response;
     assert.equal(
-      result.headers.get('Content-Type').startsWith('text/markdown'),
+      result.headers.get('Content-Type')!.startsWith('text/markdown'),
       markdown,
       accept,
     );
@@ -107,7 +117,7 @@ test('preserves 404 status with a Markdown explanation and recovery links', asyn
   const { response, fetched } = serve({ path: '/missing', status: 404 });
   const result = await response;
   assert.equal(result.status, 404);
-  assert.match(result.headers.get('Content-Type'), /^text\/markdown/);
+  assert.match(result.headers.get('Content-Type')!, /^text\/markdown/);
   assert.equal(result.headers.get('Cache-Control'), 'no-store');
   assert.equal(result.headers.get('X-Robots-Tag'), 'noindex');
   assert.match(
@@ -118,13 +128,14 @@ test('preserves 404 status with a Markdown explanation and recovery links', asyn
 });
 
 test('keeps HTML 404s, redirects, non-HTML assets, and real challenge responses intact', async () => {
-  for (const options of [
+  const cases: ServeOptions[] = [
     { status: 404, accept: 'text/html' },
     { status: 302, headers: { Location: '/privacy' } },
     { contentType: 'text/plain' },
     { headers: { 'cf-mitigated': 'challenge' } },
     { method: 'POST' },
-  ]) {
+  ];
+  for (const options of cases) {
     const { response, fetched } = serve(options);
     const result = await response;
     assert.equal(result.status, options.status ?? 200);
@@ -140,7 +151,7 @@ test('keeps HTML 404s, redirects, non-HTML assets, and real challenge responses 
 test('HEAD returns Markdown headers without a response body', async () => {
   const { response } = serve({ method: 'HEAD' });
   const result = await response;
-  assert.match(result.headers.get('Content-Type'), /^text\/markdown/);
+  assert.match(result.headers.get('Content-Type')!, /^text\/markdown/);
   assert.equal(await result.text(), '');
 });
 
@@ -160,7 +171,7 @@ test('a missing generated Markdown representation does not hide a valid HTML pag
   const { response } = serve({ markdownStatus: 404 });
   const result = await response;
   assert.equal(result.status, 200);
-  assert.match(result.headers.get('Content-Type'), /^text\/html/);
+  assert.match(result.headers.get('Content-Type')!, /^text\/html/);
   assert.equal(result.headers.get('Vary'), 'Accept');
   assert.match(await result.text(), /<h1>Nicolas/);
 });

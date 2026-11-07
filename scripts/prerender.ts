@@ -2,9 +2,11 @@ import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { createServer } from 'vite';
+import { createServer, type Manifest } from 'vite';
 
-import { renderLlms, renderMarkdown } from './agent-content.mjs';
+import type { PrerenderPage, SeoPage } from '../src/seo.ts';
+
+import { renderLlms, renderMarkdown } from './agent-content.ts';
 
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -16,7 +18,17 @@ const templatePath = path.join(distDirectory, 'index.html');
 const seoBlockPattern = /<!-- seo:start -->[\s\S]*?<!-- seo:end -->/;
 const emptyRoot = '<div id="root"></div>';
 
-const assertUnique = (values, label) => {
+type ImageMetadata = Pick<
+  NonNullable<SeoPage['image']>,
+  'type' | 'width' | 'height'
+>;
+
+type PageRenderer = {
+  getPrerenderPages: () => PrerenderPage[];
+  renderPage: (path: string) => Promise<string>;
+};
+
+const assertUnique = (values: string[], label: string) => {
   const duplicates = values.filter(
     (value, index) => values.indexOf(value) !== index,
   );
@@ -28,10 +40,10 @@ const assertUnique = (values, label) => {
   }
 };
 
-const readThreeByteInteger = (buffer, offset) =>
+const readThreeByteInteger = (buffer: Buffer, offset: number) =>
   buffer[offset] | (buffer[offset + 1] << 8) | (buffer[offset + 2] << 16);
 
-const readJpegMetadata = (buffer) => {
+const readJpegMetadata = (buffer: Buffer): ImageMetadata => {
   const startOfFrameMarkers = new Set([
     0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce,
     0xcf,
@@ -78,7 +90,7 @@ const readJpegMetadata = (buffer) => {
   throw new Error('Could not read JPEG dimensions');
 };
 
-const readWebpMetadata = (buffer) => {
+const readWebpMetadata = (buffer: Buffer): ImageMetadata => {
   let offset = 12;
 
   while (offset + 8 <= buffer.length) {
@@ -131,7 +143,7 @@ const readWebpMetadata = (buffer) => {
   throw new Error('Could not read WebP dimensions');
 };
 
-const readImageMetadata = (buffer) => {
+const readImageMetadata = (buffer: Buffer): ImageMetadata => {
   if (
     buffer.length >= 24 &&
     buffer
@@ -160,7 +172,7 @@ const readImageMetadata = (buffer) => {
   throw new Error('Unsupported or invalid social image file');
 };
 
-const assertLocalImageExists = async (page) => {
+const assertLocalImageExists = async (page: PrerenderPage) => {
   if (!page.seo.image) {
     return;
   }
@@ -197,7 +209,17 @@ const assertLocalImageExists = async (page) => {
   }
 };
 
-const buildDocument = ({ template, appHtml, seoHead, styles }) => {
+const buildDocument = ({
+  template,
+  appHtml,
+  seoHead,
+  styles,
+}: {
+  template: string;
+  appHtml: string;
+  seoHead: string;
+  styles: string;
+}) => {
   if (!seoBlockPattern.test(template)) {
     throw new Error('SEO marker block was not found in dist/index.html');
   }
@@ -215,7 +237,7 @@ const buildDocument = ({ template, appHtml, seoHead, styles }) => {
     .replace('</head>', `${styles}</head>`);
 };
 
-const assertRenderedDocument = (document, page) => {
+const assertRenderedDocument = (document: string, page: PrerenderPage) => {
   const requirements = [
     ['a title', '<title data-seo-static>'],
     ['a description', 'name="description"'],
@@ -242,14 +264,14 @@ const assertRenderedDocument = (document, page) => {
 const template = await readFile(templatePath, 'utf8');
 const manifest = JSON.parse(
   await readFile(path.join(distDirectory, '.vite/manifest.json'), 'utf8'),
-);
+) as Manifest;
 
 // Lazy routes still need their styles on the first, prerendered paint.
-const renderPageStyles = (page) => {
+const renderPageStyles = (page: PrerenderPage) => {
   if (!page.styleEntry) return '';
-  const styles = new Set();
-  const visited = new Set();
-  const collectStyles = (entry) => {
+  const styles = new Set<string>();
+  const visited = new Set<string>();
+  const collectStyles = (entry: string): void => {
     if (visited.has(entry)) return;
     visited.add(entry);
     const chunk = manifest[entry];
@@ -285,11 +307,19 @@ try {
     { writings },
     { profile, projects },
   ] = await Promise.all([
-    vite.ssrLoadModule('/src/entry-server.tsx'),
-    vite.ssrLoadModule('/src/seo.ts'),
-    vite.ssrLoadModule('/src/content/information.ts'),
-    vite.ssrLoadModule('/src/content/writings.ts'),
-    vite.ssrLoadModule('/src/data/portfolio.ts'),
+    vite.ssrLoadModule('/src/entry-server.tsx') as Promise<PageRenderer>,
+    vite.ssrLoadModule('/src/seo.ts') as Promise<
+      typeof import('../src/seo.ts')
+    >,
+    vite.ssrLoadModule('/src/content/information.ts') as Promise<
+      typeof import('../src/content/information.ts')
+    >,
+    vite.ssrLoadModule('/src/content/writings.ts') as Promise<
+      typeof import('../src/content/writings.ts')
+    >,
+    vite.ssrLoadModule('/src/data/portfolio.ts') as Promise<
+      typeof import('../src/data/portfolio.ts')
+    >,
   ]);
   const pages = getPrerenderPages();
 
