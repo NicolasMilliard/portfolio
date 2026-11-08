@@ -1,3 +1,5 @@
+import { ArrowSquareOutIcon } from '@phosphor-icons/react';
+
 import { projects } from '../data/portfolio';
 
 export const Projects = () => {
@@ -11,7 +13,7 @@ export const Projects = () => {
         <p className="eyebrow">Projects</p>
         <h2 id="projects-heading">
           A few things
-          <br className="desktop-break" /> I’ve made
+          <br className="desktop-break" /> I've made
         </h2>
         <p>Small tools and bigger experiments. Always something to learn.</p>
       </div>
@@ -27,7 +29,7 @@ export const Projects = () => {
             <span className="project-title">{project.title}</span>
             <span className="project-description">{project.description}</span>
             <span className="row-arrow" aria-hidden="true">
-              ↗
+              <ArrowSquareOutIcon />
             </span>
           </a>
         ))}
