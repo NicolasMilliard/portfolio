@@ -10,12 +10,11 @@ export const Introduction = () => (
       <div className="introduction-copy">
         <Greeting />
         <p className="introduction-lead">
-          I build interfaces that feel simple.
-          <br /> And care about the details that make them work.
+          I'm a Senior Frontend Engineer with ten years of experience.
         </p>
         <p className="introduction-description">
-          I’m a {profile.title} working with React and TypeScript, with ten
-          years of building for the web.
+          I work with React, TypeScript, and design systems. I care about how
+          interfaces work and how they feel to use.
         </p>
       </div>
       <figure className="introduction-portrait">
