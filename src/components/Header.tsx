@@ -13,8 +13,8 @@ export const Header = ({ profile }: { profile: Profile }) => {
       >
         <img
           className="introduction-logo"
-          src="/images/brand/nicolas-face-small.png"
-          srcSet="/images/brand/nicolas-face-small.png 96w, /images/brand/nicolas-face.png 256w"
+          src="/images/brand/nicolas-face-small.webp"
+          srcSet="/images/brand/nicolas-face-small.webp 96w, /images/brand/nicolas-face.webp 256w"
           sizes="44px"
           width="44"
           height="44"

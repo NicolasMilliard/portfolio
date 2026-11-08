@@ -16,7 +16,7 @@ export const Connect = () => {
         <SketchRuler />
         <img
           className="connect-character"
-          src="/images/brand/nicolas-skating-cutout.png"
+          src="/images/brand/nicolas-skating-cutout.webp"
           width="480"
           height="720"
           alt=""

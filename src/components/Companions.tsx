@@ -70,8 +70,8 @@ export function Companions() {
         <img
           className="companions-art"
           ref={artRef}
-          src="/images/brand/companions-cutout.png"
-          srcSet="/images/brand/companions-small-cutout.png 480w, /images/brand/companions-cutout.png 960w"
+          src="/images/brand/companions-cutout.webp"
+          srcSet="/images/brand/companions-small-cutout.webp 480w, /images/brand/companions-cutout.webp 960w"
           sizes="(max-width: 40rem) 90vw, 480px"
           width="960"
           height="720"
