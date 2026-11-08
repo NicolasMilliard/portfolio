@@ -3,7 +3,12 @@ import { Link } from '@tanstack/react-router';
 import { links, profile } from '../data/portfolio';
 
 import { Companions } from './Companions';
-import { DrawnUnderline } from './SketchMarks';
+import {
+  conversationStrokes,
+  conversationViewBox,
+} from './conversationLettering';
+import { DrawnUnderline } from './ui/DrawUnderline';
+import { Handwriting } from './ui/Handwriting';
 import { SketchRuler } from './ui/SketchRuler';
 
 export const Connect = () => {
@@ -26,17 +31,19 @@ export const Connect = () => {
           aria-hidden="true"
         />
         <div className="connect-copy">
-          <p className="eyebrow">Let’s connect</p>
+          <p className="eyebrow">Let's connect</p>
           <h2 id="connect-heading">
             Good things start
             <br />
             with a{' '}
-            <span className="handwritten conversation-word">conversation.</span>
+            <span className="handwritten conversation-word" data-handwriting>
+              <span className="handwriting-label">conversation.</span>
+              <Handwriting
+                strokes={conversationStrokes}
+                viewBox={conversationViewBox}
+              />
+            </span>
           </h2>
-          <p>
-            Have a frontend puzzle or a project in mind?
-            <br className="desktop-break" /> I’d love to hear about it.
-          </p>
           <div className="connect-links">
             {links.map((link) => (
               <a

@@ -405,7 +405,22 @@
 }
 
 .conversation-word {
+  position: relative;
   font-size: 1.2em;
+  white-space: nowrap;
+}
+
+.conversation-word .handwriting-label {
+  opacity: 0;
+}
+
+.conversation-word svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
 .drawn-underline {
@@ -539,14 +554,18 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .site-nav nav a:hover:not(:focus-visible) > .drawn-box path,
-  .hello-stroke,
-  .name-underline-stroke {
+  .hello-word .handwriting-stroke,
+  .name-underline-stroke,
+  .home-page[data-sketchbook='ready']
+    [data-handwriting][data-inked]
+    .handwriting-stroke {
     animation: ink-write var(--stroke-duration) var(--stroke-delay)
       cubic-bezier(0.35, 0.1, 0.55, 1) both;
   }
 
-  .hello-stroke,
-  .name-underline-stroke {
+  .hello-word .handwriting-stroke,
+  .name-underline-stroke,
+  .home-page[data-sketchbook='ready'] [data-handwriting] .handwriting-stroke {
     /* The longer gap prevents round caps from leaking the next dash at the end. */
     stroke-dasharray: 1 2;
     stroke-dashoffset: 1.01;

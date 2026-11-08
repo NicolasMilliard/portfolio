@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { DrawnUnderline, PawPrint } from './SketchMarks';
+import { DrawnUnderline } from './ui/DrawUnderline';
+import { PawPrint } from './ui/PawPrint';
 
 export function Companions() {
   const [hasEntered, setHasEntered] = useState(false);

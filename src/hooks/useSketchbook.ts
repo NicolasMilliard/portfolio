@@ -11,7 +11,7 @@ export function useSketchbook(rootRef: RefObject<HTMLDivElement | null>) {
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          (entry.target as SVGElement).dataset.inked = 'true';
+          (entry.target as HTMLElement | SVGElement).dataset.inked = 'true';
           observer.unobserve(entry.target);
         }
       },
@@ -19,7 +19,7 @@ export function useSketchbook(rootRef: RefObject<HTMLDivElement | null>) {
     );
 
     root
-      .querySelectorAll('[data-sketch]')
+      .querySelectorAll('[data-sketch], [data-handwriting]')
       .forEach((element) => observer.observe(element));
     return () => {
       observer.disconnect();
