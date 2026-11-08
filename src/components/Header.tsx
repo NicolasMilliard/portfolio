@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { DrawnBox } from './SketchMarks';
+import { DrawnBox } from './ui/DrawnBox';
 
 import type { Profile } from '../data/portfolio';
 

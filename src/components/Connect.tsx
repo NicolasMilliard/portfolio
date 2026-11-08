@@ -3,7 +3,8 @@ import { Link } from '@tanstack/react-router';
 import { links, profile } from '../data/portfolio';
 
 import { Companions } from './Companions';
-import { DrawnUnderline, SketchRuler } from './SketchMarks';
+import { DrawnUnderline } from './SketchMarks';
+import { SketchRuler } from './ui/SketchRuler';
 
 export const Connect = () => {
   return (

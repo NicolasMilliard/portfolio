@@ -1,4 +1,6 @@
+import { ArrowRightIcon } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
+import { SketchRuler } from './ui/SketchRuler';
 
 import { formatPublishedDate, writings } from '../content/writings';
 
@@ -6,9 +8,10 @@ export const Writing = () => {
   return (
     <section
       id="writing"
-      className="home-section"
+      className="home-section writing-section"
       aria-labelledby="writing-heading"
     >
+      <SketchRuler />
       <div className="section-heading">
         <p className="eyebrow">Writing</p>
         <h2 id="writing-heading">
@@ -16,7 +19,7 @@ export const Writing = () => {
           <br className="desktop-break" /> the workbench
         </h2>
         <p>
-          Things I’ve tried, problems I’ve untangled, and what I learned along
+          Things I've tried, problems I've untangled, and what I learned along
           the way.
         </p>
       </div>
@@ -46,7 +49,7 @@ export const Writing = () => {
                 {writing.description}
               </span>
               <span className="row-arrow" aria-hidden="true">
-                →
+                <ArrowRightIcon />
               </span>
             </Link>
           </li>

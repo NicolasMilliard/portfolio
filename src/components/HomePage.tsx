@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { useSketchbook } from '../hooks/useSketchbook';
 
-import { About } from './About';
 import { Connect } from './Connect';
 import { Introduction } from './Introduction';
 import { Projects } from './Projects';
@@ -17,7 +16,6 @@ export function HomePage() {
     <div className="page home-page" ref={rootRef}>
       <Introduction />
       <main id="main-content" className="home-main">
-        <About />
         <Writing />
         <Projects />
         <Connect />
