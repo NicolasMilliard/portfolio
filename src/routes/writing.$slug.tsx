@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
-import { WritingPage } from '../components/WritingPage';
+import { WritingPage } from '../features/writing/WritingPage';
 import { loadWriting, type WritingWithContent } from '../content/writings';
 import { getWritingSeo, notFoundSeo, seoToRouteHead } from '../seo';
 

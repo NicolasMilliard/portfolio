@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 
 import type { InformationPage as InformationPageContent } from '../content/information';
 
-import './article.css';
+import '../styles/article.css';
 
 export function InformationPage({ page }: { page: InformationPageContent }) {
   return (

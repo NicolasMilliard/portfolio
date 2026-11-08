@@ -21,10 +21,9 @@ Cloudflare Pages middleware locally, build first, then run
 - `src/features/home` contains the homepage sections, drawing components,
   motion, and styles.
 - `src/features/lost` contains the interactive 404 page.
-- `src/components` holds the article and information-page components.
-- `src/index.css` contains global styles and shared page transitions. Page
-  styles live in `src/features/home/home.css`, `src/features/lost/styles`, and
-  `src/components/article.css` and load with their pages.
+- `src/features/writing` contains the article page, section navigation, heading
+  links, image viewer, and writing-specific styles.
+- `src/components` holds the information-page component.
 - `src/content` owns articles and page content; `src/data/portfolio.ts` provides
   profile, project, and social data shared with SEO.
 - `scripts` contains build tooling: prerendering pages and generating Markdown

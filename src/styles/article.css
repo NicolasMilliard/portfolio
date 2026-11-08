@@ -1,0 +1,73 @@
+.article-main {
+  display: block;
+  width: 100%;
+  max-width: var(--content-width);
+  margin-block: var(--space-page-y);
+  margin-inline: auto;
+}
+
+.article-back-link {
+  display: inline-block;
+  font-size: 0.875rem;
+}
+
+.article-header {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-top: 2.5rem;
+  margin-inline: auto;
+}
+
+.article-title {
+  width: fit-content;
+  max-width: 100%;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 7vw, 3rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.article-content {
+  margin-top: 3rem;
+}
+
+.article-content > * {
+  margin-block: 0;
+}
+
+.article-content > * + * {
+  margin-top: 1.25rem;
+}
+
+.article-content > .information-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.article-content h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 0;
+  color: var(--foreground);
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  line-height: 1.3;
+}
+
+.article-content > ol {
+  padding-inline-start: 1.5rem;
+}
+
+.article-content > ol li {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.article-content > ol li + li {
+  margin-top: 0.25rem;
+}

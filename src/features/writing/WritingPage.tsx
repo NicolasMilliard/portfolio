@@ -4,12 +4,13 @@ import { useRef } from 'react';
 import {
   formatPublishedDate,
   type WritingWithContent,
-} from '../content/writings';
+} from '../../content/writings';
 
 import { ArticleHeading } from './ArticleHeading';
 import { ArticleSectionNav } from './ArticleSectionNav';
 
-import './article.css';
+import '../../styles/article.css';
+import './writing.css';
 
 export function WritingPage({ writing }: { writing: WritingWithContent }) {
   const Content = writing.Content;
