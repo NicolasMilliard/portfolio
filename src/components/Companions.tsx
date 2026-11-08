@@ -6,7 +6,6 @@ import { PawPrint } from './ui/PawPrint';
 export function Companions() {
   const [hasEntered, setHasEntered] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const sceneRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const artRef = useRef<HTMLImageElement>(null);
   const isVisible = hasEntered && isReady;
@@ -14,18 +13,6 @@ export function Companions() {
   useEffect(() => {
     if (artRef.current?.complete && artRef.current.naturalWidth > 0)
       setIsReady(true);
-    const scene = sceneRef.current;
-    if (!scene || !('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        setHasEntered(true);
-        observer.disconnect();
-      },
-      { threshold: 0.25 },
-    );
-    observer.observe(scene);
-    return () => observer.disconnect();
   }, []);
 
   const arrive = () => {
@@ -44,12 +31,13 @@ export function Companions() {
   };
 
   return (
-    <div className="companions" ref={sceneRef} data-open={isVisible}>
+    <div className="companions" data-open={isVisible}>
       <div className="companions-invitation">
         <button
           type="button"
           className="text-link companions-trigger"
           aria-controls="studio-assistants"
+          aria-expanded={isVisible}
           onClick={arrive}
         >
           <PawPrint />
