@@ -1,11 +1,7 @@
-import { profile } from '../data/portfolio';
-
 import { Greeting } from './Greeting';
-import { Header } from './Header';
 
 export const Introduction = () => (
-  <header className="introduction">
-    <Header profile={profile} />
+  <div className="introduction">
     <div className="introduction-body">
       <div className="introduction-copy">
         <Greeting />
@@ -29,5 +25,5 @@ export const Introduction = () => (
         />
       </figure>
     </div>
-  </header>
+  </div>
 );
