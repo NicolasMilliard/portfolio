@@ -18,12 +18,13 @@ Cloudflare Pages middleware locally, build first, then run
 ## Code organization
 
 - `src/routes` owns URLs, route metadata, and article loading.
-- `src/features/home` contains the homepage sections, drawing components,
-  motion, and styles.
+- `src/components` contains the homepage sections, drawing components, motion,
+  and the information-page component.
+- `src/hooks` holds shared React hooks; `src/styles` contains global, homepage,
+  and shared article styles.
 - `src/features/lost` contains the interactive 404 page.
 - `src/features/writing` contains the article page, section navigation, heading
   links, image viewer, and writing-specific styles.
-- `src/components` holds the information-page component.
 - `src/content` owns articles and page content; `src/data/portfolio.ts` provides
   profile, project, and social data shared with SEO.
 - `scripts` contains build tooling: prerendering pages and generating Markdown

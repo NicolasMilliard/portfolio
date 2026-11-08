@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 
-import { formatPublishedDate, writings } from '../../content/writings';
+import { formatPublishedDate, writings } from '../content/writings';
 
 export const Writing = () => {
   return (

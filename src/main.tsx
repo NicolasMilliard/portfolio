@@ -2,8 +2,8 @@ import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import './index.css';
 import { createAppRouter } from './router';
+import './styles/index.css';
 
 const router = createAppRouter();
 const rootElement = document.getElementById('root');

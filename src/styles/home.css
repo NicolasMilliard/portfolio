@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Caveat';
-  src: url('../../fonts/Caveat-Medium-Latin.woff2') format('woff2');
+  src: url('../fonts/Caveat-Medium-Latin.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;

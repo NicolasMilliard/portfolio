@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 
-import { links, profile } from '../../data/portfolio';
+import { links, profile } from '../data/portfolio';
 
 import { Companions } from './Companions';
 import { DrawnUnderline, SketchRuler } from './SketchMarks';
