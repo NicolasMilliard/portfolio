@@ -1,5 +1,5 @@
-import { ArrowRightIcon } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
+import { DrawnArrow } from './ui/DrawnArrow';
 import { SketchRuler } from './ui/SketchRuler';
 
 import { formatPublishedDate, writings } from '../content/writings';
@@ -47,9 +47,7 @@ export const Writing = () => {
               >
                 {writing.description}
               </span>
-              <span className="row-arrow" aria-hidden="true">
-                <ArrowRightIcon />
-              </span>
+              <DrawnArrow className="row-arrow" />
             </Link>
           </li>
         ))}

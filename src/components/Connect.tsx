@@ -4,8 +4,8 @@ import {
   conversationViewBox,
 } from './conversationLettering';
 
-import { ArrowSquareOutIcon } from '@phosphor-icons/react';
 import { Footer } from './Footer';
+import { DrawnExternalLink } from './ui/DrawnExternalLink';
 import { DrawnUnderline } from './ui/DrawUnderline';
 import { Handwriting } from './ui/Handwriting';
 import { SketchRuler } from './ui/SketchRuler';
@@ -52,7 +52,7 @@ export const Connect = () => {
                 key={link.label}
               >
                 {link.label}
-                <ArrowSquareOutIcon />
+                <DrawnExternalLink />
                 <DrawnUnderline />
               </a>
             ))}

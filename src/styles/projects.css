@@ -115,14 +115,7 @@
   position: absolute;
   right: 1.25rem;
   bottom: 1rem;
-  width: 2rem;
-  height: 1.5rem;
   color: var(--note-ink);
-  pointer-events: none;
-}
-
-.project-arrow path {
-  stroke-dasharray: 1 2;
 }
 
 .project-note:is(:hover, :focus-visible) {
@@ -158,14 +151,6 @@
     .watercolor-wash-stroke {
     animation: pigment-paint var(--stroke-duration) var(--stroke-delay)
       cubic-bezier(0.35, 0.1, 0.55, 1) both;
-  }
-
-  .project-note:is(:hover, :focus-visible) .project-arrow path {
-    animation: ink-write 240ms ease-out both;
-  }
-
-  .project-note:is(:hover, :focus-visible) .project-arrow path + path {
-    animation-delay: 140ms;
   }
 }
 

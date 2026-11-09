@@ -1,4 +1,5 @@
 import { projects } from '../data/portfolio';
+import { DrawnArrow } from './ui/DrawnArrow';
 import { WatercolorWash } from './ui/WatercolorWash';
 
 import '../styles/projects.css';
@@ -51,20 +52,7 @@ export const Projects = () => {
             <span className="project-number" aria-hidden="true">
               {String(index + 1).padStart(2, '0')}
             </span>
-            <svg
-              className="project-arrow"
-              viewBox="0 0 36 28"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M5 23Q17 12 30 5" pathLength="1" />
-              <path d="M18 5L30 4L29 17" pathLength="1" />
-            </svg>
+            <DrawnArrow direction="up-right" className="project-arrow" />
           </a>
         ))}
       </div>
