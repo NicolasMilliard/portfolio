@@ -23,16 +23,18 @@ export const createAppRouter = (
       },
     },
     scrollRestoration,
-    getScrollRestorationKey: (location) =>
-      location.pathname === '/'
-        ? '/'
-        : location.state.__TSR_key || location.href,
+    // Settle route positions before view-transition snapshots; anchors stay smooth.
+    scrollRestorationBehavior: 'instant',
     trailingSlash: 'never',
   });
 
 export type AppRouter = ReturnType<typeof createAppRouter>;
 
 declare module '@tanstack/react-router' {
+  interface HistoryState {
+    homeHistoryIndex?: number;
+  }
+
   interface Register {
     router: AppRouter;
   }

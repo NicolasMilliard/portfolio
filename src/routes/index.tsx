@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import App from '../App';
+import { HomePage } from '../components/HomePage';
 import { homeSeo, seoToRouteHead } from '../seo';
 
 export const Route = createFileRoute('/')({
   head: () => seoToRouteHead(homeSeo),
-  component: App,
+  component: HomePage,
 });

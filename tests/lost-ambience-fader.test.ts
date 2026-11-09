@@ -6,20 +6,28 @@ import { createAmbienceFader } from '../src/features/lost/ambienceFader.ts';
 function setup() {
   let time = 0;
   let next = 0;
-  const frames = new Map();
+  const frames = new Map<number, FrameRequestCallback>();
   const clip = {
     paused: true,
     volume: 0.45,
-    pause() { this.paused = true; },
-    play() { this.paused = false; return Promise.resolve(); },
+    pause() {
+      this.paused = true;
+    },
+    play() {
+      this.paused = false;
+      return Promise.resolve();
+    },
   };
   const fader = createAmbienceFader({
     clip,
     now: () => time,
-    requestFrame: (callback) => { frames.set(++next, callback); return next; },
+    requestFrame: (callback) => {
+      frames.set(++next, callback);
+      return next;
+    },
     cancelFrame: (id) => frames.delete(id),
   });
-  const advance = (milliseconds) => {
+  const advance = (milliseconds: number) => {
     time += milliseconds;
     const callbacks = [...frames.values()];
     frames.clear();
@@ -94,10 +102,17 @@ test('mute, hidden-tab stop and disposal silence immediately and cancel ramps', 
 
 test('a late play completion cannot restore sound after stopping', async () => {
   const { clip, fader, frames } = setup();
-  let finish;
-  clip.play = () => new Promise((resolve) => { finish = () => { clip.paused = false; resolve(); }; });
+  let finish: (() => void) | undefined;
+  clip.play = () =>
+    new Promise<void>((resolve) => {
+      finish = () => {
+        clip.paused = false;
+        resolve();
+      };
+    });
   const pending = fader.resume();
   fader.stop();
+  assert.ok(finish);
   finish();
   await pending;
   assert.equal(clip.paused, true);
@@ -109,7 +124,10 @@ test('denied playback remains recoverable on the next user gesture', async () =>
   const { clip, fader, advance } = setup();
   clip.play = () => Promise.reject(new Error('Autoplay denied'));
   await assert.rejects(fader.resume());
-  clip.play = () => { clip.paused = false; return Promise.resolve(); };
+  clip.play = () => {
+    clip.paused = false;
+    return Promise.resolve();
+  };
   await fader.resume();
   advance(700);
   assert.equal(clip.paused, false);

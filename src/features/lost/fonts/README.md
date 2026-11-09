@@ -3,7 +3,7 @@
 Only the LOST 404 page loads these subsets. Its stylesheet declares unique
 `Lost Sans` and `Lost Serif` families and scopes the family aliases to
 `.lost-page`. The homepage and writing routes continue to use the original
-`DM Sans` and `Source Serif 4` files and declarations in `src/index.css`.
+`DM Sans` and `Source Serif 4` files and declarations in `src/styles/index.css`.
 An `html:has(.lost-page)` rule also uses the subset for root font metrics only
 while the 404 is mounted, preventing an extra shared-font request on entry.
 `Jost-404.ttf` is already a two-character subset and is unchanged.

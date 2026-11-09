@@ -1,48 +1,29 @@
-import { profile } from '../data/portfolio';
+import { Greeting } from './Greeting';
 
-export const Introduction = () => {
-  return (
-    <header className="introduction">
-      <svg
-        className="introduction-logo"
-        width="44"
-        height="39"
-        viewBox="0 0 44 39"
-        fill="none"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <g className="logo-capsule-left">
-          <rect
-            x="15.817"
-            y="2.31699"
-            width="17"
-            height="33"
-            rx="8.5"
-            transform="rotate(30 15.817 2.31699)"
-            fill="#245BC3"
-            fillOpacity="0.4"
-            stroke="#245BC3"
-          />
-        </g>
-        <g className="logo-capsule-right">
-          <rect
-            x="29.817"
-            y="-0.683013"
-            width="17"
-            height="33"
-            rx="8.5"
-            transform="rotate(30 29.817 -0.683013)"
-            fill="#245BC3"
-            fillOpacity="0.4"
-            stroke="#245BC3"
-          />
-        </g>
-      </svg>
+export const Introduction = () => (
+  <div className="introduction">
+    <div className="introduction-body">
       <div className="introduction-copy">
-        <h1>{profile.name}</h1>
-        <p>{profile.title}</p>
+        <Greeting />
+        <p className="introduction-lead">
+          I'm a Senior Frontend Engineer with ten years of experience.
+        </p>
+        <p className="introduction-description">
+          I work with React, TypeScript, and design systems. I care about how
+          interfaces work and how they feel to use.
+        </p>
       </div>
-    </header>
-  );
-};
+      <figure className="introduction-portrait">
+        <img
+          src="/images/brand/nicolas-portrait-cutout.webp"
+          srcSet="/images/brand/nicolas-portrait-small-cutout.webp 320w, /images/brand/nicolas-portrait-cutout.webp 640w"
+          sizes="(max-width: 40rem) 36vw, (max-width: 50rem) 208px, 280px"
+          width="640"
+          height="1129"
+          alt="Watercolor character of Nicolas wearing black glasses, smiling with his hands in his pockets and a backpack over his shoulder."
+          fetchPriority="high"
+        />
+      </figure>
+    </div>
+  </div>
+);

@@ -1,3 +1,4 @@
+import { useRouter } from '@tanstack/react-router';
 import { useEffect, useRef, useState, type RefObject } from 'react';
 
 type Section = {
@@ -18,6 +19,7 @@ export const ArticleSectionNav = ({
   const [activeId, setActiveId] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const content = contentRef.current;
@@ -102,6 +104,30 @@ export const ArticleSectionNav = ({
       className="article-toc"
       aria-label="Article sections"
       data-open={isOpen}
+      onClick={(event) => {
+        if (
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
+          return;
+
+        const link = (event.target as HTMLElement).closest<HTMLAnchorElement>(
+          'a[href^="#"]',
+        );
+        if (!link) return;
+
+        // Keep the homepage origin while adding article sections to history.
+        event.preventDefault();
+        void router.navigate({
+          to: '/writing/$slug',
+          params: { slug: articleKey },
+          hash: link.hash.slice(1),
+          state: (previous) => ({ homeHistoryIndex: previous.homeHistoryIndex }),
+        });
+      }}
       onKeyDown={(event) => {
         if (event.key === 'Escape') {
           setIsOpen(false);

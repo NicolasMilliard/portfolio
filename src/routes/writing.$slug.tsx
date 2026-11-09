@@ -1,13 +1,7 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router';
-import { useRef } from 'react';
+import { createFileRoute, notFound } from '@tanstack/react-router';
 
-import { ArticleHeading } from '../components/ArticleHeading';
-import { ArticleSectionNav } from '../components/ArticleSectionNav';
-import {
-  formatPublishedDate,
-  loadWriting,
-  type WritingWithContent,
-} from '../content/writings';
+import { WritingPage } from '../features/writing/WritingPage';
+import { loadWriting, type WritingWithContent } from '../content/writings';
 import { getWritingSeo, notFoundSeo, seoToRouteHead } from '../seo';
 
 export const Route = createFileRoute('/writing/$slug')({
@@ -22,57 +16,11 @@ export const Route = createFileRoute('/writing/$slug')({
   },
   head: ({ loaderData }) =>
     seoToRouteHead(loaderData ? getWritingSeo(loaderData) : notFoundSeo),
-  component: WritingPage,
+  component: WritingRoute,
 });
 
-function WritingPage() {
+function WritingRoute() {
   const writing = Route.useLoaderData();
-  const Content = writing.Content;
-  const contentRef = useRef<HTMLDivElement>(null);
 
-  return (
-    <div className="page article-page">
-      <ArticleSectionNav contentRef={contentRef} articleKey={writing.slug} />
-      <main className="article-main">
-        <article className="article">
-          <Link className="article-back-link" to="/">
-            Back home
-          </Link>
-          <header className="article-header">
-            <h1
-              className="article-title"
-              style={{ viewTransitionName: `writing-title-${writing.slug}` }}
-            >
-              {writing.title}
-            </h1>
-            <p
-              className="article-description"
-              style={{
-                viewTransitionName: `writing-description-${writing.slug}`,
-              }}
-            >
-              {writing.description}
-            </p>
-            <div className="article-time">
-              <time className="article-date" dateTime={writing.publishedAt}>
-                {formatPublishedDate(writing.publishedAt)}
-              </time>
-              {writing.updatedAt &&
-              writing.updatedAt !== writing.publishedAt ? (
-                <p className="article-date">
-                  Updated{' '}
-                  <time dateTime={writing.updatedAt}>
-                    {formatPublishedDate(writing.updatedAt)}
-                  </time>
-                </p>
-              ) : null}
-            </div>
-          </header>
-          <div className="article-content" ref={contentRef}>
-            <Content components={{ h2: ArticleHeading }} />
-          </div>
-        </article>
-      </main>
-    </div>
-  );
+  return <WritingPage writing={writing} />;
 }

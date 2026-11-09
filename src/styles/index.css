@@ -1,0 +1,221 @@
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../fonts/DMSans-VariableFont_opsz,wght.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../fonts/SourceSerif4-VariableFont_opsz,wght.woff2') format('woff2');
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+:root {
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', ui-serif, Georgia, Cambria, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    monospace;
+
+  --background: #faf6ef;
+  --foreground: #303c48;
+  --muted: #62676a;
+  --ink-blue: #415a77;
+  --accent: #a95539;
+  --surface-subtle: color-mix(in oklab, var(--foreground), transparent 96%);
+  --surface-accent: color-mix(in oklab, var(--accent), transparent 96%);
+  --border-subtle: color-mix(in oklab, var(--foreground), transparent 90%);
+
+  --space-page-y: clamp(4rem, 10vw, 8rem);
+  --space-page-x: clamp(1rem, 5vw, 4rem);
+  --content-width: 36.25rem;
+  --site-width: 60rem;
+  --header-offset: 6.5rem;
+  --tape-edge: polygon(
+    2% 0, 98% 4%, 96% 36%, 100% 62%, 97% 100%, 0 96%, 3% 65%, 0 32%
+  );
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+}
+
+::selection {
+  background: #edcfb8;
+}
+
+.site-layout {
+  display: flow-root;
+  min-height: 100svh;
+}
+
+.page {
+  padding-inline: var(--space-page-x);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @keyframes ink-write {
+    from {
+      stroke-dashoffset: 1.01;
+      opacity: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-family: var(--font-serif);
+  margin-bottom: 1.5rem;
+}
+
+p {
+  max-width: var(--content-width);
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--muted);
+  transition: color 300ms ease;
+}
+
+a:hover {
+  color: var(--foreground);
+}
+
+a:focus-visible {
+  color: var(--foreground);
+  outline: 0.125rem solid currentColor;
+  outline-offset: 0.1875rem;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  color: var(--accent);
+}
+
+/* Shared by the writing list and article routes during navigation. */
+.writing-title,
+.article-title {
+  view-transition-class: writing-title;
+}
+
+.writing-description,
+.article-description {
+  view-transition-class: writing-description;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+::view-transition {
+  background: var(--background);
+}
+
+::view-transition-old(root) {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(root) {
+  animation: none;
+  opacity: 1;
+}
+
+html:active-view-transition-type(article-enter)
+  :is(.article-time, .article-content) {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(0.5rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .article-time,
+  .article-content {
+    transition:
+      opacity 300ms ease-out,
+      transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+::view-transition-group(.writing-title),
+::view-transition-group(.writing-description) {
+  animation-duration: 480ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(.writing-title):only-child,
+::view-transition-old(.writing-description):only-child {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(.writing-title):only-child,
+::view-transition-new(.writing-description):only-child {
+  animation: none;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 40rem) {
+
+  :root {
+    --header-offset: 6rem;
+  }
+}

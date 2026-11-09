@@ -1,33 +1,65 @@
 import { links } from '../data/portfolio';
+import {
+  conversationStrokes,
+  conversationViewBox,
+} from './conversationLettering';
 
-const getSeparator = (index: number, total: number) => {
-  if (index === 0) {
-    return '';
-  }
-
-  if (index === total - 1) {
-    return ', and ';
-  }
-
-  return ', ';
-};
+import { Footer } from './Footer';
+import { DrawnExternalLink } from './ui/DrawnExternalLink';
+import { DrawnUnderline } from './ui/DrawUnderline';
+import { Handwriting } from './ui/Handwriting';
+import { SketchRuler } from './ui/SketchRuler';
 
 export const Connect = () => {
   return (
-    <section>
-      <h2>connect</h2>
-      <p>
-        Find me on{' '}
-        {links.map((link, index) => (
-          <span key={link.label}>
-            {getSeparator(index, links.length)}
-            <a className="social-link" href={link.href}>
-              {link.label}
-            </a>
-          </span>
-        ))}
-        .
-      </p>
+    <section
+      className="connect-section"
+      id="connect"
+      aria-labelledby="connect-heading"
+    >
+      <div className="connect-content">
+        <SketchRuler />
+        <img
+          className="connect-character"
+          src="/images/brand/nicolas-skating-cutout.webp"
+          width="480"
+          height="720"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        />
+        <div className="connect-copy">
+          <h2 id="connect-heading">
+            Good things start
+            <br />
+            with a{' '}
+            <span className="handwritten conversation-word" data-handwriting>
+              <span className="handwriting-label">conversation.</span>
+              <Handwriting
+                strokes={conversationStrokes}
+                viewBox={conversationViewBox}
+              />
+            </span>
+          </h2>
+          <div className="connect-links">
+            {links.map((link) => (
+              <a
+                className="text-link social-link"
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={link.label}
+              >
+                {link.label}
+                <DrawnExternalLink />
+                <DrawnUnderline />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+      <Footer />
     </section>
   );
 };

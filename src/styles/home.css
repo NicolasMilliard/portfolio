@@ -1,0 +1,668 @@
+@font-face {
+  font-family: 'Caveat';
+  src: url('../fonts/Caveat-Medium-Latin.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.home-page {
+  --font-handwritten: 'Caveat', 'Bradley Hand', cursive;
+  display: flow-root;
+  max-width: calc(var(--site-width) + 2 * var(--space-page-x));
+  margin-inline: auto;
+}
+
+.home-page .introduction-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 17.5rem;
+  align-items: center;
+  gap: 3rem;
+  padding-block: 3.5rem;
+}
+
+.introduction-copy h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 5.8vw, 4rem);
+  font-weight: 450;
+  letter-spacing: -0.055em;
+  line-height: 1.2;
+}
+
+.hello-word {
+  display: inline-block;
+  width: 2.1em;
+  vertical-align: -0.14em;
+  line-height: 0;
+}
+
+.hello-word svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.hello-comma {
+  margin-left: -0.06em;
+}
+
+.name-wash {
+  position: relative;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+.name-wash-pigment {
+  position: absolute;
+  z-index: -1;
+  top: 0.2em;
+  left: -0.13em;
+  width: calc(100% + 0.26em);
+  height: 1em;
+  overflow: visible;
+  color: #d99a73;
+  pointer-events: none;
+}
+
+.home-page .introduction-lead {
+  margin-top: 2rem;
+  max-width: 28rem;
+  color: var(--foreground);
+  font-size: 1.375rem;
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+}
+
+.introduction-description {
+  max-width: 27rem;
+  margin-top: 1rem;
+  line-height: 1.75;
+}
+
+.text-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 0.375rem;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  color: var(--accent);
+}
+
+.introduction-portrait {
+  margin: 0;
+  text-align: center;
+}
+
+.introduction-portrait img,
+.connect-character {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.home-page .home-main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5rem;
+}
+
+.home-page section {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  scroll-margin-top: var(--header-offset);
+}
+
+.home-section,
+.connect-content {
+  position: relative;
+  display: grid;
+  grid-template-columns: 12.5rem minmax(0, 1fr);
+  gap: 3.5rem;
+}
+
+.home-page .writing-section {
+  padding-block: 2.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.home-page .section-heading h2 {
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.section-heading > p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.home-page .writing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.home-page .writing-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2rem;
+  gap: 0.5rem 1.25rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-page .writing-list li:first-child .writing-link {
+  padding-top: 0;
+}
+
+.home-page .writing-title {
+  grid-column: 1;
+  color: var(--foreground);
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  font-weight: 450;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.home-page .writing-date {
+  color: var(--muted);
+  grid-column: 1;
+  grid-row: 1;
+  margin-bottom: 0.125rem;
+  font-size: 0.75rem;
+}
+
+.home-page .writing-description {
+  grid-column: 1;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.writing-title,
+.writing-description {
+  justify-self: start;
+}
+
+.row-arrow {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: center;
+  justify-self: end;
+  color: var(--accent);
+}
+
+.home-page .writing-link:hover .writing-title {
+  color: var(--accent);
+}
+
+.connect-content {
+  align-items: center;
+  padding-block: 3rem;
+}
+
+.connect-character {
+  width: 12.5rem;
+}
+
+.home-page .connect-copy h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 450;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+.connect-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  margin-top: 1.25rem;
+}
+
+.site-footer {
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.site-footer p {
+  font-size: 0.75rem;
+}
+
+.handwritten {
+  font-family: var(--font-handwritten);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.conversation-word {
+  position: relative;
+  font-size: 1.2em;
+  white-space: nowrap;
+}
+
+.conversation-word .handwriting-label {
+  opacity: 0;
+}
+
+.conversation-word svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.drawn-icon {
+  display: block;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.drawn-arrow {
+  width: 2rem;
+  height: 1.5rem;
+}
+
+.drawn-external-link {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.drawn-icon path {
+  stroke-dasharray: 1 2;
+}
+
+.drawn-underline {
+  position: absolute;
+  inset: auto 0 -0.125rem;
+  width: 100%;
+  height: 0.5rem;
+  color: var(--accent);
+  pointer-events: none;
+}
+
+.drawn-underline path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+:is(a, button):is(:hover, :focus-visible) > .drawn-underline path {
+  stroke-dashoffset: 0;
+}
+
+.sketch-ruler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1.25rem;
+  color: var(--ink-blue);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.companions {
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.companions-invitation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 2rem;
+}
+
+.companions-trigger {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.companions-trigger > svg:not(.drawn-underline) {
+  width: 1rem;
+  height: 1rem;
+  color: var(--accent);
+}
+
+.companions-trigger:focus-visible {
+  outline: 0.125rem solid var(--accent);
+  outline-offset: 0.375rem;
+}
+
+.companions-stage {
+  position: relative;
+  width: min(100%, 30rem);
+  aspect-ratio: 4 / 3;
+  margin: 1rem auto 0;
+  overflow: hidden;
+}
+
+.companions-art {
+  position: absolute;
+  inset: auto 0 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateY(89%) rotate(-3deg);
+  transform-origin: 50% 100%;
+}
+
+.companions[data-open='true'] .companions-art {
+  transform: translateY(0) rotate(0);
+}
+
+.paw-trail {
+  position: absolute;
+  z-index: 1;
+  left: 4%;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1rem;
+  color: var(--accent);
+  transform: rotate(28deg);
+  pointer-events: none;
+}
+
+.paw-trail svg {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0;
+}
+
+.paw-trail svg:nth-child(2) {
+  margin-left: 1rem;
+}
+
+.companions[data-open='true'] .paw-trail svg {
+  opacity: 0.3;
+}
+
+@media (hover: none) {
+  .text-link > .drawn-underline path {
+    stroke-dashoffset: 0;
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hello-word .handwriting-stroke,
+  .home-page[data-sketchbook='ready']
+    [data-handwriting][data-inked]
+    .handwriting-stroke {
+    animation: ink-write var(--stroke-duration) var(--stroke-delay)
+      cubic-bezier(0.35, 0.1, 0.55, 1) both;
+  }
+
+  .hello-word .handwriting-stroke,
+  .home-page[data-sketchbook='ready'] [data-handwriting] .handwriting-stroke {
+    /* The longer gap prevents round caps from leaking the next dash at the end. */
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1.01;
+    opacity: 0;
+  }
+
+  .hello-comma {
+    animation: hello-comma var(--stroke-duration) var(--stroke-delay) both;
+  }
+
+  .name-wash-pigment .watercolor-wash-stroke {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1.01;
+    animation: pigment-paint var(--stroke-duration) var(--stroke-delay)
+      cubic-bezier(0.35, 0.1, 0.55, 1) both;
+  }
+
+  .drawn-underline path {
+    transition: stroke-dashoffset 280ms ease-out;
+  }
+
+  :is(a, button):is(:hover, :focus-visible) > .drawn-icon path {
+    animation: ink-write 240ms ease-out both;
+  }
+
+  :is(a, button):is(:hover, :focus-visible) > .drawn-icon path + path {
+    animation-delay: 140ms;
+  }
+
+  :is(a, button):is(:hover, :focus-visible) > .drawn-icon path:nth-child(3) {
+    animation-delay: 280ms;
+  }
+
+  .home-page[data-sketchbook='ready'] [data-sketch] path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1600ms cubic-bezier(0.25, 0.65, 0.35, 1);
+  }
+
+  .home-page[data-sketchbook='ready'] [data-sketch][data-inked] path {
+    stroke-dashoffset: 0;
+  }
+
+  .home-page[data-sketchbook='ready'] .sketch-ruler .ruler-ticks {
+    transition-duration: 2000ms;
+    transition-delay: 220ms;
+  }
+
+  .companions[data-open='true'] .companions-art {
+    animation: companions-arrive 1200ms both;
+  }
+
+  .companions[data-open='true'] .paw-trail svg {
+    animation: paw-appear 260ms ease-out both;
+  }
+
+  .companions[data-open='true'] .paw-trail svg:nth-child(2) {
+    animation-delay: 160ms;
+  }
+
+  .companions[data-open='true'] .paw-trail svg:nth-child(3) {
+    animation-delay: 320ms;
+  }
+
+  @keyframes pigment-paint {
+    from {
+      stroke-dashoffset: 1.01;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes hello-comma {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes companions-arrive {
+    0% {
+      transform: translateY(100%) rotate(-4deg);
+      animation-timing-function: ease-out;
+    }
+    22%,
+    40% {
+      transform: translateY(70%) rotate(-2deg);
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    82% {
+      transform: translateY(-1.5%) rotate(0.8deg);
+      animation-timing-function: ease-out;
+    }
+    100% {
+      transform: translateY(0) rotate(0);
+    }
+  }
+
+  @keyframes paw-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.75);
+    }
+    to {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+  }
+}
+
+@media (max-width: 50rem) {
+  .home-page .introduction-body {
+    grid-template-columns: minmax(0, 1fr) 13rem;
+    gap: 1rem;
+    padding-block: 2.5rem 3.5rem;
+  }
+
+  .home-section,
+  .connect-content {
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .connect-character {
+    width: 10rem;
+  }
+}
+
+@media (max-width: 40rem) {
+
+  .home-page .introduction-body {
+    grid-template-columns: minmax(0, 1fr) 36%;
+    grid-template-areas:
+      'title portrait'
+      'lead portrait'
+      'description description';
+    gap: 0 0.75rem;
+    padding-block: 2rem;
+  }
+
+  .introduction-copy {
+    display: contents;
+  }
+
+  .introduction-copy h1 {
+    grid-area: title;
+    font-size: clamp(2.5rem, 11.5vw, 3.75rem);
+    line-height: 1.15;
+  }
+
+  .greeting {
+    display: block;
+    margin-bottom: 0.125rem;
+    font-size: 0.66em;
+    letter-spacing: -0.035em;
+  }
+
+  .home-page .introduction-lead {
+    grid-area: lead;
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .introduction-description {
+    grid-area: description;
+    margin-top: 1.5rem;
+  }
+
+  .introduction-portrait {
+    grid-area: portrait;
+    width: 105%;
+    align-self: center;
+    justify-self: center;
+    transform: rotate(5deg);
+  }
+
+  .home-page .home-main {
+    gap: 3.5rem;
+  }
+
+  .home-section {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .desktop-break {
+    display: none;
+  }
+
+  .home-page .section-heading h2 {
+    text-wrap: initial;
+  }
+
+  .section-heading > p {
+    max-width: 22rem;
+  }
+
+  .connect-content {
+    grid-template-columns: minmax(0, 1fr) 8rem;
+    gap: 1rem;
+    padding-block: 2.5rem 2rem;
+  }
+
+  .connect-copy {
+    display: contents;
+  }
+
+  .home-page .connect-copy h2 {
+    grid-column: 1 / -1;
+    margin-block: 0;
+  }
+
+  .connect-links {
+    grid-column: 1;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  .connect-character {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
+    align-self: center;
+    justify-self: center;
+    transform: rotate(-7deg);
+  }
+
+  .companions {
+    padding-top: 1.75rem;
+  }
+
+  .site-footer p > span:last-child {
+    display: block;
+  }
+
+  .site-footer p > span[aria-hidden] {
+    display: none;
+  }
+}

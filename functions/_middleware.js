@@ -1,3 +1,8 @@
+/**
+ * Cloudflare Pages content negotiation: HTML and Markdown share the same page
+ * URL. HTML is the default; clients can opt into Markdown via the Accept header.
+ * scripts/prerender.ts generates the .md files; no conversion runs per request.
+ */
 const prefersMarkdown = (accept = '') => {
   const ranges = accept
     .toLowerCase()
@@ -14,12 +19,14 @@ const prefersMarkdown = (accept = '') => {
       };
     });
   const quality = (type) => {
+    // Specific ranges override wildcards, including an explicit q=0 refusal.
     for (const candidate of [type, 'text/*', '*/*']) {
       const matches = ranges.filter((range) => range.type === candidate);
       if (matches.length) return Math.max(...matches.map((range) => range.q));
     }
     return 0;
   };
+  // Only explicit Markdown ranges opt in; ties with HTML favor Markdown.
   return (
     ranges.some((range) => range.type === 'text/markdown') &&
     quality('text/markdown') > 0 &&
@@ -45,6 +52,7 @@ The requested page does not exist on this website. You can continue from the [ho
 
 export async function onRequest(context) {
   const { request } = context;
+  // Resolve Pages first to preserve routing status and security headers.
   const response = await context.next();
   if (
     !['GET', 'HEAD'].includes(request.method) ||
@@ -60,7 +68,8 @@ export async function onRequest(context) {
 
   const headers = new Headers(response.headers);
   varyOnAccept(headers);
-  // Negotiated HTML and Markdown must not share a representation-blind cache.
+  // Revalidate public pages so cached HTML isn't reused for a Markdown request.
+  // Preserve existing private/no-store policies.
   if (response.status === 404) {
     headers.set('Cache-Control', 'no-store');
   } else if (
@@ -76,6 +85,7 @@ export async function onRequest(context) {
 
   let body = notFoundMarkdown;
   if (response.status === 200) {
+    // Build artifacts follow page paths: / -> /index.md, /foo -> /foo.md.
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, '');
     url.pathname = path ? `${path}.md` : '/index.md';
@@ -96,6 +106,7 @@ export async function onRequest(context) {
   }
 
   headers.set('Content-Type', 'text/markdown; charset=utf-8');
+  // HTML byte lengths, compression, and validators don't apply to the new body.
   for (const name of [
     'Content-Length',
     'Content-Encoding',

@@ -42,11 +42,11 @@ export const informationPages: InformationPage[] = [
     paragraphs: [
       'This is the personal portfolio of Nicolas Milliard. It presents information about my frontend engineering work, projects, and published articles. It does not use visitor analytics and does not provide a contact form or ask you to create an account.',
       'The website is hosted on Cloudflare Pages. Delivering pages requires your browser to send requests to Cloudflare, including your IP address, the requested URL, and normal request headers. Cloudflare may process request information for delivery and security under its own policies.',
-      'I have not added advertising trackers or analytics cookies to this portfolio. Cloudflare delivery and security features may use technical browser storage or cookies for their operation. You can read about the provider’s handling of request information in its privacy policy, linked below.',
+      "I have not added advertising trackers or analytics cookies to this portfolio. Cloudflare delivery and security features may use technical browser storage or cookies for their operation. You can read about the provider's handling of request information in its privacy policy, linked below.",
       'If you have a question about this portfolio or this notice, use one of the profiles linked from the homepage. ',
     ],
     links: [
-      { label: 'Nicolas Milliard’s profiles', href: '/' },
+      { label: "Nicolas Milliard's profiles", href: '/' },
       {
         label: 'Cloudflare privacy policy',
         href: 'https://www.cloudflare.com/privacypolicy/',

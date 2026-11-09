@@ -1,18 +1,24 @@
 import TurndownService from 'turndown';
 
-export const renderMarkdown = (html, canonicalUrl) => {
+import type { InformationPage } from '../src/content/information.ts';
+import type { Writing } from '../src/content/writings.ts';
+import type { Profile, Project } from '../src/data/portfolio.ts';
+
+export const renderMarkdown = (html: string, canonicalUrl: string) => {
   const turndown = new TurndownService({
     headingStyle: 'atx',
     codeBlockStyle: 'fenced',
     bulletListMarker: '-',
   });
 
-  turndown.remove(['script', 'style', 'svg', 'nav', 'dialog', 'footer']);
+  const omittedTags = ['script', 'style', 'svg', 'nav', 'dialog', 'footer'];
+  turndown.remove((node) => omittedTags.includes(node.nodeName.toLowerCase()));
+  turndown.remove((node) => node.classList.contains('site-header'));
   turndown.remove((node) => node.getAttribute('aria-hidden') === 'true');
   turndown.addRule('absoluteLinks', {
     filter: (node) => node.nodeName === 'A' && node.hasAttribute('href'),
     replacement: (content, node) => {
-      const url = new URL(node.getAttribute('href'), canonicalUrl).href
+      const url = new URL(node.getAttribute('href')!, canonicalUrl).href
         .replaceAll('(', '%28')
         .replaceAll(')', '%29');
       const title = node.querySelector('.writing-title, .project-title');
@@ -42,12 +48,13 @@ export const renderMarkdown = (html, canonicalUrl) => {
     filter: (node) =>
       node.nodeName === 'PRE' && node.firstChild?.nodeName === 'CODE',
     replacement: (_content, node) => {
-      const code = node.firstChild;
+      // This rule's filter guarantees that the first child is a CODE element.
+      const code = node.firstChild as HTMLElement;
       const language =
         code.getAttribute('data-language') ??
         /language-(\S+)/.exec(code.className)?.[1] ??
         '';
-      const text = code.textContent.replace(/\n$/, '');
+      const text = (code.textContent ?? '').replace(/\n$/, '');
       const longestFence = Math.max(
         2,
         ...(text.match(/`+/g) ?? []).map((value) => value.length),
@@ -60,8 +67,20 @@ export const renderMarkdown = (html, canonicalUrl) => {
   return `${turndown.turndown(html)}\n\nCanonical URL: ${canonicalUrl}\n`;
 };
 
-export const renderLlms = ({ profile, pages, writings, projects, origin }) => {
-  const absolute = (path) => new URL(path, origin).href;
+export const renderLlms = ({
+  profile,
+  pages,
+  writings,
+  projects,
+  origin,
+}: {
+  profile: Profile;
+  pages: Pick<InformationPage, 'path' | 'title' | 'description'>[];
+  writings: Pick<Writing, 'slug' | 'title' | 'description'>[];
+  projects: Project[];
+  origin: string;
+}) => {
+  const absolute = (path: string) => new URL(path, origin).href;
   return `# ${profile.name}
 
 > ${profile.about.join(' ')}
