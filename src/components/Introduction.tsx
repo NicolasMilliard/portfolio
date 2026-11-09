@@ -20,7 +20,7 @@ export const Introduction = () => (
           sizes="(max-width: 40rem) 36vw, (max-width: 50rem) 208px, 280px"
           width="640"
           height="1129"
-          alt="Watercolor character of Nicolas, smiling with his hands in his pockets and a backpack over his shoulder."
+          alt="Watercolor character of Nicolas wearing black glasses, smiling with his hands in his pockets and a backpack over his shoulder."
           fetchPriority="high"
         />
       </figure>

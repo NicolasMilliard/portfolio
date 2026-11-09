@@ -1,8 +1,4 @@
-import {
-  helloLettering,
-  nameUnderlinePaths,
-  type HelloStrokeId,
-} from './helloLettering.ts';
+import { helloLettering, type HelloStrokeId } from './helloLettering.ts';
 
 // All values are milliseconds. The schedule below follows these settings.
 export const greetingTiming = {
@@ -21,11 +17,11 @@ export const greetingTiming = {
   // The next pen guide starts slightly early for a flowing lowercase rhythm.
   letterOverlaps: { eToL: 50, lToL: 10, lToO: 30 },
   comma: { pauseBefore: 40, duration: 120 },
-  underline: {
+  wash: {
     pauseBefore: 220,
-    firstDuration: 460,
-    pauseBetween: 100,
-    secondDuration: 320,
+    firstDuration: 800,
+    pauseBetween: 90,
+    secondDuration: 600,
   },
 };
 
@@ -53,27 +49,19 @@ export function createGreetingMotion(timing = greetingTiming) {
     delay: helloEnd + timing.comma.pauseBefore,
     duration: timing.comma.duration,
   };
-  const firstUnderline = {
-    path: nameUnderlinePaths[0],
+  const firstPass = {
     delay:
-      greetingComma.delay +
-      greetingComma.duration +
-      timing.underline.pauseBefore,
-    duration: timing.underline.firstDuration,
+      greetingComma.delay + greetingComma.duration + timing.wash.pauseBefore,
+    duration: timing.wash.firstDuration,
   };
-  const nameUnderlineStrokes = [
-    firstUnderline,
-    {
-      path: nameUnderlinePaths[1],
-      delay:
-        firstUnderline.delay +
-        firstUnderline.duration +
-        timing.underline.pauseBetween,
-      duration: timing.underline.secondDuration,
+  const nameWash = {
+    firstPass,
+    secondPass: {
+      delay: firstPass.delay + firstPass.duration + timing.wash.pauseBetween,
+      duration: timing.wash.secondDuration,
     },
-  ];
-  return { helloStrokes, greetingComma, nameUnderlineStrokes };
+  };
+  return { helloStrokes, greetingComma, nameWash };
 }
 
-export const { helloStrokes, greetingComma, nameUnderlineStrokes } =
-  createGreetingMotion();
+export const { helloStrokes, greetingComma, nameWash } = createGreetingMotion();

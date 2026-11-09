@@ -1,11 +1,8 @@
-import {
-  greetingComma,
-  helloStrokes,
-  nameUnderlineStrokes,
-} from './greetingMotion';
+import { greetingComma, helloStrokes, nameWash } from './greetingMotion';
 
 import { Handwriting } from './ui/Handwriting';
 import { strokeStyle } from './ui/strokeStyle';
+import { WatercolorWash } from './ui/WatercolorWash';
 
 export function Greeting() {
   return (
@@ -21,29 +18,11 @@ export function Greeting() {
         >
           ,
         </span>{' '}
-        I’m
+        I'm
       </span>{' '}
-      <span className="name-underline">
+      <span className="name-wash">
+        <WatercolorWash {...nameWash} />
         Nicolas
-        <svg
-          viewBox="0 0 260 16"
-          fill="none"
-          aria-hidden="true"
-          focusable="false"
-        >
-          {nameUnderlineStrokes.map((stroke, index) => (
-            <path
-              key={index}
-              className="name-underline-stroke"
-              d={stroke.path}
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              pathLength="1"
-              style={strokeStyle(stroke)}
-            />
-          ))}
-        </svg>
       </span>
       .
     </h1>

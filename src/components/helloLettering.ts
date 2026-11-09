@@ -51,8 +51,3 @@ export const helloLettering = [
 ] as const;
 
 export type HelloStrokeId = (typeof helloLettering)[number]['id'];
-
-export const nameUnderlinePaths = [
-  'M4 11C65 2 164 2 255 8',
-  'M24 15C98 7 184 7 231 11',
-] as const;

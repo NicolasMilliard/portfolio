@@ -219,19 +219,22 @@
   margin-left: -0.06em;
 }
 
-.name-underline {
+.name-wash {
   position: relative;
+  z-index: 0;
   white-space: nowrap;
 }
 
-.name-underline svg {
+.name-wash-pigment {
   position: absolute;
-  left: -0.025em;
-  bottom: -0.09em;
-  width: 103%;
-  height: 0.22em;
-  color: var(--accent);
-  opacity: 0.65;
+  z-index: -1;
+  top: 0.2em;
+  left: -0.13em;
+  width: calc(100% + 0.26em);
+  height: 1em;
+  overflow: visible;
+  color: #d99a73;
+  pointer-events: none;
 }
 
 .home-page .introduction-lead {
@@ -608,7 +611,6 @@
 @media (prefers-reduced-motion: no-preference) {
   .site-nav nav a:hover:not(:focus-visible) > .drawn-box path,
   .hello-word .handwriting-stroke,
-  .name-underline-stroke,
   .home-page[data-sketchbook='ready']
     [data-handwriting][data-inked]
     .handwriting-stroke {
@@ -617,7 +619,6 @@
   }
 
   .hello-word .handwriting-stroke,
-  .name-underline-stroke,
   .home-page[data-sketchbook='ready'] [data-handwriting] .handwriting-stroke {
     /* The longer gap prevents round caps from leaking the next dash at the end. */
     stroke-dasharray: 1 2;
@@ -627,6 +628,13 @@
 
   .hello-comma {
     animation: hello-comma var(--stroke-duration) var(--stroke-delay) both;
+  }
+
+  .name-wash-stroke {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1.01;
+    animation: pigment-paint var(--stroke-duration) var(--stroke-delay)
+      cubic-bezier(0.35, 0.1, 0.55, 1) both;
   }
 
   .drawn-underline path {
@@ -670,6 +678,15 @@
 
   .companions[data-open='true'] .paw-trail svg:nth-child(3) {
     animation-delay: 320ms;
+  }
+
+  @keyframes pigment-paint {
+    from {
+      stroke-dashoffset: 1.01;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 
   @keyframes ink-write {
