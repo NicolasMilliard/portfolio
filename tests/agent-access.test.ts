@@ -179,7 +179,10 @@ test('a missing generated Markdown representation does not hide a valid HTML pag
 test('Markdown retains article headings, code, and images without interactive duplicates', () => {
   const markdown = renderMarkdown(
     `
-    <h1>Article</h1>
+    <header class="site-header">
+      <a href="/"><img src="/logo.png" alt="">Nicolas Milliard</a>
+    </header>
+    <header class="article-header"><h1>Article</h1></header>
     <nav>Browser navigation</nav>
     <h2><button>Example<span aria-hidden="true">#</span></button></h2>
     <p><a href="/writing/other">Related article</a></p>
@@ -203,7 +206,7 @@ test('Markdown retains article headings, code, and images without interactive du
   assert.match(markdown, /````js\nconst fence = '```';\n````/);
   assert.doesNotMatch(
     markdown,
-    /Browser navigation|Duplicate|browserOnly|Example#/,
+    /Browser navigation|Duplicate|browserOnly|Example#|Nicolas Milliard|logo\.png/,
   );
 });
 

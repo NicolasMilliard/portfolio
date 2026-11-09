@@ -3,6 +3,14 @@ import { DrawnBox } from './ui/DrawnBox';
 
 import type { Profile } from '../data/portfolio';
 
+import '../styles/header.css';
+
+const navigation = [
+  { label: 'Writing', hash: 'writing' },
+  { label: 'Projects', hash: 'projects' },
+  { label: 'Say hello', hash: 'connect' },
+];
+
 export const Header = ({ profile }: { profile: Profile }) => {
   return (
     <header className="site-header">
@@ -29,6 +37,7 @@ export const Header = ({ profile }: { profile: Profile }) => {
         <Link
           className="site-identity"
           to="/"
+          resetScroll={false}
           onClick={(event) => {
             if (
               event.button !== 0 ||
@@ -38,13 +47,16 @@ export const Header = ({ profile }: { profile: Profile }) => {
               event.altKey
             )
               return;
-            // Bypass section restoration; CSS handles smooth and reduced motion scrolling.
-            window.scrollTo({ top: 0, behavior: 'auto' });
+            // Return home at the top instead of restoring a previously visited section.
+            window.scrollTo({
+              top: 0,
+              behavior: window.location.pathname === '/' ? 'auto' : 'instant',
+            });
           }}
           aria-label={`${profile.name}, home`}
         >
           <img
-            className="introduction-logo"
+            className="site-logo"
             src="/images/brand/nicolas-face-small.webp"
             srcSet="/images/brand/nicolas-face-small.webp 96w, /images/brand/nicolas-face.webp 256w"
             sizes="44px"
@@ -56,18 +68,17 @@ export const Header = ({ profile }: { profile: Profile }) => {
           <span>{profile.name}</span>
         </Link>
         <nav aria-label="Main navigation">
-          <a href="#writing">
-            Writing
-            <DrawnBox />
-          </a>
-          <a href="#projects">
-            Projects
-            <DrawnBox />
-          </a>
-          <a href="#connect">
-            Say hello
-            <DrawnBox />
-          </a>
+          {navigation.map(({ label, hash }) => (
+            <Link
+              to="/"
+              hash={hash}
+              hashScrollIntoView={{ behavior: 'auto', block: 'start' }}
+              key={hash}
+            >
+              {label}
+              <DrawnBox />
+            </Link>
+          ))}
         </nav>
       </div>
     </header>

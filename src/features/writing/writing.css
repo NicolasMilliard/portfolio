@@ -292,7 +292,7 @@
   position: relative;
   width: fit-content;
   max-width: 100%;
-  scroll-margin-top: 2rem;
+  scroll-margin-top: var(--header-offset);
 }
 
 .article-heading-copy {

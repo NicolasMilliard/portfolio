@@ -13,6 +13,7 @@ export const renderMarkdown = (html: string, canonicalUrl: string) => {
 
   const omittedTags = ['script', 'style', 'svg', 'nav', 'dialog', 'footer'];
   turndown.remove((node) => omittedTags.includes(node.nodeName.toLowerCase()));
+  turndown.remove((node) => node.classList.contains('site-header'));
   turndown.remove((node) => node.getAttribute('aria-hidden') === 'true');
   turndown.addRule('absoluteLinks', {
     filter: (node) => node.nodeName === 'A' && node.hasAttribute('href'),
