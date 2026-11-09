@@ -19,7 +19,7 @@ export const profile = {
   name: 'Nicolas Milliard',
   title: 'Senior Frontend Engineer',
   about: [
-    'I’ve spent the last ten years building interfaces and the frontend foundations behind them. I work with React, TypeScript, and design systems to make complex products easier to use and maintain.',
+    "I've spent the last ten years building interfaces and the frontend foundations behind them. I work with React, TypeScript, and design systems to make complex products easier to use and maintain.",
     'I care about how an interface feels to use, how well it performs, and how easy it is for the next person to work on.',
   ],
 } satisfies Profile;

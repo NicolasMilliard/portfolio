@@ -3,7 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import { BoardingPass } from './BoardingPass';
 import { InspectionDialog } from './InspectionDialog';
 import { LotteryTicket } from './LotteryTicket';
-import type { ArtifactKind, ClueKind, Evidence, SuitcaseItem } from './protocol';
+import type {
+  ArtifactKind,
+  ClueKind,
+  Evidence,
+  SuitcaseItem,
+} from './protocol';
 import type { PlaySound } from './soundEffects';
 import './styles/suitcase.css';
 import { OpenSuitcase, ShirtInspection } from './SuitcaseContents';
@@ -17,7 +22,7 @@ type ClueDialogProps = {
 };
 type SuitcaseView = 'closed' | 'open' | 'shirt' | 'lottery';
 const suitcaseTitles: Record<SuitcaseView, string> = {
-  closed: 'Someone else’s baggage.',
+  closed: "Someone else's baggage.",
   open: 'Someone left in a hurry.',
   shirt: 'A folded linen shirt.',
   lottery: 'A damaged lottery ticket.',

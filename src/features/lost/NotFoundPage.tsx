@@ -103,9 +103,9 @@ export function NotFoundPage() {
     : found.ticket && found.lottery
       ? 'The island has a habit of keeping secrets.'
       : found.ticket
-        ? 'There’s something folded inside that suitcase.'
+        ? "There's something folded inside that suitcase."
         : found.lottery
-          ? 'There’s a boarding pass caught in the leaves.'
+          ? "There's a boarding pass caught in the leaves."
           : 'The tide leaves things behind. Look around.';
 
   return (
