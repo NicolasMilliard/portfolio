@@ -22,6 +22,8 @@ export const Connect = () => {
         <img
           className="connect-character"
           src="/images/brand/nicolas-skating-cutout.webp"
+          srcSet="/images/brand/nicolas-skating-small-cutout.webp 256w, /images/brand/nicolas-skating-cutout.webp 480w"
+          sizes="(max-width: 40rem) 128px, (max-width: 50rem) 160px, 200px"
           width="480"
           height="720"
           alt=""

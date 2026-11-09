@@ -16,7 +16,7 @@ export const Introduction = () => (
       <figure className="introduction-portrait">
         <img
           src="/images/brand/nicolas-portrait-cutout.webp"
-          srcSet="/images/brand/nicolas-portrait-small-cutout.webp 320w, /images/brand/nicolas-portrait-cutout.webp 640w"
+          srcSet="/images/brand/nicolas-portrait-small-cutout.webp 320w, /images/brand/nicolas-portrait-medium-cutout.webp 480w, /images/brand/nicolas-portrait-cutout.webp 640w"
           sizes="(max-width: 40rem) 36vw, (max-width: 50rem) 208px, 280px"
           width="640"
           height="1129"
