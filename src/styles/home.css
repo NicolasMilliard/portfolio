@@ -15,29 +15,6 @@
   margin-inline: auto;
 }
 
-.skip-link {
-  position: fixed;
-  z-index: 20;
-  inset: 1rem auto auto 1rem;
-  padding: 0.75rem 1rem;
-  background: var(--foreground);
-  color: var(--background);
-  transform: translateY(-200%);
-}
-
-.skip-link:focus {
-  color: var(--background);
-  transform: none;
-}
-
-.home-page .introduction {
-  display: block;
-  width: 100%;
-  max-width: none;
-  margin-top: 0;
-  margin-inline: auto;
-}
-
 .site-header {
   position: sticky;
   z-index: 20;
@@ -193,7 +170,6 @@
 }
 
 .introduction-copy h1 {
-  margin-top: 0;
   font-family: var(--font-serif);
   font-size: clamp(2.75rem, 5.8vw, 4rem);
   font-weight: 450;
@@ -249,7 +225,6 @@
 .introduction-description {
   max-width: 27rem;
   margin-top: 1rem;
-  font-size: 1rem;
   line-height: 1.75;
 }
 
@@ -285,8 +260,6 @@
   flex-direction: column;
   width: 100%;
   gap: 5rem;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 .home-page section {
@@ -296,7 +269,8 @@
   scroll-margin-top: var(--header-offset);
 }
 
-.home-section {
+.home-section,
+.connect-content {
   position: relative;
   display: grid;
   grid-template-columns: 12.5rem minmax(0, 1fr);
@@ -326,10 +300,6 @@
   line-height: 1.7;
 }
 
-.personal-note a {
-  color: inherit;
-}
-
 .home-page .writing-list {
   display: flex;
   flex-direction: column;
@@ -345,10 +315,8 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) 1.5rem;
   gap: 0.5rem 1.25rem;
-  margin: 0;
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--border-subtle);
-  border-radius: 0;
   color: inherit;
   text-decoration: none;
 }
@@ -405,11 +373,7 @@
 }
 
 .connect-content {
-  position: relative;
-  display: grid;
-  grid-template-columns: 12.5rem minmax(0, 1fr);
   align-items: center;
-  gap: 3.5rem;
   padding-block: 3rem;
 }
 
@@ -434,30 +398,18 @@
 }
 
 .site-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
   padding-block: 1.5rem;
   border-top: 1px solid var(--border-subtle);
 }
 
-.site-footer p,
-.site-footer a {
+.site-footer p {
   font-size: 0.75rem;
-  line-height: 1.65;
 }
 
 .handwritten {
   font-family: var(--font-handwritten);
   font-weight: 500;
   letter-spacing: 0;
-}
-
-.word-note {
-  display: inline-block;
-  font-size: 1.4em;
-  line-height: 0.8;
-  transform: rotate(-3deg);
 }
 
 .conversation-word {
@@ -497,18 +449,6 @@
   stroke-dashoffset: 0;
 }
 
-.inline-sketch-link {
-  position: relative;
-  display: inline-block;
-  color: inherit;
-  text-decoration: none;
-}
-
-.inline-sketch-link .drawn-underline path {
-  stroke-dashoffset: 0;
-  opacity: 0.55;
-}
-
 .sketch-ruler {
   position: absolute;
   top: 0;
@@ -529,15 +469,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  min-height: 2rem;
 }
 
 .companions-trigger {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
   border: 0;
   background: transparent;
-  color: var(--muted);
   font-family: inherit;
-  font-size: 0.8125rem;
   cursor: pointer;
 }
 
@@ -602,7 +543,7 @@
 }
 
 @media (hover: none) {
-  :is(.text-link, .inline-sketch-link) > .drawn-underline path {
+  .text-link > .drawn-underline path {
     stroke-dashoffset: 0;
     opacity: 0.55;
   }
@@ -639,10 +580,6 @@
 
   .drawn-underline path {
     transition: stroke-dashoffset 280ms ease-out;
-  }
-
-  .inline-sketch-link:is(:hover, :focus-visible) > .drawn-underline path {
-    animation: ink-link 350ms ease-out both;
   }
 
   .home-page[data-sketchbook='ready'] [data-sketch] path {
@@ -700,15 +637,6 @@
     to {
       stroke-dashoffset: 0;
       opacity: 1;
-    }
-  }
-
-  @keyframes ink-link {
-    from {
-      stroke-dashoffset: 1;
-    }
-    to {
-      stroke-dashoffset: 0;
     }
   }
 
@@ -824,10 +752,6 @@
     height: 2.25rem;
   }
 
-  .site-nav nav {
-    gap: 1rem;
-  }
-
   .site-nav nav a {
     font-size: 0.75rem;
   }
@@ -848,7 +772,6 @@
 
   .introduction-copy h1 {
     grid-area: title;
-    margin-top: 0;
     font-size: clamp(2.5rem, 11.5vw, 3.75rem);
     line-height: 1.15;
   }
@@ -865,10 +788,6 @@
     margin-top: 1.5rem;
     font-size: 1.125rem;
     line-height: 1.6;
-  }
-
-  .introduction-lead br {
-    display: none;
   }
 
   .introduction-description {
@@ -898,7 +817,6 @@
   }
 
   .home-page .section-heading h2 {
-    font-size: 1.75rem;
     text-wrap: initial;
   }
 
@@ -920,12 +838,6 @@
   .home-page .connect-copy h2 {
     grid-column: 1 / -1;
     margin-block: 0;
-  }
-
-  .connect-copy > p:not(.eyebrow) {
-    grid-column: 1;
-    margin-top: 0.5rem;
-    font-size: 0.9375rem;
   }
 
   .connect-links {

@@ -1,12 +1,11 @@
-import { Link } from '@tanstack/react-router';
-
-import { links, profile } from '../data/portfolio';
-
-import { Companions } from './Companions';
+import { links } from '../data/portfolio';
 import {
   conversationStrokes,
   conversationViewBox,
 } from './conversationLettering';
+
+import { ArrowSquareOutIcon } from '@phosphor-icons/react';
+import { Footer } from './Footer';
 import { DrawnUnderline } from './ui/DrawUnderline';
 import { Handwriting } from './ui/Handwriting';
 import { SketchRuler } from './ui/SketchRuler';
@@ -54,24 +53,14 @@ export const Connect = () => {
                 key={link.label}
               >
                 {link.label}
-                <span aria-hidden="true">↗</span>
+                <ArrowSquareOutIcon />
                 <DrawnUnderline />
               </a>
             ))}
           </div>
         </div>
       </div>
-      <footer>
-        <div className="site-footer">
-          <p>
-            {profile.name}
-            <span aria-hidden="true"> · </span>
-            <span>Thanks for stopping by.</span>
-          </p>
-          <Link to="/privacy">Privacy</Link>
-        </div>
-        <Companions />
-      </footer>
+      <Footer />
     </section>
   );
 };

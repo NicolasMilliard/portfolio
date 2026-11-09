@@ -6,7 +6,6 @@ import { PawPrint } from './ui/PawPrint';
 export function Companions() {
   const [hasEntered, setHasEntered] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const stageRef = useRef<HTMLDivElement>(null);
   const artRef = useRef<HTMLImageElement>(null);
   const isVisible = hasEntered && isReady;
 
@@ -15,39 +14,25 @@ export function Companions() {
       setIsReady(true);
   }, []);
 
-  const arrive = () => {
-    setHasEntered(true);
-    if (
-      !isVisible ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    )
-      return;
-    for (const animation of stageRef.current?.getAnimations({
-      subtree: true,
-    }) ?? []) {
-      animation.currentTime = 0;
-      animation.play();
-    }
-  };
-
   return (
     <div className="companions" data-open={isVisible}>
       <div className="companions-invitation">
-        <button
-          type="button"
-          className="text-link companions-trigger"
-          aria-controls="studio-assistants"
-          aria-expanded={isVisible}
-          onClick={arrive}
-        >
-          <PawPrint />
-          Meet the studio assistants
-          <DrawnUnderline />
-        </button>
+        {!hasEntered && (
+          <button
+            type="button"
+            className="text-link companions-trigger"
+            aria-controls="studio-assistants"
+            aria-expanded={isVisible}
+            onClick={() => setHasEntered(true)}
+          >
+            <PawPrint />
+            Meet the studio assistants
+            <DrawnUnderline />
+          </button>
+        )}
       </div>
       <div
         className="companions-stage"
-        ref={stageRef}
         id="studio-assistants"
         aria-hidden={!isVisible}
       >
