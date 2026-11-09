@@ -13,7 +13,6 @@ export const Writing = () => {
     >
       <SketchRuler />
       <div className="section-heading">
-        <p className="eyebrow">Writing</p>
         <h2 id="writing-heading">
           Notes from
           <br className="desktop-break" /> the workbench

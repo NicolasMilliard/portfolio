@@ -30,7 +30,6 @@ export const Connect = () => {
           aria-hidden="true"
         />
         <div className="connect-copy">
-          <p className="eyebrow">Let's connect</p>
           <h2 id="connect-heading">
             Good things start
             <br />

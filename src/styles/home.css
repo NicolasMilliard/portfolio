@@ -10,6 +10,9 @@
   --home-width: 60rem;
   --header-offset: 6.5rem;
   --font-handwritten: 'Caveat', 'Bradley Hand', cursive;
+  --tape-edge: polygon(
+    2% 0, 98% 4%, 96% 36%, 100% 62%, 97% 100%, 0 96%, 3% 65%, 0 32%
+  );
   display: flow-root;
   max-width: calc(var(--home-width) + 2 * var(--space-page-x));
   margin-inline: auto;
@@ -38,16 +41,7 @@
   width: 3rem;
   height: 0.875rem;
   background: #d8bd9766;
-  clip-path: polygon(
-    2% 0,
-    98% 4%,
-    96% 36%,
-    100% 62%,
-    97% 100%,
-    0 96%,
-    3% 65%,
-    0 32%
-  );
+  clip-path: var(--tape-edge);
   transform: rotate(-3deg);
   pointer-events: none;
 }
@@ -158,15 +152,6 @@
   align-items: center;
   gap: 3rem;
   padding-block: 3.5rem;
-}
-
-.home-page .eyebrow {
-  color: var(--accent);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  line-height: 1.5;
-  text-transform: uppercase;
 }
 
 .introduction-copy h1 {
@@ -291,11 +276,7 @@
   text-wrap: balance;
 }
 
-.section-heading .eyebrow {
-  margin-bottom: 0.75rem;
-}
-
-.section-heading > p:not(.eyebrow) {
+.section-heading > p {
   font-size: 0.875rem;
   line-height: 1.7;
 }
@@ -309,8 +290,7 @@
   list-style: none;
 }
 
-.home-page .writing-link,
-.home-page .project-link {
+.home-page .writing-link {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 1.5rem;
@@ -321,13 +301,11 @@
   text-decoration: none;
 }
 
-.home-page .writing-list li:first-child .writing-link,
-.home-page .project-link:first-child {
+.home-page .writing-list li:first-child .writing-link {
   padding-top: 0;
 }
 
-.home-page .writing-title,
-.home-page .project-title {
+.home-page .writing-title {
   grid-column: 1;
   color: var(--foreground);
   font-family: var(--font-serif);
@@ -345,8 +323,7 @@
   font-size: 0.75rem;
 }
 
-.home-page .writing-description,
-.home-page .project-description {
+.home-page .writing-description {
   grid-column: 1;
   color: var(--muted);
   font-size: 0.9375rem;
@@ -367,8 +344,7 @@
   font-size: 1.25rem;
 }
 
-.home-page .writing-link:hover .writing-title,
-.home-page .project-link:hover .project-title {
+.home-page .writing-link:hover .writing-title {
   color: var(--accent);
 }
 
@@ -382,7 +358,6 @@
 }
 
 .home-page .connect-copy h2 {
-  margin-top: 0.75rem;
   margin-bottom: 1rem;
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 450;
@@ -571,7 +546,7 @@
     animation: hello-comma var(--stroke-duration) var(--stroke-delay) both;
   }
 
-  .name-wash-stroke {
+  .name-wash-pigment .watercolor-wash-stroke {
     stroke-dasharray: 1 2;
     stroke-dashoffset: 1.01;
     animation: pigment-paint var(--stroke-duration) var(--stroke-delay)
@@ -696,8 +671,7 @@
     transition: transform 180ms ease-out;
   }
 
-  .writing-link:hover .row-arrow,
-  .project-link:hover .row-arrow {
+  .writing-link:hover .row-arrow {
     transform: translateX(2px);
   }
 }
@@ -820,7 +794,7 @@
     text-wrap: initial;
   }
 
-  .section-heading > p:not(.eyebrow) {
+  .section-heading > p {
     max-width: 22rem;
   }
 
@@ -834,7 +808,6 @@
     display: contents;
   }
 
-  .connect-copy > .eyebrow,
   .home-page .connect-copy h2 {
     grid-column: 1 / -1;
     margin-block: 0;
@@ -850,7 +823,7 @@
 
   .connect-character {
     grid-column: 2;
-    grid-row: 3 / 5;
+    grid-row: 2;
     width: 100%;
     align-self: center;
     justify-self: center;

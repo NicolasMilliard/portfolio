@@ -5,15 +5,17 @@ import { strokeStyle, type StrokeTiming } from './strokeStyle';
 export function WatercolorWash({
   firstPass,
   secondPass,
+  className = 'name-wash-pigment',
 }: {
   firstPass: StrokeTiming;
   secondPass: StrokeTiming;
+  className?: string;
 }) {
   const id = useId();
 
   return (
     <svg
-      className="name-wash-pigment"
+      className={className}
       viewBox="0 0 300 90"
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -30,7 +32,7 @@ export function WatercolorWash({
           height="140"
         >
           <path
-            className="name-wash-stroke"
+            className="watercolor-wash-stroke"
             d="M-45 49C54 36 160 53 246 44Q290 40 345 50"
             pathLength="1"
             fill="none"
@@ -49,7 +51,7 @@ export function WatercolorWash({
           height="140"
         >
           <path
-            className="name-wash-stroke"
+            className="watercolor-wash-stroke"
             d="M345 51C249 67 140 44 53 55Q4 61-45 51"
             pathLength="1"
             fill="none"

@@ -1,0 +1,189 @@
+.projects-section {
+  display: grid;
+  gap: 2rem;
+}
+
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  align-items: start;
+  gap: 2rem 1.5rem;
+  padding: 0.875rem 0.5rem 0.5rem;
+}
+
+.project-note {
+  --note-angle: -1.4deg;
+  --note-ink: var(--ink-blue);
+  --tape-position: 22%;
+  --tape-angle: -7deg;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.875rem;
+  min-width: 0;
+  min-height: 14rem;
+  padding: 2.125rem 1.5rem 1.125rem;
+  border-radius: 2px 4px 1px 3px;
+  background: linear-gradient(145deg, #fffdf8, #f7f0e4);
+  color: var(--foreground);
+  text-decoration: none;
+  box-shadow:
+    0 2px 3px -2px #303c4833,
+    1px 8px 16px -12px #303c4855;
+  transform: rotate(var(--note-angle));
+}
+
+.project-note::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -0.625rem;
+  left: var(--tape-position);
+  width: 3.5rem;
+  height: 1.25rem;
+  background: #d8bd9773;
+  clip-path: var(--tape-edge);
+  transform: rotate(var(--tape-angle));
+  pointer-events: none;
+}
+
+.project-note:nth-child(even) {
+  --note-angle: 1.2deg;
+  --note-ink: var(--accent);
+  --tape-position: 59%;
+  --tape-angle: 6deg;
+  margin-top: 1.125rem;
+}
+
+.project-note:nth-child(3n) {
+  --note-angle: -0.7deg;
+  --note-ink: #ad8755;
+  --tape-position: 38%;
+  --tape-angle: -3deg;
+}
+
+.project-paper-edge {
+  position: absolute;
+  inset: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  color: var(--ink-blue);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.project-title {
+  position: relative;
+  isolation: isolate;
+  justify-self: start;
+  max-width: 100%;
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.project-wash {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: -0.35em;
+  width: calc(100% + 0.7em);
+  height: 125%;
+  overflow: visible;
+  color: var(--note-ink);
+  pointer-events: none;
+}
+
+.project-description {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.project-number {
+  color: var(--note-ink);
+  font-family: var(--font-handwritten);
+  font-size: 1.25rem;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.project-arrow {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1rem;
+  width: 2rem;
+  height: 1.5rem;
+  color: var(--note-ink);
+  pointer-events: none;
+}
+
+.project-arrow path {
+  stroke-dasharray: 1 2;
+}
+
+.project-note:is(:hover, :focus-visible) {
+  color: var(--foreground);
+}
+
+.project-note:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .project-note {
+    transition:
+      transform 240ms ease-out,
+      box-shadow 240ms ease-out;
+  }
+
+  .project-note:is(:hover, :focus-visible) {
+    transform: translateY(-2px) rotate(calc(var(--note-angle) * 0.3));
+    box-shadow:
+      0 3px 5px -3px #303c4833,
+      2px 12px 20px -12px #303c4866;
+  }
+
+  .home-page[data-sketchbook='ready'] .project-wash .watercolor-wash-stroke {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1.01;
+  }
+
+  .home-page[data-sketchbook='ready']
+    .project-note[data-inked]
+    .watercolor-wash-stroke {
+    animation: pigment-paint var(--stroke-duration) var(--stroke-delay)
+      cubic-bezier(0.35, 0.1, 0.55, 1) both;
+  }
+
+  .project-note:is(:hover, :focus-visible) .project-arrow path {
+    animation: ink-write 240ms ease-out both;
+  }
+
+  .project-note:is(:hover, :focus-visible) .project-arrow path + path {
+    animation-delay: 140ms;
+  }
+}
+
+@media (max-width: 40rem) {
+  .project-list {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    padding-inline: 0.25rem;
+  }
+
+  .project-note {
+    justify-self: start;
+    width: calc(100% - 0.75rem);
+    min-height: 12.5rem;
+  }
+
+  .project-note:nth-child(even) {
+    justify-self: end;
+    margin-top: 0;
+  }
+}

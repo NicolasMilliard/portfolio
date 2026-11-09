@@ -19,7 +19,7 @@ export function useSketchbook(rootRef: RefObject<HTMLDivElement | null>) {
     );
 
     root
-      .querySelectorAll('[data-sketch], [data-handwriting]')
+      .querySelectorAll('[data-sketch], [data-handwriting], [data-watercolor]')
       .forEach((element) => observer.observe(element));
     return () => {
       observer.disconnect();
