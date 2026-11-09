@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useLocation, useRouter } from '@tanstack/react-router';
 import { useRef } from 'react';
 
 import {
@@ -15,13 +15,36 @@ import './writing.css';
 export function WritingPage({ writing }: { writing: WritingWithContent }) {
   const Content = writing.Content;
   const contentRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const historyState = useLocation({ select: (location) => location.state });
 
   return (
     <div className="page article-page">
       <ArticleSectionNav contentRef={contentRef} articleKey={writing.slug} />
       <main className="article-main">
         <article className="article">
-          <Link className="article-back-link" to="/">
+          <Link
+            className="article-back-link"
+            to="/"
+            onClick={(event) => {
+              if (
+                historyState.homeHistoryIndex === undefined ||
+                historyState.homeHistoryIndex >= historyState.__TSR_index ||
+                event.button !== 0 ||
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey
+              )
+                return;
+
+              // Restore the original homepage entry, including its reading position.
+              event.preventDefault();
+              router.history.go(
+                historyState.homeHistoryIndex - historyState.__TSR_index,
+              );
+            }}
+          >
             Back home
           </Link>
           <header className="article-header">

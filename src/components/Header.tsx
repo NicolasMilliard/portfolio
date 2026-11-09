@@ -72,6 +72,7 @@ export const Header = ({ profile }: { profile: Profile }) => {
             <Link
               to="/"
               hash={hash}
+              activeOptions={{ exact: true, includeHash: true }}
               hashScrollIntoView={{ behavior: 'auto', block: 'start' }}
               key={hash}
             >

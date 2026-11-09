@@ -29,6 +29,7 @@ export const Writing = () => {
               className="writing-link"
               to="/writing/$slug"
               params={{ slug: writing.slug }}
+              state={(previous) => ({ homeHistoryIndex: previous.__TSR_index })}
             >
               <span
                 className="writing-title"
