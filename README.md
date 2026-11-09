@@ -15,6 +15,20 @@ bun run check
 Cloudflare Pages middleware locally, build first, then run
 `npx wrangler pages dev dist`.
 
+## Image and font assets
+
+The watercolor WebP assets in `public/images/brand` use quality 82, compression
+method 6, and lossless alpha (`alpha_quality=100`), encoded with Pillow 13.0.0.
+Generate responsive variants from the original artwork with Lanczos resampling:
+companions at 480/768/960px, the portrait at 320/480/640px, and the skating
+character at 256/480px. Start from the original artwork when updating images to
+avoid repeated lossy compression.
+
+The companions image is requested after clicking “Meet the studio assistants.”
+Keep its stage dimensions reserved while it loads so the page does not shift.
+
+See [`src/fonts/README.md`](src/fonts/README.md) for font coverage and subsetting.
+
 ## Code organization
 
 - `src/routes` owns URLs, route metadata, and article loading.
