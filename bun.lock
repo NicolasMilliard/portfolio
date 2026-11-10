@@ -6,6 +6,7 @@
       "name": "portfolio",
       "dependencies": {
         "@tanstack/react-router": "1.170.46",
+        "falling-leaves": "^0.1.0",
         "react": "19.3.1",
         "react-dom": "19.3.1",
       },
@@ -388,6 +389,8 @@
     "estree-walker": ["estree-walker@3.0.3", "", { "dependencies": { "@types/estree": "^1.0.0" } }, "sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g=="],
 
     "extend": ["extend@3.0.2", "", {}, "sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g=="],
+
+    "falling-leaves": ["falling-leaves@0.1.0", "", { "peerDependencies": { "react": ">=17" }, "optionalPeers": ["react"] }, "sha512-fn4J38NagpzKLcoasuxcgXDz79cpYEppa6TONHvWE1KpTmsK9UxQSmQim8Oo1u221s+ckDMqmBraYsaKKVJDWA=="],
 
     "fault": ["fault@2.0.1", "", { "dependencies": { "format": "^0.2.0" } }, "sha512-WtySTkS4OKev5JtpHXnib4Gxiurzh5NCGvWrFaZ34m6JehfTUhKZvn9njTfw48t6JumVQOmrKqpmGcdwxnhqBQ=="],
 
