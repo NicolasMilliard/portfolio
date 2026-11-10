@@ -4,7 +4,6 @@ import {
   conversationViewBox,
 } from './conversationLettering';
 
-import { Footer } from './Footer';
 import { DrawnExternalLink } from './ui/DrawnExternalLink';
 import { DrawnUnderline } from './ui/DrawUnderline';
 import { Handwriting } from './ui/Handwriting';
@@ -61,7 +60,6 @@ export const Connect = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </section>
   );
 };
