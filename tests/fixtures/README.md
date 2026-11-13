@@ -11,6 +11,6 @@ pointer IDs cannot acquire native capture. The fixture verifies application
 behavior, not the browser's physical pinch gesture. Confirm native page zoom on
 a touch device.
 
-The TSX fixture lives in `src/features/lost/__fixtures__` so it is checked by
+The TSX fixture lives in `src/features/404/__fixtures__` so it is checked by
 the browser TypeScript configuration. It is not imported by the application
 entry points and does not ship in the production build.

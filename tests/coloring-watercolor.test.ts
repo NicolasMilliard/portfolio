@@ -7,7 +7,7 @@ import {
   FILTER_PADDING,
   PAINT_TILE_SIZE,
   type PixelBuffer,
-} from '../src/features/lost/watercolor.ts';
+} from '../src/features/404/watercolor.ts';
 
 const pixels = (width: number, height: number, rgba: number[]): PixelBuffer => {
   const data = new Uint8ClampedArray(width * height * 4);

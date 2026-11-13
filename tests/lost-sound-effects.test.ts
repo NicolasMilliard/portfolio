@@ -5,7 +5,7 @@ import {
   createSoundEffects,
   SOUND_EFFECT_NAMES,
   type SoundEffect,
-} from '../src/features/lost/soundEffects.ts';
+} from '../src/features/404/soundEffects.ts';
 
 const createClip = () => ({
   currentTime: 0,

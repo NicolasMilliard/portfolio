@@ -11,7 +11,7 @@ import {
   LOST_SEQUENCE,
   OCEANIC_FLIGHT,
   startCountdown,
-} from '../src/features/lost/protocol.ts';
+} from '../src/features/404/protocol.ts';
 
 test('four discoveries supply all six numbers without relying on Flight 815', () => {
   const discovered = Object.values(CLUE_NUMBERS)

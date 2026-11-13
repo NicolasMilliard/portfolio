@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { createAmbienceFader } from '../src/features/lost/ambienceFader.ts';
+import { createAmbienceFader } from '../src/features/404/ambienceFader.ts';
 
 function setup() {
   let time = 0;

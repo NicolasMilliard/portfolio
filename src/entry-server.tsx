@@ -39,7 +39,7 @@ export const getPrerenderPages = (): PrerenderPage[] => [
   {
     path: '/404',
     outputFile: '404.html',
-    styleEntry: 'src/features/lost/NotFoundPage.tsx',
+    styleEntry: 'src/features/404/NotFoundPage.tsx',
     seo: notFoundSeo,
     includeInSitemap: false,
   },

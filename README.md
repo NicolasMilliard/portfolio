@@ -36,7 +36,7 @@ See [`src/fonts/README.md`](src/fonts/README.md) for font coverage and subsettin
   and the information-page component.
 - `src/hooks` holds shared React hooks; `src/styles` contains global, homepage,
   and shared article styles.
-- `src/features/lost` contains the interactive 404 page.
+- `src/features/404` contains the interactive 404 page.
 - `src/features/writing` contains the article page, section navigation, heading
   links, image viewer, and writing-specific styles.
 - `src/content` owns articles and page content; `src/data/portfolio.ts` provides
