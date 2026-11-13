@@ -80,7 +80,20 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
     };
   };
 
+  const cancelStroke = () => {
+    const current = gesture.current;
+    if (!current) return;
+    gesture.current = null;
+    painter.current?.cancelStroke();
+    if (canvas.current?.hasPointerCapture(current.pointerId))
+      canvas.current.releasePointerCapture(current.pointerId);
+  };
+
   const startStroke = (event: PointerEvent<HTMLCanvasElement>) => {
+    if (event.pointerType === 'touch' && !event.isPrimary) {
+      cancelStroke();
+      return;
+    }
     if (
       !painter.current ||
       !event.isPrimary ||
@@ -90,7 +103,7 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
       return;
     const bounds = event.currentTarget.getBoundingClientRect();
     if (!bounds.width) return;
-    event.preventDefault();
+    if (event.pointerType !== 'touch') event.preventDefault();
     const scale = bounds.width / frame.width;
     gesture.current = {
       pointerId: event.pointerId,
@@ -148,7 +161,9 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
         onPointerDown={startStroke}
         onPointerMove={continueStroke}
         onPointerUp={finishStroke}
-        onPointerCancel={finishStroke}
+        onPointerCancel={(event) => {
+          if (gesture.current?.pointerId === event.pointerId) cancelStroke();
+        }}
         onLostPointerCapture={finishStroke}
       />
       {status === 'error' && (

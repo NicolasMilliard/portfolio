@@ -119,7 +119,7 @@ export class ColoringPainter {
     width: number;
     last: PaintPoint | null;
     pending: PaintPoint[];
-    tiles: Set<PaintTile>;
+    tiles: Map<PaintTile, PaintRect | null>;
   } | null = null;
 
   constructor(canvas: HTMLCanvasElement, assets: PaintingAssets) {
@@ -175,7 +175,7 @@ export class ColoringPainter {
       width,
       last: null,
       pending: [point],
-      tiles: new Set(),
+      tiles: new Map(),
     };
     this.schedule();
   }
@@ -191,7 +191,7 @@ export class ColoringPainter {
     this.animationFrame = 0;
     if (!this.stroke) return;
     this.flush();
-    for (const tile of this.stroke.tiles) {
+    for (const tile of this.stroke.tiles.keys()) {
       if (!tile.active) continue;
       tile.raw.context.globalAlpha = pigmentOpacity;
       tile.raw.context.drawImage(tile.active.canvas, 0, 0);
@@ -200,6 +200,22 @@ export class ColoringPainter {
       tile.active = null;
     }
     this.stroke = null;
+  }
+
+  cancelStroke() {
+    if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
+    this.animationFrame = 0;
+    const stroke = this.stroke;
+    this.stroke = null;
+    if (!stroke) return;
+    for (const [tile, dirty] of stroke.tiles) {
+      if (tile.active) tile.active.canvas.width = 0;
+      tile.active = null;
+      // Restore only the previewed region from the committed pigments. A pinch
+      // must not leave the first finger's dab or erase an earlier wash.
+      if (dirty) this.updateTile(tile, dirty);
+    }
+    this.render();
   }
 
   dispose() {
@@ -318,7 +334,7 @@ export class ColoringPainter {
         const tile = this.getTile(tx, ty);
         if (!tile) continue;
         tile.active ??= createSurface(rawSize, true);
-        stroke.tiles.add(tile);
+        if (!stroke.tiles.has(tile)) stroke.tiles.set(tile, null);
         const context = tile.active.context;
         context.setTransform(
           1,
@@ -332,19 +348,34 @@ export class ColoringPainter {
         context.lineWidth = stroke.width;
         context.lineCap = context.lineJoin = 'round';
         context.beginPath();
-        if (!stroke.last && points.length === 1) {
+        if (!stroke.last) {
           context.arc(first.x, first.y, stroke.width / 2, 0, Math.PI * 2);
           context.fill();
-        } else {
-          context.moveTo(first.x, first.y);
-          for (const point of points) context.lineTo(point.x, point.y);
-          context.stroke();
+          context.beginPath();
         }
+        context.moveTo(first.x, first.y);
+        for (const point of points) context.lineTo(point.x, point.y);
+        context.stroke();
         const x = Math.max(0, left - tile.x);
         const y = Math.max(0, top - tile.y);
         const width = Math.min(PAINT_TILE_SIZE, right - tile.x) - x;
         const height = Math.min(PAINT_TILE_SIZE, bottom - tile.y) - y;
         if (width > 0 && height > 0) {
+          const previous = stroke.tiles.get(tile);
+          const dirtyLeft = Math.min(previous?.x ?? x, x);
+          const dirtyTop = Math.min(previous?.y ?? y, y);
+          stroke.tiles.set(tile, {
+            x: dirtyLeft,
+            y: dirtyTop,
+            width:
+              Math.max(previous ? previous.x + previous.width : 0, x + width) -
+              dirtyLeft,
+            height:
+              Math.max(
+                previous ? previous.y + previous.height : 0,
+                y + height,
+              ) - dirtyTop,
+          });
           this.updateTile(tile, { x, y, width, height });
         }
       }
