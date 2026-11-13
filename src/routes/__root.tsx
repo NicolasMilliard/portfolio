@@ -42,7 +42,7 @@ export const Route = createRootRoute({
   head: () => seoToRouteHead(notFoundSeo),
   component: RootLayout,
   notFoundComponent: lazyRouteComponent(
-    () => import('../features/lost/NotFoundPage'),
+    () => import('../features/404/NotFoundPage'),
     'NotFoundPage',
   ),
 });
