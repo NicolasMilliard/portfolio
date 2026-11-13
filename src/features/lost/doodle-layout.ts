@@ -14,7 +14,7 @@ type DoodleName =
   | 'pineapple'
   | 'game-console';
 
-type Doodle = [
+export type Doodle = [
   name: DoodleName,
   x: number,
   y: number,

@@ -5,6 +5,7 @@
 }
 
 .coloring-composition {
+  position: relative;
   display: block;
   width: 100%;
   height: 100svh;
@@ -12,9 +13,30 @@
   user-select: none;
 }
 
-.coloring-composition > g,
-.coloring-composition use {
+.coloring-artwork,
+.coloring-paint {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.coloring-artwork {
   pointer-events: none;
+}
+
+.coloring-paint-error {
+  position: absolute;
+  z-index: 1;
+  top: 6rem;
+  left: 50%;
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  padding: 0.5rem 0.75rem;
+  background: var(--background);
+  font-size: 0.8125rem;
+  text-align: center;
+  transform: translateX(-50%);
 }
 
 .coloring-base {
