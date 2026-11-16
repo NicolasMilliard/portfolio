@@ -1,24 +1,16 @@
-import {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type PointerEvent,
-} from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import type { PointerEvent } from "react";
 
-import {
-  ColoringPainter,
-  loadPaintingAssets,
-  type ColoringFrame,
-} from './coloring-painter';
-import type { PaintPoint } from './watercolor';
+import { ColoringPainter, loadPaintingAssets } from "./coloring-painter";
+import type { ColoringFrame } from "./coloring-painter";
+import type { PaintPoint } from "./watercolor";
 
-type Props = {
+interface Props {
   frame: ColoringFrame;
   color: string;
   brushSize: number;
   cursor: string;
-};
+}
 
 export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -31,18 +23,19 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
     scale: number;
     frame: ColoringFrame;
   } | null>(null);
-  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>(
-    'loading',
+  const [status, setStatus] = useState<"loading" | "ready" | "error">(
+    "loading"
   );
 
   useLayoutEffect(() => {
     latestFrame.current = frame;
     // A resize ends the gesture before coordinates change; cached paint remains.
     if (gesture.current && canvas.current) {
-      const pointerId = gesture.current.pointerId;
+      const { pointerId } = gesture.current;
       gesture.current = null;
-      if (canvas.current.hasPointerCapture(pointerId))
+      if (canvas.current.hasPointerCapture(pointerId)) {
         canvas.current.releasePointerCapture(pointerId);
+      }
     }
     painter.current?.resize(frame);
   }, [frame]);
@@ -51,21 +44,28 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
     const controller = new AbortController();
     let instance: ColoringPainter | null = null;
     const resize = () => instance?.resize(latestFrame.current);
-    void loadPaintingAssets(controller.signal)
-      .then((assets) => {
-        if (controller.signal.aborted || !canvas.current) return;
+    const initialize = async () => {
+      try {
+        const assets = await loadPaintingAssets(controller.signal);
+        if (controller.signal.aborted || !canvas.current) {
+          return;
+        }
+        // oxlint-disable-next-line react/immutability -- This effect-local resource is shared with its cleanup, not render state.
         instance = new ColoringPainter(canvas.current, assets);
         painter.current = instance;
         resize();
-        window.addEventListener('resize', resize);
-        setStatus('ready');
-      })
-      .catch(() => {
-        if (!controller.signal.aborted) setStatus('error');
-      });
+        window.addEventListener("resize", resize);
+        setStatus("ready");
+      } catch {
+        if (!controller.signal.aborted) {
+          setStatus("error");
+        }
+      }
+    };
+    void initialize();
     return () => {
       controller.abort();
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
       instance?.dispose();
       painter.current = null;
       gesture.current = null;
@@ -73,7 +73,10 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
   }, []);
 
   const pointAt = (event: globalThis.PointerEvent): PaintPoint => {
-    const current = gesture.current!;
+    const { current } = gesture;
+    if (!current) {
+      throw new Error("No active painting gesture");
+    }
     return {
       x: current.frame.x + (event.clientX - current.left) / current.scale,
       y: current.frame.y + (event.clientY - current.top) / current.scale,
@@ -81,16 +84,19 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
   };
 
   const cancelStroke = () => {
-    const current = gesture.current;
-    if (!current) return;
+    const { current } = gesture;
+    if (!current) {
+      return;
+    }
     gesture.current = null;
     painter.current?.cancelStroke();
-    if (canvas.current?.hasPointerCapture(current.pointerId))
+    if (canvas.current?.hasPointerCapture(current.pointerId)) {
       canvas.current.releasePointerCapture(current.pointerId);
+    }
   };
 
   const startStroke = (event: PointerEvent<HTMLCanvasElement>) => {
-    if (event.pointerType === 'touch' && !event.isPrimary) {
+    if (event.pointerType === "touch" && !event.isPrimary) {
       cancelStroke();
       return;
     }
@@ -99,11 +105,16 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
       !event.isPrimary ||
       event.button !== 0 ||
       gesture.current
-    )
+    ) {
       return;
+    }
     const bounds = event.currentTarget.getBoundingClientRect();
-    if (!bounds.width) return;
-    if (event.pointerType !== 'touch') event.preventDefault();
+    if (!bounds.width) {
+      return;
+    }
+    if (event.pointerType !== "touch") {
+      event.preventDefault();
+    }
     const scale = bounds.width / frame.width;
     gesture.current = {
       pointerId: event.pointerId,
@@ -116,22 +127,28 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
     painter.current.startStroke(
       pointAt(event.nativeEvent),
       brushSize / scale,
-      color,
+      color
     );
   };
 
   const finishStroke = (event: PointerEvent<HTMLCanvasElement>) => {
-    if (gesture.current?.pointerId !== event.pointerId) return;
-    if (event.type === 'pointerup')
+    if (gesture.current?.pointerId !== event.pointerId) {
+      return;
+    }
+    if (event.type === "pointerup") {
       painter.current?.addPoints([pointAt(event.nativeEvent)]);
+    }
     painter.current?.finishStroke();
     gesture.current = null;
-    if (event.currentTarget.hasPointerCapture(event.pointerId))
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
+    }
   };
 
   const continueStroke = (event: PointerEvent<HTMLCanvasElement>) => {
-    if (gesture.current?.pointerId !== event.pointerId) return;
+    if (gesture.current?.pointerId !== event.pointerId) {
+      return;
+    }
     if (!(event.buttons & 1)) {
       finishStroke(event);
       return;
@@ -140,7 +157,7 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
     // without forcing a React render (or a separate raster pass) for each sample.
     const coalesced = event.nativeEvent.getCoalescedEvents?.();
     painter.current?.addPoints(
-      (coalesced?.length ? coalesced : [event.nativeEvent]).map(pointAt),
+      (coalesced?.length ? coalesced : [event.nativeEvent]).map(pointAt)
     );
   };
 
@@ -151,25 +168,24 @@ export function ColoringCanvas({ frame, color, brushSize, cursor }: Props) {
         className="coloring-paint"
         aria-hidden="true"
         style={{
-          cursor:
-            status === 'ready'
-              ? cursor
-              : status === 'loading'
-                ? 'progress'
-                : 'default',
+          cursor: { ready: cursor, loading: "progress", error: "default" }[
+            status
+          ],
         }}
         onPointerDown={startStroke}
         onPointerMove={continueStroke}
         onPointerUp={finishStroke}
         onPointerCancel={(event) => {
-          if (gesture.current?.pointerId === event.pointerId) cancelStroke();
+          if (gesture.current?.pointerId === event.pointerId) {
+            cancelStroke();
+          }
         }}
         onLostPointerCapture={finishStroke}
       />
-      {status === 'error' && (
-        <p className="coloring-paint-error" role="status">
+      {status === "error" && (
+        <output className="coloring-paint-error">
           Painting couldn’t load. Please reload the page to try again.
-        </p>
+        </output>
       )}
     </>
   );

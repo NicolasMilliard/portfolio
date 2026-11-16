@@ -1,12 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from "@tanstack/react-router";
 
-import { InformationPage } from '../components/InformationPage';
-import { getInformationPage } from '../content/information';
-import { getInformationSeo, seoToRouteHead } from '../seo';
+import { InformationPage } from "../components/InformationPage";
+import { getInformationPage } from "../content/information";
+import { getInformationSeo, seoToRouteHead } from "../seo";
 
-const page = getInformationPage('/privacy');
+const page = getInformationPage("/privacy");
 
-export const Route = createFileRoute('/privacy')({
+export const Route = createFileRoute("/privacy")({
   head: () => seoToRouteHead(getInformationSeo(page)),
   component: () => <InformationPage page={page} />,
 });

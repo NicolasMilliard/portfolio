@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { DrawnUnderline } from './ui/DrawUnderline';
-import { PawPrint } from './ui/PawPrint';
+import { DrawnUnderline } from "./ui/DrawUnderline";
+import { PawPrint } from "./ui/PawPrint";
 
 export function Companions() {
   const [hasEntered, setHasEntered] = useState(false);
@@ -17,7 +17,9 @@ export function Companions() {
             className="text-link companions-trigger"
             aria-controls="studio-assistants"
             aria-expanded={isVisible}
-            onClick={() => setHasEntered(true)}
+            onClick={() => {
+              setHasEntered(true);
+            }}
           >
             <PawPrint />
             Meet the studio assistants
@@ -46,7 +48,9 @@ export function Companions() {
             alt="A watercolor puppy and two cats: one cat curled up on a scratching post, the other sitting beside the puppy."
             loading="eager"
             decoding="async"
-            onLoad={() => setIsReady(true)}
+            onLoad={() => {
+              setIsReady(true);
+            }}
             onError={() => {
               setHasEntered(false);
               setIsReady(false);

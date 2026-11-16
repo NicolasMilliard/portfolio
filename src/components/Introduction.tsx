@@ -1,4 +1,4 @@
-import { Greeting } from './Greeting';
+import { Greeting } from "./Greeting";
 
 export const Introduction = () => (
   <div className="introduction">
@@ -6,7 +6,7 @@ export const Introduction = () => (
       <div className="introduction-copy">
         <Greeting />
         <p className="introduction-lead">
-          I'm a Senior Frontend Engineer with ten years of experience.
+          I&apos;m a Senior Frontend Engineer with ten years of experience.
         </p>
         <p className="introduction-description">
           I work with React, TypeScript, and design systems. I care about how

@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 
-type ArticleImageLightboxProps = {
+interface ArticleImageLightboxProps {
   src: string;
   alt: string;
   width: number;
   height: number;
-};
+}
 
 export function ArticleImageLightbox({
   src,
@@ -33,12 +33,15 @@ export function ArticleImageLightbox({
       >
         <img src={src} alt={alt} width={width} height={height} loading="lazy" />
       </button>
+      {/* oxlint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- Native dialog supports Escape and the Close button; this handler dismisses backdrop clicks. */}
       <dialog
         ref={dialogRef}
         className="article-image-dialog"
         aria-label={alt}
         onClick={(event) => {
-          if (event.target === event.currentTarget) close();
+          if (event.target === event.currentTarget) {
+            close();
+          }
         }}
         onClose={() => {
           triggerRef.current?.focus();
@@ -46,8 +49,13 @@ export function ArticleImageLightbox({
       >
         <div className="article-image-dialog-panel">
           <div className="article-image-dialog-toolbar">
-            <button type="button" onClick={() => setZoomed(!zoomed)}>
-              {zoomed ? 'Fit image' : 'Zoom in'}
+            <button
+              type="button"
+              onClick={() => {
+                setZoomed(!zoomed);
+              }}
+            >
+              {zoomed ? "Fit image" : "Zoom in"}
             </button>
             <button type="button" onClick={close}>
               Close
@@ -59,7 +67,7 @@ export function ArticleImageLightbox({
               alt={alt}
               width={width}
               height={height}
-              className={zoomed ? 'is-zoomed' : undefined}
+              className={zoomed ? "is-zoomed" : undefined}
             />
           </div>
         </div>

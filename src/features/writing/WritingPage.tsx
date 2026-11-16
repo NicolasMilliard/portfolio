@@ -1,19 +1,16 @@
-import { Link, useLocation, useRouter } from '@tanstack/react-router';
-import { useRef } from 'react';
+import { Link, useLocation, useRouter } from "@tanstack/react-router";
+import { useRef } from "react";
 
-import {
-  formatPublishedDate,
-  type WritingWithContent,
-} from '../../content/writings';
+import { formatPublishedDate } from "../../content/writings";
+import type { WritingWithContent } from "../../content/writings";
+import { ArticleHeading } from "./ArticleHeading";
+import { ArticleSectionNav } from "./ArticleSectionNav";
 
-import { ArticleHeading } from './ArticleHeading';
-import { ArticleSectionNav } from './ArticleSectionNav';
-
-import '../../styles/article.css';
-import './writing.css';
+import "../../styles/article.css";
+import "./writing.css";
 
 export function WritingPage({ writing }: { writing: WritingWithContent }) {
-  const Content = writing.Content;
+  const { Content } = writing;
   const contentRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const historyState = useLocation({ select: (location) => location.state });
@@ -35,13 +32,14 @@ export function WritingPage({ writing }: { writing: WritingWithContent }) {
                 event.ctrlKey ||
                 event.shiftKey ||
                 event.altKey
-              )
+              ) {
                 return;
+              }
 
               // Restore the original homepage entry, including its reading position.
               event.preventDefault();
               router.history.go(
-                historyState.homeHistoryIndex - historyState.__TSR_index,
+                historyState.homeHistoryIndex - historyState.__TSR_index
               );
             }}
           >
@@ -69,7 +67,7 @@ export function WritingPage({ writing }: { writing: WritingWithContent }) {
               {writing.updatedAt &&
               writing.updatedAt !== writing.publishedAt ? (
                 <p className="article-date">
-                  Updated{' '}
+                  Updated{" "}
                   <time dateTime={writing.updatedAt}>
                     {formatPublishedDate(writing.updatedAt)}
                   </time>

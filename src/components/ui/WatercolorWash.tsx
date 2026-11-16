@@ -1,11 +1,12 @@
-import { useId } from 'react';
+import { useId } from "react";
 
-import { strokeStyle, type StrokeTiming } from './strokeStyle';
+import { strokeStyle } from "./strokeStyle";
+import type { StrokeTiming } from "./strokeStyle";
 
 export function WatercolorWash({
   firstPass,
   secondPass,
-  className = 'name-wash-pigment',
+  className = "name-wash-pigment",
 }: {
   firstPass: StrokeTiming;
   secondPass: StrokeTiming;

@@ -19,8 +19,9 @@ export const SketchRuler = ({ sketchKey }: { sketchKey: string }) => (
       className="ruler-ticks"
       d={Array.from({ length: 79 }, (_, index) => {
         const x = (index + 1) * 12;
-        return `M${x} 3l${index % 3 === 0 ? 0.4 : -0.3} ${index % 5 === 4 ? 12 : index % 5 === 1 ? 8 : 5}`;
-      }).join('')}
+        const heights = [5, 8, 5, 5, 12];
+        return `M${x} 3l${index % 3 === 0 ? 0.4 : -0.3} ${heights[index % 5]}`;
+      }).join("")}
       pathLength="1"
       stroke="currentColor"
       strokeWidth="0.8"

@@ -2,13 +2,16 @@ export const PAINT_TILE_SIZE = 256;
 export const PAINT_GUTTER = 4;
 export const FILTER_PADDING = 3;
 
-export type PaintPoint = { x: number; y: number };
+export interface PaintPoint {
+  x: number;
+  y: number;
+}
 export type PaintRect = PaintPoint & { width: number; height: number };
-export type PixelBuffer = {
+export interface PixelBuffer {
   width: number;
   height: number;
   data: Uint8ClampedArray;
-};
+}
 
 const sampleCount = (PAINT_TILE_SIZE + 2 * PAINT_GUTTER) ** 2 * 4;
 const blurNeighbor = Math.exp(-1 / (2 * 0.4 ** 2));
@@ -31,7 +34,7 @@ export function filterPaintPatch(
   mask: Uint8ClampedArray,
   dirty: PaintRect,
   output: PixelBuffer,
-  workspace: ReturnType<typeof createWatercolorWorkspace>,
+  workspace: ReturnType<typeof createWatercolorWorkspace>
 ) {
   const { width, height, data } = source;
   const { displaced, horizontal } = workspace;
@@ -42,11 +45,11 @@ export function filterPaintPatch(
         (((origin.y + y) & 255) * PAINT_TILE_SIZE + ((origin.x + x) & 255)) * 4;
       const sampleX = Math.max(
         0,
-        Math.min(width - 1, x + (grain[grainIndex] / 255 - 0.5) * 2),
+        Math.min(width - 1, x + (grain[grainIndex] / 255 - 0.5) * 2)
       );
       const sampleY = Math.max(
         0,
-        Math.min(height - 1, y + (grain[grainIndex + 1] / 255 - 0.5) * 2),
+        Math.min(height - 1, y + (grain[grainIndex + 1] / 255 - 0.5) * 2)
       );
       const left = Math.floor(sampleX);
       const top = Math.floor(sampleY);

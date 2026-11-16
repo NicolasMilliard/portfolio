@@ -1,4 +1,5 @@
-import { helloLettering, type HelloStrokeId } from './helloLettering.ts';
+import { helloLettering } from "./helloLettering.ts";
+import type { HelloStrokeId } from "./helloLettering.ts";
 
 // All values are milliseconds. The schedule below follows these settings.
 export const greetingTiming = {
@@ -43,7 +44,7 @@ export function createGreetingMotion(timing = greetingTiming) {
     return { ...artwork, delay, duration };
   });
   const helloEnd = Math.max(
-    ...helloStrokes.map((stroke) => stroke.delay + stroke.duration),
+    ...helloStrokes.map((stroke) => stroke.delay + stroke.duration)
   );
   const greetingComma = {
     delay: helloEnd + timing.comma.pauseBefore,

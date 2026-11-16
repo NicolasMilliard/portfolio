@@ -1,8 +1,8 @@
-import { Link } from '@tanstack/react-router';
+import { Link } from "@tanstack/react-router";
 
-import type { InformationPage as InformationPageContent } from '../content/information';
+import type { InformationPage as InformationPageContent } from "../content/information";
 
-import '../styles/article.css';
+import "../styles/article.css";
 
 export function InformationPage({ page }: { page: InformationPageContent }) {
   return (
@@ -19,7 +19,7 @@ export function InformationPage({ page }: { page: InformationPageContent }) {
             {page.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
-            <ul className="information-links" role="list">
+            <ul className="information-links">
               {page.links.map(({ label, href }) => (
                 <li key={href}>
                   <a className="social-link" href={href}>

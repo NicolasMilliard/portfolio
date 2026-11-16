@@ -1,6 +1,5 @@
-import { Companions } from './Companions';
-
-import { profile } from '../data/portfolio';
+import { profile } from "../data/portfolio";
+import { Companions } from "./Companions";
 
 export const Footer = () => (
   <footer>

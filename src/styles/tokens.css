@@ -1,8 +1,8 @@
 :root {
-  --font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif: 'Source Serif 4', ui-serif, Georgia, Cambria, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Source Serif 4", ui-serif, Georgia, Cambria, serif;
   --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     monospace;
 
   --background: oklch(97.4302% 0.0102171 81.7952);
@@ -52,8 +52,7 @@
   );
   --shadow-paper:
     0 2px 3px -2px oklch(from var(--foreground) l c h / 20%),
-    1px 8px 16px -12px
-      oklch(from var(--foreground) l c h / 33.3333%);
+    1px 8px 16px -12px oklch(from var(--foreground) l c h / 33.3333%);
   --shadow-header:
     0 5px 18px -10px oklch(from var(--foreground) l c h / 38%),
     0 1px 0 var(--paper-light);

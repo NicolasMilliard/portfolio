@@ -1,8 +1,7 @@
-import { greetingComma, helloStrokes, nameWash } from './greetingMotion';
-
-import { Handwriting } from './ui/Handwriting';
-import { strokeStyle } from './ui/strokeStyle';
-import { WatercolorWash } from './ui/WatercolorWash';
+import { greetingComma, helloStrokes, nameWash } from "./greetingMotion";
+import { Handwriting } from "./ui/Handwriting";
+import { strokeStyle } from "./ui/strokeStyle";
+import { WatercolorWash } from "./ui/WatercolorWash";
 
 export function Greeting() {
   return (
@@ -17,9 +16,9 @@ export function Greeting() {
           style={strokeStyle(greetingComma)}
         >
           ,
-        </span>{' '}
-        I'm
-      </span>{' '}
+        </span>{" "}
+        I&apos;m
+      </span>{" "}
       <span className="name-wash">
         <WatercolorWash {...nameWash} />
         Nicolas

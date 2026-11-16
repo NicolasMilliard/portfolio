@@ -1,14 +1,14 @@
-import { useRef } from 'react';
-import { useSketchbook } from '../hooks/useSketchbook';
+import { FallingLeaves } from "falling-leaves/react";
+import { useRef } from "react";
 
-import { FallingLeaves } from 'falling-leaves/react';
-import { Connect } from './Connect';
-import { Footer } from './Footer';
-import { Introduction } from './Introduction';
-import { Projects } from './Projects';
-import { Writing } from './Writing';
+import { useSketchbook } from "../hooks/useSketchbook";
+import { Connect } from "./Connect";
+import { Footer } from "./Footer";
+import { Introduction } from "./Introduction";
+import { Projects } from "./Projects";
+import { Writing } from "./Writing";
 
-import '../styles/home.css';
+import "../styles/home.css";
 
 export function HomePage() {
   const rootRef = useRef<HTMLDivElement>(null);
