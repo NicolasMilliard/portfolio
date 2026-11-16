@@ -17,7 +17,7 @@ export const Connect = () => {
       aria-labelledby="connect-heading"
     >
       <div className="connect-content">
-        <SketchRuler />
+        <SketchRuler sketchKey="connect-ruler" />
         <img
           className="connect-character"
           src="/images/brand/nicolas-skating-cutout.webp"
@@ -35,7 +35,11 @@ export const Connect = () => {
             Good things start
             <br />
             with a{' '}
-            <span className="handwritten conversation-word" data-handwriting>
+            <span
+              className="handwritten conversation-word"
+              data-handwriting
+              data-sketch-key="conversation"
+            >
               <span className="handwriting-label">conversation.</span>
               <Handwriting
                 strokes={conversationStrokes}

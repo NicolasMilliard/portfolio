@@ -307,8 +307,9 @@
   stroke-dashoffset: 1;
 }
 
-:is(a, button):is(:hover, :focus-visible) > .drawn-underline path {
+:is(a, button):focus-visible > .drawn-underline path {
   stroke-dashoffset: 0;
+  transition: none;
 }
 
 .sketch-ruler {
@@ -411,61 +412,87 @@
   }
 }
 
+@media (hover: hover) and (pointer: fine) {
+  html:not([data-input='keyboard'])
+    :is(a, button):hover > .drawn-underline path {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-input='keyboard'])
+    :is(a, button):not(:focus-visible) > .drawn-underline path {
+    transition: stroke-dashoffset 180ms var(--ease-out);
+  }
+
+  html:not([data-input='keyboard'])
+    :is(a, button):hover:not(:focus-visible) > .drawn-icon path {
+    animation: ink-write 240ms ease-out both;
+  }
+
+  html:not([data-input='keyboard'])
+    :is(a, button):hover:not(:focus-visible) > .drawn-icon path + path {
+    animation-delay: 140ms;
+  }
+
+  html:not([data-input='keyboard'])
+    :is(a, button):hover:not(:focus-visible) > .drawn-icon path:nth-child(3) {
+    animation-delay: 280ms;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .hello-word .handwriting-stroke,
   .home-page[data-sketchbook='ready']
-    [data-handwriting][data-inked]
+    :is([data-sketch-key='greeting'], [data-handwriting])[data-inked='true']
     .handwriting-stroke {
     animation: ink-write var(--stroke-duration) var(--stroke-delay)
       cubic-bezier(0.35, 0.1, 0.55, 1) both;
   }
 
-  .hello-word .handwriting-stroke,
-  .home-page[data-sketchbook='ready'] [data-handwriting] .handwriting-stroke {
+  .home-page[data-sketchbook='ready']
+    :is([data-sketch-key='greeting'], [data-handwriting]):not([data-inked='seen'])
+    .handwriting-stroke {
     /* The longer gap prevents round caps from leaking the next dash at the end. */
     stroke-dasharray: 1 2;
     stroke-dashoffset: 1.01;
     opacity: 0;
   }
 
-  .hello-comma {
+  .home-page[data-sketchbook='ready']
+    [data-sketch-key='greeting']:not([data-inked='seen']) .hello-comma {
+    opacity: 0;
+  }
+
+  .home-page[data-sketchbook='ready']
+    [data-sketch-key='greeting'][data-inked='true'] .hello-comma {
     animation: hello-comma var(--stroke-duration) var(--stroke-delay) both;
   }
 
-  .name-wash-pigment .watercolor-wash-stroke {
+  .home-page[data-sketchbook='ready']
+    [data-sketch-key='greeting']:not([data-inked='seen']) .watercolor-wash-stroke {
     stroke-dasharray: 1 2;
     stroke-dashoffset: 1.01;
+  }
+
+  .home-page[data-sketchbook='ready']
+    [data-sketch-key='greeting'][data-inked='true'] .watercolor-wash-stroke {
     animation: pigment-paint var(--stroke-duration) var(--stroke-delay)
       cubic-bezier(0.35, 0.1, 0.55, 1) both;
   }
 
-  .drawn-underline path {
-    transition: stroke-dashoffset 280ms ease-out;
-  }
-
-  :is(a, button):is(:hover, :focus-visible) > .drawn-icon path {
-    animation: ink-write 240ms ease-out both;
-  }
-
-  :is(a, button):is(:hover, :focus-visible) > .drawn-icon path + path {
-    animation-delay: 140ms;
-  }
-
-  :is(a, button):is(:hover, :focus-visible) > .drawn-icon path:nth-child(3) {
-    animation-delay: 280ms;
-  }
-
-  .home-page[data-sketchbook='ready'] [data-sketch] path {
+  .home-page[data-sketchbook='ready']
+    [data-sketch]:not([data-inked='seen']) path {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
     transition: stroke-dashoffset 1600ms cubic-bezier(0.25, 0.65, 0.35, 1);
   }
 
-  .home-page[data-sketchbook='ready'] [data-sketch][data-inked] path {
+  .home-page[data-sketchbook='ready'] [data-sketch][data-inked='true'] path {
     stroke-dashoffset: 0;
   }
 
-  .home-page[data-sketchbook='ready'] .sketch-ruler .ruler-ticks {
+  .home-page[data-sketchbook='ready']
+    .sketch-ruler:not([data-inked='seen']) .ruler-ticks {
     transition-duration: 2000ms;
     transition-delay: 220ms;
   }

@@ -33,6 +33,7 @@
   --content-width: 36.25rem;
   --site-width: 60rem;
   --header-offset: 6.5rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --tape-edge: polygon(
     2% 0, 98% 4%, 96% 36%, 100% 62%, 97% 100%, 0 96%, 3% 65%, 0 32%
   );
@@ -72,7 +73,7 @@ body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html {
+  html:not([data-input='keyboard']) {
     scroll-behavior: smooth;
   }
 
@@ -130,6 +131,22 @@ a:focus-visible {
   color: var(--foreground);
   outline: 0.125rem solid currentColor;
   outline-offset: 0.1875rem;
+  transition: none;
+}
+
+html[data-input='keyboard'] :is(
+  a,
+  button,
+  .drawn-box path,
+  .drawn-icon path,
+  .drawn-underline path,
+  .site-logo,
+  .article-toc-panel,
+  .article-toc-mark span,
+  .article-heading-copy-icon
+) {
+  transition: none !important;
+  animation: none !important;
 }
 
 .social-link:hover,
@@ -171,26 +188,46 @@ a:focus-visible {
   opacity: 1;
 }
 
-html:active-view-transition-type(article-enter)
-  :is(.article-time, .article-content) {
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(0.5rem);
+.writing-page .article-time {
+  view-transition-name: article-time;
+  view-transition-class: article-details;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .article-time,
-  .article-content {
-    transition:
-      opacity 300ms ease-out,
-      transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+.writing-page .article-content {
+  view-transition-name: article-content;
+  view-transition-class: article-details;
+}
+
+::view-transition-group(.article-details) {
+  animation: none;
+}
+
+::view-transition-old(.article-details):only-child {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(.article-details):only-child {
+  animation: none;
+}
+
+html:active-view-transition-type(article-enter)::view-transition-new(.article-details) {
+  animation: article-reveal 150ms var(--ease-out) both;
+}
+
+@keyframes article-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
 ::view-transition-group(.writing-title),
 ::view-transition-group(.writing-description) {
-  animation-duration: 480ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 260ms;
+  animation-timing-function: var(--ease-out);
 }
 
 ::view-transition-old(.writing-title):only-child,
@@ -203,6 +240,12 @@ html:active-view-transition-type(article-enter)
 ::view-transition-new(.writing-description):only-child {
   animation: none;
   opacity: 1;
+}
+
+html[data-input='keyboard']::view-transition-group(*),
+html[data-input='keyboard']::view-transition-old(*),
+html[data-input='keyboard']::view-transition-new(*) {
+  animation: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

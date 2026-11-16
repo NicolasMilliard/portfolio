@@ -26,7 +26,10 @@ export function ArticleImageLightbox({
         type="button"
         className="article-diagram-trigger"
         aria-label={`Enlarge: ${alt}`}
-        onClick={() => dialogRef.current?.showModal()}
+        onClick={() => {
+          setZoomed(false);
+          dialogRef.current?.showModal();
+        }}
       >
         <img src={src} alt={alt} width={width} height={height} loading="lazy" />
       </button>
@@ -38,7 +41,6 @@ export function ArticleImageLightbox({
           if (event.target === event.currentTarget) close();
         }}
         onClose={() => {
-          setZoomed(false);
           triggerRef.current?.focus();
         }}
       >

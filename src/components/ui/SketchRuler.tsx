@@ -1,4 +1,4 @@
-export const SketchRuler = () => (
+export const SketchRuler = ({ sketchKey }: { sketchKey: string }) => (
   <svg
     className="sketch-ruler"
     viewBox="0 0 960 20"
@@ -7,6 +7,7 @@ export const SketchRuler = () => (
     aria-hidden="true"
     focusable="false"
     data-sketch
+    data-sketch-key={sketchKey}
   >
     <path
       d="M1 3Q230 1 480 3T959 3"

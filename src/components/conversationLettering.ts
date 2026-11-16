@@ -117,11 +117,12 @@ const lettering = [
 ];
 
 // Timings are milliseconds. Each pen lift gets a short pause.
-let nextStroke = 140;
+let nextStroke = 80;
 export const conversationStrokes = lettering.map((stroke) => {
   const delay = nextStroke;
-  nextStroke += stroke.duration + 24;
-  return { ...stroke, delay };
+  const duration = Math.round(stroke.duration * 0.55);
+  nextStroke += duration + 16;
+  return { ...stroke, delay, duration };
 });
 
 export const conversationViewBox = [0, -16, 447.1, 126] as const;

@@ -128,29 +128,27 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .project-note {
-    transition:
-      transform 240ms ease-out,
-      box-shadow 240ms ease-out;
-  }
-
-  .project-note:is(:hover, :focus-visible) {
-    transform: translateY(-2px) rotate(calc(var(--note-angle) * 0.3));
-    box-shadow:
-      0 3px 5px -3px #303c4833,
-      2px 12px 20px -12px #303c4866;
-  }
-
-  .home-page[data-sketchbook='ready'] .project-wash .watercolor-wash-stroke {
+  .home-page[data-sketchbook='ready']
+    .project-note:not([data-inked='seen']) .watercolor-wash-stroke {
     stroke-dasharray: 1 2;
     stroke-dashoffset: 1.01;
   }
 
   .home-page[data-sketchbook='ready']
-    .project-note[data-inked]
+    .project-note[data-inked='true']
     .watercolor-wash-stroke {
     animation: pigment-paint var(--stroke-duration) var(--stroke-delay)
       cubic-bezier(0.35, 0.1, 0.55, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-input='keyboard']) .project-note:not(:focus-visible) {
+    transition: transform 180ms var(--ease-out);
+  }
+
+  html:not([data-input='keyboard']) .project-note:hover:not(:focus-visible) {
+    transform: translateY(-2px) rotate(calc(var(--note-angle) * 0.3));
   }
 }
 

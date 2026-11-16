@@ -19,7 +19,7 @@ export function WritingPage({ writing }: { writing: WritingWithContent }) {
   const historyState = useLocation({ select: (location) => location.state });
 
   return (
-    <div className="page article-page">
+    <div className="page article-page writing-page">
       <ArticleSectionNav contentRef={contentRef} articleKey={writing.slug} />
       <main className="article-main">
         <article className="article">
