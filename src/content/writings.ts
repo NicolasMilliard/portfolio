@@ -1,16 +1,16 @@
-import type { ComponentProps, ComponentType } from 'react';
+import type { ComponentProps, ComponentType } from "react";
 import rawWritingMetadata, {
   writingModuleLoaders as rawWritingModuleLoaders,
-} from 'virtual:writings-metadata';
+} from "virtual:writings-metadata";
 
-export type WritingImage = {
+export interface WritingImage {
   src: string;
   alt: string;
   width: number;
   height: number;
-};
+}
 
-export type WritingMetadata = {
+export interface WritingMetadata {
   title: string;
   description: string;
   publishedAt: string;
@@ -18,58 +18,54 @@ export type WritingMetadata = {
   seoTitle?: string;
   image?: WritingImage;
   draft?: boolean;
-};
+}
 
-export type Writing = Omit<WritingMetadata, 'draft'> & {
+export type Writing = Omit<WritingMetadata, "draft"> & {
   slug: string;
 };
 
 export type WritingWithContent = Writing & {
   Content: ComponentType<{
-    components?: { h2?: ComponentType<ComponentProps<'h2'>> };
+    components?: { h2?: ComponentType<ComponentProps<"h2">> };
   }>;
 };
 
-type WritingModule = {
-  default: WritingWithContent['Content'];
+interface WritingModule {
+  default: WritingWithContent["Content"];
   metadata: WritingMetadata;
-};
+}
 
-type WritingRecord = {
+interface WritingRecord {
   writing: Writing;
   loadModule: () => Promise<WritingModule>;
-};
+}
 
 const writingModuleLoaders = rawWritingModuleLoaders as Record<
   string,
   () => Promise<WritingModule>
 >;
 
-const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const datePattern = /^\d{4}-\d{2}-\d{2}$/u;
+const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const metadataFields = new Set([
-  'title',
-  'description',
-  'publishedAt',
-  'updatedAt',
-  'seoTitle',
-  'image',
-  'draft',
+  "title",
+  "description",
+  "publishedAt",
+  "updatedAt",
+  "seoTitle",
+  "image",
+  "draft",
 ]);
-const imageFields = new Set(['src', 'alt', 'width', 'height']);
+const imageFields = new Set(["src", "alt", "width", "height"]);
 
 const getSlugFromPath = (path: string) =>
   path
-    .split('/')
+    .split("/")
     .at(-1)
-    ?.replace(/\.mdx?$/, '') ?? '';
+    ?.replace(/\.mdx?$/u, "") ?? "";
 
-const assertString = (
-  value: unknown,
-  field: string,
-  path: string,
-): string => {
-  if (typeof value !== 'string' || value.trim() === '') {
+const assertString = (value: unknown, field: string, path: string): string => {
+  if (typeof value !== "string" || value.trim() === "") {
     throw new Error(`${path}: ${field} must be a non-empty string`);
   }
 
@@ -92,25 +88,28 @@ const assertDate = (value: unknown, field: string, path: string): string => {
   return date;
 };
 
-const validateImage = (value: unknown, path: string): WritingImage | undefined => {
+const validateImage = (
+  value: unknown,
+  path: string
+): WritingImage | undefined => {
   if (value === undefined) {
     return undefined;
   }
 
-  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
     throw new Error(`${path}: image must be an object`);
   }
 
   const image = value as Record<string, unknown>;
   const unknownFields = Object.keys(image).filter(
-    (field) => !imageFields.has(field),
+    (field) => !imageFields.has(field)
   );
-  const width = image.width;
-  const height = image.height;
+  const { width } = image;
+  const { height } = image;
 
   if (unknownFields.length > 0) {
     throw new Error(
-      `${path}: unknown image field(s): ${unknownFields.join(', ')}`,
+      `${path}: unknown image field(s): ${unknownFields.join(", ")}`
     );
   }
 
@@ -123,52 +122,52 @@ const validateImage = (value: unknown, path: string): WritingImage | undefined =
   }
 
   return {
-    src: assertString(image.src, 'image.src', path),
-    alt: assertString(image.alt, 'image.alt', path),
+    src: assertString(image.src, "image.src", path),
+    alt: assertString(image.alt, "image.alt", path),
     width: width as number,
     height: height as number,
   };
 };
 
 const validateMetadata = (value: unknown, path: string): WritingMetadata => {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
     throw new Error(`${path}: frontmatter must export a metadata object`);
   }
 
   const metadata = value as Record<string, unknown>;
   const unknownFields = Object.keys(metadata).filter(
-    (field) => !metadataFields.has(field),
+    (field) => !metadataFields.has(field)
   );
 
   if (unknownFields.length > 0) {
     throw new Error(
-      `${path}: unknown frontmatter field(s): ${unknownFields.join(', ')}`,
+      `${path}: unknown frontmatter field(s): ${unknownFields.join(", ")}`
     );
   }
 
-  const publishedAt = assertDate(metadata.publishedAt, 'publishedAt', path);
+  const publishedAt = assertDate(metadata.publishedAt, "publishedAt", path);
   const updatedAt =
     metadata.updatedAt === undefined
       ? undefined
-      : assertDate(metadata.updatedAt, 'updatedAt', path);
+      : assertDate(metadata.updatedAt, "updatedAt", path);
 
   if (updatedAt && updatedAt < publishedAt) {
     throw new Error(`${path}: updatedAt cannot be earlier than publishedAt`);
   }
 
-  if (metadata.draft !== undefined && typeof metadata.draft !== 'boolean') {
+  if (metadata.draft !== undefined && typeof metadata.draft !== "boolean") {
     throw new Error(`${path}: draft must be a boolean`);
   }
 
   return {
-    title: assertString(metadata.title, 'title', path),
-    description: assertString(metadata.description, 'description', path),
+    title: assertString(metadata.title, "title", path),
+    description: assertString(metadata.description, "description", path),
     publishedAt,
     updatedAt,
     seoTitle:
       metadata.seoTitle === undefined
         ? undefined
-        : assertString(metadata.seoTitle, 'seoTitle', path),
+        : assertString(metadata.seoTitle, "seoTitle", path),
     image: validateImage(metadata.image, path),
     draft: metadata.draft,
   };
@@ -184,7 +183,7 @@ const writingRecords = Object.entries(rawWritingMetadata)
 
     if (!slugPattern.test(slug)) {
       throw new Error(
-        `${path}: filename must produce a lowercase, hyphen-separated slug`,
+        `${path}: filename must produce a lowercase, hyphen-separated slug`
       );
     }
 
@@ -195,14 +194,14 @@ const writingRecords = Object.entries(rawWritingMetadata)
     seenSlugs.add(slug);
 
     if (metadata.draft) {
-      return undefined;
+      return null;
     }
 
-    if (!loadModule) {
+    if (!(path in writingModuleLoaders)) {
       throw new Error(`No Markdown module found for ${path}`);
     }
 
-    const publishedMetadata: Omit<WritingMetadata, 'draft'> = {
+    const publishedMetadata: Omit<WritingMetadata, "draft"> = {
       title: metadata.title,
       description: metadata.description,
       publishedAt: metadata.publishedAt,
@@ -219,13 +218,13 @@ const writingRecords = Object.entries(rawWritingMetadata)
       loadModule,
     } satisfies WritingRecord;
   })
-  .filter((record): record is WritingRecord => record !== undefined)
-  .sort((a, b) =>
-    b.writing.publishedAt.localeCompare(a.writing.publishedAt),
+  .filter((record): record is WritingRecord => record !== null)
+  .toSorted((a, b) =>
+    b.writing.publishedAt.localeCompare(a.writing.publishedAt)
   );
 
 const writingRecordsBySlug = new Map(
-  writingRecords.map((record) => [record.writing.slug, record]),
+  writingRecords.map((record) => [record.writing.slug, record])
 );
 
 export const writings = writingRecords.map(({ writing }) => writing);
@@ -234,7 +233,7 @@ export const getWriting = (slug: string) =>
   writingRecordsBySlug.get(slug)?.writing;
 
 export const loadWriting = async (
-  slug: string,
+  slug: string
 ): Promise<WritingWithContent | undefined> => {
   const record = writingRecordsBySlug.get(slug);
 
@@ -250,9 +249,9 @@ export const loadWriting = async (
   };
 };
 
-const publishedDateFormatter = new Intl.DateTimeFormat('en', {
-  dateStyle: 'long',
-  timeZone: 'UTC',
+const publishedDateFormatter = new Intl.DateTimeFormat("en", {
+  dateStyle: "long",
+  timeZone: "UTC",
 });
 
 export const formatPublishedDate = (publishedAt: string) =>

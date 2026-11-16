@@ -49,7 +49,7 @@
 
 .article-toc-mark:hover span,
 .article-toc-mark:focus-visible span,
-.article-toc-mark[aria-current='location'] span {
+.article-toc-mark[aria-current="location"] span {
   background: var(--foreground);
 }
 
@@ -79,8 +79,9 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  :where(html:not([data-input='keyboard']))
-    .article-toc:hover .article-toc-panel {
+  :where(html:not([data-input="keyboard"]))
+    .article-toc:hover
+    .article-toc-panel {
     visibility: visible;
     opacity: 1;
     transform: translate(0, -50%);
@@ -132,7 +133,7 @@
   color: var(--foreground);
 }
 
-.article-toc-card a[aria-current='location'] {
+.article-toc-card a[aria-current="location"] {
   color: var(--accent);
 }
 
@@ -196,7 +197,7 @@
     pointer-events: none;
   }
 
-  html .article-toc[data-open='true'] .article-toc-panel {
+  html .article-toc[data-open="true"] .article-toc-panel {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
@@ -309,8 +310,8 @@
   }
 }
 
-html[data-input='keyboard'] .article-image-dialog,
-html[data-input='keyboard'] .article-image-dialog::backdrop {
+html[data-input="keyboard"] .article-image-dialog,
+html[data-input="keyboard"] .article-image-dialog::backdrop {
   transition: none;
 }
 
@@ -344,13 +345,15 @@ html[data-input='keyboard'] .article-image-dialog::backdrop {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-input='keyboard'])
+  html:not([data-input="keyboard"])
     :is(.article-toc-toggle, .article-image-dialog-toolbar button) {
     transition: transform 120ms var(--ease-out);
   }
 
-  html:not([data-input='keyboard'])
-    :is(.article-toc-toggle, .article-image-dialog-toolbar button):active:not(:focus-visible) {
+  html:not([data-input="keyboard"])
+    :is(.article-toc-toggle, .article-image-dialog-toolbar button):active:not(
+      :focus-visible
+    ) {
     transform: scale(0.97);
   }
 }
@@ -422,16 +425,18 @@ html[data-input='keyboard'] .article-image-dialog::backdrop {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  html:not([data-input='keyboard'])
-    .article-heading-copy:hover .article-heading-copy-icon {
+  html:not([data-input="keyboard"])
+    .article-heading-copy:hover
+    .article-heading-copy-icon {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
-  html:not([data-input='keyboard'])
-    .article-heading-copy:not(:focus-visible) .article-heading-copy-icon {
+  html:not([data-input="keyboard"])
+    .article-heading-copy:not(:focus-visible)
+    .article-heading-copy-icon {
     transition:
       opacity 160ms var(--ease-out),
       transform 160ms var(--ease-out);

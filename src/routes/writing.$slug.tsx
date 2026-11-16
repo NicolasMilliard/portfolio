@@ -1,14 +1,16 @@
-import { createFileRoute, notFound } from '@tanstack/react-router';
+import { createFileRoute, notFound } from "@tanstack/react-router";
 
-import { WritingPage } from '../features/writing/WritingPage';
-import { loadWriting, type WritingWithContent } from '../content/writings';
-import { getWritingSeo, notFoundSeo, seoToRouteHead } from '../seo';
+import { loadWriting } from "../content/writings";
+import type { WritingWithContent } from "../content/writings";
+import { WritingPage } from "../features/writing/WritingPage";
+import { getWritingSeo, notFoundSeo, seoToRouteHead } from "../seo";
 
-export const Route = createFileRoute('/writing/$slug')({
+export const Route = createFileRoute("/writing/$slug")({
   loader: async ({ params }): Promise<WritingWithContent> => {
     const writing = await loadWriting(params.slug);
 
     if (!writing) {
+      // oxlint-disable-next-line typescript/only-throw-error -- TanStack Router catches this routing sentinel.
       throw notFound();
     }
 

@@ -1,41 +1,41 @@
-import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
 
-import { createServer, type Manifest } from 'vite';
+import { createServer } from "vite";
+import type { Manifest } from "vite";
 
-import type { PrerenderPage, SeoPage } from '../src/seo.ts';
+import type * as InformationModule from "../src/content/information.ts";
+import type * as WritingsModule from "../src/content/writings.ts";
+import type * as PortfolioModule from "../src/data/portfolio.ts";
+import type * as SeoModule from "../src/seo.ts";
+import type { PrerenderPage, SeoPage } from "../src/seo.ts";
+import { renderLlms, renderMarkdown } from "./agent-content.ts";
 
-import { renderLlms, renderMarkdown } from './agent-content.ts';
-
-const projectRoot = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  '..',
-);
-const distDirectory = path.join(projectRoot, 'dist');
-const publicDirectory = path.join(projectRoot, 'public');
-const templatePath = path.join(distDirectory, 'index.html');
-const seoBlockPattern = /<!-- seo:start -->[\s\S]*?<!-- seo:end -->/;
+const projectRoot = path.resolve(import.meta.dirname, "..");
+const distDirectory = path.join(projectRoot, "dist");
+const publicDirectory = path.join(projectRoot, "public");
+const templatePath = path.join(distDirectory, "index.html");
+const seoBlockPattern = /<!-- seo:start -->[\s\S]*?<!-- seo:end -->/u;
 const emptyRoot = '<div id="root"></div>';
 
 type ImageMetadata = Pick<
-  NonNullable<SeoPage['image']>,
-  'type' | 'width' | 'height'
+  NonNullable<SeoPage["image"]>,
+  "type" | "width" | "height"
 >;
 
-type PageRenderer = {
+interface PageRenderer {
   getPrerenderPages: () => PrerenderPage[];
   renderPage: (path: string) => Promise<string>;
-};
+}
 
 const assertUnique = (values: string[], label: string) => {
   const duplicates = values.filter(
-    (value, index) => values.indexOf(value) !== index,
+    (value, index) => values.indexOf(value) !== index
   );
 
   if (duplicates.length > 0) {
     throw new Error(
-      `Duplicate ${label}: ${[...new Set(duplicates)].join(', ')}`,
+      `Duplicate ${label}: ${[...new Set(duplicates)].join(", ")}`
     );
   }
 };
@@ -78,7 +78,7 @@ const readJpegMetadata = (buffer: Buffer): ImageMetadata => {
 
     if (startOfFrameMarkers.has(marker) && segmentLength >= 7) {
       return {
-        type: 'image/jpeg',
+        type: "image/jpeg",
         width: buffer.readUInt16BE(offset + 5),
         height: buffer.readUInt16BE(offset + 3),
       };
@@ -87,14 +87,14 @@ const readJpegMetadata = (buffer: Buffer): ImageMetadata => {
     offset += segmentLength;
   }
 
-  throw new Error('Could not read JPEG dimensions');
+  throw new Error("Could not read JPEG dimensions");
 };
 
 const readWebpMetadata = (buffer: Buffer): ImageMetadata => {
   let offset = 12;
 
   while (offset + 8 <= buffer.length) {
-    const chunkType = buffer.toString('ascii', offset, offset + 4);
+    const chunkType = buffer.toString("ascii", offset, offset + 4);
     const chunkSize = buffer.readUInt32LE(offset + 4);
     const dataOffset = offset + 8;
 
@@ -102,45 +102,45 @@ const readWebpMetadata = (buffer: Buffer): ImageMetadata => {
       break;
     }
 
-    if (chunkType === 'VP8X' && chunkSize >= 10) {
+    if (chunkType === "VP8X" && chunkSize >= 10) {
       return {
-        type: 'image/webp',
+        type: "image/webp",
         width: readThreeByteInteger(buffer, dataOffset + 4) + 1,
         height: readThreeByteInteger(buffer, dataOffset + 7) + 1,
       };
     }
 
-    if (chunkType === 'VP8L' && chunkSize >= 5 && buffer[dataOffset] === 0x2f) {
+    if (chunkType === "VP8L" && chunkSize >= 5 && buffer[dataOffset] === 0x2f) {
       const byte1 = buffer[dataOffset + 1];
       const byte2 = buffer[dataOffset + 2];
       const byte3 = buffer[dataOffset + 3];
       const byte4 = buffer[dataOffset + 4];
 
       return {
-        type: 'image/webp',
+        type: "image/webp",
         width: 1 + byte1 + ((byte2 & 0x3f) << 8),
         height: 1 + (byte2 >> 6) + (byte3 << 2) + ((byte4 & 0x0f) << 10),
       };
     }
 
     if (
-      chunkType === 'VP8 ' &&
+      chunkType === "VP8 " &&
       chunkSize >= 10 &&
       buffer[dataOffset + 3] === 0x9d &&
       buffer[dataOffset + 4] === 0x01 &&
       buffer[dataOffset + 5] === 0x2a
     ) {
       return {
-        type: 'image/webp',
-        width: buffer.readUInt16LE(dataOffset + 6) & 0x3fff,
-        height: buffer.readUInt16LE(dataOffset + 8) & 0x3fff,
+        type: "image/webp",
+        width: buffer.readUInt16LE(dataOffset + 6) & 0x3f_ff,
+        height: buffer.readUInt16LE(dataOffset + 8) & 0x3f_ff,
       };
     }
 
     offset = dataOffset + chunkSize + (chunkSize % 2);
   }
 
-  throw new Error('Could not read WebP dimensions');
+  throw new Error("Could not read WebP dimensions");
 };
 
 const readImageMetadata = (buffer: Buffer): ImageMetadata => {
@@ -151,7 +151,7 @@ const readImageMetadata = (buffer: Buffer): ImageMetadata => {
       .equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
   ) {
     return {
-      type: 'image/png',
+      type: "image/png",
       width: buffer.readUInt32BE(16),
       height: buffer.readUInt32BE(20),
     };
@@ -163,13 +163,13 @@ const readImageMetadata = (buffer: Buffer): ImageMetadata => {
 
   if (
     buffer.length >= 30 &&
-    buffer.toString('ascii', 0, 4) === 'RIFF' &&
-    buffer.toString('ascii', 8, 12) === 'WEBP'
+    buffer.toString("ascii", 0, 4) === "RIFF" &&
+    buffer.toString("ascii", 8, 12) === "WEBP"
   ) {
     return readWebpMetadata(buffer);
   }
 
-  throw new Error('Unsupported or invalid social image file');
+  throw new Error("Unsupported or invalid social image file");
 };
 
 const assertLocalImageExists = async (page: PrerenderPage) => {
@@ -179,18 +179,18 @@ const assertLocalImageExists = async (page: PrerenderPage) => {
 
   const imageUrl = new URL(page.seo.image.url);
 
-  if (imageUrl.origin !== 'https://milliard.dev') {
+  if (imageUrl.origin !== "https://milliard.dev") {
     return;
   }
 
   const relativeImagePath = decodeURIComponent(imageUrl.pathname).replace(
-    /^\/+/,
-    '',
+    /^\/+/u,
+    ""
   );
   const imagePath = path.join(publicDirectory, relativeImagePath);
   const relativePath = path.relative(publicDirectory, imagePath);
 
-  if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+  if (relativePath.startsWith("..") || path.isAbsolute(relativePath)) {
     throw new Error(`Unsafe social image path: ${imageUrl.pathname}`);
   }
 
@@ -204,7 +204,7 @@ const assertLocalImageExists = async (page: PrerenderPage) => {
     imageMetadata.height !== page.seo.image.height
   ) {
     throw new Error(
-      `${imageUrl.pathname}: declared ${page.seo.image.type} ${page.seo.image.width}x${page.seo.image.height}, actual ${imageMetadata.type} ${imageMetadata.width}x${imageMetadata.height}`,
+      `${imageUrl.pathname}: declared ${page.seo.image.type} ${page.seo.image.width}x${page.seo.image.height}, actual ${imageMetadata.type} ${imageMetadata.width}x${imageMetadata.height}`
     );
   }
 };
@@ -221,36 +221,36 @@ const buildDocument = ({
   styles: string;
 }) => {
   if (!seoBlockPattern.test(template)) {
-    throw new Error('SEO marker block was not found in dist/index.html');
+    throw new Error("SEO marker block was not found in dist/index.html");
   }
 
   if (!template.includes(emptyRoot)) {
-    throw new Error('Empty root element was not found in dist/index.html');
+    throw new Error("Empty root element was not found in dist/index.html");
   }
 
   return template
     .replace(
       seoBlockPattern,
-      `<!-- seo:start -->\n    ${seoHead}\n    <!-- seo:end -->`,
+      `<!-- seo:start -->\n    ${seoHead}\n    <!-- seo:end -->`
     )
     .replace(emptyRoot, `<div id="root">${appHtml}</div>`)
-    .replace('</head>', `${styles}</head>`);
+    .replace("</head>", `${styles}</head>`);
 };
 
 const assertRenderedDocument = (document: string, page: PrerenderPage) => {
   const requirements = [
-    ['a title', '<title data-seo-static>'],
-    ['a description', 'name="description"'],
-    ['robots metadata', 'name="robots"'],
-    ['a primary heading', '<h1'],
+    ["a title", "<title data-seo-static>"],
+    ["a description", 'name="description"'],
+    ["robots metadata", 'name="robots"'],
+    ["a primary heading", "<h1"],
   ];
 
   if (page.seo.canonicalUrl) {
     requirements.push(
-      ['a canonical URL', 'rel="canonical"'],
-      ['an Open Graph URL', 'property="og:url"'],
-      ['an absolute social image', 'content="https://'],
-      ['structured data', 'type="application/ld+json"'],
+      ["a canonical URL", 'rel="canonical"'],
+      ["an Open Graph URL", 'property="og:url"'],
+      ["an absolute social image", 'content="https://'],
+      ["structured data", 'type="application/ld+json"']
     );
   }
 
@@ -261,28 +261,40 @@ const assertRenderedDocument = (document: string, page: PrerenderPage) => {
   }
 };
 
-const template = await readFile(templatePath, 'utf8');
+const template = await readFile(templatePath, "utf-8");
 const manifest = JSON.parse(
-  await readFile(path.join(distDirectory, '.vite/manifest.json'), 'utf8'),
+  await readFile(path.join(distDirectory, ".vite/manifest.json"), "utf-8")
 ) as Manifest;
 
 // Lazy routes still need their styles on the first, prerendered paint.
 const renderPageStyles = (page: PrerenderPage) => {
-  if (!page.styleEntry) return '';
+  if (!page.styleEntry) {
+    return "";
+  }
   const styles = new Set<string>();
   const visited = new Set<string>();
   const collectStyles = (entry: string): void => {
-    if (visited.has(entry)) return;
+    if (visited.has(entry)) {
+      return;
+    }
     visited.add(entry);
     const chunk = manifest[entry];
-    if (!chunk) throw new Error(`Missing built entry: ${entry}`);
+    if (!(entry in manifest)) {
+      throw new Error(`Missing built entry: ${entry}`);
+    }
     // Follow static imports, including shared clue styles, but keep dialog
     // and terminal chunks lazy by ignoring dynamic imports.
-    for (const dependency of chunk.imports ?? []) collectStyles(dependency);
-    for (const asset of chunk.css ?? []) styles.add(asset);
+    for (const dependency of chunk.imports ?? []) {
+      collectStyles(dependency);
+    }
+    for (const asset of chunk.css ?? []) {
+      styles.add(asset);
+    }
   };
   for (const [entry, chunk] of Object.entries(manifest)) {
-    if (chunk.src?.split('?')[0] === page.styleEntry) collectStyles(entry);
+    if (chunk.src?.split("?")[0] === page.styleEntry) {
+      collectStyles(entry);
+    }
   }
   if (styles.size === 0) {
     throw new Error(`No built styles found for ${page.styleEntry}`);
@@ -290,12 +302,12 @@ const renderPageStyles = (page: PrerenderPage) => {
   return [...styles]
     .filter((asset) => !template.includes(`href="/${asset}"`))
     .map((asset) => `    <link rel="stylesheet" href="/${asset}" />\n`)
-    .join('');
+    .join("");
 };
 const vite = await createServer({
   root: projectRoot,
-  appType: 'custom',
-  logLevel: 'error',
+  appType: "custom",
+  logLevel: "error",
   server: { middlewareMode: true, hmr: false, ws: false },
 });
 
@@ -307,29 +319,27 @@ try {
     { writings },
     { profile, projects },
   ] = await Promise.all([
-    vite.ssrLoadModule('/src/entry-server.tsx') as Promise<PageRenderer>,
-    vite.ssrLoadModule('/src/seo.ts') as Promise<
-      typeof import('../src/seo.ts')
+    vite.ssrLoadModule("/src/entry-server.tsx") as Promise<PageRenderer>,
+    vite.ssrLoadModule("/src/seo.ts") as Promise<typeof SeoModule>,
+    vite.ssrLoadModule("/src/content/information.ts") as Promise<
+      typeof InformationModule
     >,
-    vite.ssrLoadModule('/src/content/information.ts') as Promise<
-      typeof import('../src/content/information.ts')
+    vite.ssrLoadModule("/src/content/writings.ts") as Promise<
+      typeof WritingsModule
     >,
-    vite.ssrLoadModule('/src/content/writings.ts') as Promise<
-      typeof import('../src/content/writings.ts')
-    >,
-    vite.ssrLoadModule('/src/data/portfolio.ts') as Promise<
-      typeof import('../src/data/portfolio.ts')
+    vite.ssrLoadModule("/src/data/portfolio.ts") as Promise<
+      typeof PortfolioModule
     >,
   ]);
   const pages = getPrerenderPages();
 
   assertUnique(
     pages.map(({ path: pagePath }) => pagePath),
-    'prerender paths',
+    "prerender paths"
   );
   assertUnique(
     pages.map(({ outputFile }) => outputFile),
-    'prerender output files',
+    "prerender output files"
   );
 
   for (const page of pages) {
@@ -339,7 +349,7 @@ try {
     const relativeOutputPath = path.relative(distDirectory, outputPath);
 
     if (
-      relativeOutputPath.startsWith('..') ||
+      relativeOutputPath.startsWith("..") ||
       path.isAbsolute(relativeOutputPath)
     ) {
       throw new Error(`Unsafe prerender output path: ${page.outputFile}`);
@@ -357,10 +367,10 @@ try {
     await mkdir(path.dirname(outputPath), { recursive: true });
     await writeFile(outputPath, document);
     if (page.includeInSitemap && page.seo.canonicalUrl) {
-      const markdownPath = outputPath.replace(/\.html$/, '.md');
+      const markdownPath = outputPath.replace(/\.html$/u, ".md");
       await writeFile(
         markdownPath,
-        renderMarkdown(appHtml, page.seo.canonicalUrl),
+        renderMarkdown(appHtml, page.seo.canonicalUrl)
       );
     }
   }
@@ -368,17 +378,17 @@ try {
   const sitemap = renderSitemap(pages);
 
   await Promise.all([
-    writeFile(path.join(distDirectory, 'sitemap.xml'), sitemap),
-    writeFile(path.join(publicDirectory, 'sitemap.xml'), sitemap),
+    writeFile(path.join(distDirectory, "sitemap.xml"), sitemap),
+    writeFile(path.join(publicDirectory, "sitemap.xml"), sitemap),
     writeFile(
-      path.join(distDirectory, 'llms.txt'),
+      path.join(distDirectory, "llms.txt"),
       renderLlms({
         profile,
         pages: informationPages,
         writings,
         projects,
-        origin: 'https://milliard.dev',
-      }),
+        origin: "https://milliard.dev",
+      })
     ),
   ]);
 } finally {

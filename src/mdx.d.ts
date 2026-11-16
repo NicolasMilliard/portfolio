@@ -1,13 +1,10 @@
-declare module 'virtual:writings-metadata' {
+declare module "virtual:writings-metadata" {
   const metadata: Record<string, unknown>;
-  export const writingModuleLoaders: Record<
-    string,
-    () => Promise<unknown>
-  >;
+  export const writingModuleLoaders: Record<string, () => Promise<unknown>>;
   export default metadata;
 }
 
-declare module '*.mdx' {
+declare module "*.mdx" {
   export const metadata: {
     title: string;
     description: string;
@@ -24,7 +21,7 @@ declare module '*.mdx' {
   };
 }
 
-declare module '*.md' {
+declare module "*.md" {
   export const metadata: {
     title: string;
     description: string;

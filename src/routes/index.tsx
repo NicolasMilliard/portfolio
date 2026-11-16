@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from "@tanstack/react-router";
 
-import { HomePage } from '../components/HomePage';
-import { homeSeo, seoToRouteHead } from '../seo';
+import { HomePage } from "../components/HomePage";
+import { homeSeo, seoToRouteHead } from "../seo";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   head: () => seoToRouteHead(homeSeo),
   component: HomePage,
 });

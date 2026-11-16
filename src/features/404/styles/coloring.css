@@ -52,7 +52,7 @@
 }
 
 .coloring-note::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -0.5rem;
   left: calc(50% - 1.5rem);
@@ -128,7 +128,7 @@
   border-radius: 54% 46% 55% 45% / 46% 55% 45% 54%;
 }
 
-.coloring-swatch[aria-pressed='true'] > span {
+.coloring-swatch[aria-pressed="true"] > span {
   outline: 1.5px solid var(--foreground);
   outline-offset: 3px;
 }
@@ -150,7 +150,7 @@
 }
 
 .coloring-brush-size::before {
-  content: '';
+  content: "";
   position: absolute;
   inset-inline: 0;
   bottom: 0.5625rem;

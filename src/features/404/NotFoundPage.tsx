@@ -1,19 +1,19 @@
-import { Link } from '@tanstack/react-router';
-import { memo, useEffect, useRef, useState } from 'react';
+import { Link } from "@tanstack/react-router";
+import { memo, useEffect, useRef, useState } from "react";
 
-import { ColoringCanvas } from './ColoringCanvas';
-import type { ColoringFrame } from './coloring-painter';
-import { doodles } from './doodle-layout';
+import type { ColoringFrame } from "./coloring-painter";
+import { ColoringCanvas } from "./ColoringCanvas";
+import { doodles } from "./doodle-layout";
 
-import './styles/coloring.css';
+import "./styles/coloring.css";
 
 const palette = [
-  { name: 'Terracotta', color: '#d96539' },
-  { name: 'Ochre', color: '#e0aa24' },
-  { name: 'Sage', color: '#5f9b51' },
-  { name: 'Ink blue', color: '#357fc0' },
-  { name: 'Dusty rose', color: '#d65f7c' },
-  { name: 'Lavender', color: '#8d62bf' },
+  { name: "Terracotta", color: "#d96539" },
+  { name: "Ochre", color: "#e0aa24" },
+  { name: "Sage", color: "#5f9b51" },
+  { name: "Ink blue", color: "#357fc0" },
+  { name: "Dusty rose", color: "#d65f7c" },
+  { name: "Lavender", color: "#8d62bf" },
 ];
 
 // Palette/brush changes and pointer events never reconcile the static artwork.
@@ -22,11 +22,11 @@ const DoodleArtwork = memo(function DoodleArtwork({
   layer,
 }: {
   frame: ColoringFrame;
-  layer: 'base' | 'ink';
+  layer: "base" | "ink";
 }) {
   return (
     <svg
-      className={`coloring-artwork${layer === 'base' ? ' coloring-base' : ''}`}
+      className={`coloring-artwork${layer === "base" ? " coloring-base" : ""}`}
       viewBox={`${frame.x} ${frame.y} ${frame.width} ${frame.height}`}
       aria-hidden="true"
     >
@@ -36,12 +36,12 @@ const DoodleArtwork = memo(function DoodleArtwork({
             x + size > frame.x &&
             x - size < frame.x + frame.width &&
             y + size > frame.y &&
-            y - size < frame.y + frame.height,
+            y - size < frame.y + frame.height
         )
         .map(([name, x, y, size, angle]) => (
           <use
             key={`${x}-${y}`}
-            href={`/images/coloring/doodles.svg#${name}${layer === 'base' ? '-area' : ''}`}
+            href={`/images/coloring/doodles.svg#${name}${layer === "base" ? "-area" : ""}`}
             x={-size / 2}
             y={-size / 2}
             width={size}
@@ -65,10 +65,14 @@ export function NotFoundPage() {
   });
 
   useEffect(() => {
-    if (!scene.current) return;
+    if (!scene.current) {
+      return;
+    }
     const observer = new ResizeObserver(([entry]) => {
       const { width, height } = entry.contentRect;
-      if (!width || !height) return;
+      if (!width || !height) {
+        return;
+      }
       const scale = Math.min(width / 1150, height / 720, 1.2);
       const next = {
         x: 500 - width / scale / 2,
@@ -79,11 +83,13 @@ export function NotFoundPage() {
       setFrame((current) =>
         current.width === next.width && current.height === next.height
           ? current
-          : next,
+          : next
       );
     });
     observer.observe(scene.current);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const cursorCenter = brushSize / 2 + 2;
@@ -144,7 +150,9 @@ export function NotFoundPage() {
               className="coloring-swatch"
               aria-label={color.name}
               aria-pressed={selectedColor.name === color.name}
-              onClick={() => setSelectedColor(color)}
+              onClick={() => {
+                setSelectedColor(color);
+              }}
             >
               <span
                 style={{ backgroundColor: color.color }}
@@ -164,14 +172,14 @@ export function NotFoundPage() {
             step="2"
             value={brushSize}
             aria-valuetext={`${brushSize} pixels`}
-            onChange={(event) =>
-              setBrushSize(Number(event.currentTarget.value))
-            }
+            onChange={(event) => {
+              setBrushSize(Number(event.currentTarget.value));
+            }}
           />
         </div>
-        <p className="visually-hidden" role="status">
+        <output className="visually-hidden">
           {selectedColor.name} selected
-        </p>
+        </output>
       </div>
     </main>
   );

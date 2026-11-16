@@ -1,42 +1,36 @@
-import {
-  isValidElement,
-  useEffect,
-  useRef,
-  useState,
-  type ComponentProps,
-  type ReactNode,
-} from 'react';
+import { isValidElement, useEffect, useRef, useState } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 const textFromChildren = (children: ReactNode): string => {
-  if (typeof children === 'string' || typeof children === 'number') {
+  if (typeof children === "string" || typeof children === "number") {
     return String(children);
   }
 
   if (Array.isArray(children)) {
-    return children.map(textFromChildren).join('');
+    return children.map(textFromChildren).join("");
   }
 
   if (isValidElement<{ children?: ReactNode }>(children)) {
     return textFromChildren(children.props.children);
   }
 
-  return '';
+  return "";
 };
 
 const slugFromText = (text: string) =>
   text
-    .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .normalize("NFKD")
+    .replaceAll(/[\u0300-\u036F]/gu, "")
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
+    .replaceAll(/[^a-z0-9]+/gu, "-")
+    .replaceAll(/^-|-$/gu, "");
 
 export const ArticleHeading = ({
   children,
   className,
   id,
   ...props
-}: ComponentProps<'h2'>) => {
+}: ComponentProps<"h2">) => {
   const title = textFromChildren(children);
   const headingId = id || slugFromText(title);
   const [copied, setCopied] = useState(false);
@@ -44,9 +38,11 @@ export const ArticleHeading = ({
 
   useEffect(
     () => () => {
-      if (resetTimer.current) window.clearTimeout(resetTimer.current);
+      if (resetTimer.current) {
+        window.clearTimeout(resetTimer.current);
+      }
     },
-    [],
+    []
   );
 
   const copyLink = async () => {
@@ -56,8 +52,12 @@ export const ArticleHeading = ({
     try {
       await navigator.clipboard.writeText(url.toString());
       setCopied(true);
-      if (resetTimer.current) window.clearTimeout(resetTimer.current);
-      resetTimer.current = window.setTimeout(() => setCopied(false), 1800);
+      if (resetTimer.current) {
+        window.clearTimeout(resetTimer.current);
+      }
+      resetTimer.current = window.setTimeout(() => {
+        setCopied(false);
+      }, 1800);
     } catch {
       setCopied(false);
     }
@@ -68,17 +68,23 @@ export const ArticleHeading = ({
       {...props}
       id={headingId}
       aria-labelledby={`${headingId}-title`}
-      className={['article-section-heading', className].filter(Boolean).join(' ')}
+      className={["article-section-heading", className]
+        .filter(Boolean)
+        .join(" ")}
     >
       <button
         className="article-heading-copy"
         type="button"
-        aria-label={copied ? `Link copied: ${title}` : `Copy link to section: ${title}`}
-        onClick={() => void copyLink()}
+        aria-label={
+          copied ? `Link copied: ${title}` : `Copy link to section: ${title}`
+        }
+        onClick={() => {
+          void copyLink();
+        }}
       >
         <span id={`${headingId}-title`}>{children}</span>
         <span className="article-heading-copy-icon" aria-hidden="true">
-          {copied ? '✓' : '#'}
+          {copied ? "✓" : "#"}
         </span>
       </button>
     </h2>

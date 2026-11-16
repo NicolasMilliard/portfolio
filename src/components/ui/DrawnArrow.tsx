@@ -1,11 +1,11 @@
 const arrowPaths = {
-  right: ['M4 14Q15 12.5 31 14', 'M22 6L31 14L22 21'],
-  'up-right': ['M5 23Q17 12 30 5', 'M18 5L30 4L29 17'],
+  right: ["M4 14Q15 12.5 31 14", "M22 6L31 14L22 21"],
+  "up-right": ["M5 23Q17 12 30 5", "M18 5L30 4L29 17"],
 } as const;
 
 export const DrawnArrow = ({
-  direction = 'right',
-  className = '',
+  direction = "right",
+  className = "",
 }: {
   direction?: keyof typeof arrowPaths;
   className?: string;

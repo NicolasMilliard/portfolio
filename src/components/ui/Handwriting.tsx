@@ -1,6 +1,7 @@
-import { useId } from 'react';
+import { useId } from "react";
 
-import { strokeStyle, type StrokeTiming } from './strokeStyle';
+import { strokeStyle } from "./strokeStyle";
+import type { StrokeTiming } from "./strokeStyle";
 
 type HandwritingStroke = StrokeTiming & {
   outline: string;
@@ -19,7 +20,7 @@ export function Handwriting({
 
   return (
     <svg
-      viewBox={viewBox.join(' ')}
+      viewBox={viewBox.join(" ")}
       fill="currentColor"
       aria-hidden="true"
       focusable="false"

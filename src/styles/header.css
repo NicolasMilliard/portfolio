@@ -14,7 +14,7 @@
 }
 
 .site-header::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -0.375rem;
   left: calc(50% - 1.5rem);
@@ -128,33 +128,39 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  html:not([data-input='keyboard']) .site-nav nav a:hover > .drawn-box path {
+  html:not([data-input="keyboard"]) .site-nav nav a:hover > .drawn-box path {
     stroke-dashoffset: 0;
     opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
-  html:not([data-input='keyboard']) .drawn-box path {
+  html:not([data-input="keyboard"]) .drawn-box path {
     transition:
       stroke-dashoffset 110ms var(--ease-out),
       opacity 80ms var(--ease-out);
   }
 
-  html:not([data-input='keyboard'])
-    .site-nav nav a:hover:not(:focus-visible) > .drawn-box path {
+  html:not([data-input="keyboard"])
+    .site-nav
+    nav
+    a:hover:not(:focus-visible)
+    > .drawn-box
+    path {
     transition-duration: var(--stroke-duration), 40ms;
     transition-delay: var(--stroke-delay);
     transition-timing-function: cubic-bezier(0.35, 0.1, 0.55, 1), ease;
   }
 
-  html:not([data-input='keyboard'])
-    .site-identity:not(:focus-visible) .site-logo {
+  html:not([data-input="keyboard"])
+    .site-identity:not(:focus-visible)
+    .site-logo {
     transition: transform 180ms var(--ease-out);
   }
 
-  html:not([data-input='keyboard'])
-    .site-identity:hover:not(:focus-visible) .site-logo {
+  html:not([data-input="keyboard"])
+    .site-identity:hover:not(:focus-visible)
+    .site-logo {
     transform: rotate(-5deg);
   }
 }

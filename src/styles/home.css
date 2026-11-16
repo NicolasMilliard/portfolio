@@ -1,13 +1,13 @@
 @font-face {
-  font-family: 'Caveat';
-  src: url('../fonts/Caveat-Medium-Latin.woff2') format('woff2');
+  font-family: "Caveat";
+  src: url("../fonts/Caveat-Medium-Latin.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 .home-page {
-  --font-handwritten: 'Caveat', 'Bradley Hand', cursive;
+  --font-handwritten: "Caveat", "Bradley Hand", cursive;
   display: flow-root;
   max-width: calc(var(--site-width) + 2 * var(--space-page-x));
   margin-inline: auto;
@@ -374,7 +374,7 @@
   transform-origin: 50% 100%;
 }
 
-.companions[data-open='true'] .companions-art {
+.companions[data-open="true"] .companions-art {
   transform: translateY(0) rotate(0);
 }
 
@@ -401,7 +401,7 @@
   margin-left: 1rem;
 }
 
-.companions[data-open='true'] .paw-trail svg {
+.companions[data-open="true"] .paw-trail svg {
   opacity: 0.3;
 }
 
@@ -413,44 +413,57 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  html:not([data-input='keyboard'])
-    :is(a, button):hover > .drawn-underline path {
+  html:not([data-input="keyboard"])
+    :is(a, button):hover
+    > .drawn-underline
+    path {
     stroke-dashoffset: 0;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
-  html:not([data-input='keyboard'])
-    :is(a, button):not(:focus-visible) > .drawn-underline path {
+  html:not([data-input="keyboard"])
+    :is(a, button):not(:focus-visible)
+    > .drawn-underline
+    path {
     transition: stroke-dashoffset 180ms var(--ease-out);
   }
 
-  html:not([data-input='keyboard'])
-    :is(a, button):hover:not(:focus-visible) > .drawn-icon path {
+  html:not([data-input="keyboard"])
+    :is(a, button):hover:not(:focus-visible)
+    > .drawn-icon
+    path {
     animation: ink-write 240ms ease-out both;
   }
 
-  html:not([data-input='keyboard'])
-    :is(a, button):hover:not(:focus-visible) > .drawn-icon path + path {
+  html:not([data-input="keyboard"])
+    :is(a, button):hover:not(:focus-visible)
+    > .drawn-icon
+    path
+    + path {
     animation-delay: 140ms;
   }
 
-  html:not([data-input='keyboard'])
-    :is(a, button):hover:not(:focus-visible) > .drawn-icon path:nth-child(3) {
+  html:not([data-input="keyboard"])
+    :is(a, button):hover:not(:focus-visible)
+    > .drawn-icon
+    path:nth-child(3) {
     animation-delay: 280ms;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .home-page[data-sketchbook='ready']
-    :is([data-sketch-key='greeting'], [data-handwriting])[data-inked='true']
+  .home-page[data-sketchbook="ready"]
+    :is([data-sketch-key="greeting"], [data-handwriting])[data-inked="true"]
     .handwriting-stroke {
     animation: ink-write var(--stroke-duration) var(--stroke-delay)
       cubic-bezier(0.35, 0.1, 0.55, 1) both;
   }
 
-  .home-page[data-sketchbook='ready']
-    :is([data-sketch-key='greeting'], [data-handwriting]):not([data-inked='seen'])
+  .home-page[data-sketchbook="ready"]
+    :is([data-sketch-key="greeting"], [data-handwriting]):not(
+      [data-inked="seen"]
+    )
     .handwriting-stroke {
     /* The longer gap prevents round caps from leaking the next dash at the end. */
     stroke-dasharray: 1 2;
@@ -458,58 +471,64 @@
     opacity: 0;
   }
 
-  .home-page[data-sketchbook='ready']
-    [data-sketch-key='greeting']:not([data-inked='seen']) .hello-comma {
+  .home-page[data-sketchbook="ready"]
+    [data-sketch-key="greeting"]:not([data-inked="seen"])
+    .hello-comma {
     opacity: 0;
   }
 
-  .home-page[data-sketchbook='ready']
-    [data-sketch-key='greeting'][data-inked='true'] .hello-comma {
+  .home-page[data-sketchbook="ready"]
+    [data-sketch-key="greeting"][data-inked="true"]
+    .hello-comma {
     animation: hello-comma var(--stroke-duration) var(--stroke-delay) both;
   }
 
-  .home-page[data-sketchbook='ready']
-    [data-sketch-key='greeting']:not([data-inked='seen']) .watercolor-wash-stroke {
+  .home-page[data-sketchbook="ready"]
+    [data-sketch-key="greeting"]:not([data-inked="seen"])
+    .watercolor-wash-stroke {
     stroke-dasharray: 1 2;
     stroke-dashoffset: 1.01;
   }
 
-  .home-page[data-sketchbook='ready']
-    [data-sketch-key='greeting'][data-inked='true'] .watercolor-wash-stroke {
+  .home-page[data-sketchbook="ready"]
+    [data-sketch-key="greeting"][data-inked="true"]
+    .watercolor-wash-stroke {
     animation: pigment-paint var(--stroke-duration) var(--stroke-delay)
       cubic-bezier(0.35, 0.1, 0.55, 1) both;
   }
 
-  .home-page[data-sketchbook='ready']
-    [data-sketch]:not([data-inked='seen']) path {
+  .home-page[data-sketchbook="ready"]
+    [data-sketch]:not([data-inked="seen"])
+    path {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
     transition: stroke-dashoffset 1600ms cubic-bezier(0.25, 0.65, 0.35, 1);
   }
 
-  .home-page[data-sketchbook='ready'] [data-sketch][data-inked='true'] path {
+  .home-page[data-sketchbook="ready"] [data-sketch][data-inked="true"] path {
     stroke-dashoffset: 0;
   }
 
-  .home-page[data-sketchbook='ready']
-    .sketch-ruler:not([data-inked='seen']) .ruler-ticks {
+  .home-page[data-sketchbook="ready"]
+    .sketch-ruler:not([data-inked="seen"])
+    .ruler-ticks {
     transition-duration: 2000ms;
     transition-delay: 220ms;
   }
 
-  .companions[data-open='true'] .companions-art {
+  .companions[data-open="true"] .companions-art {
     animation: companions-arrive 1200ms both;
   }
 
-  .companions[data-open='true'] .paw-trail svg {
+  .companions[data-open="true"] .paw-trail svg {
     animation: paw-appear 260ms ease-out both;
   }
 
-  .companions[data-open='true'] .paw-trail svg:nth-child(2) {
+  .companions[data-open="true"] .paw-trail svg:nth-child(2) {
     animation-delay: 160ms;
   }
 
-  .companions[data-open='true'] .paw-trail svg:nth-child(3) {
+  .companions[data-open="true"] .paw-trail svg:nth-child(3) {
     animation-delay: 320ms;
   }
 
@@ -584,9 +603,9 @@
   .home-page .introduction-body {
     grid-template-columns: minmax(0, 1fr) 36%;
     grid-template-areas:
-      'title portrait'
-      'lead portrait'
-      'description description';
+      "title portrait"
+      "lead portrait"
+      "description description";
     gap: 0 0.75rem;
     padding-block: 2rem;
   }

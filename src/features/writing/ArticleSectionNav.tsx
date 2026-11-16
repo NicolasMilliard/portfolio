@@ -1,15 +1,16 @@
-import { useRouter } from '@tanstack/react-router';
-import { useEffect, useRef, useState, type RefObject } from 'react';
+import { useRouter } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
+import type { RefObject } from "react";
 
-type Section = {
+interface Section {
   id: string;
   title: string;
-};
+}
 
-type ArticleSectionNavProps = {
+interface ArticleSectionNavProps {
   contentRef: RefObject<HTMLDivElement | null>;
   articleKey: string;
-};
+}
 
 export const ArticleSectionNav = ({
   contentRef,
@@ -23,11 +24,13 @@ export const ArticleSectionNav = ({
 
   useEffect(() => {
     const content = contentRef.current;
-    if (!content) return;
+    if (!content) {
+      return;
+    }
 
-    const headings = Array.from(
-      content.querySelectorAll<HTMLHeadingElement>('h2[id]'),
-    );
+    const headings = [
+      ...content.querySelectorAll<HTMLHeadingElement>("h2[id]"),
+    ];
 
     setSections(
       headings.map((heading) => ({
@@ -36,7 +39,7 @@ export const ArticleSectionNav = ({
           document.getElementById(`${heading.id}-title`)?.textContent?.trim() ||
           heading.textContent?.trim() ||
           heading.id,
-      })),
+      }))
     );
     setIsOpen(false);
 
@@ -44,10 +47,12 @@ export const ArticleSectionNav = ({
     const updateActiveSection = () => {
       frame = 0;
       const readingLine = Math.min(window.innerHeight * 0.35, 240);
-      let current = headings[0];
+      let [current] = headings;
 
       for (const heading of headings) {
-        if (heading.getBoundingClientRect().top > readingLine) break;
+        if (heading.getBoundingClientRect().top > readingLine) {
+          break;
+        }
         current = heading;
       }
 
@@ -64,41 +69,55 @@ export const ArticleSectionNav = ({
       setActiveId(current?.id ?? null);
     };
     const scheduleUpdate = () => {
-      // oxlint-disable-next-line react/immutability -- This animation handle is local to the effect.
-      if (!frame) frame = window.requestAnimationFrame(updateActiveSection);
+      if (!frame) {
+        // oxlint-disable-next-line react/immutability -- This frame handle belongs to the effect, not render state.
+        frame = window.requestAnimationFrame(updateActiveSection);
+      }
     };
 
     updateActiveSection();
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate);
-    window.addEventListener('hashchange', scheduleUpdate);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("hashchange", scheduleUpdate);
 
     const resizeObserver = new ResizeObserver(scheduleUpdate);
     resizeObserver.observe(content);
 
     return () => {
-      window.removeEventListener('scroll', scheduleUpdate);
-      window.removeEventListener('resize', scheduleUpdate);
-      window.removeEventListener('hashchange', scheduleUpdate);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("hashchange", scheduleUpdate);
       resizeObserver.disconnect();
-      if (frame) window.cancelAnimationFrame(frame);
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
     };
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies -- Article changes must rescan the new headings.
   }, [contentRef, articleKey]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      return;
+    }
 
     const closeOnOutsideClick = (event: PointerEvent) => {
-      if (!navRef.current?.contains(event.target as Node)) setIsOpen(false);
+      if (!navRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
     };
 
-    document.addEventListener('pointerdown', closeOnOutsideClick);
-    return () => document.removeEventListener('pointerdown', closeOnOutsideClick);
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsideClick);
+    };
   }, [isOpen]);
 
-  if (sections.length < 2) return null;
+  if (sections.length < 2) {
+    return null;
+  }
 
   return (
+    // oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- Delegates native anchor clicks and handles Escape for the section panel.
     <nav
       ref={navRef}
       className="article-toc"
@@ -111,31 +130,36 @@ export const ArticleSectionNav = ({
           event.ctrlKey ||
           event.shiftKey ||
           event.altKey
-        )
+        ) {
           return;
+        }
 
         const link = (event.target as HTMLElement).closest<HTMLAnchorElement>(
-          'a[href^="#"]',
+          'a[href^="#"]'
         );
-        if (!link) return;
+        if (!link) {
+          return;
+        }
 
         // Keep the homepage origin while adding article sections to history.
         event.preventDefault();
         void router.navigate({
-          to: '/writing/$slug',
+          to: "/writing/$slug",
           params: { slug: articleKey },
           hash: link.hash.slice(1),
-          state: (previous) => ({ homeHistoryIndex: previous.homeHistoryIndex }),
+          state: (previous) => ({
+            homeHistoryIndex: previous.homeHistoryIndex,
+          }),
         });
       }}
       onKeyDown={(event) => {
-        if (event.key === 'Escape') {
+        if (event.key === "Escape") {
           setIsOpen(false);
           const toggle = navRef.current?.querySelector<HTMLButtonElement>(
-            '.article-toc-toggle',
+            ".article-toc-toggle"
           );
 
-          if (toggle && getComputedStyle(toggle).display !== 'none') {
+          if (toggle && getComputedStyle(toggle).display !== "none") {
             toggle.focus();
           } else {
             (document.activeElement as HTMLElement | null)?.blur();
@@ -146,10 +170,12 @@ export const ArticleSectionNav = ({
       <button
         className="article-toc-toggle"
         type="button"
-        aria-label={isOpen ? 'Hide article sections' : 'Show article sections'}
+        aria-label={isOpen ? "Hide article sections" : "Show article sections"}
         aria-expanded={isOpen}
         aria-controls="article-toc-panel"
-        onClick={() => setIsOpen((open) => !open)}
+        onClick={() => {
+          setIsOpen((open) => !open);
+        }}
       >
         <span aria-hidden="true">☰</span>
         <span>Sections</span>
@@ -162,7 +188,7 @@ export const ArticleSectionNav = ({
             className="article-toc-mark"
             href={`#${section.id}`}
             aria-label={`Jump to ${section.title}`}
-            aria-current={activeId === section.id ? 'location' : undefined}
+            aria-current={activeId === section.id ? "location" : undefined}
           >
             <span aria-hidden="true" />
           </a>
@@ -177,8 +203,12 @@ export const ArticleSectionNav = ({
               <li key={section.id}>
                 <a
                   href={`#${section.id}`}
-                  aria-current={activeId === section.id ? 'location' : undefined}
-                  onClick={() => setIsOpen(false)}
+                  aria-current={
+                    activeId === section.id ? "location" : undefined
+                  }
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
                 >
                   {section.title}
                 </a>

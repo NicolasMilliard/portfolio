@@ -1,15 +1,15 @@
-@import './tokens.css';
+@import "./tokens.css";
 
 @font-face {
-  font-family: 'DM Sans';
-  src: url('../fonts/DMSans-VariableFont_opsz,wght.woff2') format('woff2');
+  font-family: "DM Sans";
+  src: url("../fonts/DMSans-VariableFont_opsz,wght.woff2") format("woff2");
   font-weight: 100 1000;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Source Serif 4';
-  src: url('../fonts/SourceSerif4-VariableFont_opsz,wght.woff2') format('woff2');
+  font-family: "Source Serif 4";
+  src: url("../fonts/SourceSerif4-VariableFont_opsz,wght.woff2") format("woff2");
   font-weight: 200 900;
   font-display: swap;
 }
@@ -52,7 +52,7 @@ body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-input='keyboard']) {
+  html:not([data-input="keyboard"]) {
     scroll-behavior: smooth;
   }
 
@@ -114,17 +114,18 @@ a:focus-visible {
 }
 
 /* Accessibility overrides must win over every component's motion settings. */
-html[data-input='keyboard'] :is(
-  a,
-  button,
-  .drawn-box path,
-  .drawn-icon path,
-  .drawn-underline path,
-  .site-logo,
-  .article-toc-panel,
-  .article-toc-mark span,
-  .article-heading-copy-icon
-) {
+html[data-input="keyboard"]
+  :is(
+    a,
+    button,
+    .drawn-box path,
+    .drawn-icon path,
+    .drawn-underline path,
+    .site-logo,
+    .article-toc-panel,
+    .article-toc-mark span,
+    .article-heading-copy-icon
+  ) {
   transition: none !important;
   animation: none !important;
 }
@@ -191,7 +192,9 @@ html[data-input='keyboard'] :is(
   animation: none;
 }
 
-html:active-view-transition-type(article-enter)::view-transition-new(.article-details) {
+html:active-view-transition-type(
+    article-enter
+  )::view-transition-new(.article-details) {
   animation: article-reveal 150ms var(--ease-out) both;
 }
 
@@ -222,9 +225,9 @@ html:active-view-transition-type(article-enter)::view-transition-new(.article-de
   opacity: 1;
 }
 
-html[data-input='keyboard']::view-transition-group(*),
-html[data-input='keyboard']::view-transition-old(*),
-html[data-input='keyboard']::view-transition-new(*) {
+html[data-input="keyboard"]::view-transition-group(*),
+html[data-input="keyboard"]::view-transition-old(*),
+html[data-input="keyboard"]::view-transition-new(*) {
   animation: none !important;
 }
 

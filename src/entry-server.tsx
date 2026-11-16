@@ -1,23 +1,18 @@
-import { createMemoryHistory, RouterProvider } from '@tanstack/react-router';
-import { StrictMode } from 'react';
-import { renderToString } from 'react-dom/server';
+import { createMemoryHistory, RouterProvider } from "@tanstack/react-router";
+import { StrictMode } from "react";
+import { renderToString } from "react-dom/server";
 
-import { informationPages } from './content/information';
-import { writings } from './content/writings';
-import { createAppRouter } from './router';
-import {
-  getInformationSeo,
-  getWritingSeo,
-  homeSeo,
-  notFoundSeo,
-  type PrerenderPage,
-} from './seo';
+import { informationPages } from "./content/information";
+import { writings } from "./content/writings";
+import { createAppRouter } from "./router";
+import { getInformationSeo, getWritingSeo, homeSeo, notFoundSeo } from "./seo";
+import type { PrerenderPage } from "./seo";
 
 export const getPrerenderPages = (): PrerenderPage[] => [
   {
-    path: '/',
-    outputFile: 'index.html',
-    styleEntry: 'src/routes/index.tsx',
+    path: "/",
+    outputFile: "index.html",
+    styleEntry: "src/routes/index.tsx",
     seo: homeSeo,
     includeInSitemap: true,
   },
@@ -31,15 +26,15 @@ export const getPrerenderPages = (): PrerenderPage[] => [
   ...writings.map((writing) => ({
     path: `/writing/${writing.slug}`,
     outputFile: `writing/${writing.slug}.html`,
-    styleEntry: 'src/routes/writing.$slug.tsx',
+    styleEntry: "src/routes/writing.$slug.tsx",
     seo: getWritingSeo(writing),
     includeInSitemap: true,
     lastModified: writing.updatedAt ?? writing.publishedAt,
   })),
   {
-    path: '/404',
-    outputFile: '404.html',
-    styleEntry: 'src/features/404/NotFoundPage.tsx',
+    path: "/404",
+    outputFile: "404.html",
+    styleEntry: "src/features/404/NotFoundPage.tsx",
     seo: notFoundSeo,
     includeInSitemap: false,
   },
@@ -54,6 +49,6 @@ export const renderPage = async (path: string) => {
   return renderToString(
     <StrictMode>
       <RouterProvider router={router} />
-    </StrictMode>,
+    </StrictMode>
   );
 };
