@@ -40,17 +40,16 @@
   border-radius: 0.25rem;
 }
 
-.article-toc-mark span {
+.article-toc-mark svg {
   width: 1.5rem;
-  height: 0.16rem;
-  border-radius: 0.75rem;
-  background: var(--toc-marker);
+  height: 0.375rem;
+  color: var(--toc-marker);
 }
 
-.article-toc-mark:hover span,
-.article-toc-mark:focus-visible span,
-.article-toc-mark[aria-current="location"] span {
-  background: var(--foreground);
+.article-toc-mark:hover svg,
+.article-toc-mark:focus-visible svg,
+.article-toc-mark[aria-current="location"] svg {
+  color: var(--foreground);
 }
 
 .article-toc-mark:focus-visible,
@@ -90,13 +89,27 @@
 }
 
 .article-toc-card {
+  position: relative;
+  border-radius: 3px 5px 2px 4px;
+  background: var(--surface-header), var(--background);
+  box-shadow: var(--shadow-header);
+}
+
+.article-toc-outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--ink-blue);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.article-toc-scroll {
   max-height: calc(100vh - 2rem);
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 1rem;
-  border: 0.0625rem solid var(--border-subtle);
-  border-radius: 0.875rem;
-  background: var(--background);
-  box-shadow: 0 0.75rem 2rem var(--shadow-subtle);
 }
 
 .article-toc-title {
@@ -149,8 +162,8 @@
       visibility 160ms;
   }
 
-  .article-toc-mark span {
-    transition: background-color 160ms ease-out;
+  .article-toc-mark svg {
+    transition: color 160ms ease-out;
   }
 }
 
@@ -204,7 +217,7 @@
     pointer-events: auto;
   }
 
-  .article-toc-card {
+  .article-toc-scroll {
     max-height: min(70vh, 28rem);
   }
 }

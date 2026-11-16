@@ -12,6 +12,12 @@ interface ArticleSectionNavProps {
   articleKey: string;
 }
 
+const sectionMarkPaths = [
+  "M1.2 3.2Q7 2.7 12 3T22.8 2.8",
+  "M1.2 2.8Q6.5 3.3 12 2.9T22.8 3.1",
+  "M1.2 3.1Q8 2.8 13 3.2T22.8 2.9",
+];
+
 export const ArticleSectionNav = ({
   contentRef,
   articleKey,
@@ -182,7 +188,7 @@ export const ArticleSectionNav = ({
       </button>
 
       <div className="article-toc-rail">
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <a
             key={section.id}
             className="article-toc-mark"
@@ -190,31 +196,65 @@ export const ArticleSectionNav = ({
             aria-label={`Jump to ${section.title}`}
             aria-current={activeId === section.id ? "location" : undefined}
           >
-            <span aria-hidden="true" />
+            <svg
+              viewBox="0 0 24 6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d={sectionMarkPaths[index % sectionMarkPaths.length]} />
+            </svg>
           </a>
         ))}
       </div>
 
       <div className="article-toc-panel" id="article-toc-panel">
         <div className="article-toc-card">
-          <p className="article-toc-title">On this page</p>
-          <ol>
-            {sections.map((section) => (
-              <li key={section.id}>
-                <a
-                  href={`#${section.id}`}
-                  aria-current={
-                    activeId === section.id ? "location" : undefined
-                  }
-                  onClick={() => {
-                    setIsOpen(false);
-                  }}
-                >
-                  {section.title}
-                </a>
-              </li>
-            ))}
-          </ol>
+          <svg
+            className="article-toc-outline"
+            viewBox="0 0 280 340"
+            preserveAspectRatio="none"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.85"
+            strokeLinecap="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M4 2Q2 86 4 169T3 337" vectorEffect="non-scaling-stroke" />
+            <path d="M2 5Q72 2 143 4T277 3" vectorEffect="non-scaling-stroke" />
+            <path
+              d="M277 2Q280 86 277 171T278 337"
+              vectorEffect="non-scaling-stroke"
+            />
+            <path
+              d="M5 336Q82 333 145 336T278 334"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+          <div className="article-toc-scroll">
+            <p className="article-toc-title">On this page</p>
+            <ol>
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <a
+                    href={`#${section.id}`}
+                    aria-current={
+                      activeId === section.id ? "location" : undefined
+                    }
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  >
+                    {section.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </nav>
