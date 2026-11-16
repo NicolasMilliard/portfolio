@@ -1,17 +1,25 @@
-import { useEffect, type RefObject } from 'react';
+import { useLayoutEffect, type RefObject } from 'react';
+
+import { isKeyboardInput } from '../interactionMotion';
+
+// Keep discoveries across client-side route changes, including interrupted draws.
+const revealedSketches = new Set<string>();
 
 export function useSketchbook(rootRef: RefObject<HTMLDivElement | null>) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = rootRef.current;
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!root || motion.matches || !('IntersectionObserver' in window)) return;
+    if (!root || !('IntersectionObserver' in window)) return;
 
     root.dataset.sketchbook = 'ready';
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          (entry.target as HTMLElement | SVGElement).dataset.inked = 'true';
+          const element = entry.target as HTMLElement | SVGElement;
+          element.dataset.inked =
+            motion.matches || isKeyboardInput() ? 'seen' : 'true';
+          revealedSketches.add(element.dataset.sketchKey!);
           observer.unobserve(entry.target);
         }
       },
@@ -19,10 +27,29 @@ export function useSketchbook(rootRef: RefObject<HTMLDivElement | null>) {
     );
 
     root
-      .querySelectorAll('[data-sketch], [data-handwriting], [data-watercolor]')
-      .forEach((element) => observer.observe(element));
+      .querySelectorAll<HTMLElement | SVGElement>('[data-sketch-key]')
+      .forEach((element) => {
+        if (revealedSketches.has(element.dataset.sketchKey!)) {
+          element.dataset.inked = 'seen';
+        } else {
+          observer.observe(element);
+        }
+      });
+
+    const finishActiveDrawings = () => {
+      if (!isKeyboardInput() && !motion.matches) return;
+      root
+        .querySelectorAll<HTMLElement | SVGElement>('[data-inked="true"]')
+        .forEach((element) => {
+          element.dataset.inked = 'seen';
+        });
+    };
+    document.addEventListener('keydown', finishActiveDrawings);
+    motion.addEventListener('change', finishActiveDrawings);
     return () => {
       observer.disconnect();
+      document.removeEventListener('keydown', finishActiveDrawings);
+      motion.removeEventListener('change', finishActiveDrawings);
       delete root.dataset.sketchbook;
     };
   }, [rootRef]);

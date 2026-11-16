@@ -1,18 +1,24 @@
 import { createRouter, type RouterHistory } from '@tanstack/react-router';
 
 import { routeTree } from './routeTree.gen';
+import { isKeyboardInput, prefersReducedMotion } from './interactionMotion';
 
 export const createAppRouter = (
   history?: RouterHistory,
   scrollRestoration = true,
-) =>
-  createRouter({
+) => {
+  const router = createRouter({
     routeTree,
     history,
     defaultPreload: 'intent',
     defaultViewTransition: {
       types: ({ fromLocation, toLocation }) => {
-        if (!fromLocation || fromLocation.pathname === toLocation.pathname) {
+        if (
+          isKeyboardInput() ||
+          prefersReducedMotion() ||
+          !fromLocation ||
+          fromLocation.pathname === toLocation.pathname
+        ) {
           return false;
         }
 
@@ -27,6 +33,17 @@ export const createAppRouter = (
     scrollRestorationBehavior: 'instant',
     trailingSlash: 'never',
   });
+
+  const viewTransition = router.options.defaultViewTransition;
+  router.subscribe('onBeforeNavigate', () => {
+    // Also skip snapshots on browsers without support for transition types.
+    router.update({
+      defaultViewTransition:
+        isKeyboardInput() || prefersReducedMotion() ? false : viewTransition,
+    });
+  });
+  return router;
+};
 
 export type AppRouter = ReturnType<typeof createAppRouter>;
 

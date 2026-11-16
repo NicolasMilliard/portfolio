@@ -6,7 +6,7 @@ import { WatercolorWash } from './ui/WatercolorWash';
 
 export function Greeting() {
   return (
-    <h1>
+    <h1 data-sketch-key="greeting">
       <span className="greeting">
         <span className="hello-word">
           <span className="visually-hidden">Hello</span>

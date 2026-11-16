@@ -8,10 +8,8 @@
   margin-inline: auto;
   padding: 0.5rem 1.25rem;
   border-radius: 3px 5px 2px 4px;
-  background: linear-gradient(120deg, #fffdf870, #f5eddf55), var(--background);
-  box-shadow:
-    0 5px 18px -10px color-mix(in oklab, var(--foreground), transparent 62%),
-    0 1px 0 #fffdf8;
+  background: var(--surface-header), var(--background);
+  box-shadow: var(--shadow-header);
   font-family: var(--font-sans);
 }
 
@@ -22,7 +20,7 @@
   left: calc(50% - 1.5rem);
   width: 3rem;
   height: 0.875rem;
-  background: #d8bd9766;
+  background: var(--tape-header);
   clip-path: var(--tape-edge);
   transform: rotate(-3deg);
   pointer-events: none;
@@ -119,36 +117,45 @@
   --stroke-duration: 200ms;
 }
 
-.site-nav nav a:is(:hover, :focus-visible) > .drawn-box path {
+.site-nav nav a:focus-visible > .drawn-box path {
   stroke-dashoffset: 0;
   opacity: 1;
+  transition: none;
 }
 
 .site-nav nav a:focus-visible {
   outline: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .site-nav nav a:hover:not(:focus-visible) > .drawn-box path {
-    animation: ink-write var(--stroke-duration) var(--stroke-delay)
-      cubic-bezier(0.35, 0.1, 0.55, 1) both;
+@media (hover: hover) and (pointer: fine) {
+  html:not([data-input='keyboard']) .site-nav nav a:hover > .drawn-box path {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-input='keyboard']) .drawn-box path {
+    transition:
+      stroke-dashoffset 110ms var(--ease-out),
+      opacity 80ms var(--ease-out);
   }
 
-  .site-identity:is(:hover, :focus-visible) .site-logo {
-    animation: face-greeting 450ms ease-out both;
+  html:not([data-input='keyboard'])
+    .site-nav nav a:hover:not(:focus-visible) > .drawn-box path {
+    transition-duration: var(--stroke-duration), 40ms;
+    transition-delay: var(--stroke-delay);
+    transition-timing-function: cubic-bezier(0.35, 0.1, 0.55, 1), ease;
   }
 
-  @keyframes face-greeting {
-    0%,
-    100% {
-      transform: rotate(0);
-    }
-    40% {
-      transform: rotate(-7deg);
-    }
-    70% {
-      transform: rotate(3deg);
-    }
+  html:not([data-input='keyboard'])
+    .site-identity:not(:focus-visible) .site-logo {
+    transition: transform 180ms var(--ease-out);
+  }
+
+  html:not([data-input='keyboard'])
+    .site-identity:hover:not(:focus-visible) .site-logo {
+    transform: rotate(-5deg);
   }
 }
 

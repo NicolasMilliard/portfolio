@@ -29,6 +29,12 @@
 
 .article-content {
   margin-top: 3rem;
+  overflow-wrap: anywhere;
+}
+
+.article-content img {
+  max-inline-size: 100%;
+  block-size: auto;
 }
 
 .article-content > * {

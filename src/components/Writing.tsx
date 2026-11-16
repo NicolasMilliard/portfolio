@@ -11,7 +11,7 @@ export const Writing = () => {
       className="home-section writing-section"
       aria-labelledby="writing-heading"
     >
-      <SketchRuler />
+      <SketchRuler sketchKey="writing-ruler" />
       <div className="section-heading">
         <h2 id="writing-heading">
           Notes from

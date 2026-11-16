@@ -24,6 +24,7 @@ export const Projects = () => {
             target="_blank"
             rel="noopener noreferrer"
             data-watercolor
+            data-sketch-key={`project-${project.title}`}
           >
             <svg
               className="project-paper-edge"

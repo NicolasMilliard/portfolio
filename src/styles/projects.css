@@ -25,12 +25,10 @@
   min-height: 14rem;
   padding: 2.125rem 1.5rem 1.125rem;
   border-radius: 2px 4px 1px 3px;
-  background: linear-gradient(145deg, #fffdf8, #f7f0e4);
+  background: var(--surface-paper);
   color: var(--foreground);
   text-decoration: none;
-  box-shadow:
-    0 2px 3px -2px #303c4833,
-    1px 8px 16px -12px #303c4855;
+  box-shadow: var(--shadow-paper);
   transform: rotate(var(--note-angle));
 }
 
@@ -42,7 +40,7 @@
   left: var(--tape-position);
   width: 3.5rem;
   height: 1.25rem;
-  background: #d8bd9773;
+  background: var(--tape-paper);
   clip-path: var(--tape-edge);
   transform: rotate(var(--tape-angle));
   pointer-events: none;
@@ -58,7 +56,8 @@
 
 .project-note:nth-child(3n) {
   --note-angle: -0.7deg;
-  --note-ink: #ad8755;
+  --note-ink: var(--ink-ochre);
+  --note-pigment: var(--pigment-ochre);
   --tape-position: 38%;
   --tape-angle: -3deg;
 }
@@ -93,7 +92,7 @@
   width: calc(100% + 0.7em);
   height: 125%;
   overflow: visible;
-  color: var(--note-ink);
+  color: var(--note-pigment, var(--note-ink));
   pointer-events: none;
 }
 
@@ -108,7 +107,6 @@
   font-family: var(--font-handwritten);
   font-size: 1.25rem;
   line-height: 1;
-  opacity: 0.7;
 }
 
 .project-arrow {
@@ -128,29 +126,27 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .project-note {
-    transition:
-      transform 240ms ease-out,
-      box-shadow 240ms ease-out;
-  }
-
-  .project-note:is(:hover, :focus-visible) {
-    transform: translateY(-2px) rotate(calc(var(--note-angle) * 0.3));
-    box-shadow:
-      0 3px 5px -3px #303c4833,
-      2px 12px 20px -12px #303c4866;
-  }
-
-  .home-page[data-sketchbook='ready'] .project-wash .watercolor-wash-stroke {
+  .home-page[data-sketchbook='ready']
+    .project-note:not([data-inked='seen']) .watercolor-wash-stroke {
     stroke-dasharray: 1 2;
     stroke-dashoffset: 1.01;
   }
 
   .home-page[data-sketchbook='ready']
-    .project-note[data-inked]
+    .project-note[data-inked='true']
     .watercolor-wash-stroke {
     animation: pigment-paint var(--stroke-duration) var(--stroke-delay)
       cubic-bezier(0.35, 0.1, 0.55, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-input='keyboard']) .project-note:not(:focus-visible) {
+    transition: transform 180ms var(--ease-out);
+  }
+
+  html:not([data-input='keyboard']) .project-note:hover:not(:focus-visible) {
+    transform: translateY(-2px) rotate(calc(var(--note-angle) * 0.3));
   }
 }
 
