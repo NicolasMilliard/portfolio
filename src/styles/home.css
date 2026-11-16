@@ -61,7 +61,7 @@
   width: calc(100% + 0.26em);
   height: 1em;
   overflow: visible;
-  color: #d99a73;
+  color: var(--pigment-peach);
   pointer-events: none;
 }
 
@@ -581,7 +581,6 @@
 }
 
 @media (max-width: 40rem) {
-
   .home-page .introduction-body {
     grid-template-columns: minmax(0, 1fr) 36%;
     grid-template-areas:

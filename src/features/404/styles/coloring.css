@@ -1,5 +1,4 @@
 .coloring-page {
-  --coloring-neutral: #e8dfd0;
   position: relative;
   min-height: 100svh;
 }
@@ -40,18 +39,16 @@
 }
 
 .coloring-base {
-  color: var(--coloring-neutral);
+  color: var(--paper-neutral);
 }
 
 .coloring-note {
   position: absolute;
   z-index: 1;
-  border: 1px solid color-mix(in oklab, var(--ink-blue), transparent 82%);
+  border: 1px solid var(--border-ink);
   border-radius: 3px 5px 2px 4px;
-  background: linear-gradient(145deg, #fffdf8, #f7f0e4);
-  box-shadow:
-    0 2px 3px -2px #303c4833,
-    1px 8px 16px -12px #303c4855;
+  background: var(--surface-paper);
+  box-shadow: var(--shadow-paper);
 }
 
 .coloring-note::before {
@@ -61,7 +58,7 @@
   left: calc(50% - 1.5rem);
   width: 3rem;
   height: 1rem;
-  background: #d8bd9773;
+  background: var(--tape-paper);
   clip-path: var(--tape-edge);
   transform: rotate(-5deg);
   pointer-events: none;
@@ -123,7 +120,7 @@
 .coloring-swatch > span {
   width: 1.875rem;
   height: 1.875rem;
-  border: 1px solid #303c481a;
+  border: 1px solid var(--border-subtle);
   border-radius: 46% 54% 48% 52% / 53% 45% 55% 47%;
 }
 
@@ -186,6 +183,7 @@
   background: transparent;
 }
 
+/* Keep vendor pseudo-elements separate: unsupported selectors invalidate a list. */
 .coloring-brush-size input::-webkit-slider-thumb {
   appearance: none;
   width: 1.375rem;
@@ -195,7 +193,7 @@
   border-radius: 45% 55% 43% 57% / 56% 44% 58% 42%;
   background: linear-gradient(
     125deg,
-    color-mix(in oklab, var(--foreground), #fffdf8 20%),
+    var(--foreground-soft),
     var(--foreground)
   );
   transform: rotate(-9deg);
@@ -208,7 +206,7 @@
   border-radius: 45% 55% 43% 57% / 56% 44% 58% 42%;
   background: linear-gradient(
     125deg,
-    color-mix(in oklab, var(--foreground), #fffdf8 20%),
+    var(--foreground-soft),
     var(--foreground)
   );
   transform: rotate(-9deg);

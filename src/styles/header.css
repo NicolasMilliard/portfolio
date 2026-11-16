@@ -8,10 +8,8 @@
   margin-inline: auto;
   padding: 0.5rem 1.25rem;
   border-radius: 3px 5px 2px 4px;
-  background: linear-gradient(120deg, #fffdf870, #f5eddf55), var(--background);
-  box-shadow:
-    0 5px 18px -10px color-mix(in oklab, var(--foreground), transparent 62%),
-    0 1px 0 #fffdf8;
+  background: var(--surface-header), var(--background);
+  box-shadow: var(--shadow-header);
   font-family: var(--font-sans);
 }
 
@@ -22,7 +20,7 @@
   left: calc(50% - 1.5rem);
   width: 3rem;
   height: 0.875rem;
-  background: #d8bd9766;
+  background: var(--tape-header);
   clip-path: var(--tape-edge);
   transform: rotate(-3deg);
   pointer-events: none;
