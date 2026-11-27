@@ -41,6 +41,18 @@ export const projects = [
       "Decentralized alternative to link-in-bio platforms, built on Web3 technologies.",
     link: "https://3bio.social/",
   },
+  {
+    title: "Dunderlines",
+    description:
+      "Interactive visualization of words spoken by The Office characters.",
+    link: "https://nicolasmilliard.github.io/dunderlines/",
+  },
+  {
+    title: "Statecraft",
+    description:
+      "In-progress visual workspace linking user flows to frontend code.",
+    link: "https://github.com/NicolasMilliard/statecraft",
+  },
 ] satisfies Project[];
 
 export const links = [
